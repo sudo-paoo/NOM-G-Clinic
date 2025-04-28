@@ -69,8 +69,9 @@ Partial Class AdminDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettings = New Panel()
-        Label8 = New Label()
         BigLabel1 = New ReaLTaiizor.Controls.BigLabel()
+        Label8 = New Label()
+        BigLabel2 = New ReaLTaiizor.Controls.BigLabel()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -100,7 +101,7 @@ Partial Class AdminDashboard
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12F)
+        HopeForm1.Font = New Font("Segoe UI", 12.0F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -363,7 +364,7 @@ Partial Class AdminDashboard
         HopeGroupBox3.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox3.Controls.Add(lblActiveDoctors)
         HopeGroupBox3.Controls.Add(Label4)
-        HopeGroupBox3.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox3.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox3.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox3.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox3.Location = New Point(596, 60)
@@ -402,7 +403,7 @@ Partial Class AdminDashboard
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Controls.Add(lblTodaysAppointments)
         HopeGroupBox2.Controls.Add(Label3)
-        HopeGroupBox2.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox2.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Location = New Point(310, 60)
@@ -441,7 +442,7 @@ Partial Class AdminDashboard
         HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox1.Controls.Add(lblTotalPatients)
         HopeGroupBox1.Controls.Add(Label2)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox1.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox1.Location = New Point(24, 60)
@@ -509,7 +510,7 @@ Partial Class AdminDashboard
         ' 
         ' txtSearchPatient
         ' 
-        txtSearchPatient.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchPatient.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtSearchPatient.Location = New Point(24, 90)
         txtSearchPatient.Name = "txtSearchPatient"
         txtSearchPatient.PlaceholderText = "Search patient..."
@@ -576,7 +577,7 @@ Partial Class AdminDashboard
         ' 
         ' txtSearchDoctor
         ' 
-        txtSearchDoctor.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchDoctor.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtSearchDoctor.Location = New Point(24, 90)
         txtSearchDoctor.Name = "txtSearchDoctor"
         txtSearchDoctor.PlaceholderText = "Search doctor..."
@@ -694,6 +695,7 @@ Partial Class AdminDashboard
         ' pnlSettings
         ' 
         pnlSettings.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlSettings.Controls.Add(BigLabel2)
         pnlSettings.Controls.Add(BigLabel1)
         pnlSettings.Controls.Add(Label8)
         pnlSettings.Dock = DockStyle.Fill
@@ -701,6 +703,18 @@ Partial Class AdminDashboard
         pnlSettings.Name = "pnlSettings"
         pnlSettings.Size = New Size(900, 660)
         pnlSettings.TabIndex = 10
+        ' 
+        ' BigLabel1
+        ' 
+        BigLabel1.AutoSize = True
+        BigLabel1.BackColor = Color.Transparent
+        BigLabel1.Font = New Font("Segoe UI", 25.0F)
+        BigLabel1.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
+        BigLabel1.Location = New Point(153, 168)
+        BigLabel1.Name = "BigLabel1"
+        BigLabel1.Size = New Size(205, 57)
+        BigLabel1.TabIndex = 2
+        BigLabel1.Text = "BigLabel1"
         ' 
         ' Label8
         ' 
@@ -712,21 +726,21 @@ Partial Class AdminDashboard
         Label8.TabIndex = 1
         Label8.Text = "Settings"
         ' 
-        ' BigLabel1
+        ' BigLabel2
         ' 
-        BigLabel1.AutoSize = True
-        BigLabel1.BackColor = Color.Transparent
-        BigLabel1.Font = New Font("Segoe UI", 25F)
-        BigLabel1.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
-        BigLabel1.Location = New Point(153, 168)
-        BigLabel1.Name = "BigLabel1"
-        BigLabel1.Size = New Size(205, 57)
-        BigLabel1.TabIndex = 2
-        BigLabel1.Text = "BigLabel1"
+        BigLabel2.AutoSize = True
+        BigLabel2.BackColor = Color.Transparent
+        BigLabel2.Font = New Font("Segoe UI", 25.0F)
+        BigLabel2.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
+        BigLabel2.Location = New Point(146, 303)
+        BigLabel2.Name = "BigLabel2"
+        BigLabel2.Size = New Size(205, 57)
+        BigLabel2.TabIndex = 3
+        BigLabel2.Text = "BigLabel2"
         ' 
         ' AdminDashboard
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
         Controls.Add(pnlSettings)
@@ -825,4 +839,5 @@ Partial Class AdminDashboard
     Friend WithEvents pnlSettings As Panel
     Friend WithEvents Label8 As Label
     Friend WithEvents BigLabel1 As ReaLTaiizor.Controls.BigLabel
+    Friend WithEvents BigLabel2 As ReaLTaiizor.Controls.BigLabel
 End Class
