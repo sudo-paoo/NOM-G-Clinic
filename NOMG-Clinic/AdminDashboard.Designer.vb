@@ -70,6 +70,7 @@ Partial Class AdminDashboard
         Label7 = New Label()
         pnlSettings = New Panel()
         Label8 = New Label()
+        BigLabel1 = New ReaLTaiizor.Controls.BigLabel()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -693,6 +694,7 @@ Partial Class AdminDashboard
         ' pnlSettings
         ' 
         pnlSettings.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlSettings.Controls.Add(BigLabel1)
         pnlSettings.Controls.Add(Label8)
         pnlSettings.Dock = DockStyle.Fill
         pnlSettings.Location = New Point(300, 40)
@@ -709,6 +711,18 @@ Partial Class AdminDashboard
         Label8.Size = New Size(147, 34)
         Label8.TabIndex = 1
         Label8.Text = "Settings"
+        ' 
+        ' BigLabel1
+        ' 
+        BigLabel1.AutoSize = True
+        BigLabel1.BackColor = Color.Transparent
+        BigLabel1.Font = New Font("Segoe UI", 25F)
+        BigLabel1.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
+        BigLabel1.Location = New Point(153, 168)
+        BigLabel1.Name = "BigLabel1"
+        BigLabel1.Size = New Size(205, 57)
+        BigLabel1.TabIndex = 2
+        BigLabel1.Text = "BigLabel1"
         ' 
         ' AdminDashboard
         ' 
@@ -810,4 +824,5 @@ Partial Class AdminDashboard
     Friend WithEvents btnSettings As FontAwesome.Sharp.IconButton
     Friend WithEvents pnlSettings As Panel
     Friend WithEvents Label8 As Label
+    Friend WithEvents BigLabel1 As ReaLTaiizor.Controls.BigLabel
 End Class
