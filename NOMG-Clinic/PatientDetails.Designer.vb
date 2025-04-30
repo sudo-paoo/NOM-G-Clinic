@@ -64,6 +64,11 @@ Partial Class PatientDetails
         dgvBilling = New DataGridView()
         Label15 = New Label()
         Label16 = New Label()
+        TabPage4 = New TabPage()
+        Panel5 = New Panel()
+        dgvConsultationDetails = New DataGridView()
+        Label19 = New Label()
+        Label20 = New Label()
         IconButton2 = New FontAwesome.Sharp.IconButton()
         IconButton1 = New FontAwesome.Sharp.IconButton()
         Label7 = New Label()
@@ -80,6 +85,9 @@ Partial Class PatientDetails
         TabPage3.SuspendLayout()
         Panel4.SuspendLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
+        TabPage4.SuspendLayout()
+        Panel5.SuspendLayout()
+        CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -88,7 +96,7 @@ Partial Class PatientDetails
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12F)
+        HopeForm1.Font = New Font("Segoe UI", 12.0F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -117,6 +125,7 @@ Partial Class PatientDetails
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
         TabControl1.Controls.Add(TabPage3)
+        TabControl1.Controls.Add(TabPage4)
         TabControl1.Location = New Point(13, 61)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
@@ -155,7 +164,7 @@ Partial Class PatientDetails
         HopeGroupBox4.Controls.Add(flowRecentAppointments)
         HopeGroupBox4.Controls.Add(Label12)
         HopeGroupBox4.Controls.Add(Label11)
-        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox4.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox4.Location = New Point(10, 269)
@@ -209,7 +218,7 @@ Partial Class PatientDetails
         HopeGroupBox2.Controls.Add(Label9)
         HopeGroupBox2.Controls.Add(Label10)
         HopeGroupBox2.FlatStyle = FlatStyle.Flat
-        HopeGroupBox2.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox2.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Location = New Point(502, 13)
@@ -328,7 +337,7 @@ Partial Class PatientDetails
         HopeGroupBox1.Controls.Add(Label2)
         HopeGroupBox1.Controls.Add(Label1)
         HopeGroupBox1.FlatStyle = FlatStyle.Flat
-        HopeGroupBox1.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        HopeGroupBox1.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.Transparent
         HopeGroupBox1.Location = New Point(10, 13)
@@ -557,12 +566,63 @@ Partial Class PatientDetails
         Label16.TabIndex = 15
         Label16.Text = "Billing"
         ' 
+        ' TabPage4
+        ' 
+        TabPage4.Controls.Add(Panel5)
+        TabPage4.Location = New Point(4, 29)
+        TabPage4.Name = "TabPage4"
+        TabPage4.Padding = New Padding(3)
+        TabPage4.Size = New Size(967, 554)
+        TabPage4.TabIndex = 3
+        TabPage4.Text = "Consultation Details"
+        TabPage4.UseVisualStyleBackColor = True
+        ' 
+        ' Panel5
+        ' 
+        Panel5.Controls.Add(dgvConsultationDetails)
+        Panel5.Controls.Add(Label19)
+        Panel5.Controls.Add(Label20)
+        Panel5.Location = New Point(0, 0)
+        Panel5.Name = "Panel5"
+        Panel5.Size = New Size(967, 554)
+        Panel5.TabIndex = 0
+        ' 
+        ' dgvConsultationDetails
+        ' 
+        dgvConsultationDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvConsultationDetails.Location = New Point(17, 63)
+        dgvConsultationDetails.Name = "dgvConsultationDetails"
+        dgvConsultationDetails.RowHeadersWidth = 51
+        dgvConsultationDetails.Size = New Size(933, 479)
+        dgvConsultationDetails.TabIndex = 20
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        Label19.Location = New Point(17, 40)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(346, 20)
+        Label19.TabIndex = 19
+        Label19.Text = "All consultation details for Maria Garcia"
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.BackColor = Color.Transparent
+        Label20.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.Location = New Point(17, 12)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(246, 28)
+        Label20.TabIndex = 18
+        Label20.Text = "Consultaion Notes"
+        ' 
         ' IconButton2
         ' 
         IconButton2.BackColor = Color.Transparent
         IconButton2.FlatAppearance.BorderColor = Color.Black
         IconButton2.FlatStyle = FlatStyle.Flat
-        IconButton2.Font = New Font("Verdana", 12F)
+        IconButton2.Font = New Font("Verdana", 12.0F)
         IconButton2.IconChar = FontAwesome.Sharp.IconChar.Pen
         IconButton2.IconColor = Color.Black
         IconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto
@@ -581,7 +641,7 @@ Partial Class PatientDetails
         IconButton1.BackColor = Color.Transparent
         IconButton1.FlatAppearance.BorderColor = Color.Black
         IconButton1.FlatStyle = FlatStyle.Flat
-        IconButton1.Font = New Font("Verdana", 12F)
+        IconButton1.Font = New Font("Verdana", 12.0F)
         IconButton1.IconChar = FontAwesome.Sharp.IconChar.Calendar
         IconButton1.IconColor = Color.Black
         IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
@@ -608,7 +668,7 @@ Partial Class PatientDetails
         ' 
         ' PatientDetails
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1000, 700)
         Controls.Add(Panel1)
@@ -639,6 +699,10 @@ Partial Class PatientDetails
         Panel4.ResumeLayout(False)
         Panel4.PerformLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
+        TabPage4.ResumeLayout(False)
+        Panel5.ResumeLayout(False)
+        Panel5.PerformLayout()
+        CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -686,4 +750,9 @@ Partial Class PatientDetails
     Friend WithEvents lblName As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents Label17 As Label
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents dgvConsultationDetails As DataGridView
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label20 As Label
 End Class

@@ -25,20 +25,22 @@ Partial Class ConsultationDetails
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConsultationDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
+        Button2 = New Button()
+        Button1 = New Button()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
-        TextBox4 = New TextBox()
+        txtDoctorPlan = New TextBox()
         Label20 = New Label()
-        TextBox3 = New TextBox()
+        txtDoctorAssessment = New TextBox()
         Label19 = New Label()
         Label18 = New Label()
-        RadioButton4 = New RadioButton()
-        RadioButton3 = New RadioButton()
-        RadioButton2 = New RadioButton()
-        RadioButton1 = New RadioButton()
+        rbBlood = New RadioButton()
+        rbKetones = New RadioButton()
+        rbGlucose = New RadioButton()
+        rbProtein = New RadioButton()
         Label17 = New Label()
-        TextBox2 = New TextBox()
+        txtFetalHeart = New TextBox()
         Label16 = New Label()
-        TextBox1 = New TextBox()
+        Me.txtFundalHeight = New TextBox()
         Label15 = New Label()
         smlWeight = New ReaLTaiizor.Controls.SmallTextBox()
         smlTemperature = New ReaLTaiizor.Controls.SmallTextBox()
@@ -49,8 +51,6 @@ Partial Class ConsultationDetails
         Label12 = New Label()
         Label11 = New Label()
         Label10 = New Label()
-        listReasonofVisit = New ListBox()
-        listVisitType = New ListBox()
         Label5 = New Label()
         Label4 = New Label()
         Label3 = New Label()
@@ -69,11 +69,13 @@ Partial Class ConsultationDetails
         Label2 = New Label()
         lblDate = New Label()
         Label1 = New Label()
-        Button1 = New Button()
-        Button2 = New Button()
+        cmbReasonVisit = New ReaLTaiizor.Controls.HopeComboBox()
+        cmbVisitType = New ReaLTaiizor.Controls.HopeComboBox()
+        hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
         Panel1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
+        hgbUrineAnalysis.SuspendLayout()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -110,23 +112,39 @@ Partial Class ConsultationDetails
         Panel1.Size = New Size(1200, 660)
         Panel1.TabIndex = 1
         ' 
+        ' Button2
+        ' 
+        Button2.Location = New Point(1006, 75)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(120, 43)
+        Button2.TabIndex = 5
+        Button2.Text = "Save Notes"
+        Button2.UseVisualStyleBackColor = True
+        ' 
+        ' Button1
+        ' 
+        Button1.Location = New Point(866, 75)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(120, 43)
+        Button1.TabIndex = 4
+        Button1.Text = "Cancel"
+        Button1.UseVisualStyleBackColor = True
+        ' 
         ' HopeGroupBox2
         ' 
         HopeGroupBox2.BackColor = SystemColors.Control
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        HopeGroupBox2.Controls.Add(TextBox4)
+        HopeGroupBox2.Controls.Add(hgbUrineAnalysis)
+        HopeGroupBox2.Controls.Add(cmbVisitType)
+        HopeGroupBox2.Controls.Add(cmbReasonVisit)
+        HopeGroupBox2.Controls.Add(txtDoctorPlan)
         HopeGroupBox2.Controls.Add(Label20)
-        HopeGroupBox2.Controls.Add(TextBox3)
+        HopeGroupBox2.Controls.Add(txtDoctorAssessment)
         HopeGroupBox2.Controls.Add(Label19)
         HopeGroupBox2.Controls.Add(Label18)
-        HopeGroupBox2.Controls.Add(RadioButton4)
-        HopeGroupBox2.Controls.Add(RadioButton3)
-        HopeGroupBox2.Controls.Add(RadioButton2)
-        HopeGroupBox2.Controls.Add(RadioButton1)
-        HopeGroupBox2.Controls.Add(Label17)
-        HopeGroupBox2.Controls.Add(TextBox2)
+        HopeGroupBox2.Controls.Add(txtFetalHeart)
         HopeGroupBox2.Controls.Add(Label16)
-        HopeGroupBox2.Controls.Add(TextBox1)
+        HopeGroupBox2.Controls.Add(Me.txtFundalHeight)
         HopeGroupBox2.Controls.Add(Label15)
         HopeGroupBox2.Controls.Add(smlWeight)
         HopeGroupBox2.Controls.Add(smlTemperature)
@@ -137,8 +155,6 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Controls.Add(Label12)
         HopeGroupBox2.Controls.Add(Label11)
         HopeGroupBox2.Controls.Add(Label10)
-        HopeGroupBox2.Controls.Add(listReasonofVisit)
-        HopeGroupBox2.Controls.Add(listVisitType)
         HopeGroupBox2.Controls.Add(Label5)
         HopeGroupBox2.Controls.Add(Label4)
         HopeGroupBox2.Controls.Add(Label3)
@@ -154,14 +170,14 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ' 
-        ' TextBox4
+        ' txtDoctorPlan
         ' 
-        TextBox4.BorderStyle = BorderStyle.FixedSingle
-        TextBox4.Location = New Point(35, 925)
-        TextBox4.Multiline = True
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(659, 167)
-        TextBox4.TabIndex = 39
+        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
+        txtDoctorPlan.Location = New Point(35, 925)
+        txtDoctorPlan.Multiline = True
+        txtDoctorPlan.Name = "txtDoctorPlan"
+        txtDoctorPlan.Size = New Size(659, 167)
+        txtDoctorPlan.TabIndex = 39
         ' 
         ' Label20
         ' 
@@ -175,14 +191,14 @@ Partial Class ConsultationDetails
         Label20.TabIndex = 38
         Label20.Text = "Plan"
         ' 
-        ' TextBox3
+        ' txtDoctorAssessment
         ' 
-        TextBox3.BorderStyle = BorderStyle.FixedSingle
-        TextBox3.Location = New Point(35, 704)
-        TextBox3.Multiline = True
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(659, 167)
-        TextBox3.TabIndex = 37
+        txtDoctorAssessment.BorderStyle = BorderStyle.FixedSingle
+        txtDoctorAssessment.Location = New Point(35, 704)
+        txtDoctorAssessment.Multiline = True
+        txtDoctorAssessment.Name = "txtDoctorAssessment"
+        txtDoctorAssessment.Size = New Size(659, 167)
+        txtDoctorAssessment.TabIndex = 37
         ' 
         ' Label19
         ' 
@@ -208,53 +224,53 @@ Partial Class ConsultationDetails
         Label18.TabIndex = 35
         Label18.Text = "Doctor's Note"
         ' 
-        ' RadioButton4
+        ' rbBlood
         ' 
-        RadioButton4.AutoSize = True
-        RadioButton4.BackColor = Color.Transparent
-        RadioButton4.Location = New Point(609, 557)
-        RadioButton4.Name = "RadioButton4"
-        RadioButton4.Size = New Size(85, 32)
-        RadioButton4.TabIndex = 34
-        RadioButton4.TabStop = True
-        RadioButton4.Text = "Blood"
-        RadioButton4.UseVisualStyleBackColor = False
+        rbBlood.AutoSize = True
+        rbBlood.BackColor = Color.Transparent
+        rbBlood.Location = New Point(579, 40)
+        rbBlood.Name = "rbBlood"
+        rbBlood.Size = New Size(85, 32)
+        rbBlood.TabIndex = 34
+        rbBlood.TabStop = True
+        rbBlood.Text = "Blood"
+        rbBlood.UseVisualStyleBackColor = False
         ' 
-        ' RadioButton3
+        ' rbKetones
         ' 
-        RadioButton3.AutoSize = True
-        RadioButton3.BackColor = Color.Transparent
-        RadioButton3.Location = New Point(411, 557)
-        RadioButton3.Name = "RadioButton3"
-        RadioButton3.Size = New Size(103, 32)
-        RadioButton3.TabIndex = 33
-        RadioButton3.TabStop = True
-        RadioButton3.Text = "Ketones"
-        RadioButton3.UseVisualStyleBackColor = False
+        rbKetones.AutoSize = True
+        rbKetones.BackColor = Color.Transparent
+        rbKetones.Location = New Point(387, 40)
+        rbKetones.Name = "rbKetones"
+        rbKetones.Size = New Size(103, 32)
+        rbKetones.TabIndex = 33
+        rbKetones.TabStop = True
+        rbKetones.Text = "Ketones"
+        rbKetones.UseVisualStyleBackColor = False
         ' 
-        ' RadioButton2
+        ' rbGlucose
         ' 
-        RadioButton2.AutoSize = True
-        RadioButton2.BackColor = Color.Transparent
-        RadioButton2.Location = New Point(211, 557)
-        RadioButton2.Name = "RadioButton2"
-        RadioButton2.Size = New Size(102, 32)
-        RadioButton2.TabIndex = 32
-        RadioButton2.TabStop = True
-        RadioButton2.Text = "Glucose"
-        RadioButton2.UseVisualStyleBackColor = False
+        rbGlucose.AutoSize = True
+        rbGlucose.BackColor = Color.Transparent
+        rbGlucose.Location = New Point(187, 40)
+        rbGlucose.Name = "rbGlucose"
+        rbGlucose.Size = New Size(102, 32)
+        rbGlucose.TabIndex = 32
+        rbGlucose.TabStop = True
+        rbGlucose.Text = "Glucose"
+        rbGlucose.UseVisualStyleBackColor = False
         ' 
-        ' RadioButton1
+        ' rbProtein
         ' 
-        RadioButton1.AutoSize = True
-        RadioButton1.BackColor = Color.Transparent
-        RadioButton1.Location = New Point(31, 557)
-        RadioButton1.Name = "RadioButton1"
-        RadioButton1.Size = New Size(96, 32)
-        RadioButton1.TabIndex = 31
-        RadioButton1.TabStop = True
-        RadioButton1.Text = "Protein"
-        RadioButton1.UseVisualStyleBackColor = False
+        rbProtein.AutoSize = True
+        rbProtein.BackColor = Color.Transparent
+        rbProtein.Location = New Point(7, 40)
+        rbProtein.Name = "rbProtein"
+        rbProtein.Size = New Size(96, 32)
+        rbProtein.TabIndex = 31
+        rbProtein.TabStop = True
+        rbProtein.Text = "Protein"
+        rbProtein.UseVisualStyleBackColor = False
         ' 
         ' Label17
         ' 
@@ -262,18 +278,18 @@ Partial Class ConsultationDetails
         Label17.BackColor = Color.Transparent
         Label17.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label17.ForeColor = Color.Black
-        Label17.Location = New Point(26, 519)
+        Label17.Location = New Point(4, 7)
         Label17.Name = "Label17"
         Label17.Size = New Size(156, 22)
         Label17.TabIndex = 30
         Label17.Text = "Urine Analysis"
         ' 
-        ' TextBox2
+        ' txtFetalHeart
         ' 
-        TextBox2.Location = New Point(31, 460)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(663, 34)
-        TextBox2.TabIndex = 29
+        txtFetalHeart.Location = New Point(31, 460)
+        txtFetalHeart.Name = "txtFetalHeart"
+        txtFetalHeart.Size = New Size(663, 34)
+        txtFetalHeart.TabIndex = 29
         ' 
         ' Label16
         ' 
@@ -287,12 +303,12 @@ Partial Class ConsultationDetails
         Label16.TabIndex = 28
         Label16.Text = "Fetal Heart Rate (bpm)"
         ' 
-        ' TextBox1
+        ' txtFundalHeight
         ' 
-        TextBox1.Location = New Point(31, 368)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(663, 34)
-        TextBox1.TabIndex = 27
+        Me.txtFundalHeight.Location = New Point(31, 368)
+        Me.txtFundalHeight.Name = "txtFundalHeight"
+        Me.txtFundalHeight.Size = New Size(663, 34)
+        Me.txtFundalHeight.TabIndex = 27
         ' 
         ' Label15
         ' 
@@ -441,26 +457,6 @@ Partial Class ConsultationDetails
         Label10.Size = New Size(150, 22)
         Label10.TabIndex = 16
         Label10.Text = "Current Vitals"
-        ' 
-        ' listReasonofVisit
-        ' 
-        listReasonofVisit.FormattingEnabled = True
-        listReasonofVisit.ItemHeight = 28
-        listReasonofVisit.Items.AddRange(New Object() {"Routine Check-Up", "Specific Concern", "Follow-Up", "Emergency"})
-        listReasonofVisit.Location = New Point(354, 133)
-        listReasonofVisit.Name = "listReasonofVisit"
-        listReasonofVisit.Size = New Size(322, 32)
-        listReasonofVisit.TabIndex = 15
-        ' 
-        ' listVisitType
-        ' 
-        listVisitType.FormattingEnabled = True
-        listVisitType.ItemHeight = 28
-        listVisitType.Items.AddRange(New Object() {"Prenatal Check-Up", "Ultrasound", "Postpartum Follow-Up", "Consultation"})
-        listVisitType.Location = New Point(26, 133)
-        listVisitType.Name = "listVisitType"
-        listVisitType.Size = New Size(322, 32)
-        listVisitType.TabIndex = 14
         ' 
         ' Label5
         ' 
@@ -682,23 +678,52 @@ Partial Class ConsultationDetails
         Label1.TabIndex = 0
         Label1.Text = "Consultation Notes"
         ' 
-        ' Button1
+        ' cmbReasonVisit
         ' 
-        Button1.Location = New Point(866, 75)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(120, 43)
-        Button1.TabIndex = 4
-        Button1.Text = "Cancel"
-        Button1.UseVisualStyleBackColor = True
+        cmbReasonVisit.DrawMode = DrawMode.OwnerDrawFixed
+        cmbReasonVisit.FlatStyle = FlatStyle.Flat
+        cmbReasonVisit.Font = New Font("Segoe UI", 12F)
+        cmbReasonVisit.FormattingEnabled = True
+        cmbReasonVisit.ItemHeight = 30
+        cmbReasonVisit.Items.AddRange(New Object() {"Routine Check-Up", "Follow-up"})
+        cmbReasonVisit.Location = New Point(354, 133)
+        cmbReasonVisit.Name = "cmbReasonVisit"
+        cmbReasonVisit.Size = New Size(315, 36)
+        cmbReasonVisit.TabIndex = 40
         ' 
-        ' Button2
+        ' cmbVisitType
         ' 
-        Button2.Location = New Point(1006, 75)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(120, 43)
-        Button2.TabIndex = 5
-        Button2.Text = "Save Notes"
-        Button2.UseVisualStyleBackColor = True
+        cmbVisitType.DrawMode = DrawMode.OwnerDrawFixed
+        cmbVisitType.FlatStyle = FlatStyle.Flat
+        cmbVisitType.Font = New Font("Segoe UI", 12F)
+        cmbVisitType.FormattingEnabled = True
+        cmbVisitType.ItemHeight = 30
+        cmbVisitType.Items.AddRange(New Object() {"Prenatal Check-Up", "", "Ultrasound", "", "Postpartum Follow-Up", "", "Consultation"})
+        cmbVisitType.Location = New Point(26, 133)
+        cmbVisitType.Name = "cmbVisitType"
+        cmbVisitType.Size = New Size(315, 36)
+        cmbVisitType.TabIndex = 41
+        ' 
+        ' hgbUrineAnalysis
+        ' 
+        hgbUrineAnalysis.BackColor = Color.Transparent
+        hgbUrineAnalysis.BorderColor = Color.Transparent
+        hgbUrineAnalysis.Controls.Add(rbBlood)
+        hgbUrineAnalysis.Controls.Add(rbKetones)
+        hgbUrineAnalysis.Controls.Add(rbGlucose)
+        hgbUrineAnalysis.Controls.Add(rbProtein)
+        hgbUrineAnalysis.Controls.Add(Label17)
+        hgbUrineAnalysis.Font = New Font("Segoe UI", 12F)
+        hgbUrineAnalysis.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
+        hgbUrineAnalysis.LineColor = Color.Transparent
+        hgbUrineAnalysis.Location = New Point(24, 517)
+        hgbUrineAnalysis.Name = "hgbUrineAnalysis"
+        hgbUrineAnalysis.ShowText = False
+        hgbUrineAnalysis.Size = New Size(670, 86)
+        hgbUrineAnalysis.TabIndex = 42
+        hgbUrineAnalysis.TabStop = False
+        hgbUrineAnalysis.Text = "HopeGroupBox3"
+        hgbUrineAnalysis.ThemeColor = Color.Transparent
         ' 
         ' ConsultationDetails
         ' 
@@ -720,6 +745,8 @@ Partial Class ConsultationDetails
         HopeGroupBox2.PerformLayout()
         HopeGroupBox1.ResumeLayout(False)
         HopeGroupBox1.PerformLayout()
+        hgbUrineAnalysis.ResumeLayout(False)
+        hgbUrineAnalysis.PerformLayout()
         ResumeLayout(False)
     End Sub
 
@@ -744,7 +771,6 @@ Partial Class ConsultationDetails
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents listReasonofVisit As ListBox
     Friend WithEvents listVisitType As ListBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
@@ -756,19 +782,22 @@ Partial Class ConsultationDetails
     Friend WithEvents smlPulse As ReaLTaiizor.Controls.SmallTextBox
     Friend WithEvents smlBloodPressure As ReaLTaiizor.Controls.SmallTextBox
     Friend WithEvents Label17 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtFetalHeart As TextBox
     Friend WithEvents Label16 As Label
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label15 As Label
     Friend WithEvents Label18 As Label
-    Friend WithEvents RadioButton4 As RadioButton
-    Friend WithEvents RadioButton3 As RadioButton
-    Friend WithEvents RadioButton2 As RadioButton
-    Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents rbBlood As RadioButton
+    Friend WithEvents rbKetones As RadioButton
+    Friend WithEvents rbGlucose As RadioButton
+    Friend WithEvents rbProtein As RadioButton
+    Friend WithEvents txtDoctorAssessment As TextBox
     Friend WithEvents Label19 As Label
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents txtDoctorPlan As TextBox
     Friend WithEvents Label20 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents cmbReasonVisit As ReaLTaiizor.Controls.HopeComboBox
+    Friend WithEvents cmbVisitType As ReaLTaiizor.Controls.HopeComboBox
+    Friend WithEvents hgbUrineAnalysis As ReaLTaiizor.Controls.HopeGroupBox
 End Class
