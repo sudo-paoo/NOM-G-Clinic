@@ -26,6 +26,20 @@ Partial Class ConsultationDetails
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
+        TextBox4 = New TextBox()
+        Label20 = New Label()
+        TextBox3 = New TextBox()
+        Label19 = New Label()
+        Label18 = New Label()
+        RadioButton4 = New RadioButton()
+        RadioButton3 = New RadioButton()
+        RadioButton2 = New RadioButton()
+        RadioButton1 = New RadioButton()
+        Label17 = New Label()
+        TextBox2 = New TextBox()
+        Label16 = New Label()
+        TextBox1 = New TextBox()
+        Label15 = New Label()
         smlWeight = New ReaLTaiizor.Controls.SmallTextBox()
         smlTemperature = New ReaLTaiizor.Controls.SmallTextBox()
         smlPulse = New ReaLTaiizor.Controls.SmallTextBox()
@@ -55,6 +69,8 @@ Partial Class ConsultationDetails
         Label2 = New Label()
         lblDate = New Label()
         Label1 = New Label()
+        Button1 = New Button()
+        Button2 = New Button()
         Panel1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
@@ -81,7 +97,9 @@ Partial Class ConsultationDetails
         ' 
         Panel1.AutoScroll = True
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
-        Panel1.BackgroundImageLayout = ImageLayout.Zoom
+        Panel1.BackgroundImageLayout = ImageLayout.Stretch
+        Panel1.Controls.Add(Button2)
+        Panel1.Controls.Add(Button1)
         Panel1.Controls.Add(HopeGroupBox2)
         Panel1.Controls.Add(HopeGroupBox1)
         Panel1.Controls.Add(lblDate)
@@ -94,7 +112,22 @@ Partial Class ConsultationDetails
         ' 
         ' HopeGroupBox2
         ' 
+        HopeGroupBox2.BackColor = SystemColors.Control
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        HopeGroupBox2.Controls.Add(TextBox4)
+        HopeGroupBox2.Controls.Add(Label20)
+        HopeGroupBox2.Controls.Add(TextBox3)
+        HopeGroupBox2.Controls.Add(Label19)
+        HopeGroupBox2.Controls.Add(Label18)
+        HopeGroupBox2.Controls.Add(RadioButton4)
+        HopeGroupBox2.Controls.Add(RadioButton3)
+        HopeGroupBox2.Controls.Add(RadioButton2)
+        HopeGroupBox2.Controls.Add(RadioButton1)
+        HopeGroupBox2.Controls.Add(Label17)
+        HopeGroupBox2.Controls.Add(TextBox2)
+        HopeGroupBox2.Controls.Add(Label16)
+        HopeGroupBox2.Controls.Add(TextBox1)
+        HopeGroupBox2.Controls.Add(Label15)
         HopeGroupBox2.Controls.Add(smlWeight)
         HopeGroupBox2.Controls.Add(smlTemperature)
         HopeGroupBox2.Controls.Add(smlPulse)
@@ -115,11 +148,163 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Location = New Point(432, 135)
         HopeGroupBox2.Name = "HopeGroupBox2"
         HopeGroupBox2.ShowText = False
-        HopeGroupBox2.Size = New Size(734, 513)
+        HopeGroupBox2.Size = New Size(734, 1118)
         HopeGroupBox2.TabIndex = 3
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        ' 
+        ' TextBox4
+        ' 
+        TextBox4.BorderStyle = BorderStyle.FixedSingle
+        TextBox4.Location = New Point(35, 925)
+        TextBox4.Multiline = True
+        TextBox4.Name = "TextBox4"
+        TextBox4.Size = New Size(659, 167)
+        TextBox4.TabIndex = 39
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.BackColor = Color.Transparent
+        Label20.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.ForeColor = Color.Black
+        Label20.Location = New Point(31, 895)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(54, 22)
+        Label20.TabIndex = 38
+        Label20.Text = "Plan"
+        ' 
+        ' TextBox3
+        ' 
+        TextBox3.BorderStyle = BorderStyle.FixedSingle
+        TextBox3.Location = New Point(35, 704)
+        TextBox3.Multiline = True
+        TextBox3.Name = "TextBox3"
+        TextBox3.Size = New Size(659, 167)
+        TextBox3.TabIndex = 37
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.BackColor = Color.Transparent
+        Label19.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.ForeColor = Color.Black
+        Label19.Location = New Point(31, 674)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(132, 22)
+        Label19.TabIndex = 36
+        Label19.Text = "Assessment"
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.BackColor = Color.Transparent
+        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.ForeColor = Color.Black
+        Label18.Location = New Point(26, 621)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(188, 28)
+        Label18.TabIndex = 35
+        Label18.Text = "Doctor's Note"
+        ' 
+        ' RadioButton4
+        ' 
+        RadioButton4.AutoSize = True
+        RadioButton4.BackColor = Color.Transparent
+        RadioButton4.Location = New Point(609, 557)
+        RadioButton4.Name = "RadioButton4"
+        RadioButton4.Size = New Size(85, 32)
+        RadioButton4.TabIndex = 34
+        RadioButton4.TabStop = True
+        RadioButton4.Text = "Blood"
+        RadioButton4.UseVisualStyleBackColor = False
+        ' 
+        ' RadioButton3
+        ' 
+        RadioButton3.AutoSize = True
+        RadioButton3.BackColor = Color.Transparent
+        RadioButton3.Location = New Point(411, 557)
+        RadioButton3.Name = "RadioButton3"
+        RadioButton3.Size = New Size(103, 32)
+        RadioButton3.TabIndex = 33
+        RadioButton3.TabStop = True
+        RadioButton3.Text = "Ketones"
+        RadioButton3.UseVisualStyleBackColor = False
+        ' 
+        ' RadioButton2
+        ' 
+        RadioButton2.AutoSize = True
+        RadioButton2.BackColor = Color.Transparent
+        RadioButton2.Location = New Point(211, 557)
+        RadioButton2.Name = "RadioButton2"
+        RadioButton2.Size = New Size(102, 32)
+        RadioButton2.TabIndex = 32
+        RadioButton2.TabStop = True
+        RadioButton2.Text = "Glucose"
+        RadioButton2.UseVisualStyleBackColor = False
+        ' 
+        ' RadioButton1
+        ' 
+        RadioButton1.AutoSize = True
+        RadioButton1.BackColor = Color.Transparent
+        RadioButton1.Location = New Point(31, 557)
+        RadioButton1.Name = "RadioButton1"
+        RadioButton1.Size = New Size(96, 32)
+        RadioButton1.TabIndex = 31
+        RadioButton1.TabStop = True
+        RadioButton1.Text = "Protein"
+        RadioButton1.UseVisualStyleBackColor = False
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.BackColor = Color.Transparent
+        Label17.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.ForeColor = Color.Black
+        Label17.Location = New Point(26, 519)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(156, 22)
+        Label17.TabIndex = 30
+        Label17.Text = "Urine Analysis"
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.Location = New Point(31, 460)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(663, 34)
+        TextBox2.TabIndex = 29
+        ' 
+        ' Label16
+        ' 
+        Label16.AutoSize = True
+        Label16.BackColor = Color.Transparent
+        Label16.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label16.ForeColor = Color.Black
+        Label16.Location = New Point(26, 422)
+        Label16.Name = "Label16"
+        Label16.Size = New Size(245, 22)
+        Label16.TabIndex = 28
+        Label16.Text = "Fetal Heart Rate (bpm)"
+        ' 
+        ' TextBox1
+        ' 
+        TextBox1.Location = New Point(31, 368)
+        TextBox1.Name = "TextBox1"
+        TextBox1.Size = New Size(663, 34)
+        TextBox1.TabIndex = 27
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.BackColor = Color.Transparent
+        Label15.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label15.ForeColor = Color.Black
+        Label15.Location = New Point(26, 330)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(152, 22)
+        Label15.TabIndex = 26
+        Label15.Text = "Fundal Height"
         ' 
         ' smlWeight
         ' 
@@ -497,6 +682,24 @@ Partial Class ConsultationDetails
         Label1.TabIndex = 0
         Label1.Text = "Consultation Notes"
         ' 
+        ' Button1
+        ' 
+        Button1.Location = New Point(866, 75)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(120, 43)
+        Button1.TabIndex = 4
+        Button1.Text = "Cancel"
+        Button1.UseVisualStyleBackColor = True
+        ' 
+        ' Button2
+        ' 
+        Button2.Location = New Point(1006, 75)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(120, 43)
+        Button2.TabIndex = 5
+        Button2.Text = "Save Notes"
+        Button2.UseVisualStyleBackColor = True
+        ' 
         ' ConsultationDetails
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -552,4 +755,20 @@ Partial Class ConsultationDetails
     Friend WithEvents smlTemperature As ReaLTaiizor.Controls.SmallTextBox
     Friend WithEvents smlPulse As ReaLTaiizor.Controls.SmallTextBox
     Friend WithEvents smlBloodPressure As ReaLTaiizor.Controls.SmallTextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
 End Class
