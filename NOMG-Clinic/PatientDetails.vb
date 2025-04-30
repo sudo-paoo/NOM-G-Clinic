@@ -418,4 +418,5 @@ Public Class PatientDetails
             End Using
         End Using
     End Sub
+
 End Class

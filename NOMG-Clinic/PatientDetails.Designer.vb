@@ -96,7 +96,7 @@ Partial Class PatientDetails
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12.0F)
+        HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -109,6 +109,7 @@ Partial Class PatientDetails
         ' 
         ' Panel1
         ' 
+        Panel1.BackColor = SystemColors.Control
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
         Panel1.Controls.Add(TabControl1)
         Panel1.Controls.Add(IconButton2)
@@ -164,7 +165,7 @@ Partial Class PatientDetails
         HopeGroupBox4.Controls.Add(flowRecentAppointments)
         HopeGroupBox4.Controls.Add(Label12)
         HopeGroupBox4.Controls.Add(Label11)
-        HopeGroupBox4.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
         HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox4.Location = New Point(10, 269)
@@ -174,7 +175,7 @@ Partial Class PatientDetails
         HopeGroupBox4.TabIndex = 3
         HopeGroupBox4.TabStop = False
         HopeGroupBox4.Text = "HopeGroupBox4"
-        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(192), CByte(192), CByte(255))
+        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         ' 
         ' flowRecentAppointments
         ' 
@@ -218,7 +219,7 @@ Partial Class PatientDetails
         HopeGroupBox2.Controls.Add(Label9)
         HopeGroupBox2.Controls.Add(Label10)
         HopeGroupBox2.FlatStyle = FlatStyle.Flat
-        HopeGroupBox2.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox2.Font = New Font("Segoe UI", 12F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Location = New Point(502, 13)
@@ -228,7 +229,7 @@ Partial Class PatientDetails
         HopeGroupBox2.TabIndex = 1
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
-        HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(192), CByte(192), CByte(255))
+        HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         ' 
         ' Label18
         ' 
@@ -337,7 +338,7 @@ Partial Class PatientDetails
         HopeGroupBox1.Controls.Add(Label2)
         HopeGroupBox1.Controls.Add(Label1)
         HopeGroupBox1.FlatStyle = FlatStyle.Flat
-        HopeGroupBox1.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        HopeGroupBox1.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.Transparent
         HopeGroupBox1.Location = New Point(10, 13)
@@ -347,7 +348,7 @@ Partial Class PatientDetails
         HopeGroupBox1.TabIndex = 0
         HopeGroupBox1.TabStop = False
         HopeGroupBox1.Text = "HopeGroupBox1"
-        HopeGroupBox1.ThemeColor = Color.FromArgb(CByte(192), CByte(192), CByte(255))
+        HopeGroupBox1.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         ' 
         ' Label17
         ' 
@@ -622,7 +623,7 @@ Partial Class PatientDetails
         IconButton2.BackColor = Color.Transparent
         IconButton2.FlatAppearance.BorderColor = Color.Black
         IconButton2.FlatStyle = FlatStyle.Flat
-        IconButton2.Font = New Font("Verdana", 12.0F)
+        IconButton2.Font = New Font("Verdana", 12F)
         IconButton2.IconChar = FontAwesome.Sharp.IconChar.Pen
         IconButton2.IconColor = Color.Black
         IconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto
@@ -641,7 +642,7 @@ Partial Class PatientDetails
         IconButton1.BackColor = Color.Transparent
         IconButton1.FlatAppearance.BorderColor = Color.Black
         IconButton1.FlatStyle = FlatStyle.Flat
-        IconButton1.Font = New Font("Verdana", 12.0F)
+        IconButton1.Font = New Font("Verdana", 12F)
         IconButton1.IconChar = FontAwesome.Sharp.IconChar.Calendar
         IconButton1.IconColor = Color.Black
         IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
@@ -668,7 +669,7 @@ Partial Class PatientDetails
         ' 
         ' PatientDetails
         ' 
-        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1000, 700)
         Controls.Add(Panel1)
