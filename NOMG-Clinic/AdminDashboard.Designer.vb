@@ -69,9 +69,9 @@ Partial Class AdminDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettings = New Panel()
+        BigLabel2 = New ReaLTaiizor.Controls.BigLabel()
         BigLabel1 = New ReaLTaiizor.Controls.BigLabel()
         Label8 = New Label()
-        BigLabel2 = New ReaLTaiizor.Controls.BigLabel()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -704,6 +704,18 @@ Partial Class AdminDashboard
         pnlSettings.Size = New Size(900, 660)
         pnlSettings.TabIndex = 10
         ' 
+        ' BigLabel2
+        ' 
+        BigLabel2.AutoSize = True
+        BigLabel2.BackColor = Color.Transparent
+        BigLabel2.Font = New Font("Segoe UI", 25.0F)
+        BigLabel2.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
+        BigLabel2.Location = New Point(146, 303)
+        BigLabel2.Name = "BigLabel2"
+        BigLabel2.Size = New Size(205, 57)
+        BigLabel2.TabIndex = 3
+        BigLabel2.Text = "BigLabel2"
+        ' 
         ' BigLabel1
         ' 
         BigLabel1.AutoSize = True
@@ -726,28 +738,16 @@ Partial Class AdminDashboard
         Label8.TabIndex = 1
         Label8.Text = "Settings"
         ' 
-        ' BigLabel2
-        ' 
-        BigLabel2.AutoSize = True
-        BigLabel2.BackColor = Color.Transparent
-        BigLabel2.Font = New Font("Segoe UI", 25.0F)
-        BigLabel2.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
-        BigLabel2.Location = New Point(146, 303)
-        BigLabel2.Name = "BigLabel2"
-        BigLabel2.Size = New Size(205, 57)
-        BigLabel2.TabIndex = 3
-        BigLabel2.Text = "BigLabel2"
-        ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlPatients)
         Controls.Add(pnlSettings)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
         Controls.Add(pnlDoctors)
-        Controls.Add(pnlPatients)
         Controls.Add(pnlDashboard)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
