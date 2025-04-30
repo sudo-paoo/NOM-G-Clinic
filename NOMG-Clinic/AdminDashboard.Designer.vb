@@ -83,6 +83,8 @@ Partial Class AdminDashboard
         TextBox9 = New TextBox()
         Label8 = New Label()
         HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
+        btnEyePassword = New FontAwesome.Sharp.IconButton()
+        TextBox2 = New TextBox()
         TextBox4 = New TextBox()
         TextBox3 = New TextBox()
         Label14 = New Label()
@@ -91,8 +93,7 @@ Partial Class AdminDashboard
         Label11 = New Label()
         TextBox1 = New TextBox()
         Label21 = New Label()
-        TextBox2 = New TextBox()
-        btnEyePassword = New FontAwesome.Sharp.IconButton()
+        IconButton1 = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -739,6 +740,7 @@ Partial Class AdminDashboard
         ' 
         Panel2.AutoScroll = True
         Panel2.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        Panel2.Controls.Add(IconButton1)
         Panel2.Controls.Add(SmallLabel1)
         Panel2.Controls.Add(btnSave)
         Panel2.Controls.Add(Label16)
@@ -897,6 +899,28 @@ Partial Class AdminDashboard
         HopeGroupBox4.Text = "HopeGroupBox4"
         HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         ' 
+        ' btnEyePassword
+        ' 
+        btnEyePassword.BackColor = Color.Transparent
+        btnEyePassword.FlatAppearance.BorderSize = 0
+        btnEyePassword.FlatStyle = FlatStyle.Flat
+        btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.Eye
+        btnEyePassword.IconColor = Color.Black
+        btnEyePassword.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEyePassword.IconSize = 25
+        btnEyePassword.Location = New Point(593, 84)
+        btnEyePassword.Name = "btnEyePassword"
+        btnEyePassword.Size = New Size(32, 32)
+        btnEyePassword.TabIndex = 44
+        btnEyePassword.UseVisualStyleBackColor = False
+        ' 
+        ' TextBox2
+        ' 
+        TextBox2.Location = New Point(290, 189)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(300, 34)
+        TextBox2.TabIndex = 12
+        ' 
         ' TextBox4
         ' 
         TextBox4.Location = New Point(290, 84)
@@ -972,27 +996,19 @@ Partial Class AdminDashboard
         Label21.TabIndex = 1
         Label21.Text = "Settings"
         ' 
-        ' TextBox2
+        ' IconButton1
         ' 
-        TextBox2.Location = New Point(290, 189)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(300, 34)
-        TextBox2.TabIndex = 12
-        ' 
-        ' btnEyePassword
-        ' 
-        btnEyePassword.BackColor = Color.Transparent
-        btnEyePassword.FlatAppearance.BorderSize = 0
-        btnEyePassword.FlatStyle = FlatStyle.Flat
-        btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.Eye
-        btnEyePassword.IconColor = Color.Black
-        btnEyePassword.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEyePassword.IconSize = 25
-        btnEyePassword.Location = New Point(593, 84)
-        btnEyePassword.Name = "btnEyePassword"
-        btnEyePassword.Size = New Size(32, 32)
-        btnEyePassword.TabIndex = 44
-        btnEyePassword.UseVisualStyleBackColor = False
+        IconButton1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        IconButton1.IconColor = Color.RosyBrown
+        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
+        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
+        IconButton1.Location = New Point(402, 415)
+        IconButton1.Name = "IconButton1"
+        IconButton1.Size = New Size(118, 44)
+        IconButton1.TabIndex = 21
+        IconButton1.Text = "        SAVE"
+        IconButton1.UseVisualStyleBackColor = True
         ' 
         ' AdminDashboard
         ' 
@@ -1123,4 +1139,5 @@ Partial Class AdminDashboard
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label21 As Label
     Friend WithEvents btnEyePassword As FontAwesome.Sharp.IconButton
+    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
 End Class
