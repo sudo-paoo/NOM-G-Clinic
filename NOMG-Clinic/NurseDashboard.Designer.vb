@@ -54,6 +54,8 @@ Partial Class NurseDashboard
         Panel3 = New Panel()
         dgvAppointments = New DataGridView()
         Appointments = New Label()
+        btnSettings = New FontAwesome.Sharp.IconButton()
+        Panel2 = New Panel()
         Panel1.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
@@ -90,6 +92,7 @@ Partial Class NurseDashboard
         ' Panel1
         ' 
         Panel1.BackColor = Color.FromArgb(CByte(227), CByte(190), CByte(210))
+        Panel1.Controls.Add(btnSettings)
         Panel1.Controls.Add(btnLogout)
         Panel1.Controls.Add(btnAppointments)
         Panel1.Controls.Add(btnPatients)
@@ -461,6 +464,35 @@ Partial Class NurseDashboard
         Appointments.TabIndex = 1
         Appointments.Text = "Appointments"
         ' 
+        ' btnSettings
+        ' 
+        btnSettings.BackColor = Color.Transparent
+        btnSettings.Dock = DockStyle.Top
+        btnSettings.FlatAppearance.BorderSize = 0
+        btnSettings.FlatStyle = FlatStyle.Flat
+        btnSettings.Font = New Font("Verdana", 10.2F)
+        btnSettings.IconChar = FontAwesome.Sharp.IconChar.Bars
+        btnSettings.IconColor = Color.Black
+        btnSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSettings.IconSize = 36
+        btnSettings.ImageAlign = ContentAlignment.MiddleLeft
+        btnSettings.Location = New Point(0, 180)
+        btnSettings.Margin = New Padding(5)
+        btnSettings.Name = "btnSettings"
+        btnSettings.Size = New Size(300, 60)
+        btnSettings.TabIndex = 8
+        btnSettings.Text = "Settings"
+        btnSettings.TextAlign = ContentAlignment.MiddleLeft
+        btnSettings.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnSettings.UseVisualStyleBackColor = False
+        ' 
+        ' Panel2
+        ' 
+        Panel2.Location = New Point(300, 40)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(900, 660)
+        Panel2.TabIndex = 5
+        ' 
         ' NurseDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -468,6 +500,7 @@ Partial Class NurseDashboard
         BackgroundImage = My.Resources.Resources.bg_img
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(1200, 700)
+        Controls.Add(Panel2)
         Controls.Add(pnlPatients)
         Controls.Add(pnlAppointments)
         Controls.Add(pnlDashboard)
@@ -534,4 +567,6 @@ Partial Class NurseDashboard
     Friend WithEvents dgvAppointments As DataGridView
     Friend WithEvents Appointments As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents btnSettings As FontAwesome.Sharp.IconButton
+    Friend WithEvents Panel2 As Panel
 End Class
