@@ -15,4 +15,8 @@ Public Class BillingDetails
     Private Sub BillingDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
+
+    Private Sub TextBox9_TextChanged(sender As Object, e As EventArgs) Handles TextBox9.TextChanged
+
+    End Sub
 End Class
