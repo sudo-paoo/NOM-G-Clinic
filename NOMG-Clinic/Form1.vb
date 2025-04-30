@@ -37,7 +37,6 @@ Public Class Form1
             conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
             conn.Open()
 
-            ' Modify the query to retrieve the role and respective ID
             Dim query As String = "SELECT role FROM users WHERE username = @username AND password = @password"
             cmd = New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@username", username)
