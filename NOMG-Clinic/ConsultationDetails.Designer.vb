@@ -84,7 +84,7 @@ Partial Class ConsultationDetails
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12F)
+        HopeForm1.Font = New Font("Segoe UI", 12.0F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -158,7 +158,7 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Controls.Add(Label5)
         HopeGroupBox2.Controls.Add(Label4)
         HopeGroupBox2.Controls.Add(Label3)
-        HopeGroupBox2.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox2.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Location = New Point(432, 135)
@@ -327,7 +327,7 @@ Partial Class ConsultationDetails
         smlWeight.BackColor = Color.Transparent
         smlWeight.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlWeight.CustomBGColor = Color.White
-        smlWeight.Font = New Font("Tahoma", 11F)
+        smlWeight.Font = New Font("Tahoma", 11.0F)
         smlWeight.ForeColor = Color.DimGray
         smlWeight.Location = New Point(561, 273)
         smlWeight.MaxLength = 32767
@@ -346,7 +346,7 @@ Partial Class ConsultationDetails
         smlTemperature.BackColor = Color.Transparent
         smlTemperature.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlTemperature.CustomBGColor = Color.White
-        smlTemperature.Font = New Font("Tahoma", 11F)
+        smlTemperature.Font = New Font("Tahoma", 11.0F)
         smlTemperature.ForeColor = Color.DimGray
         smlTemperature.Location = New Point(390, 273)
         smlTemperature.MaxLength = 32767
@@ -365,7 +365,7 @@ Partial Class ConsultationDetails
         smlPulse.BackColor = Color.Transparent
         smlPulse.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlPulse.CustomBGColor = Color.White
-        smlPulse.Font = New Font("Tahoma", 11F)
+        smlPulse.Font = New Font("Tahoma", 11.0F)
         smlPulse.ForeColor = Color.DimGray
         smlPulse.Location = New Point(223, 273)
         smlPulse.MaxLength = 32767
@@ -384,7 +384,7 @@ Partial Class ConsultationDetails
         smlBloodPressure.BackColor = Color.Transparent
         smlBloodPressure.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlBloodPressure.CustomBGColor = Color.White
-        smlBloodPressure.Font = New Font("Tahoma", 11F)
+        smlBloodPressure.Font = New Font("Tahoma", 11.0F)
         smlBloodPressure.ForeColor = Color.DimGray
         smlBloodPressure.Location = New Point(31, 273)
         smlBloodPressure.MaxLength = 32767
@@ -512,7 +512,7 @@ Partial Class ConsultationDetails
         HopeGroupBox1.Controls.Add(lblPatientAge)
         HopeGroupBox1.Controls.Add(lblPatientName)
         HopeGroupBox1.Controls.Add(Label2)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox1.Font = New Font("Segoe UI", 12.0F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox1.Location = New Point(35, 135)
@@ -571,7 +571,7 @@ Partial Class ConsultationDetails
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label9.ForeColor = Color.Black
         Label9.Location = New Point(19, 437)
         Label9.Name = "Label9"
@@ -582,7 +582,7 @@ Partial Class ConsultationDetails
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label8.ForeColor = Color.Black
         Label8.Location = New Point(19, 368)
         Label8.Name = "Label8"
@@ -593,7 +593,7 @@ Partial Class ConsultationDetails
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = Color.Black
         Label7.Location = New Point(19, 296)
         Label7.Name = "Label7"
@@ -604,7 +604,7 @@ Partial Class ConsultationDetails
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = Color.Black
         Label6.Location = New Point(19, 217)
         Label6.Name = "Label6"
@@ -615,7 +615,7 @@ Partial Class ConsultationDetails
         ' lblTypeOfPatient
         ' 
         lblTypeOfPatient.AutoSize = True
-        lblTypeOfPatient.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTypeOfPatient.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTypeOfPatient.ForeColor = Color.Black
         lblTypeOfPatient.Location = New Point(161, 160)
         lblTypeOfPatient.Name = "lblTypeOfPatient"
@@ -626,7 +626,7 @@ Partial Class ConsultationDetails
         ' lblPatientAge
         ' 
         lblPatientAge.AutoSize = True
-        lblPatientAge.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblPatientAge.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientAge.ForeColor = Color.Black
         lblPatientAge.Location = New Point(161, 123)
         lblPatientAge.Name = "lblPatientAge"
@@ -637,7 +637,7 @@ Partial Class ConsultationDetails
         ' lblPatientName
         ' 
         lblPatientName.AutoSize = True
-        lblPatientName.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblPatientName.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientName.ForeColor = Color.Black
         lblPatientName.Location = New Point(161, 85)
         lblPatientName.Name = "lblPatientName"
@@ -660,7 +660,7 @@ Partial Class ConsultationDetails
         ' 
         lblDate.AutoSize = True
         lblDate.BackColor = Color.Transparent
-        lblDate.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDate.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDate.Location = New Point(24, 65)
         lblDate.Name = "lblDate"
         lblDate.Size = New Size(145, 25)
@@ -682,7 +682,7 @@ Partial Class ConsultationDetails
         ' 
         cmbReasonVisit.DrawMode = DrawMode.OwnerDrawFixed
         cmbReasonVisit.FlatStyle = FlatStyle.Flat
-        cmbReasonVisit.Font = New Font("Segoe UI", 12F)
+        cmbReasonVisit.Font = New Font("Segoe UI", 12.0F)
         cmbReasonVisit.FormattingEnabled = True
         cmbReasonVisit.ItemHeight = 30
         cmbReasonVisit.Items.AddRange(New Object() {"Routine Check-Up", "Follow-up"})
@@ -695,7 +695,7 @@ Partial Class ConsultationDetails
         ' 
         cmbVisitType.DrawMode = DrawMode.OwnerDrawFixed
         cmbVisitType.FlatStyle = FlatStyle.Flat
-        cmbVisitType.Font = New Font("Segoe UI", 12F)
+        cmbVisitType.Font = New Font("Segoe UI", 12.0F)
         cmbVisitType.FormattingEnabled = True
         cmbVisitType.ItemHeight = 30
         cmbVisitType.Items.AddRange(New Object() {"Prenatal Check-Up", "", "Ultrasound", "", "Postpartum Follow-Up", "", "Consultation"})
@@ -713,7 +713,7 @@ Partial Class ConsultationDetails
         hgbUrineAnalysis.Controls.Add(rbGlucose)
         hgbUrineAnalysis.Controls.Add(rbProtein)
         hgbUrineAnalysis.Controls.Add(Label17)
-        hgbUrineAnalysis.Font = New Font("Segoe UI", 12F)
+        hgbUrineAnalysis.Font = New Font("Segoe UI", 12.0F)
         hgbUrineAnalysis.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         hgbUrineAnalysis.LineColor = Color.Transparent
         hgbUrineAnalysis.Location = New Point(24, 517)
@@ -727,7 +727,7 @@ Partial Class ConsultationDetails
         ' 
         ' ConsultationDetails
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
         Controls.Add(Panel1)
@@ -748,6 +748,24 @@ Partial Class ConsultationDetails
         hgbUrineAnalysis.ResumeLayout(False)
         hgbUrineAnalysis.PerformLayout()
         ResumeLayout(False)
+
+        ' 
+        ' txtFundalHeight
+        ' 
+        txtFundalHeight.BackColor = Color.Transparent
+        txtFundalHeight.Font = New Font("Tahoma", 11.0F)
+        txtFundalHeight.ForeColor = Color.DimGray
+        txtFundalHeight.Location = New Point(31, 330)
+        txtFundalHeight.MaxLength = 32767
+        txtFundalHeight.Multiline = False
+        txtFundalHeight.Name = "txtFundalHeight"
+        txtFundalHeight.ReadOnly = False
+        txtFundalHeight.Size = New Size(163, 33)
+        txtFundalHeight.TabIndex = 26
+        txtFundalHeight.Text = ""
+        txtFundalHeight.UseSystemPasswordChar = False
+        HopeGroupBox2.Controls.Add(txtFundalHeight)
+
     End Sub
 
     Friend WithEvents HopeForm1 As ReaLTaiizor.Forms.HopeForm
@@ -800,4 +818,6 @@ Partial Class ConsultationDetails
     Friend WithEvents cmbReasonVisit As ReaLTaiizor.Controls.HopeComboBox
     Friend WithEvents cmbVisitType As ReaLTaiizor.Controls.HopeComboBox
     Friend WithEvents hgbUrineAnalysis As ReaLTaiizor.Controls.HopeGroupBox
+    Friend WithEvents txtFundalHeight As TextBox
+
 End Class
