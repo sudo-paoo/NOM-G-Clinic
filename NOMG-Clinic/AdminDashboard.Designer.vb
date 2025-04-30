@@ -69,17 +69,6 @@ Partial Class AdminDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettings = New Panel()
-        TextBox4 = New TextBox()
-        TextBox3 = New TextBox()
-        TextBox2 = New TextBox()
-        TextBox1 = New TextBox()
-        Label14 = New Label()
-        Label13 = New Label()
-        Label12 = New Label()
-        Label11 = New Label()
-        Label9 = New Label()
-        Label8 = New Label()
-        Panel2 = New Panel()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -720,76 +709,6 @@ Partial Class AdminDashboard
         pnlSettings.Size = New Size(900, 660)
         pnlSettings.TabIndex = 10
         ' 
-        ' TextBox4
-        ' 
-        TextBox4.Location = New Point(442, 225)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(300, 27)
-        TextBox4.TabIndex = 11
-        ' 
-        ' TextBox3
-        ' 
-        TextBox3.Location = New Point(442, 278)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(300, 27)
-        TextBox3.TabIndex = 10
-        ' 
-        ' TextBox2
-        ' 
-        TextBox2.Location = New Point(442, 331)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(300, 27)
-        TextBox2.TabIndex = 9
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.Location = New Point(442, 172)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(300, 27)
-        TextBox1.TabIndex = 8
-        ' 
-        ' Label14
-        ' 
-        Label14.AutoSize = True
-        Label14.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(176, 171)
-        Label14.Name = "Label14"
-        Label14.Size = New Size(109, 28)
-        Label14.TabIndex = 7
-        Label14.Text = "Username:"
-        ' 
-        ' Label13
-        ' 
-        Label13.AutoSize = True
-        Label13.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label13.Location = New Point(176, 330)
-        Label13.Name = "Label13"
-        Label13.Size = New Size(165, 28)
-        Label13.TabIndex = 6
-        Label13.Text = "Contact number:"
-        ' 
-        ' Label12
-        ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(175, 277)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(65, 28)
-        Label12.TabIndex = 5
-        Label12.Text = "Email:"
-        ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(176, 224)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(102, 28)
-        Label11.TabIndex = 4
-        Label11.Text = "Password:"
-        ' 
-        ' Label9
-        ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label9.Location = New Point(340, 106)
@@ -808,23 +727,16 @@ Partial Class AdminDashboard
         Label8.TabIndex = 1
         Label8.Text = "Settings"
         ' 
-        ' Panel2
-        ' 
-        Panel2.Location = New Point(147, 155)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(626, 228)
-        Panel2.TabIndex = 12
-        ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlPatients)
         Controls.Add(pnlSettings)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
         Controls.Add(pnlDoctors)
-        Controls.Add(pnlPatients)
         Controls.Add(pnlDashboard)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
