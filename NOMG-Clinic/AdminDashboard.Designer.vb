@@ -57,8 +57,8 @@ Partial Class AdminDashboard
         pnlDoctors = New Panel()
         pnlDoctorsDataGrid = New Panel()
         dgvDoctors = New DataGridView()
-        txtSearchDoctor = New TextBox()
         btnAddDoctor = New FontAwesome.Sharp.IconButton()
+        txtSearchDoctor = New TextBox()
         Label6 = New Label()
         pnlAppointments = New Panel()
         Panel3 = New Panel()
@@ -69,9 +69,6 @@ Partial Class AdminDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettings = New Panel()
-        BigLabel2 = New ReaLTaiizor.Controls.BigLabel()
-        BigLabel1 = New ReaLTaiizor.Controls.BigLabel()
-        Label8 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -135,7 +132,7 @@ Partial Class AdminDashboard
         btnSettings.FlatAppearance.BorderSize = 0
         btnSettings.FlatStyle = FlatStyle.Flat
         btnSettings.Font = New Font("Verdana", 10.2F)
-        btnSettings.IconChar = FontAwesome.Sharp.IconChar.CreditCard
+        btnSettings.IconChar = FontAwesome.Sharp.IconChar.Bars
         btnSettings.IconColor = Color.Black
         btnSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSettings.IconSize = 36
@@ -548,7 +545,6 @@ Partial Class AdminDashboard
         pnlDoctors.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlDoctors.Controls.Add(pnlDoctorsDataGrid)
         pnlDoctors.Controls.Add(txtSearchDoctor)
-        pnlDoctors.Controls.Add(btnAddDoctor)
         pnlDoctors.Controls.Add(Label6)
         pnlDoctors.Dock = DockStyle.Fill
         pnlDoctors.Location = New Point(300, 40)
@@ -559,6 +555,7 @@ Partial Class AdminDashboard
         ' pnlDoctorsDataGrid
         ' 
         pnlDoctorsDataGrid.Controls.Add(dgvDoctors)
+        pnlDoctorsDataGrid.Controls.Add(btnAddDoctor)
         pnlDoctorsDataGrid.Location = New Point(24, 134)
         pnlDoctorsDataGrid.Name = "pnlDoctorsDataGrid"
         pnlDoctorsDataGrid.Size = New Size(852, 514)
@@ -575,6 +572,22 @@ Partial Class AdminDashboard
         dgvDoctors.Size = New Size(852, 514)
         dgvDoctors.TabIndex = 4
         ' 
+        ' btnAddDoctor
+        ' 
+        btnAddDoctor.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnAddDoctor.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        btnAddDoctor.IconColor = Color.Black
+        btnAddDoctor.IconFont = FontAwesome.Sharp.IconFont.Regular
+        btnAddDoctor.IconSize = 34
+        btnAddDoctor.Location = New Point(0, 0)
+        btnAddDoctor.Name = "btnAddDoctor"
+        btnAddDoctor.Size = New Size(195, 60)
+        btnAddDoctor.TabIndex = 2
+        btnAddDoctor.Text = "Add Doctor"
+        btnAddDoctor.TextAlign = ContentAlignment.MiddleRight
+        btnAddDoctor.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnAddDoctor.UseVisualStyleBackColor = True
+        ' 
         ' txtSearchDoctor
         ' 
         txtSearchDoctor.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -583,22 +596,6 @@ Partial Class AdminDashboard
         txtSearchDoctor.PlaceholderText = "Search doctor..."
         txtSearchDoctor.Size = New Size(250, 32)
         txtSearchDoctor.TabIndex = 3
-        ' 
-        ' btnAddDoctor
-        ' 
-        btnAddDoctor.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnAddDoctor.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
-        btnAddDoctor.IconColor = Color.Black
-        btnAddDoctor.IconFont = FontAwesome.Sharp.IconFont.Regular
-        btnAddDoctor.IconSize = 34
-        btnAddDoctor.Location = New Point(681, 22)
-        btnAddDoctor.Name = "btnAddDoctor"
-        btnAddDoctor.Size = New Size(195, 60)
-        btnAddDoctor.TabIndex = 2
-        btnAddDoctor.Text = "Add Doctor"
-        btnAddDoctor.TextAlign = ContentAlignment.MiddleRight
-        btnAddDoctor.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnAddDoctor.UseVisualStyleBackColor = True
         ' 
         ' Label6
         ' 
@@ -695,44 +692,36 @@ Partial Class AdminDashboard
         ' pnlSettings
         ' 
         pnlSettings.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        pnlSettings.Controls.Add(BigLabel2)
-        pnlSettings.Controls.Add(BigLabel1)
+        pnlSettings.Controls.Add(TextBox4)
+        pnlSettings.Controls.Add(TextBox3)
+        pnlSettings.Controls.Add(TextBox2)
+        pnlSettings.Controls.Add(TextBox1)
+        pnlSettings.Controls.Add(Label14)
+        pnlSettings.Controls.Add(Label13)
+        pnlSettings.Controls.Add(Label12)
+        pnlSettings.Controls.Add(Label11)
+        pnlSettings.Controls.Add(Label9)
         pnlSettings.Controls.Add(Label8)
+        pnlSettings.Controls.Add(Panel2)
         pnlSettings.Dock = DockStyle.Fill
         pnlSettings.Location = New Point(300, 40)
         pnlSettings.Name = "pnlSettings"
         pnlSettings.Size = New Size(900, 660)
         pnlSettings.TabIndex = 10
         ' 
-        ' BigLabel2
-        ' 
-        BigLabel2.AutoSize = True
-        BigLabel2.BackColor = Color.Transparent
-        BigLabel2.Font = New Font("Segoe UI", 25.0F)
-        BigLabel2.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
-        BigLabel2.Location = New Point(146, 303)
-        BigLabel2.Name = "BigLabel2"
-        BigLabel2.Size = New Size(205, 57)
-        BigLabel2.TabIndex = 3
-        BigLabel2.Text = "BigLabel2"
-        ' 
-        ' BigLabel1
-        ' 
-        BigLabel1.AutoSize = True
-        BigLabel1.BackColor = Color.Transparent
-        BigLabel1.Font = New Font("Segoe UI", 25.0F)
-        BigLabel1.ForeColor = Color.FromArgb(CByte(80), CByte(80), CByte(80))
-        BigLabel1.Location = New Point(153, 168)
-        BigLabel1.Name = "BigLabel1"
-        BigLabel1.Size = New Size(205, 57)
-        BigLabel1.TabIndex = 2
-        BigLabel1.Text = "BigLabel1"
+        Label9.AutoSize = True
+        Label9.Font = New Font("Segoe UI Semibold", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Location = New Point(340, 106)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(232, 31)
+        Label9.TabIndex = 2
+        Label9.Text = "Personal Information"
         ' 
         ' Label8
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label8.Location = New Point(24, 32)
+        Label8.Location = New Point(24, 22)
         Label8.Name = "Label8"
         Label8.Size = New Size(147, 34)
         Label8.TabIndex = 1
@@ -838,6 +827,14 @@ Partial Class AdminDashboard
     Friend WithEvents btnSettings As FontAwesome.Sharp.IconButton
     Friend WithEvents pnlSettings As Panel
     Friend WithEvents Label8 As Label
-    Friend WithEvents BigLabel1 As ReaLTaiizor.Controls.BigLabel
-    Friend WithEvents BigLabel2 As ReaLTaiizor.Controls.BigLabel
+    Friend WithEvents Label12 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Panel2 As Panel
 End Class
