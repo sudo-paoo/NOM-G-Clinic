@@ -748,6 +748,7 @@ Partial Class DoctorDashboard
         txtConfirmPassword.Name = "txtConfirmPassword"
         txtConfirmPassword.Size = New Size(300, 34)
         txtConfirmPassword.TabIndex = 13
+        txtConfirmPassword.UseSystemPasswordChar = True
         ' 
         ' btnEyePassword
         ' 
@@ -781,6 +782,7 @@ Partial Class DoctorDashboard
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(300, 34)
         txtPassword.TabIndex = 11
+        txtPassword.UseSystemPasswordChar = True
         ' 
         ' Label10
         ' 
