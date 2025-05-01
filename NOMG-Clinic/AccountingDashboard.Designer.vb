@@ -30,7 +30,10 @@ Partial Class AccountingDashboard
         btnPatients = New FontAwesome.Sharp.IconButton()
         btnDashboard = New FontAwesome.Sharp.IconButton()
         pnlDashboard = New Panel()
-        Label1 = New Label()
+        tabDashboard = New TabControl()
+        TabPage1 = New TabPage()
+        TabPage2 = New TabPage()
+        TabPage3 = New TabPage()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
         lblTotalExpenses = New Label()
         Label5 = New Label()
@@ -40,16 +43,21 @@ Partial Class AccountingDashboard
         HopeGroupBox3 = New ReaLTaiizor.Controls.HopeGroupBox()
         lblTotalRevenue = New Label()
         Label4 = New Label()
-        TabControl1 = New TabControl()
-        TabPage1 = New TabPage()
-        TabPage2 = New TabPage()
-        TabPage3 = New TabPage()
+        lblWelcomeMessage = New Label()
+        pnlPatients = New Panel()
+        Label3 = New Label()
+        txtSearchPatient = New TextBox()
+        pnlPatientsDataGrid = New Panel()
+        dgvPatients = New DataGridView()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
+        tabDashboard.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         HopeGroupBox3.SuspendLayout()
-        TabControl1.SuspendLayout()
+        pnlPatients.SuspendLayout()
+        pnlPatientsDataGrid.SuspendLayout()
+        CType(dgvPatients, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -172,25 +180,58 @@ Partial Class AccountingDashboard
         ' 
         ' pnlDashboard
         ' 
-        pnlDashboard.Controls.Add(TabControl1)
+        pnlDashboard.Controls.Add(tabDashboard)
         pnlDashboard.Controls.Add(HopeGroupBox2)
         pnlDashboard.Controls.Add(HopeGroupBox1)
         pnlDashboard.Controls.Add(HopeGroupBox3)
-        pnlDashboard.Controls.Add(Label1)
+        pnlDashboard.Controls.Add(lblWelcomeMessage)
         pnlDashboard.Dock = DockStyle.Fill
         pnlDashboard.Location = New Point(300, 40)
         pnlDashboard.Name = "pnlDashboard"
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 3
         ' 
-        ' Label1
+        ' tabDashboard
         ' 
-        Label1.Font = New Font("Verdana", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(0, 3)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(116, 38)
-        Label1.TabIndex = 0
-        Label1.Text = "."
+        tabDashboard.Controls.Add(TabPage1)
+        tabDashboard.Controls.Add(TabPage2)
+        tabDashboard.Controls.Add(TabPage3)
+        tabDashboard.Location = New Point(22, 215)
+        tabDashboard.Name = "tabDashboard"
+        tabDashboard.SelectedIndex = 0
+        tabDashboard.Size = New Size(852, 430)
+        tabDashboard.SizeMode = TabSizeMode.Fixed
+        tabDashboard.TabIndex = 12
+        ' 
+        ' TabPage1
+        ' 
+        TabPage1.Location = New Point(4, 29)
+        TabPage1.Name = "TabPage1"
+        TabPage1.Padding = New Padding(3)
+        TabPage1.Size = New Size(844, 397)
+        TabPage1.TabIndex = 0
+        TabPage1.Text = "Recent Invoices"
+        TabPage1.UseVisualStyleBackColor = True
+        ' 
+        ' TabPage2
+        ' 
+        TabPage2.Location = New Point(4, 29)
+        TabPage2.Name = "TabPage2"
+        TabPage2.Padding = New Padding(3)
+        TabPage2.Size = New Size(844, 397)
+        TabPage2.TabIndex = 1
+        TabPage2.Text = "Recent Payments"
+        TabPage2.UseVisualStyleBackColor = True
+        ' 
+        ' TabPage3
+        ' 
+        TabPage3.Location = New Point(4, 29)
+        TabPage3.Name = "TabPage3"
+        TabPage3.Padding = New Padding(3)
+        TabPage3.Size = New Size(844, 397)
+        TabPage3.TabIndex = 2
+        TabPage3.Text = "Recent Expenses"
+        TabPage3.UseVisualStyleBackColor = True
         ' 
         ' HopeGroupBox2
         ' 
@@ -200,7 +241,7 @@ Partial Class AccountingDashboard
         HopeGroupBox2.Font = New Font("Segoe UI", 12F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox2.Location = New Point(594, 44)
+        HopeGroupBox2.Location = New Point(598, 59)
         HopeGroupBox2.Name = "HopeGroupBox2"
         HopeGroupBox2.ShowText = False
         HopeGroupBox2.Size = New Size(280, 150)
@@ -239,7 +280,7 @@ Partial Class AccountingDashboard
         HopeGroupBox1.Font = New Font("Segoe UI", 12F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Location = New Point(308, 44)
+        HopeGroupBox1.Location = New Point(312, 59)
         HopeGroupBox1.Name = "HopeGroupBox1"
         HopeGroupBox1.ShowText = False
         HopeGroupBox1.Size = New Size(280, 150)
@@ -278,7 +319,7 @@ Partial Class AccountingDashboard
         HopeGroupBox3.Font = New Font("Segoe UI", 12F)
         HopeGroupBox3.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox3.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox3.Location = New Point(22, 44)
+        HopeGroupBox3.Location = New Point(26, 59)
         HopeGroupBox3.Name = "HopeGroupBox3"
         HopeGroupBox3.ShowText = False
         HopeGroupBox3.Size = New Size(280, 150)
@@ -309,46 +350,63 @@ Partial Class AccountingDashboard
         Label4.TabIndex = 5
         Label4.Text = "Total Revenue"
         ' 
-        ' TabControl1
+        ' lblWelcomeMessage
         ' 
-        TabControl1.Controls.Add(TabPage1)
-        TabControl1.Controls.Add(TabPage2)
-        TabControl1.Controls.Add(TabPage3)
-        TabControl1.Location = New Point(22, 254)
-        TabControl1.Name = "TabControl1"
-        TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(852, 394)
-        TabControl1.TabIndex = 12
+        lblWelcomeMessage.Font = New Font("Verdana", 16.2F, FontStyle.Bold)
+        lblWelcomeMessage.Location = New Point(23, 10)
+        lblWelcomeMessage.Name = "lblWelcomeMessage"
+        lblWelcomeMessage.Size = New Size(851, 38)
+        lblWelcomeMessage.TabIndex = 0
+        lblWelcomeMessage.Text = "."
         ' 
-        ' TabPage1
+        ' pnlPatients
         ' 
-        TabPage1.Location = New Point(4, 29)
-        TabPage1.Name = "TabPage1"
-        TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(844, 361)
-        TabPage1.TabIndex = 0
-        TabPage1.Text = "Recent Invoices"
-        TabPage1.UseVisualStyleBackColor = True
+        pnlPatients.Controls.Add(Label3)
+        pnlPatients.Controls.Add(txtSearchPatient)
+        pnlPatients.Controls.Add(pnlPatientsDataGrid)
+        pnlPatients.Dock = DockStyle.Fill
+        pnlPatients.Location = New Point(300, 40)
+        pnlPatients.Name = "pnlPatients"
+        pnlPatients.Size = New Size(900, 660)
+        pnlPatients.TabIndex = 13
         ' 
-        ' TabPage2
+        ' Label3
         ' 
-        TabPage2.Location = New Point(4, 29)
-        TabPage2.Name = "TabPage2"
-        TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(844, 361)
-        TabPage2.TabIndex = 1
-        TabPage2.Text = "Recent Payments"
-        TabPage2.UseVisualStyleBackColor = True
+        Label3.AutoSize = True
+        Label3.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(21, 26)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(147, 34)
+        Label3.TabIndex = 8
+        Label3.Text = "Patients"
         ' 
-        ' TabPage3
+        ' txtSearchPatient
         ' 
-        TabPage3.Location = New Point(4, 29)
-        TabPage3.Name = "TabPage3"
-        TabPage3.Padding = New Padding(3)
-        TabPage3.Size = New Size(844, 361)
-        TabPage3.TabIndex = 2
-        TabPage3.Text = "Recent Expenses"
-        TabPage3.UseVisualStyleBackColor = True
+        txtSearchPatient.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchPatient.Location = New Point(21, 80)
+        txtSearchPatient.Name = "txtSearchPatient"
+        txtSearchPatient.PlaceholderText = "Search patient..."
+        txtSearchPatient.Size = New Size(250, 32)
+        txtSearchPatient.TabIndex = 7
+        ' 
+        ' pnlPatientsDataGrid
+        ' 
+        pnlPatientsDataGrid.Controls.Add(dgvPatients)
+        pnlPatientsDataGrid.Location = New Point(21, 134)
+        pnlPatientsDataGrid.Name = "pnlPatientsDataGrid"
+        pnlPatientsDataGrid.Size = New Size(852, 514)
+        pnlPatientsDataGrid.TabIndex = 6
+        ' 
+        ' dgvPatients
+        ' 
+        dgvPatients.ColumnHeadersHeight = 29
+        dgvPatients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        dgvPatients.Dock = DockStyle.Fill
+        dgvPatients.Location = New Point(0, 0)
+        dgvPatients.Name = "dgvPatients"
+        dgvPatients.RowHeadersWidth = 51
+        dgvPatients.Size = New Size(852, 514)
+        dgvPatients.TabIndex = 4
         ' 
         ' AccountingDashboard
         ' 
@@ -356,6 +414,7 @@ Partial Class AccountingDashboard
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
         Controls.Add(pnlDashboard)
+        Controls.Add(pnlPatients)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
@@ -367,13 +426,17 @@ Partial Class AccountingDashboard
         Text = "AccountingDashboard"
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
+        tabDashboard.ResumeLayout(False)
         HopeGroupBox2.ResumeLayout(False)
         HopeGroupBox2.PerformLayout()
         HopeGroupBox1.ResumeLayout(False)
         HopeGroupBox1.PerformLayout()
         HopeGroupBox3.ResumeLayout(False)
         HopeGroupBox3.PerformLayout()
-        TabControl1.ResumeLayout(False)
+        pnlPatients.ResumeLayout(False)
+        pnlPatients.PerformLayout()
+        pnlPatientsDataGrid.ResumeLayout(False)
+        CType(dgvPatients, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -384,7 +447,7 @@ Partial Class AccountingDashboard
     Friend WithEvents btnPatients As FontAwesome.Sharp.IconButton
     Friend WithEvents btnDashboard As FontAwesome.Sharp.IconButton
     Friend WithEvents pnlDashboard As Panel
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblWelcomeMessage As Label
     Friend WithEvents HopeGroupBox2 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents lblTotalExpenses As Label
     Friend WithEvents Label5 As Label
@@ -394,8 +457,13 @@ Partial Class AccountingDashboard
     Friend WithEvents HopeGroupBox3 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents lblTotalRevenue As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tabDashboard As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents pnlPatients As Panel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtSearchPatient As TextBox
+    Friend WithEvents pnlPatientsDataGrid As Panel
+    Friend WithEvents dgvPatients As DataGridView
 End Class
