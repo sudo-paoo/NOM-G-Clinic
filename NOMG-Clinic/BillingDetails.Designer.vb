@@ -28,11 +28,16 @@ Partial Class BillingDetails
         Label7 = New Label()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
+        IconButton1 = New FontAwesome.Sharp.IconButton()
+        Label18 = New Label()
+        Label17 = New Label()
         TextBox9 = New TextBox()
         TextBox8 = New TextBox()
         Label16 = New Label()
         Label15 = New Label()
         TabPage2 = New TabPage()
+        TextBox10 = New TextBox()
+        Label19 = New Label()
         Label14 = New Label()
         Label10 = New Label()
         TextBox7 = New TextBox()
@@ -62,11 +67,6 @@ Partial Class BillingDetails
         lblGestationalAge = New Label()
         lblPatientID = New Label()
         lblPatientName = New Label()
-        Label17 = New Label()
-        Label18 = New Label()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
-        TextBox10 = New TextBox()
-        Label19 = New Label()
         Panel1.SuspendLayout()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
@@ -123,7 +123,7 @@ Partial Class BillingDetails
         Label7.AutoSize = True
         Label7.BackColor = Color.Transparent
         Label7.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(884, 62)
+        Label7.Location = New Point(866, 20)
         Label7.Name = "Label7"
         Label7.Size = New Size(170, 25)
         Label7.TabIndex = 55
@@ -133,7 +133,7 @@ Partial Class BillingDetails
         ' 
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
-        TabControl1.Location = New Point(649, 90)
+        TabControl1.Location = New Point(631, 48)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
         TabControl1.Size = New Size(575, 396)
@@ -155,6 +155,42 @@ Partial Class BillingDetails
         TabPage1.Size = New Size(567, 363)
         TabPage1.TabIndex = 0
         TabPage1.Text = "Cash"
+        ' 
+        ' IconButton1
+        ' 
+        IconButton1.Font = New Font("Verdana", 12F)
+        IconButton1.IconChar = FontAwesome.Sharp.IconChar.MoneyBill
+        IconButton1.IconColor = Color.Black
+        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
+        IconButton1.IconSize = 40
+        IconButton1.ImageAlign = ContentAlignment.BottomRight
+        IconButton1.Location = New Point(205, 204)
+        IconButton1.Name = "IconButton1"
+        IconButton1.Size = New Size(152, 50)
+        IconButton1.TabIndex = 54
+        IconButton1.Text = "Pay Bill"
+        IconButton1.TextImageRelation = TextImageRelation.TextBeforeImage
+        IconButton1.UseVisualStyleBackColor = True
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.BackColor = SystemColors.Control
+        Label18.Location = New Point(136, 140)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(15, 20)
+        Label18.TabIndex = 5
+        Label18.Text = "-"
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Location = New Point(44, 135)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(78, 25)
+        Label17.TabIndex = 4
+        Label17.Text = "Change:"
         ' 
         ' TextBox9
         ' 
@@ -216,6 +252,23 @@ Partial Class BillingDetails
         TabPage2.Size = New Size(567, 363)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Card"
+        ' 
+        ' TextBox10
+        ' 
+        TextBox10.Location = New Point(216, 37)
+        TextBox10.Name = "TextBox10"
+        TextBox10.Size = New Size(315, 27)
+        TextBox10.TabIndex = 65
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.Location = New Point(39, 37)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(123, 25)
+        Label19.TabIndex = 64
+        Label19.Text = "Amount Due:"
         ' 
         ' Label14
         ' 
@@ -330,7 +383,7 @@ Partial Class BillingDetails
         btnPay.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnPay.IconSize = 40
         btnPay.ImageAlign = ContentAlignment.BottomRight
-        btnPay.Location = New Point(231, 292)
+        btnPay.Location = New Point(216, 289)
         btnPay.Name = "btnPay"
         btnPay.Size = New Size(152, 50)
         btnPay.TabIndex = 53
@@ -507,59 +560,6 @@ Partial Class BillingDetails
         lblPatientName.Size = New Size(124, 20)
         lblPatientName.TabIndex = 39
         lblPatientName.Text = "patient name"
-        ' 
-        ' Label17
-        ' 
-        Label17.AutoSize = True
-        Label17.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(44, 135)
-        Label17.Name = "Label17"
-        Label17.Size = New Size(78, 25)
-        Label17.TabIndex = 4
-        Label17.Text = "Change:"
-        ' 
-        ' Label18
-        ' 
-        Label18.AutoSize = True
-        Label18.BackColor = SystemColors.Control
-        Label18.Location = New Point(136, 140)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(15, 20)
-        Label18.TabIndex = 5
-        Label18.Text = "-"
-        ' 
-        ' IconButton1
-        ' 
-        IconButton1.Font = New Font("Verdana", 12F)
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.MoneyBill
-        IconButton1.IconColor = Color.Black
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.IconSize = 40
-        IconButton1.ImageAlign = ContentAlignment.BottomRight
-        IconButton1.Location = New Point(205, 204)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(152, 50)
-        IconButton1.TabIndex = 54
-        IconButton1.Text = "Pay Bill"
-        IconButton1.TextImageRelation = TextImageRelation.TextBeforeImage
-        IconButton1.UseVisualStyleBackColor = True
-        ' 
-        ' TextBox10
-        ' 
-        TextBox10.Location = New Point(216, 37)
-        TextBox10.Name = "TextBox10"
-        TextBox10.Size = New Size(315, 27)
-        TextBox10.TabIndex = 65
-        ' 
-        ' Label19
-        ' 
-        Label19.AutoSize = True
-        Label19.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(39, 37)
-        Label19.Name = "Label19"
-        Label19.Size = New Size(123, 25)
-        Label19.TabIndex = 64
-        Label19.Text = "Amount Due:"
         ' 
         ' BillingDetails
         ' 

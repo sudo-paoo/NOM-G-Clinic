@@ -87,7 +87,23 @@ Public Class Form1
                             Return
                         End If
                     Case "accountant"
-                        Dim accountantID As String = reader("accountant_id").ToString()
+                        reader.Close()
+                        Dim accountantQuery As String = "SELECT accountant_id FROM accountant WHERE username = @username AND password = @password"
+                        cmd = New MySqlCommand(accountantQuery, conn)
+                        cmd.Parameters.AddWithValue("@username", username)
+                        cmd.Parameters.AddWithValue("@password", password)
+
+                        reader = cmd.ExecuteReader()
+
+                        If reader.Read() Then
+                            Dim accountantID As String = reader("accountant_id").ToString()
+                            Dim accountantForm As New AccountingDashboard()
+                            accountantForm.AccountantID = accountantID
+                            accountantForm.Show()
+                        Else
+                            MessageBox.Show("Accountant record not found.")
+                            Return
+                        End If
                     Case "patient"
                         MsgBox("Patient ID: " & reader("patient_id").ToString())
                     Case Else
