@@ -34,19 +34,19 @@ Partial Class NurseDashboard
         lblTotalPatients = New Label()
         Label1 = New Label()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
-        lblTotalDoctor = New Label()
+        lblActiveDoctors = New Label()
         label = New Label()
-        TabControl1 = New TabControl()
+        tabDashboard = New TabControl()
         TabPage1 = New TabPage()
         flowScheduledToday = New FlowLayoutPanel()
         TabPage2 = New TabPage()
-        flowRecent = New FlowLayoutPanel()
+        flowRecentAppointments = New FlowLayoutPanel()
         HopeGroupBox3 = New ReaLTaiizor.Controls.HopeGroupBox()
-        Label3 = New Label()
+        lblTodaysAppointments = New Label()
         Label4 = New Label()
         pnlDashboard = New Panel()
-        Label2 = New Label()
         pnlPatients = New Panel()
+        btnAddPatient = New FontAwesome.Sharp.IconButton()
         pnlPatientsDataGrid = New Panel()
         dgvPatients = New DataGridView()
         txtSearchPatient = New TextBox()
@@ -55,23 +55,23 @@ Partial Class NurseDashboard
         Panel3 = New Panel()
         dgvAppointments = New DataGridView()
         Appointments = New Label()
-        Panel2 = New Panel()
-        Label6 = New Label()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
-        Label14 = New Label()
-        Label11 = New Label()
+        pnlSettings = New Panel()
+        btnSave = New FontAwesome.Sharp.IconButton()
         Label8 = New Label()
         HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
-        btnEyePassword = New FontAwesome.Sharp.IconButton()
-        TextBox4 = New TextBox()
-        TextBox1 = New TextBox()
         btnEyeConfirmPassword = New FontAwesome.Sharp.IconButton()
-        TextBox5 = New TextBox()
+        txtConfirmPassword = New TextBox()
         Label15 = New Label()
+        btnEyePassword = New FontAwesome.Sharp.IconButton()
+        txtPassword = New TextBox()
+        Label14 = New Label()
+        Label11 = New Label()
+        txtUsername = New TextBox()
+        Label6 = New Label()
         Panel1.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
-        TabControl1.SuspendLayout()
+        tabDashboard.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         HopeGroupBox3.SuspendLayout()
@@ -82,7 +82,7 @@ Partial Class NurseDashboard
         pnlAppointments.SuspendLayout()
         Panel3.SuspendLayout()
         CType(dgvAppointments, ComponentModel.ISupportInitialize).BeginInit()
-        Panel2.SuspendLayout()
+        pnlSettings.SuspendLayout()
         HopeGroupBox4.SuspendLayout()
         SuspendLayout()
         ' 
@@ -268,7 +268,7 @@ Partial Class NurseDashboard
         ' HopeGroupBox2
         ' 
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox2.Controls.Add(lblTotalDoctor)
+        HopeGroupBox2.Controls.Add(lblActiveDoctors)
         HopeGroupBox2.Controls.Add(label)
         HopeGroupBox2.Font = New Font("Segoe UI", 12F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
@@ -282,15 +282,15 @@ Partial Class NurseDashboard
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(64), CByte(158), CByte(255))
         ' 
-        ' lblTotalDoctor
+        ' lblActiveDoctors
         ' 
-        lblTotalDoctor.BackColor = Color.Transparent
-        lblTotalDoctor.Font = New Font("Verdana", 13.8F, FontStyle.Bold)
-        lblTotalDoctor.Location = New Point(11, 85)
-        lblTotalDoctor.Name = "lblTotalDoctor"
-        lblTotalDoctor.Size = New Size(229, 44)
-        lblTotalDoctor.TabIndex = 1
-        lblTotalDoctor.Text = "Total Doctors"
+        lblActiveDoctors.BackColor = Color.Transparent
+        lblActiveDoctors.Font = New Font("Verdana", 13.8F, FontStyle.Bold)
+        lblActiveDoctors.Location = New Point(11, 85)
+        lblActiveDoctors.Name = "lblActiveDoctors"
+        lblActiveDoctors.Size = New Size(229, 44)
+        lblActiveDoctors.TabIndex = 1
+        lblActiveDoctors.Text = "Total Doctors"
         ' 
         ' label
         ' 
@@ -303,15 +303,16 @@ Partial Class NurseDashboard
         label.TabIndex = 0
         label.Text = "Doctors on Duty"
         ' 
-        ' TabControl1
+        ' tabDashboard
         ' 
-        TabControl1.Controls.Add(TabPage1)
-        TabControl1.Controls.Add(TabPage2)
-        TabControl1.Location = New Point(31, 248)
-        TabControl1.Name = "TabControl1"
-        TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(845, 397)
-        TabControl1.TabIndex = 2
+        tabDashboard.Controls.Add(TabPage1)
+        tabDashboard.Controls.Add(TabPage2)
+        tabDashboard.Location = New Point(31, 248)
+        tabDashboard.Name = "tabDashboard"
+        tabDashboard.SelectedIndex = 0
+        tabDashboard.Size = New Size(845, 397)
+        tabDashboard.SizeMode = TabSizeMode.Fixed
+        tabDashboard.TabIndex = 2
         ' 
         ' TabPage1
         ' 
@@ -326,14 +327,15 @@ Partial Class NurseDashboard
         ' 
         ' flowScheduledToday
         ' 
-        flowScheduledToday.Location = New Point(8, 14)
+        flowScheduledToday.Dock = DockStyle.Fill
+        flowScheduledToday.Location = New Point(3, 3)
         flowScheduledToday.Name = "flowScheduledToday"
-        flowScheduledToday.Size = New Size(886, 336)
+        flowScheduledToday.Size = New Size(831, 358)
         flowScheduledToday.TabIndex = 0
         ' 
         ' TabPage2
         ' 
-        TabPage2.Controls.Add(flowRecent)
+        TabPage2.Controls.Add(flowRecentAppointments)
         TabPage2.Location = New Point(4, 29)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
@@ -342,17 +344,18 @@ Partial Class NurseDashboard
         TabPage2.Text = "Recent Appointments"
         TabPage2.UseVisualStyleBackColor = True
         ' 
-        ' flowRecent
+        ' flowRecentAppointments
         ' 
-        flowRecent.Location = New Point(-1, 3)
-        flowRecent.Name = "flowRecent"
-        flowRecent.Size = New Size(891, 350)
-        flowRecent.TabIndex = 0
+        flowRecentAppointments.Dock = DockStyle.Fill
+        flowRecentAppointments.Location = New Point(3, 3)
+        flowRecentAppointments.Name = "flowRecentAppointments"
+        flowRecentAppointments.Size = New Size(831, 358)
+        flowRecentAppointments.TabIndex = 0
         ' 
         ' HopeGroupBox3
         ' 
         HopeGroupBox3.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox3.Controls.Add(Label3)
+        HopeGroupBox3.Controls.Add(lblTodaysAppointments)
         HopeGroupBox3.Controls.Add(Label4)
         HopeGroupBox3.Font = New Font("Segoe UI", 12F)
         HopeGroupBox3.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
@@ -366,14 +369,15 @@ Partial Class NurseDashboard
         HopeGroupBox3.Text = "HopeGroupBox3"
         HopeGroupBox3.ThemeColor = Color.FromArgb(CByte(64), CByte(158), CByte(255))
         ' 
-        ' Label3
+        ' lblTodaysAppointments
         ' 
-        Label3.BackColor = Color.Transparent
-        Label3.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(11, 85)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(105, 44)
-        Label3.TabIndex = 1
+        lblTodaysAppointments.BackColor = Color.Transparent
+        lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold)
+        lblTodaysAppointments.Location = New Point(11, 85)
+        lblTodaysAppointments.Name = "lblTodaysAppointments"
+        lblTodaysAppointments.Size = New Size(229, 40)
+        lblTodaysAppointments.TabIndex = 2
+        lblTodaysAppointments.Text = "Total Doctors"
         ' 
         ' Label4
         ' 
@@ -382,16 +386,15 @@ Partial Class NurseDashboard
         Label4.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label4.Location = New Point(11, 25)
         Label4.Name = "Label4"
-        Label4.Size = New Size(195, 25)
+        Label4.Size = New Size(251, 25)
         Label4.TabIndex = 0
-        Label4.Text = "Doctors on Duty"
+        Label4.Text = "Today's Appointment"
         ' 
         ' pnlDashboard
         ' 
         pnlDashboard.BackColor = Color.Transparent
-        pnlDashboard.Controls.Add(Label2)
         pnlDashboard.Controls.Add(HopeGroupBox3)
-        pnlDashboard.Controls.Add(TabControl1)
+        pnlDashboard.Controls.Add(tabDashboard)
         pnlDashboard.Controls.Add(HopeGroupBox2)
         pnlDashboard.Controls.Add(HopeGroupBox1)
         pnlDashboard.Dock = DockStyle.Fill
@@ -400,18 +403,10 @@ Partial Class NurseDashboard
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 5
         ' 
-        ' Label2
-        ' 
-        Label2.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(719, 254)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(153, 23)
-        Label2.TabIndex = 4
-        Label2.Text = "Check In Patient"
-        ' 
         ' pnlPatients
         ' 
         pnlPatients.BackColor = Color.Transparent
+        pnlPatients.Controls.Add(btnAddPatient)
         pnlPatients.Controls.Add(pnlPatientsDataGrid)
         pnlPatients.Controls.Add(txtSearchPatient)
         pnlPatients.Controls.Add(Label5)
@@ -420,6 +415,22 @@ Partial Class NurseDashboard
         pnlPatients.Name = "pnlPatients"
         pnlPatients.Size = New Size(900, 660)
         pnlPatients.TabIndex = 6
+        ' 
+        ' btnAddPatient
+        ' 
+        btnAddPatient.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnAddPatient.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        btnAddPatient.IconColor = Color.Black
+        btnAddPatient.IconFont = FontAwesome.Sharp.IconFont.Regular
+        btnAddPatient.IconSize = 34
+        btnAddPatient.Location = New Point(671, 16)
+        btnAddPatient.Name = "btnAddPatient"
+        btnAddPatient.Size = New Size(195, 60)
+        btnAddPatient.TabIndex = 12
+        btnAddPatient.Text = "Add Patient"
+        btnAddPatient.TextAlign = ContentAlignment.MiddleRight
+        btnAddPatient.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnAddPatient.UseVisualStyleBackColor = True
         ' 
         ' pnlPatientsDataGrid
         ' 
@@ -500,41 +511,122 @@ Partial Class NurseDashboard
         Appointments.TabIndex = 1
         Appointments.Text = "Appointments"
         ' 
-        ' Panel2
+        ' pnlSettings
         ' 
-        Panel2.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        Panel2.Controls.Add(IconButton1)
-        Panel2.Controls.Add(Label8)
-        Panel2.Controls.Add(HopeGroupBox4)
-        Panel2.Controls.Add(Label6)
-        Panel2.Location = New Point(300, 40)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(900, 660)
-        Panel2.TabIndex = 5
+        pnlSettings.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlSettings.Controls.Add(btnSave)
+        pnlSettings.Controls.Add(Label8)
+        pnlSettings.Controls.Add(HopeGroupBox4)
+        pnlSettings.Controls.Add(Label6)
+        pnlSettings.Dock = DockStyle.Fill
+        pnlSettings.Location = New Point(300, 40)
+        pnlSettings.Name = "pnlSettings"
+        pnlSettings.Size = New Size(900, 660)
+        pnlSettings.TabIndex = 5
         ' 
-        ' Label6
+        ' btnSave
         ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(20, 23)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(147, 34)
-        Label6.TabIndex = 2
-        Label6.Text = "Settings"
+        btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        btnSave.IconColor = Color.RosyBrown
+        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSave.ImageAlign = ContentAlignment.MiddleLeft
+        btnSave.Location = New Point(382, 424)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(118, 44)
+        btnSave.TabIndex = 24
+        btnSave.Text = "        SAVE"
+        btnSave.UseVisualStyleBackColor = True
         ' 
-        ' IconButton1
+        ' Label8
         ' 
-        IconButton1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        IconButton1.IconColor = Color.RosyBrown
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton1.Location = New Point(382, 424)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(118, 44)
-        IconButton1.TabIndex = 24
-        IconButton1.Text = "        SAVE"
-        IconButton1.UseVisualStyleBackColor = True
+        Label8.AutoSize = True
+        Label8.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label8.Location = New Point(338, 151)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(223, 31)
+        Label8.TabIndex = 23
+        Label8.Text = "Account Information"
+        ' 
+        ' HopeGroupBox4
+        ' 
+        HopeGroupBox4.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeGroupBox4.Controls.Add(btnEyeConfirmPassword)
+        HopeGroupBox4.Controls.Add(txtConfirmPassword)
+        HopeGroupBox4.Controls.Add(Label15)
+        HopeGroupBox4.Controls.Add(btnEyePassword)
+        HopeGroupBox4.Controls.Add(txtPassword)
+        HopeGroupBox4.Controls.Add(Label14)
+        HopeGroupBox4.Controls.Add(Label11)
+        HopeGroupBox4.Controls.Add(txtUsername)
+        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
+        HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeGroupBox4.Location = New Point(135, 188)
+        HopeGroupBox4.Name = "HopeGroupBox4"
+        HopeGroupBox4.ShowText = False
+        HopeGroupBox4.Size = New Size(631, 199)
+        HopeGroupBox4.TabIndex = 22
+        HopeGroupBox4.TabStop = False
+        HopeGroupBox4.Text = "HopeGroupBox4"
+        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        ' 
+        ' btnEyeConfirmPassword
+        ' 
+        btnEyeConfirmPassword.BackColor = Color.Transparent
+        btnEyeConfirmPassword.FlatAppearance.BorderSize = 0
+        btnEyeConfirmPassword.FlatStyle = FlatStyle.Flat
+        btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.Eye
+        btnEyeConfirmPassword.IconColor = Color.Black
+        btnEyeConfirmPassword.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEyeConfirmPassword.IconSize = 25
+        btnEyeConfirmPassword.Location = New Point(593, 137)
+        btnEyeConfirmPassword.Name = "btnEyeConfirmPassword"
+        btnEyeConfirmPassword.Size = New Size(32, 32)
+        btnEyeConfirmPassword.TabIndex = 47
+        btnEyeConfirmPassword.UseVisualStyleBackColor = False
+        ' 
+        ' txtConfirmPassword
+        ' 
+        txtConfirmPassword.Location = New Point(290, 137)
+        txtConfirmPassword.Name = "txtConfirmPassword"
+        txtConfirmPassword.Size = New Size(300, 34)
+        txtConfirmPassword.TabIndex = 46
+        txtConfirmPassword.UseSystemPasswordChar = True
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label15.Location = New Point(24, 136)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(181, 28)
+        Label15.TabIndex = 45
+        Label15.Text = "Confirm Password:"
+        ' 
+        ' btnEyePassword
+        ' 
+        btnEyePassword.BackColor = Color.Transparent
+        btnEyePassword.FlatAppearance.BorderSize = 0
+        btnEyePassword.FlatStyle = FlatStyle.Flat
+        btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.Eye
+        btnEyePassword.IconColor = Color.Black
+        btnEyePassword.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEyePassword.IconSize = 25
+        btnEyePassword.Location = New Point(593, 84)
+        btnEyePassword.Name = "btnEyePassword"
+        btnEyePassword.Size = New Size(32, 32)
+        btnEyePassword.TabIndex = 44
+        btnEyePassword.UseVisualStyleBackColor = False
+        ' 
+        ' txtPassword
+        ' 
+        txtPassword.Location = New Point(290, 84)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(300, 34)
+        txtPassword.TabIndex = 11
+        txtPassword.UseSystemPasswordChar = True
         ' 
         ' Label14
         ' 
@@ -558,100 +650,22 @@ Partial Class NurseDashboard
         Label11.TabIndex = 4
         Label11.Text = "Password:"
         ' 
-        ' Label8
+        ' txtUsername
         ' 
-        Label8.AutoSize = True
-        Label8.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label8.Location = New Point(338, 151)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(225, 31)
-        Label8.TabIndex = 23
-        Label8.Text = "Personal Information"
+        txtUsername.Location = New Point(290, 31)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(300, 34)
+        txtUsername.TabIndex = 8
         ' 
-        ' HopeGroupBox4
+        ' Label6
         ' 
-        HopeGroupBox4.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox4.Controls.Add(btnEyeConfirmPassword)
-        HopeGroupBox4.Controls.Add(TextBox5)
-        HopeGroupBox4.Controls.Add(Label15)
-        HopeGroupBox4.Controls.Add(btnEyePassword)
-        HopeGroupBox4.Controls.Add(TextBox4)
-        HopeGroupBox4.Controls.Add(Label14)
-        HopeGroupBox4.Controls.Add(Label11)
-        HopeGroupBox4.Controls.Add(TextBox1)
-        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox4.Location = New Point(135, 188)
-        HopeGroupBox4.Name = "HopeGroupBox4"
-        HopeGroupBox4.ShowText = False
-        HopeGroupBox4.Size = New Size(631, 199)
-        HopeGroupBox4.TabIndex = 22
-        HopeGroupBox4.TabStop = False
-        HopeGroupBox4.Text = "HopeGroupBox4"
-        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
-        ' btnEyePassword
-        ' 
-        btnEyePassword.BackColor = Color.Transparent
-        btnEyePassword.FlatAppearance.BorderSize = 0
-        btnEyePassword.FlatStyle = FlatStyle.Flat
-        btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.Eye
-        btnEyePassword.IconColor = Color.Black
-        btnEyePassword.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEyePassword.IconSize = 25
-        btnEyePassword.Location = New Point(593, 84)
-        btnEyePassword.Name = "btnEyePassword"
-        btnEyePassword.Size = New Size(32, 32)
-        btnEyePassword.TabIndex = 44
-        btnEyePassword.UseVisualStyleBackColor = False
-        ' 
-        ' TextBox4
-        ' 
-        TextBox4.Location = New Point(290, 84)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(300, 34)
-        TextBox4.TabIndex = 11
-        ' 
-        ' TextBox1
-        ' 
-        TextBox1.Location = New Point(290, 31)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(300, 34)
-        TextBox1.TabIndex = 8
-        ' 
-        ' btnEyeConfirmPassword
-        ' 
-        btnEyeConfirmPassword.BackColor = Color.Transparent
-        btnEyeConfirmPassword.FlatAppearance.BorderSize = 0
-        btnEyeConfirmPassword.FlatStyle = FlatStyle.Flat
-        btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.Eye
-        btnEyeConfirmPassword.IconColor = Color.Black
-        btnEyeConfirmPassword.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEyeConfirmPassword.IconSize = 25
-        btnEyeConfirmPassword.Location = New Point(593, 137)
-        btnEyeConfirmPassword.Name = "btnEyeConfirmPassword"
-        btnEyeConfirmPassword.Size = New Size(32, 32)
-        btnEyeConfirmPassword.TabIndex = 47
-        btnEyeConfirmPassword.UseVisualStyleBackColor = False
-        ' 
-        ' TextBox5
-        ' 
-        TextBox5.Location = New Point(290, 137)
-        TextBox5.Name = "TextBox5"
-        TextBox5.Size = New Size(300, 34)
-        TextBox5.TabIndex = 46
-        ' 
-        ' Label15
-        ' 
-        Label15.AutoSize = True
-        Label15.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(24, 136)
-        Label15.Name = "Label15"
-        Label15.Size = New Size(181, 28)
-        Label15.TabIndex = 45
-        Label15.Text = "Confirm Password:"
+        Label6.AutoSize = True
+        Label6.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.Location = New Point(20, 23)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(147, 34)
+        Label6.TabIndex = 2
+        Label6.Text = "Settings"
         ' 
         ' NurseDashboard
         ' 
@@ -660,10 +674,10 @@ Partial Class NurseDashboard
         BackgroundImage = My.Resources.Resources.bg_img
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(1200, 700)
-        Controls.Add(Panel2)
+        Controls.Add(pnlSettings)
         Controls.Add(pnlPatients)
-        Controls.Add(pnlAppointments)
         Controls.Add(pnlDashboard)
+        Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         DoubleBuffered = True
@@ -679,7 +693,7 @@ Partial Class NurseDashboard
         HopeGroupBox1.PerformLayout()
         HopeGroupBox2.ResumeLayout(False)
         HopeGroupBox2.PerformLayout()
-        TabControl1.ResumeLayout(False)
+        tabDashboard.ResumeLayout(False)
         TabPage1.ResumeLayout(False)
         TabPage2.ResumeLayout(False)
         HopeGroupBox3.ResumeLayout(False)
@@ -693,8 +707,8 @@ Partial Class NurseDashboard
         pnlAppointments.PerformLayout()
         Panel3.ResumeLayout(False)
         CType(dgvAppointments, ComponentModel.ISupportInitialize).EndInit()
-        Panel2.ResumeLayout(False)
-        Panel2.PerformLayout()
+        pnlSettings.ResumeLayout(False)
+        pnlSettings.PerformLayout()
         HopeGroupBox4.ResumeLayout(False)
         HopeGroupBox4.PerformLayout()
         ResumeLayout(False)
@@ -710,15 +724,14 @@ Partial Class NurseDashboard
     Friend WithEvents lblTotalPatients As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents HopeGroupBox2 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents lblTotalDoctor As Label
+    Friend WithEvents lblActiveDoctors As Label
     Friend WithEvents label As Label
-    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tabDashboard As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents flowScheduledToday As FlowLayoutPanel
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents flowRecent As FlowLayoutPanel
+    Friend WithEvents flowRecentAppointments As FlowLayoutPanel
     Friend WithEvents HopeGroupBox3 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents pnlDashboard As Panel
     Friend WithEvents pnlPatients As Panel
@@ -730,19 +743,20 @@ Partial Class NurseDashboard
     Friend WithEvents Panel3 As Panel
     Friend WithEvents dgvAppointments As DataGridView
     Friend WithEvents Appointments As Label
-    Friend WithEvents Label2 As Label
     Friend WithEvents btnSettings As FontAwesome.Sharp.IconButton
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlSettings As Panel
     Friend WithEvents Label6 As Label
-    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
     Friend WithEvents Label8 As Label
     Friend WithEvents HopeGroupBox4 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents btnEyePassword As FontAwesome.Sharp.IconButton
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents txtPassword As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtUsername As TextBox
     Friend WithEvents btnEyeConfirmPassword As FontAwesome.Sharp.IconButton
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents txtConfirmPassword As TextBox
     Friend WithEvents Label15 As Label
+    Friend WithEvents lblTodaysAppointments As Label
+    Friend WithEvents btnAddPatient As FontAwesome.Sharp.IconButton
 End Class
