@@ -93,7 +93,7 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
-        ShowPanel(pnlSettings, btnSettings)
+        ShowPanel(pnlSettingsAdmin, btnSettings)
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
@@ -109,7 +109,7 @@ Public Class AdminDashboard
         pnlDoctors.Visible = False
         pnlAppointments.Visible = False
         pnlBilling.Visible = False
-        pnlSettings.Visible = False
+        pnlSettingsAdmin.Visible = False
 
         ' Show the selected panel
         panelToShow.Visible = True

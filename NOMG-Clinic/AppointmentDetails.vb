@@ -9,107 +9,144 @@ Public Class AppointmentDetails
     Public Property DefaultDoctorId As String = ""
     Public Property AppointmentType As String = "Initial Check-up"
     Public Property IsNewAppointment As Boolean = True
+    Public Property GestationalWeeks As Integer = 0
+    Public Property IsFollowUp As Boolean = False
+    Public Property FollowUpReason As String = ""
+    Public Property DaysLate As Integer = 0
 
-    ' Database connection variables
+    Private NextCheckupDays As Integer = 30
+    Private ExpectedNextAppointmentDate As Date = Date.MinValue
+
     Private conn As MySqlConnection
     Private cmd As MySqlCommand
 
     Private Sub AppointmentDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Display patient information
         lblPatientName.Text = PatientName
         lblPatientID.Text = PatientId
 
-        ' Calculate and display gestational age
         If LastMenstrualDate <> Date.MinValue Then
-            Dim gestationalDays As Integer = DateDiff(DateInterval.Day, LastMenstrualDate, DateTime.Now)
-            Dim weeks As Integer = gestationalDays \ 7
-            Dim days As Integer = gestationalDays Mod 7
-            lblGestationalAge.Text = $"{weeks} weeks, {days} days"
+            If GestationalWeeks = 0 Then
+                Dim gestationalDays As Integer = DateDiff(DateInterval.Day, LastMenstrualDate, DateTime.Now)
+                GestationalWeeks = gestationalDays \ 7
+                Dim days As Integer = gestationalDays Mod 7
+                lblGestationalAge.Text = $"{GestationalWeeks} weeks, {days} days"
+            Else
+                lblGestationalAge.Text = $"{GestationalWeeks} weeks"
+            End If
         End If
 
-        ' Display due date
         If DueDate <> Date.MinValue Then
             lblDueDate.Text = DueDate.ToString("MMMM dd, yyyy")
         End If
 
-        ' Display last visit date if available
         If LastVisitDate.HasValue Then
             lblLastVisit.Text = LastVisitDate.Value.ToString("MMMM dd, yyyy")
         Else
             lblLastVisit.Text = "No previous visits"
         End If
 
-        ' Make sure comboboxes are dropdown only (not editable)
         cboDoctor.DropDownStyle = ComboBoxStyle.DropDownList
         cboTimeSlot.DropDownStyle = ComboBoxStyle.DropDownList
         cboAppointmentType.DropDownStyle = ComboBoxStyle.DropDownList
 
-        ' Add appointment types
         cboAppointmentType.Items.Add("Initial Check-up")
         cboAppointmentType.Items.Add("Follow-up Check-up")
 
-        ' Set appointment type
         If cboAppointmentType.Items.Contains(AppointmentType) Then
             cboAppointmentType.SelectedItem = AppointmentType
         Else
             cboAppointmentType.SelectedIndex = 0
         End If
 
-        ' Configure MonthCalendar to skip Sundays and Mondays
-        ' Set minimum date to today
-        calAppointmentDate.MinDate = DateTime.Today
+        If IsFollowUp AndAlso Not String.IsNullOrEmpty(FollowUpReason) Then
+            txtNotes.Text = "Follow-up for: " & FollowUpReason
+        End If
 
-        ' Default to today's date
-        calAppointmentDate.SetDate(DateTime.Today)
-        lblSelectedDate.Text = "Selected Date: " & calAppointmentDate.SelectionStart.ToString("MMMM dd, yyyy")
+        ConfigureCalendarForFollowUp()
 
-        ' Load doctors and set default if provided
         LoadDoctors()
 
-        ' Initial update of available time slots
         UpdateAvailableTimeSlots()
     End Sub
 
-    ' Load doctors into the doctor dropdown
+    Private Sub ConfigureCalendarForFollowUp()
+        Dim minDate As Date = DateTime.Today
+
+        If IsFollowUp AndAlso LastVisitDate.HasValue Then
+            If GestationalWeeks <= 12 Then
+                NextCheckupDays = 30
+            ElseIf GestationalWeeks <= 24 Then
+                NextCheckupDays = 20
+            Else
+                NextCheckupDays = 10
+            End If
+
+            ExpectedNextAppointmentDate = LastVisitDate.Value.AddDays(NextCheckupDays)
+
+            If DateTime.Today > ExpectedNextAppointmentDate Then
+                DaysLate = DateDiff(DateInterval.Day, ExpectedNextAppointmentDate, DateTime.Today)
+
+                MessageBox.Show(
+                    $"Patient is {DaysLate} days late for their follow-up appointment." & vbCrLf & vbCrLf &
+                    $"Expected follow-up date was {ExpectedNextAppointmentDate:MMMM dd, yyyy}." & vbCrLf &
+                    $"The vitamin supply will be adjusted to {NextCheckupDays - DaysLate} days.",
+                    "Late Follow-up",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
+
+                minDate = DateTime.Today
+            Else
+                minDate = ExpectedNextAppointmentDate
+
+                MessageBox.Show(
+                    $"Next follow-up should be scheduled on or after {ExpectedNextAppointmentDate:MMMM dd, yyyy}" & vbCrLf &
+                    $"(+{NextCheckupDays} days from last visit).",
+                    "Follow-up Schedule",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
+            End If
+        End If
+
+        calAppointmentDate.MinDate = minDate
+
+        Dim defaultDate As Date = If(minDate > DateTime.Today, minDate, DateTime.Today)
+
+        While defaultDate.DayOfWeek = DayOfWeek.Sunday OrElse defaultDate.DayOfWeek = DayOfWeek.Monday
+            defaultDate = defaultDate.AddDays(1)
+        End While
+
+        calAppointmentDate.SetDate(defaultDate)
+        lblSelectedDate.Text = "Selected Date: " & calAppointmentDate.SelectionStart.ToString("MMMM dd, yyyy")
+    End Sub
+
     Private Sub LoadDoctors()
         Try
-            ' Clear existing items
             cboDoctor.Items.Clear()
 
-            ' Create connection
             conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
             conn.Open()
 
-            ' Query to get doctors
             Dim query As String = "SELECT doctor_id, CONCAT('Dr. ', first_name, ' ', last_name) AS full_name FROM doctor ORDER BY last_name"
 
             cmd = New MySqlCommand(query, conn)
             Dim reader As MySqlDataReader = cmd.ExecuteReader()
 
-            ' Create dictionary for doctor IDs
             Dim doctorDictionary As New Dictionary(Of String, String)
 
-            ' Add "Select a doctor" initial item
             cboDoctor.Items.Add("-- Select a doctor --")
 
-            ' Selected index to set later
             Dim selectedIndex As Integer = 0
 
-            ' Counter for item index
             Dim index As Integer = 1
 
-            ' Read doctors from database
             While reader.Read()
                 Dim doctorId As String = reader("doctor_id").ToString()
                 Dim doctorName As String = reader("full_name").ToString()
 
-                ' Add to dictionary (using doctor ID as key, name as value)
                 doctorDictionary.Add(doctorId, doctorName)
 
-                ' Add to combobox
                 cboDoctor.Items.Add(doctorName)
 
-                ' Check if this is the selected doctor
                 If doctorId = DefaultDoctorId Then
                     selectedIndex = index
                 End If
@@ -119,10 +156,8 @@ Public Class AppointmentDetails
 
             reader.Close()
 
-            ' Store the dictionary in the combobox's Tag property
             cboDoctor.Tag = doctorDictionary
 
-            ' Set the selected item if there are items
             If cboDoctor.Items.Count > 0 Then
                 cboDoctor.SelectedIndex = If(selectedIndex > 0, selectedIndex, 0)
             End If
@@ -136,7 +171,6 @@ Public Class AppointmentDetails
         End Try
     End Sub
 
-    ' Update available time slots based on selected date and doctor
     Private Sub UpdateAvailableTimeSlots()
         cboTimeSlot.Items.Clear()
 
@@ -162,7 +196,6 @@ Public Class AppointmentDetails
             conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
             conn.Open()
 
-            ' Modified query to retrieve both date and time
             Dim query As String = "SELECT appointment_time FROM appointment_table " &
                              "WHERE appointment_date = @selectedDate"
 
@@ -181,7 +214,6 @@ Public Class AppointmentDetails
             MessageBox.Show("Error retrieving appointment data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
-        ' Filter out booked slots and add available ones to the combobox
         For Each timeSlot As Date In allTimeSlots
             Dim isBooked As Boolean = False
             Dim timeString As String = timeSlot.ToString("HH:mm:ss")
@@ -209,7 +241,6 @@ Public Class AppointmentDetails
         If selectedDate.DayOfWeek = DayOfWeek.Sunday OrElse selectedDate.DayOfWeek = DayOfWeek.Monday Then
             MessageBox.Show("The clinic is closed on Sundays and Mondays. Please select another day.", "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            ' Move to next valid day (Tuesday)
             Dim nextValidDay As Date = selectedDate
             While nextValidDay.DayOfWeek = DayOfWeek.Sunday OrElse nextValidDay.DayOfWeek = DayOfWeek.Monday
                 nextValidDay = nextValidDay.AddDays(1)
@@ -219,10 +250,8 @@ Public Class AppointmentDetails
             Return
         End If
 
-        ' Update selected date label
         lblSelectedDate.Text = "Selected Date: " & calAppointmentDate.SelectionStart.ToString("MMMM dd, yyyy")
 
-        ' Update available time slots for this date
         UpdateAvailableTimeSlots()
     End Sub
 
@@ -230,14 +259,11 @@ Public Class AppointmentDetails
         UpdateAvailableTimeSlots()
     End Sub
 
-    ' Submit button click handler
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
-        ' Validate all required fields
         If Not ValidateForm() Then
             Return
         End If
 
-        ' Save the appointment to database
         If SaveAppointment() Then
             MessageBox.Show("Appointment scheduled successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.DialogResult = DialogResult.OK
@@ -285,7 +311,7 @@ Public Class AppointmentDetails
             Dim appointmentId As Integer = GetNextAppointmentId()
             Dim doctorId As String = GetSelectedDoctorId()
 
-            ' Modified query to include appointment_time column
+            ' Query to include appointment_time column
             Dim query As String = "INSERT INTO appointment_table (appointment_id, patient_id, doctor_id, " &
                              "appointment_date, appointment_time, reason_for_visit, status, notes) " &
                              "VALUES (@appointmentId, @patientId, @doctorId, @appointmentDate, " &
@@ -303,7 +329,6 @@ Public Class AppointmentDetails
 
             cmd.ExecuteNonQuery()
 
-            ' Rest of the function remains the same
             UpdatePatientAssignedOB(doctorId)
             UpdatePatientNextCheckup(appointmentDateTime)
 
@@ -327,7 +352,7 @@ Public Class AppointmentDetails
 
     Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
         Try
-            ' Modified query to check both date and time columns separately
+            ' Query to check both date and time columns separately
             Dim query As String = "SELECT COUNT(*) FROM appointment_table " &
                              "WHERE appointment_date = @selectedDate " &
                              "AND appointment_time = @selectedTime"
@@ -355,7 +380,6 @@ Public Class AppointmentDetails
             Dim result As Object = cmd.ExecuteScalar()
 
             If result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) Then
-                ' Parse the result and increment by 1
                 If Integer.TryParse(result.ToString(), nextId) Then
                     nextId += 1
                 End If
@@ -405,7 +429,6 @@ Public Class AppointmentDetails
                 cmd.Parameters.AddWithValue("@patientId", PatientId)
                 cmd.ExecuteNonQuery()
 
-                ' Update the default doctor ID to the new one
                 DefaultDoctorId = doctorId
 
             Catch ex As Exception
@@ -413,6 +436,7 @@ Public Class AppointmentDetails
             End Try
         End If
     End Sub
+
     Private Sub UpdatePatientNextCheckup(nextCheckup As DateTime)
         Try
             Dim query As String = "UPDATE patient SET next_checkup = @nextCheckupDate, next_checkup_time = @nextCheckupTime " &
@@ -453,6 +477,7 @@ Public Class AppointmentDetails
             Return False
         End Try
     End Function
+
     Private Function GetNextConsultationId() As String
         Dim nextId As Integer = 1
         Try
@@ -473,7 +498,6 @@ Public Class AppointmentDetails
         Return "C" & nextId.ToString("D03")
     End Function
 
-    ' Create billing record after appointment and consultation with JSON item details
     Private Function CreateBillingRecord(appointmentId As Integer, consultationId As String) As Boolean
         Try
             Dim billingId As String = GetNextBillingId()
@@ -506,20 +530,26 @@ Public Class AppointmentDetails
 
             ' Add vitamins based on gestational age for follow-up appointments
             If appointmentType = "Follow-up Check-up" Then
-                Dim gestationalDays As Integer = DateDiff(DateInterval.Day, LastMenstrualDate, DateTime.Now)
-                Dim gestationalWeeks As Integer = gestationalDays \ 7
                 Dim daysToNextVisit As Integer
 
-                ' Calculate days to next visit based on gestational age
-                If gestationalWeeks <= 12 Then ' First trimester
+                ' Calculate days to next visit based on gestational age (trimester)
+                If GestationalWeeks <= 12 Then
                     daysToNextVisit = 30
-                    notes += " + 30-day vitamin supply"
-                ElseIf gestationalWeeks <= 24 Then ' Second trimester
+                ElseIf GestationalWeeks <= 24 Then
                     daysToNextVisit = 20
-                    notes += " + 20-day vitamin supply"
-                Else ' Third trimester
+                Else
                     daysToNextVisit = 10
-                    notes += " + 10-day vitamin supply"
+                End If
+
+                ' If patient was late, adjust vitamin supply days accordingly
+                If DaysLate > 0 Then
+                    Dim adjustedDays As Integer = daysToNextVisit - DaysLate
+                    If adjustedDays < 1 Then adjustedDays = 1 ' Ensure at least 1 day of vitamins
+
+                    daysToNextVisit = adjustedDays
+                    notes += $" + {daysToNextVisit}-day vitamin supply (adjusted for {DaysLate} days late)"
+                Else
+                    notes += $" + {daysToNextVisit}-day vitamin supply"
                 End If
 
                 ' Add Iron vitamin details

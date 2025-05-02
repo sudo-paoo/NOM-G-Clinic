@@ -164,7 +164,6 @@ Public Class DoctorDashboard
     Private Sub LoadRecentAppointments()
         flowRecentAppointments.Controls.Clear()
 
-        ' SQL query to get recent appointments for this doctor (past 7 days excluding today)
         Dim query As String = "SELECT a.appointment_id, a.patient_id, a.appointment_date, a.reason_for_visit, " &
                              "CONCAT(p.first_name, ' ', p.last_name) AS patient_name, " &
                              "CONCAT(d.first_name, ' ', d.last_name) AS doctor_name " &
@@ -490,6 +489,13 @@ Public Class DoctorDashboard
         rawDateColumn.Visible = False
         dgvAppointments.Columns.Add(rawDateColumn)
 
+        ' Add hidden column for patient ID
+        Dim patientIDColumn As New DataGridViewTextBoxColumn()
+        patientIDColumn.HeaderText = "PatientID"
+        patientIDColumn.Name = "PatientID"
+        patientIDColumn.Visible = False
+        dgvAppointments.Columns.Add(patientIDColumn)
+
         ' Add event handlers
         AddHandler dgvAppointments.DataBindingComplete, AddressOf dgvAppointments_DataBindingComplete
         AddHandler dgvAppointments.CellClick, AddressOf dgvAppointments_CellClick
@@ -502,24 +508,26 @@ Public Class DoctorDashboard
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
         Dim query As String = "
-    SELECT 
-        a.appointment_id AS AppointmentID,
-        CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
-        CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
-        a.appointment_date AS RawDate,
-        DATE_FORMAT(a.appointment_date, '%b %d, %Y %h:%i %p') AS AppointmentDate,
-        a.reason_for_visit AS Reason,
-        a.status AS Status
-    FROM 
-        appointment_table a
-    LEFT JOIN 
-        patient p ON a.patient_id = p.patient_id
-    LEFT JOIN 
-        doctor d ON a.doctor_id = d.doctor_id
-    WHERE
-        a.doctor_id = @doctorID
-    ORDER BY 
-        a.appointment_date DESC"
+        SELECT 
+            a.appointment_id AS AppointmentID,
+            p.patient_id AS PatientID,
+            CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
+            CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
+            a.appointment_date AS RawDate,
+            DATE_FORMAT(a.appointment_date, '%b %d, %Y %h:%i %p') AS AppointmentDate,
+            a.reason_for_visit AS Reason,
+            a.status AS Status
+        FROM 
+            appointment_table a
+        LEFT JOIN 
+            patient p ON a.patient_id = p.patient_id
+        LEFT JOIN 
+            doctor d ON a.doctor_id = d.doctor_id
+        WHERE
+            a.doctor_id = @doctorID
+        ORDER BY 
+            a.appointment_date DESC"
+
 
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
@@ -541,14 +549,17 @@ Public Class DoctorDashboard
                         Dim rawDate As DateTime = Convert.ToDateTime(reader("RawDate"))
 
                         Dim rowIndex As Integer = dgvAppointments.Rows.Add(
-                        patientName,
-                        doctorName,
-                        appointmentDate,
-                        reason,
-                        status,
-                        "",
-                        appointmentID,
-                        rawDate)
+                            patientName,
+                            doctorName,
+                            appointmentDate,
+                            reason,
+                            status,
+                            "",
+                            appointmentID,
+                            rawDate,
+                            reader("PatientID").ToString()
+                        )
+
                         Dim row As DataGridViewRow = dgvAppointments.Rows(rowIndex)
                         row.Tag = New Dictionary(Of String, Object) From {
                         {"AppointmentDate", rawDate},
@@ -597,10 +608,9 @@ Public Class DoctorDashboard
                         Dim appointmentDate As DateTime = CType(rowData("AppointmentDate"), DateTime)
 
                         Dim today As DateTime = DateTime.Today
-                        Dim yesterday As DateTime = today.AddDays(-1)
                         Dim appointmentDay As DateTime = appointmentDate.Date
 
-                        If status = "scheduled" AndAlso (appointmentDay = today OrElse appointmentDay = yesterday) Then
+                        If status = "scheduled" AndAlso appointmentDay <= today Then
                             cell.Value = "Complete"
                             cell.Style.BackColor = Color.FromArgb(245, 245, 245)
                             cell.Style.ForeColor = Color.Blue
@@ -627,27 +637,23 @@ Public Class DoctorDashboard
             Dim cell As DataGridViewButtonCell = TryCast(row.Cells(e.ColumnIndex), DataGridViewButtonCell)
             If cell IsNot Nothing AndAlso cell.Value IsNot Nothing AndAlso cell.Value.ToString() = "Complete" Then
                 Dim appointmentID As String = row.Cells("AppointmentID").Value.ToString()
+                Dim patientID As String = row.Cells("PatientID").Value.ToString()
                 Dim patientName As String = row.Cells("PatientName").Value.ToString()
 
-                If MessageBox.Show($"Mark appointment with {patientName} as completed?",
-                               "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                If MessageBox.Show($"Proceed to consultation details for {patientName}?",
+                           "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
 
-                    UpdateAppointmentStatus(appointmentID, "Completed")
+                    Dim consultationDetailsForm As New ConsultationDetails()
+                    consultationDetailsForm.PatientID = patientID
+                    consultationDetailsForm.AppointmentID = appointmentID
+                    consultationDetailsForm.ShowDialog()
 
-                    row.Cells("Status").Value = "Completed"
-
-                    cell.Value = ""
-
-                    Dim rowData As Dictionary(Of String, Object) = TryCast(row.Tag, Dictionary(Of String, Object))
-                    If rowData IsNot Nothing Then
-                        rowData("Status") = "Completed"
-                    End If
-
-                    dgvAppointments.InvalidateRow(e.RowIndex)
+                    AppointmentsPopulateDataGrid()
                 End If
             End If
         End If
     End Sub
+
 
     Private Sub UpdateAppointmentStatus(appointmentID As String, status As String)
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"

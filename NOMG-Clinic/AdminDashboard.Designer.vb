@@ -68,9 +68,8 @@ Partial Class AdminDashboard
         Panel4 = New Panel()
         dgvBilling = New DataGridView()
         Label7 = New Label()
-        pnlSettings = New Panel()
-        Panel5 = New Panel()
-        Panel2 = New Panel()
+        pnlSettingsAdmin = New Panel()
+        IconButton1 = New FontAwesome.Sharp.IconButton()
         SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
         btnSave = New FontAwesome.Sharp.IconButton()
         Label16 = New Label()
@@ -93,7 +92,6 @@ Partial Class AdminDashboard
         Label11 = New Label()
         TextBox1 = New TextBox()
         Label21 = New Label()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -114,8 +112,7 @@ Partial Class AdminDashboard
         pnlBilling.SuspendLayout()
         Panel4.SuspendLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
-        Panel5.SuspendLayout()
-        Panel2.SuspendLayout()
+        pnlSettingsAdmin.SuspendLayout()
         HopeGroupBox6.SuspendLayout()
         HopeGroupBox4.SuspendLayout()
         SuspendLayout()
@@ -126,7 +123,7 @@ Partial Class AdminDashboard
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12.0F)
+        HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -389,7 +386,7 @@ Partial Class AdminDashboard
         HopeGroupBox3.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox3.Controls.Add(lblActiveDoctors)
         HopeGroupBox3.Controls.Add(Label4)
-        HopeGroupBox3.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox3.Font = New Font("Segoe UI", 12F)
         HopeGroupBox3.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox3.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox3.Location = New Point(596, 60)
@@ -428,7 +425,7 @@ Partial Class AdminDashboard
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Controls.Add(lblTodaysAppointments)
         HopeGroupBox2.Controls.Add(Label3)
-        HopeGroupBox2.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox2.Font = New Font("Segoe UI", 12F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Location = New Point(310, 60)
@@ -467,7 +464,7 @@ Partial Class AdminDashboard
         HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox1.Controls.Add(lblTotalPatients)
         HopeGroupBox1.Controls.Add(Label2)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox1.Location = New Point(24, 60)
@@ -535,7 +532,7 @@ Partial Class AdminDashboard
         ' 
         ' txtSearchPatient
         ' 
-        txtSearchPatient.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchPatient.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtSearchPatient.Location = New Point(24, 90)
         txtSearchPatient.Name = "txtSearchPatient"
         txtSearchPatient.PlaceholderText = "Search patient..."
@@ -618,7 +615,7 @@ Partial Class AdminDashboard
         ' 
         ' txtSearchDoctor
         ' 
-        txtSearchDoctor.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchDoctor.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         txtSearchDoctor.Location = New Point(24, 90)
         txtSearchDoctor.Name = "txtSearchDoctor"
         txtSearchDoctor.PlaceholderText = "Search doctor..."
@@ -717,48 +714,43 @@ Partial Class AdminDashboard
         Label7.TabIndex = 1
         Label7.Text = "Billings"
         ' 
-        ' pnlSettings
+        ' pnlSettingsAdmin
         ' 
-        pnlSettings.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        pnlSettings.Dock = DockStyle.Fill
-        pnlSettings.Location = New Point(300, 40)
-        pnlSettings.Name = "pnlSettings"
-        pnlSettings.Size = New Size(900, 660)
-        pnlSettings.TabIndex = 10
+        pnlSettingsAdmin.AutoScroll = True
+        pnlSettingsAdmin.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlSettingsAdmin.Controls.Add(IconButton1)
+        pnlSettingsAdmin.Controls.Add(SmallLabel1)
+        pnlSettingsAdmin.Controls.Add(btnSave)
+        pnlSettingsAdmin.Controls.Add(Label16)
+        pnlSettingsAdmin.Controls.Add(HopeGroupBox6)
+        pnlSettingsAdmin.Controls.Add(Label8)
+        pnlSettingsAdmin.Controls.Add(HopeGroupBox4)
+        pnlSettingsAdmin.Controls.Add(Label21)
+        pnlSettingsAdmin.Dock = DockStyle.Fill
+        pnlSettingsAdmin.Location = New Point(300, 40)
+        pnlSettingsAdmin.Name = "pnlSettingsAdmin"
+        pnlSettingsAdmin.Size = New Size(900, 660)
+        pnlSettingsAdmin.TabIndex = 12
         ' 
-        ' Panel5
+        ' IconButton1
         ' 
-        Panel5.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        Panel5.Controls.Add(Panel2)
-        Panel5.Dock = DockStyle.Fill
-        Panel5.Location = New Point(300, 40)
-        Panel5.Name = "Panel5"
-        Panel5.Size = New Size(900, 660)
-        Panel5.TabIndex = 11
-        ' 
-        ' Panel2
-        ' 
-        Panel2.AutoScroll = True
-        Panel2.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        Panel2.Controls.Add(IconButton1)
-        Panel2.Controls.Add(SmallLabel1)
-        Panel2.Controls.Add(btnSave)
-        Panel2.Controls.Add(Label16)
-        Panel2.Controls.Add(HopeGroupBox6)
-        Panel2.Controls.Add(Label8)
-        Panel2.Controls.Add(HopeGroupBox4)
-        Panel2.Controls.Add(Label21)
-        Panel2.Dock = DockStyle.Fill
-        Panel2.Location = New Point(0, 0)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(900, 660)
-        Panel2.TabIndex = 12
+        IconButton1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        IconButton1.IconColor = Color.RosyBrown
+        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
+        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
+        IconButton1.Location = New Point(402, 415)
+        IconButton1.Name = "IconButton1"
+        IconButton1.Size = New Size(118, 44)
+        IconButton1.TabIndex = 21
+        IconButton1.Text = "        SAVE"
+        IconButton1.UseVisualStyleBackColor = True
         ' 
         ' SmallLabel1
         ' 
         SmallLabel1.AutoSize = True
         SmallLabel1.BackColor = Color.Transparent
-        SmallLabel1.Font = New Font("Segoe UI", 8.0F)
+        SmallLabel1.Font = New Font("Segoe UI", 8F)
         SmallLabel1.ForeColor = Color.FromArgb(CByte(142), CByte(142), CByte(142))
         SmallLabel1.Location = New Point(11, 1017)
         SmallLabel1.Name = "SmallLabel1"
@@ -799,7 +791,7 @@ Partial Class AdminDashboard
         HopeGroupBox6.Controls.Add(Label19)
         HopeGroupBox6.Controls.Add(Label20)
         HopeGroupBox6.Controls.Add(TextBox9)
-        HopeGroupBox6.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox6.Font = New Font("Segoe UI", 12F)
         HopeGroupBox6.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox6.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox6.Location = New Point(151, 694)
@@ -822,7 +814,7 @@ Partial Class AdminDashboard
         ' 
         Label18.AutoSize = True
         Label18.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label18.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label18.Location = New Point(24, 138)
         Label18.Name = "Label18"
         Label18.Size = New Size(144, 28)
@@ -840,7 +832,7 @@ Partial Class AdminDashboard
         ' 
         Label19.AutoSize = True
         Label19.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label19.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label19.Location = New Point(24, 30)
         Label19.Name = "Label19"
         Label19.Size = New Size(90, 28)
@@ -851,7 +843,7 @@ Partial Class AdminDashboard
         ' 
         Label20.AutoSize = True
         Label20.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label20.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label20.Location = New Point(24, 83)
         Label20.Name = "Label20"
         Label20.Size = New Size(168, 28)
@@ -887,7 +879,7 @@ Partial Class AdminDashboard
         HopeGroupBox4.Controls.Add(Label12)
         HopeGroupBox4.Controls.Add(Label11)
         HopeGroupBox4.Controls.Add(TextBox1)
-        HopeGroupBox4.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
         HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox4.Location = New Point(151, 137)
@@ -939,7 +931,7 @@ Partial Class AdminDashboard
         ' 
         Label14.AutoSize = True
         Label14.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label14.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label14.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label14.Location = New Point(24, 30)
         Label14.Name = "Label14"
         Label14.Size = New Size(109, 28)
@@ -950,7 +942,7 @@ Partial Class AdminDashboard
         ' 
         Label13.AutoSize = True
         Label13.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label13.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label13.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label13.Location = New Point(24, 189)
         Label13.Name = "Label13"
         Label13.Size = New Size(168, 28)
@@ -961,7 +953,7 @@ Partial Class AdminDashboard
         ' 
         Label12.AutoSize = True
         Label12.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label12.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label12.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label12.Location = New Point(23, 136)
         Label12.Name = "Label12"
         Label12.Size = New Size(65, 28)
@@ -972,7 +964,7 @@ Partial Class AdminDashboard
         ' 
         Label11.AutoSize = True
         Label11.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label11.Font = New Font("Segoe UI Semibold", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label11.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label11.Location = New Point(24, 83)
         Label11.Name = "Label11"
         Label11.Size = New Size(102, 28)
@@ -996,28 +988,13 @@ Partial Class AdminDashboard
         Label21.TabIndex = 1
         Label21.Text = "Settings"
         ' 
-        ' IconButton1
-        ' 
-        IconButton1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        IconButton1.IconColor = Color.RosyBrown
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton1.Location = New Point(402, 415)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(118, 44)
-        IconButton1.TabIndex = 21
-        IconButton1.Text = "        SAVE"
-        IconButton1.UseVisualStyleBackColor = True
-        ' 
         ' AdminDashboard
         ' 
-        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(Panel5)
+        Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlPatients)
-        Controls.Add(pnlSettings)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
         Controls.Add(pnlDoctors)
@@ -1059,9 +1036,8 @@ Partial Class AdminDashboard
         pnlBilling.PerformLayout()
         Panel4.ResumeLayout(False)
         CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
-        Panel5.ResumeLayout(False)
-        Panel2.ResumeLayout(False)
-        Panel2.PerformLayout()
+        pnlSettingsAdmin.ResumeLayout(False)
+        pnlSettingsAdmin.PerformLayout()
         HopeGroupBox6.ResumeLayout(False)
         HopeGroupBox6.PerformLayout()
         HopeGroupBox4.ResumeLayout(False)
@@ -1114,9 +1090,9 @@ Partial Class AdminDashboard
     Friend WithEvents Label7 As Label
     Friend WithEvents btnLogout As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSettings As FontAwesome.Sharp.IconButton
-    Friend WithEvents pnlSettings As Panel
+    Friend WithEvents pnlSettingsAdmin As Panel
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlAdminSettings As Panel
     Friend WithEvents SmallLabel1 As ReaLTaiizor.Controls.SmallLabel
     Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
     Friend WithEvents Label16 As Label

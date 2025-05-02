@@ -25,22 +25,24 @@ Partial Class ConsultationDetails
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConsultationDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
-        Button2 = New Button()
-        Button1 = New Button()
+        btnSave = New FontAwesome.Sharp.IconButton()
+        btnCancel = New FontAwesome.Sharp.IconButton()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
-        txtDoctorPlan = New TextBox()
-        Label20 = New Label()
-        txtDoctorAssessment = New TextBox()
-        Label19 = New Label()
-        Label18 = New Label()
+        cmbReasonVisit = New ComboBox()
+        cmbVisitType = New ComboBox()
+        hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
         rbBlood = New RadioButton()
         rbKetones = New RadioButton()
         rbGlucose = New RadioButton()
         rbProtein = New RadioButton()
         Label17 = New Label()
+        txtDoctorPlan = New TextBox()
+        Label20 = New Label()
+        txtDoctorAssessment = New TextBox()
+        Label19 = New Label()
+        Label18 = New Label()
         txtFetalHeart = New TextBox()
         Label16 = New Label()
-        Me.txtFundalHeight = New TextBox()
         Label15 = New Label()
         smlWeight = New ReaLTaiizor.Controls.SmallTextBox()
         smlTemperature = New ReaLTaiizor.Controls.SmallTextBox()
@@ -54,6 +56,7 @@ Partial Class ConsultationDetails
         Label5 = New Label()
         Label4 = New Label()
         Label3 = New Label()
+        txtFundalHeight = New TextBox()
         HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
         lblAllergies = New Label()
         lblBloodType = New Label()
@@ -69,13 +72,10 @@ Partial Class ConsultationDetails
         Label2 = New Label()
         lblDate = New Label()
         Label1 = New Label()
-        cmbReasonVisit = New ReaLTaiizor.Controls.HopeComboBox()
-        cmbVisitType = New ReaLTaiizor.Controls.HopeComboBox()
-        hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
         Panel1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
-        HopeGroupBox1.SuspendLayout()
         hgbUrineAnalysis.SuspendLayout()
+        HopeGroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -84,7 +84,7 @@ Partial Class ConsultationDetails
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12.0F)
+        HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -100,8 +100,8 @@ Partial Class ConsultationDetails
         Panel1.AutoScroll = True
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
-        Panel1.Controls.Add(Button2)
-        Panel1.Controls.Add(Button1)
+        Panel1.Controls.Add(btnSave)
+        Panel1.Controls.Add(btnCancel)
         Panel1.Controls.Add(HopeGroupBox2)
         Panel1.Controls.Add(HopeGroupBox1)
         Panel1.Controls.Add(lblDate)
@@ -112,31 +112,37 @@ Partial Class ConsultationDetails
         Panel1.Size = New Size(1200, 660)
         Panel1.TabIndex = 1
         ' 
-        ' Button2
+        ' btnSave
         ' 
-        Button2.Location = New Point(1006, 75)
-        Button2.Name = "Button2"
-        Button2.Size = New Size(120, 43)
-        Button2.TabIndex = 5
-        Button2.Text = "Save Notes"
-        Button2.UseVisualStyleBackColor = True
+        btnSave.IconChar = FontAwesome.Sharp.IconChar.None
+        btnSave.IconColor = Color.Black
+        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSave.Location = New Point(1072, 87)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(94, 29)
+        btnSave.TabIndex = 7
+        btnSave.Text = "Save"
+        btnSave.UseVisualStyleBackColor = True
         ' 
-        ' Button1
+        ' btnCancel
         ' 
-        Button1.Location = New Point(866, 75)
-        Button1.Name = "Button1"
-        Button1.Size = New Size(120, 43)
-        Button1.TabIndex = 4
-        Button1.Text = "Cancel"
-        Button1.UseVisualStyleBackColor = True
+        btnCancel.IconChar = FontAwesome.Sharp.IconChar.None
+        btnCancel.IconColor = Color.Black
+        btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnCancel.Location = New Point(897, 87)
+        btnCancel.Name = "btnCancel"
+        btnCancel.Size = New Size(94, 29)
+        btnCancel.TabIndex = 6
+        btnCancel.Text = "Cancel"
+        btnCancel.UseVisualStyleBackColor = True
         ' 
         ' HopeGroupBox2
         ' 
         HopeGroupBox2.BackColor = SystemColors.Control
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        HopeGroupBox2.Controls.Add(hgbUrineAnalysis)
-        HopeGroupBox2.Controls.Add(cmbVisitType)
         HopeGroupBox2.Controls.Add(cmbReasonVisit)
+        HopeGroupBox2.Controls.Add(cmbVisitType)
+        HopeGroupBox2.Controls.Add(hgbUrineAnalysis)
         HopeGroupBox2.Controls.Add(txtDoctorPlan)
         HopeGroupBox2.Controls.Add(Label20)
         HopeGroupBox2.Controls.Add(txtDoctorAssessment)
@@ -144,7 +150,6 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Controls.Add(Label18)
         HopeGroupBox2.Controls.Add(txtFetalHeart)
         HopeGroupBox2.Controls.Add(Label16)
-        HopeGroupBox2.Controls.Add(Me.txtFundalHeight)
         HopeGroupBox2.Controls.Add(Label15)
         HopeGroupBox2.Controls.Add(smlWeight)
         HopeGroupBox2.Controls.Add(smlTemperature)
@@ -158,7 +163,8 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Controls.Add(Label5)
         HopeGroupBox2.Controls.Add(Label4)
         HopeGroupBox2.Controls.Add(Label3)
-        HopeGroupBox2.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox2.Controls.Add(txtFundalHeight)
+        HopeGroupBox2.Font = New Font("Segoe UI", 12F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox2.Location = New Point(432, 135)
@@ -170,59 +176,44 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ' 
-        ' txtDoctorPlan
+        ' cmbReasonVisit
         ' 
-        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorPlan.Location = New Point(35, 925)
-        txtDoctorPlan.Multiline = True
-        txtDoctorPlan.Name = "txtDoctorPlan"
-        txtDoctorPlan.Size = New Size(659, 167)
-        txtDoctorPlan.TabIndex = 39
+        cmbReasonVisit.FormattingEnabled = True
+        cmbReasonVisit.Items.AddRange(New Object() {"Initial Check-Up", "Follow-up Check-up"})
+        cmbReasonVisit.Location = New Point(374, 133)
+        cmbReasonVisit.Name = "cmbReasonVisit"
+        cmbReasonVisit.Size = New Size(320, 36)
+        cmbReasonVisit.TabIndex = 44
         ' 
-        ' Label20
+        ' cmbVisitType
         ' 
-        Label20.AutoSize = True
-        Label20.BackColor = Color.Transparent
-        Label20.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.ForeColor = Color.Black
-        Label20.Location = New Point(31, 895)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(54, 22)
-        Label20.TabIndex = 38
-        Label20.Text = "Plan"
+        cmbVisitType.FormattingEnabled = True
+        cmbVisitType.Items.AddRange(New Object() {"Prenatal Check-Up", "Ultrasound", "Postpartum Follow-Up", "Consultation"})
+        cmbVisitType.Location = New Point(26, 133)
+        cmbVisitType.Name = "cmbVisitType"
+        cmbVisitType.Size = New Size(320, 36)
+        cmbVisitType.TabIndex = 43
         ' 
-        ' txtDoctorAssessment
+        ' hgbUrineAnalysis
         ' 
-        txtDoctorAssessment.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorAssessment.Location = New Point(35, 704)
-        txtDoctorAssessment.Multiline = True
-        txtDoctorAssessment.Name = "txtDoctorAssessment"
-        txtDoctorAssessment.Size = New Size(659, 167)
-        txtDoctorAssessment.TabIndex = 37
-        ' 
-        ' Label19
-        ' 
-        Label19.AutoSize = True
-        Label19.BackColor = Color.Transparent
-        Label19.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.ForeColor = Color.Black
-        Label19.Location = New Point(31, 674)
-        Label19.Name = "Label19"
-        Label19.Size = New Size(132, 22)
-        Label19.TabIndex = 36
-        Label19.Text = "Assessment"
-        ' 
-        ' Label18
-        ' 
-        Label18.AutoSize = True
-        Label18.BackColor = Color.Transparent
-        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.ForeColor = Color.Black
-        Label18.Location = New Point(26, 621)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(188, 28)
-        Label18.TabIndex = 35
-        Label18.Text = "Doctor's Note"
+        hgbUrineAnalysis.BackColor = Color.Transparent
+        hgbUrineAnalysis.BorderColor = Color.Transparent
+        hgbUrineAnalysis.Controls.Add(rbBlood)
+        hgbUrineAnalysis.Controls.Add(rbKetones)
+        hgbUrineAnalysis.Controls.Add(rbGlucose)
+        hgbUrineAnalysis.Controls.Add(rbProtein)
+        hgbUrineAnalysis.Controls.Add(Label17)
+        hgbUrineAnalysis.Font = New Font("Segoe UI", 12F)
+        hgbUrineAnalysis.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
+        hgbUrineAnalysis.LineColor = Color.Transparent
+        hgbUrineAnalysis.Location = New Point(24, 517)
+        hgbUrineAnalysis.Name = "hgbUrineAnalysis"
+        hgbUrineAnalysis.ShowText = False
+        hgbUrineAnalysis.Size = New Size(670, 86)
+        hgbUrineAnalysis.TabIndex = 42
+        hgbUrineAnalysis.TabStop = False
+        hgbUrineAnalysis.Text = "HopeGroupBox3"
+        hgbUrineAnalysis.ThemeColor = Color.Transparent
         ' 
         ' rbBlood
         ' 
@@ -284,6 +275,60 @@ Partial Class ConsultationDetails
         Label17.TabIndex = 30
         Label17.Text = "Urine Analysis"
         ' 
+        ' txtDoctorPlan
+        ' 
+        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
+        txtDoctorPlan.Location = New Point(35, 925)
+        txtDoctorPlan.Multiline = True
+        txtDoctorPlan.Name = "txtDoctorPlan"
+        txtDoctorPlan.Size = New Size(659, 167)
+        txtDoctorPlan.TabIndex = 39
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.BackColor = Color.Transparent
+        Label20.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.ForeColor = Color.Black
+        Label20.Location = New Point(31, 895)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(54, 22)
+        Label20.TabIndex = 38
+        Label20.Text = "Plan"
+        ' 
+        ' txtDoctorAssessment
+        ' 
+        txtDoctorAssessment.BorderStyle = BorderStyle.FixedSingle
+        txtDoctorAssessment.Location = New Point(35, 704)
+        txtDoctorAssessment.Multiline = True
+        txtDoctorAssessment.Name = "txtDoctorAssessment"
+        txtDoctorAssessment.Size = New Size(659, 167)
+        txtDoctorAssessment.TabIndex = 37
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.BackColor = Color.Transparent
+        Label19.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.ForeColor = Color.Black
+        Label19.Location = New Point(31, 674)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(132, 22)
+        Label19.TabIndex = 36
+        Label19.Text = "Assessment"
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.BackColor = Color.Transparent
+        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.ForeColor = Color.Black
+        Label18.Location = New Point(26, 621)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(188, 28)
+        Label18.TabIndex = 35
+        Label18.Text = "Doctor's Note"
+        ' 
         ' txtFetalHeart
         ' 
         txtFetalHeart.Location = New Point(31, 460)
@@ -303,13 +348,6 @@ Partial Class ConsultationDetails
         Label16.TabIndex = 28
         Label16.Text = "Fetal Heart Rate (bpm)"
         ' 
-        ' txtFundalHeight
-        ' 
-        Me.txtFundalHeight.Location = New Point(31, 368)
-        Me.txtFundalHeight.Name = "txtFundalHeight"
-        Me.txtFundalHeight.Size = New Size(663, 34)
-        Me.txtFundalHeight.TabIndex = 27
-        ' 
         ' Label15
         ' 
         Label15.AutoSize = True
@@ -327,7 +365,7 @@ Partial Class ConsultationDetails
         smlWeight.BackColor = Color.Transparent
         smlWeight.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlWeight.CustomBGColor = Color.White
-        smlWeight.Font = New Font("Tahoma", 11.0F)
+        smlWeight.Font = New Font("Tahoma", 11F)
         smlWeight.ForeColor = Color.DimGray
         smlWeight.Location = New Point(561, 273)
         smlWeight.MaxLength = 32767
@@ -337,7 +375,6 @@ Partial Class ConsultationDetails
         smlWeight.Size = New Size(133, 33)
         smlWeight.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlWeight.TabIndex = 25
-        smlWeight.Text = "SmallTextBox4"
         smlWeight.TextAlignment = HorizontalAlignment.Left
         smlWeight.UseSystemPasswordChar = False
         ' 
@@ -346,7 +383,7 @@ Partial Class ConsultationDetails
         smlTemperature.BackColor = Color.Transparent
         smlTemperature.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlTemperature.CustomBGColor = Color.White
-        smlTemperature.Font = New Font("Tahoma", 11.0F)
+        smlTemperature.Font = New Font("Tahoma", 11F)
         smlTemperature.ForeColor = Color.DimGray
         smlTemperature.Location = New Point(390, 273)
         smlTemperature.MaxLength = 32767
@@ -356,7 +393,6 @@ Partial Class ConsultationDetails
         smlTemperature.Size = New Size(141, 33)
         smlTemperature.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlTemperature.TabIndex = 24
-        smlTemperature.Text = "SmallTextBox3"
         smlTemperature.TextAlignment = HorizontalAlignment.Left
         smlTemperature.UseSystemPasswordChar = False
         ' 
@@ -365,7 +401,7 @@ Partial Class ConsultationDetails
         smlPulse.BackColor = Color.Transparent
         smlPulse.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlPulse.CustomBGColor = Color.White
-        smlPulse.Font = New Font("Tahoma", 11.0F)
+        smlPulse.Font = New Font("Tahoma", 11F)
         smlPulse.ForeColor = Color.DimGray
         smlPulse.Location = New Point(223, 273)
         smlPulse.MaxLength = 32767
@@ -375,7 +411,6 @@ Partial Class ConsultationDetails
         smlPulse.Size = New Size(136, 33)
         smlPulse.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlPulse.TabIndex = 23
-        smlPulse.Text = "SmallTextBox2"
         smlPulse.TextAlignment = HorizontalAlignment.Left
         smlPulse.UseSystemPasswordChar = False
         ' 
@@ -384,7 +419,7 @@ Partial Class ConsultationDetails
         smlBloodPressure.BackColor = Color.Transparent
         smlBloodPressure.BorderColor = Color.FromArgb(CByte(180), CByte(180), CByte(180))
         smlBloodPressure.CustomBGColor = Color.White
-        smlBloodPressure.Font = New Font("Tahoma", 11.0F)
+        smlBloodPressure.Font = New Font("Tahoma", 11F)
         smlBloodPressure.ForeColor = Color.DimGray
         smlBloodPressure.Location = New Point(31, 273)
         smlBloodPressure.MaxLength = 32767
@@ -394,7 +429,6 @@ Partial Class ConsultationDetails
         smlBloodPressure.Size = New Size(163, 33)
         smlBloodPressure.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlBloodPressure.TabIndex = 22
-        smlBloodPressure.Text = "SmallTextBox1"
         smlBloodPressure.TextAlignment = HorizontalAlignment.Left
         smlBloodPressure.UseSystemPasswordChar = False
         ' 
@@ -464,7 +498,7 @@ Partial Class ConsultationDetails
         Label5.BackColor = Color.Transparent
         Label5.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.Black
-        Label5.Location = New Point(354, 99)
+        Label5.Location = New Point(374, 99)
         Label5.Name = "Label5"
         Label5.Size = New Size(170, 22)
         Label5.TabIndex = 13
@@ -494,6 +528,15 @@ Partial Class ConsultationDetails
         Label3.TabIndex = 12
         Label3.Text = "Details"
         ' 
+        ' txtFundalHeight
+        ' 
+        txtFundalHeight.Font = New Font("Tahoma", 11F)
+        txtFundalHeight.ForeColor = Color.DimGray
+        txtFundalHeight.Location = New Point(31, 363)
+        txtFundalHeight.Name = "txtFundalHeight"
+        txtFundalHeight.Size = New Size(163, 30)
+        txtFundalHeight.TabIndex = 26
+        ' 
         ' HopeGroupBox1
         ' 
         HopeGroupBox1.BackColor = Color.Transparent
@@ -512,7 +555,7 @@ Partial Class ConsultationDetails
         HopeGroupBox1.Controls.Add(lblPatientAge)
         HopeGroupBox1.Controls.Add(lblPatientName)
         HopeGroupBox1.Controls.Add(Label2)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12.0F)
+        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox1.Location = New Point(35, 135)
@@ -571,7 +614,7 @@ Partial Class ConsultationDetails
         ' Label9
         ' 
         Label9.AutoSize = True
-        Label9.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label9.ForeColor = Color.Black
         Label9.Location = New Point(19, 437)
         Label9.Name = "Label9"
@@ -582,7 +625,7 @@ Partial Class ConsultationDetails
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label8.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label8.ForeColor = Color.Black
         Label8.Location = New Point(19, 368)
         Label8.Name = "Label8"
@@ -593,7 +636,7 @@ Partial Class ConsultationDetails
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = Color.Black
         Label7.Location = New Point(19, 296)
         Label7.Name = "Label7"
@@ -604,7 +647,7 @@ Partial Class ConsultationDetails
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label6.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = Color.Black
         Label6.Location = New Point(19, 217)
         Label6.Name = "Label6"
@@ -615,7 +658,7 @@ Partial Class ConsultationDetails
         ' lblTypeOfPatient
         ' 
         lblTypeOfPatient.AutoSize = True
-        lblTypeOfPatient.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTypeOfPatient.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblTypeOfPatient.ForeColor = Color.Black
         lblTypeOfPatient.Location = New Point(161, 160)
         lblTypeOfPatient.Name = "lblTypeOfPatient"
@@ -626,7 +669,7 @@ Partial Class ConsultationDetails
         ' lblPatientAge
         ' 
         lblPatientAge.AutoSize = True
-        lblPatientAge.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblPatientAge.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientAge.ForeColor = Color.Black
         lblPatientAge.Location = New Point(161, 123)
         lblPatientAge.Name = "lblPatientAge"
@@ -637,7 +680,7 @@ Partial Class ConsultationDetails
         ' lblPatientName
         ' 
         lblPatientName.AutoSize = True
-        lblPatientName.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblPatientName.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientName.ForeColor = Color.Black
         lblPatientName.Location = New Point(161, 85)
         lblPatientName.Name = "lblPatientName"
@@ -660,7 +703,7 @@ Partial Class ConsultationDetails
         ' 
         lblDate.AutoSize = True
         lblDate.BackColor = Color.Transparent
-        lblDate.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblDate.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDate.Location = New Point(24, 65)
         lblDate.Name = "lblDate"
         lblDate.Size = New Size(145, 25)
@@ -678,56 +721,9 @@ Partial Class ConsultationDetails
         Label1.TabIndex = 0
         Label1.Text = "Consultation Notes"
         ' 
-        ' cmbReasonVisit
-        ' 
-        cmbReasonVisit.DrawMode = DrawMode.OwnerDrawFixed
-        cmbReasonVisit.FlatStyle = FlatStyle.Flat
-        cmbReasonVisit.Font = New Font("Segoe UI", 12.0F)
-        cmbReasonVisit.FormattingEnabled = True
-        cmbReasonVisit.ItemHeight = 30
-        cmbReasonVisit.Items.AddRange(New Object() {"Routine Check-Up", "Follow-up"})
-        cmbReasonVisit.Location = New Point(354, 133)
-        cmbReasonVisit.Name = "cmbReasonVisit"
-        cmbReasonVisit.Size = New Size(315, 36)
-        cmbReasonVisit.TabIndex = 40
-        ' 
-        ' cmbVisitType
-        ' 
-        cmbVisitType.DrawMode = DrawMode.OwnerDrawFixed
-        cmbVisitType.FlatStyle = FlatStyle.Flat
-        cmbVisitType.Font = New Font("Segoe UI", 12.0F)
-        cmbVisitType.FormattingEnabled = True
-        cmbVisitType.ItemHeight = 30
-        cmbVisitType.Items.AddRange(New Object() {"Prenatal Check-Up", "", "Ultrasound", "", "Postpartum Follow-Up", "", "Consultation"})
-        cmbVisitType.Location = New Point(26, 133)
-        cmbVisitType.Name = "cmbVisitType"
-        cmbVisitType.Size = New Size(315, 36)
-        cmbVisitType.TabIndex = 41
-        ' 
-        ' hgbUrineAnalysis
-        ' 
-        hgbUrineAnalysis.BackColor = Color.Transparent
-        hgbUrineAnalysis.BorderColor = Color.Transparent
-        hgbUrineAnalysis.Controls.Add(rbBlood)
-        hgbUrineAnalysis.Controls.Add(rbKetones)
-        hgbUrineAnalysis.Controls.Add(rbGlucose)
-        hgbUrineAnalysis.Controls.Add(rbProtein)
-        hgbUrineAnalysis.Controls.Add(Label17)
-        hgbUrineAnalysis.Font = New Font("Segoe UI", 12.0F)
-        hgbUrineAnalysis.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        hgbUrineAnalysis.LineColor = Color.Transparent
-        hgbUrineAnalysis.Location = New Point(24, 517)
-        hgbUrineAnalysis.Name = "hgbUrineAnalysis"
-        hgbUrineAnalysis.ShowText = False
-        hgbUrineAnalysis.Size = New Size(670, 86)
-        hgbUrineAnalysis.TabIndex = 42
-        hgbUrineAnalysis.TabStop = False
-        hgbUrineAnalysis.Text = "HopeGroupBox3"
-        hgbUrineAnalysis.ThemeColor = Color.Transparent
-        ' 
         ' ConsultationDetails
         ' 
-        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
         Controls.Add(Panel1)
@@ -743,28 +739,11 @@ Partial Class ConsultationDetails
         Panel1.PerformLayout()
         HopeGroupBox2.ResumeLayout(False)
         HopeGroupBox2.PerformLayout()
-        HopeGroupBox1.ResumeLayout(False)
-        HopeGroupBox1.PerformLayout()
         hgbUrineAnalysis.ResumeLayout(False)
         hgbUrineAnalysis.PerformLayout()
+        HopeGroupBox1.ResumeLayout(False)
+        HopeGroupBox1.PerformLayout()
         ResumeLayout(False)
-
-        ' 
-        ' txtFundalHeight
-        ' 
-        txtFundalHeight.BackColor = Color.Transparent
-        txtFundalHeight.Font = New Font("Tahoma", 11.0F)
-        txtFundalHeight.ForeColor = Color.DimGray
-        txtFundalHeight.Location = New Point(31, 330)
-        txtFundalHeight.MaxLength = 32767
-        txtFundalHeight.Multiline = False
-        txtFundalHeight.Name = "txtFundalHeight"
-        txtFundalHeight.ReadOnly = False
-        txtFundalHeight.Size = New Size(163, 33)
-        txtFundalHeight.TabIndex = 26
-        txtFundalHeight.Text = ""
-        txtFundalHeight.UseSystemPasswordChar = False
-        HopeGroupBox2.Controls.Add(txtFundalHeight)
 
     End Sub
 
@@ -813,11 +792,11 @@ Partial Class ConsultationDetails
     Friend WithEvents Label19 As Label
     Friend WithEvents txtDoctorPlan As TextBox
     Friend WithEvents Label20 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents cmbReasonVisit As ReaLTaiizor.Controls.HopeComboBox
-    Friend WithEvents cmbVisitType As ReaLTaiizor.Controls.HopeComboBox
     Friend WithEvents hgbUrineAnalysis As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents txtFundalHeight As TextBox
+    Friend WithEvents cmbReasonVisit As ComboBox
+    Friend WithEvents cmbVisitType As ComboBox
+    Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCancel As FontAwesome.Sharp.IconButton
 
 End Class
