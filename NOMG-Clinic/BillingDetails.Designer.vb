@@ -28,29 +28,29 @@ Partial Class BillingDetails
         Label7 = New Label()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
-        Label18 = New Label()
+        btnPayBillCash = New FontAwesome.Sharp.IconButton()
+        lblChange = New Label()
         Label17 = New Label()
-        TextBox9 = New TextBox()
-        TextBox8 = New TextBox()
+        txtAmountReceived = New TextBox()
+        txtAmountDueCash = New TextBox()
         Label16 = New Label()
         Label15 = New Label()
         TabPage2 = New TabPage()
-        TextBox10 = New TextBox()
+        txtAmountDueCard = New TextBox()
         Label19 = New Label()
         Label14 = New Label()
         Label10 = New Label()
-        TextBox7 = New TextBox()
+        txtPostal = New TextBox()
         Label13 = New Label()
-        TextBox6 = New TextBox()
-        TextBox5 = New TextBox()
-        TextBox4 = New TextBox()
-        TextBox3 = New TextBox()
-        TextBox2 = New TextBox()
-        TextBox1 = New TextBox()
+        txtExpirationYear = New TextBox()
+        txtCardHolderName = New TextBox()
+        txtBillingAddress = New TextBox()
+        txtCCV = New TextBox()
+        txtEpirationMonth = New TextBox()
+        txtCardNumber = New TextBox()
         Label12 = New Label()
         Label11 = New Label()
-        btnPay = New FontAwesome.Sharp.IconButton()
+        btnPayBillCard = New FontAwesome.Sharp.IconButton()
         Label9 = New Label()
         Label8 = New Label()
         pnlItems = New Panel()
@@ -62,7 +62,7 @@ Partial Class BillingDetails
         Label2 = New Label()
         Label1 = New Label()
         lblAppointmentHeader = New Label()
-        lblDueDate = New Label()
+        lblBillingDate = New Label()
         lblLastVisit = New Label()
         lblGestationalAge = New Label()
         lblPatientID = New Label()
@@ -87,7 +87,7 @@ Partial Class BillingDetails
         HopeForm1.Location = New Point(0, 0)
         HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
-        HopeForm1.Size = New Size(1250, 40)
+        HopeForm1.Size = New Size(1192, 40)
         HopeForm1.TabIndex = 0
         HopeForm1.Text = "Billing Details"
         HopeForm1.ThemeColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
@@ -107,7 +107,7 @@ Partial Class BillingDetails
         Panel1.Controls.Add(Label2)
         Panel1.Controls.Add(Label1)
         Panel1.Controls.Add(lblAppointmentHeader)
-        Panel1.Controls.Add(lblDueDate)
+        Panel1.Controls.Add(lblBillingDate)
         Panel1.Controls.Add(lblLastVisit)
         Panel1.Controls.Add(lblGestationalAge)
         Panel1.Controls.Add(lblPatientID)
@@ -115,7 +115,7 @@ Partial Class BillingDetails
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(1250, 510)
+        Panel1.Size = New Size(1192, 465)
         Panel1.TabIndex = 1
         ' 
         ' Label7
@@ -123,7 +123,7 @@ Partial Class BillingDetails
         Label7.AutoSize = True
         Label7.BackColor = Color.Transparent
         Label7.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(866, 20)
+        Label7.Location = New Point(835, 21)
         Label7.Name = "Label7"
         Label7.Size = New Size(170, 25)
         Label7.TabIndex = 55
@@ -133,7 +133,7 @@ Partial Class BillingDetails
         ' 
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
-        TabControl1.Location = New Point(631, 48)
+        TabControl1.Location = New Point(600, 49)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
         TabControl1.Size = New Size(575, 396)
@@ -142,11 +142,11 @@ Partial Class BillingDetails
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.LightPink
-        TabPage1.Controls.Add(IconButton1)
-        TabPage1.Controls.Add(Label18)
+        TabPage1.Controls.Add(btnPayBillCash)
+        TabPage1.Controls.Add(lblChange)
         TabPage1.Controls.Add(Label17)
-        TabPage1.Controls.Add(TextBox9)
-        TabPage1.Controls.Add(TextBox8)
+        TabPage1.Controls.Add(txtAmountReceived)
+        TabPage1.Controls.Add(txtAmountDueCash)
         TabPage1.Controls.Add(Label16)
         TabPage1.Controls.Add(Label15)
         TabPage1.Location = New Point(4, 29)
@@ -156,31 +156,31 @@ Partial Class BillingDetails
         TabPage1.TabIndex = 0
         TabPage1.Text = "Cash"
         ' 
-        ' IconButton1
+        ' btnPayBillCash
         ' 
-        IconButton1.Font = New Font("Verdana", 12F)
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.MoneyBill
-        IconButton1.IconColor = Color.Black
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.IconSize = 40
-        IconButton1.ImageAlign = ContentAlignment.BottomRight
-        IconButton1.Location = New Point(205, 204)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(152, 50)
-        IconButton1.TabIndex = 54
-        IconButton1.Text = "Pay Bill"
-        IconButton1.TextImageRelation = TextImageRelation.TextBeforeImage
-        IconButton1.UseVisualStyleBackColor = True
+        btnPayBillCash.Font = New Font("Verdana", 12F)
+        btnPayBillCash.IconChar = FontAwesome.Sharp.IconChar.MoneyBill
+        btnPayBillCash.IconColor = Color.Black
+        btnPayBillCash.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnPayBillCash.IconSize = 40
+        btnPayBillCash.ImageAlign = ContentAlignment.BottomRight
+        btnPayBillCash.Location = New Point(205, 204)
+        btnPayBillCash.Name = "btnPayBillCash"
+        btnPayBillCash.Size = New Size(152, 50)
+        btnPayBillCash.TabIndex = 54
+        btnPayBillCash.Text = "Pay Bill"
+        btnPayBillCash.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnPayBillCash.UseVisualStyleBackColor = True
         ' 
-        ' Label18
+        ' lblChange
         ' 
-        Label18.AutoSize = True
-        Label18.BackColor = SystemColors.Control
-        Label18.Location = New Point(136, 140)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(15, 20)
-        Label18.TabIndex = 5
-        Label18.Text = "-"
+        lblChange.AutoSize = True
+        lblChange.BackColor = SystemColors.Control
+        lblChange.Location = New Point(136, 140)
+        lblChange.Name = "lblChange"
+        lblChange.Size = New Size(15, 20)
+        lblChange.TabIndex = 5
+        lblChange.Text = "-"
         ' 
         ' Label17
         ' 
@@ -192,19 +192,20 @@ Partial Class BillingDetails
         Label17.TabIndex = 4
         Label17.Text = "Change:"
         ' 
-        ' TextBox9
+        ' txtAmountReceived
         ' 
-        TextBox9.Location = New Point(304, 73)
-        TextBox9.Name = "TextBox9"
-        TextBox9.Size = New Size(212, 27)
-        TextBox9.TabIndex = 3
+        txtAmountReceived.Location = New Point(304, 73)
+        txtAmountReceived.Name = "txtAmountReceived"
+        txtAmountReceived.Size = New Size(212, 27)
+        txtAmountReceived.TabIndex = 3
         ' 
-        ' TextBox8
+        ' txtAmountDueCash
         ' 
-        TextBox8.Location = New Point(47, 73)
-        TextBox8.Name = "TextBox8"
-        TextBox8.Size = New Size(212, 27)
-        TextBox8.TabIndex = 2
+        txtAmountDueCash.Enabled = False
+        txtAmountDueCash.Location = New Point(47, 73)
+        txtAmountDueCash.Name = "txtAmountDueCash"
+        txtAmountDueCash.Size = New Size(212, 27)
+        txtAmountDueCash.TabIndex = 2
         ' 
         ' Label16
         ' 
@@ -229,21 +230,21 @@ Partial Class BillingDetails
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.Pink
-        TabPage2.Controls.Add(TextBox10)
+        TabPage2.Controls.Add(txtAmountDueCard)
         TabPage2.Controls.Add(Label19)
         TabPage2.Controls.Add(Label14)
         TabPage2.Controls.Add(Label10)
-        TabPage2.Controls.Add(TextBox7)
+        TabPage2.Controls.Add(txtPostal)
         TabPage2.Controls.Add(Label13)
-        TabPage2.Controls.Add(TextBox6)
-        TabPage2.Controls.Add(TextBox5)
-        TabPage2.Controls.Add(TextBox4)
-        TabPage2.Controls.Add(TextBox3)
-        TabPage2.Controls.Add(TextBox2)
-        TabPage2.Controls.Add(TextBox1)
+        TabPage2.Controls.Add(txtExpirationYear)
+        TabPage2.Controls.Add(txtCardHolderName)
+        TabPage2.Controls.Add(txtBillingAddress)
+        TabPage2.Controls.Add(txtCCV)
+        TabPage2.Controls.Add(txtEpirationMonth)
+        TabPage2.Controls.Add(txtCardNumber)
         TabPage2.Controls.Add(Label12)
         TabPage2.Controls.Add(Label11)
-        TabPage2.Controls.Add(btnPay)
+        TabPage2.Controls.Add(btnPayBillCard)
         TabPage2.Controls.Add(Label9)
         TabPage2.Controls.Add(Label8)
         TabPage2.Location = New Point(4, 29)
@@ -253,12 +254,13 @@ Partial Class BillingDetails
         TabPage2.TabIndex = 1
         TabPage2.Text = "Card"
         ' 
-        ' TextBox10
+        ' txtAmountDueCard
         ' 
-        TextBox10.Location = New Point(216, 37)
-        TextBox10.Name = "TextBox10"
-        TextBox10.Size = New Size(315, 27)
-        TextBox10.TabIndex = 65
+        txtAmountDueCard.Enabled = False
+        txtAmountDueCard.Location = New Point(216, 37)
+        txtAmountDueCard.Name = "txtAmountDueCard"
+        txtAmountDueCard.Size = New Size(315, 27)
+        txtAmountDueCard.TabIndex = 65
         ' 
         ' Label19
         ' 
@@ -289,14 +291,14 @@ Partial Class BillingDetails
         Label10.TabIndex = 62
         Label10.Text = "CCV/Postal:"
         ' 
-        ' TextBox7
+        ' txtPostal
         ' 
-        TextBox7.Location = New Point(393, 161)
-        TextBox7.Name = "TextBox7"
-        TextBox7.PlaceholderText = "postal code"
-        TextBox7.Size = New Size(138, 27)
-        TextBox7.TabIndex = 61
-        TextBox7.TextAlign = HorizontalAlignment.Center
+        txtPostal.Location = New Point(393, 161)
+        txtPostal.Name = "txtPostal"
+        txtPostal.PlaceholderText = "postal code"
+        txtPostal.Size = New Size(138, 27)
+        txtPostal.TabIndex = 61
+        txtPostal.TextAlign = HorizontalAlignment.Center
         ' 
         ' Label13
         ' 
@@ -307,53 +309,53 @@ Partial Class BillingDetails
         Label13.TabIndex = 60
         Label13.Text = "/"
         ' 
-        ' TextBox6
+        ' txtExpirationYear
         ' 
-        TextBox6.Location = New Point(415, 122)
-        TextBox6.Name = "TextBox6"
-        TextBox6.PlaceholderText = "yy"
-        TextBox6.Size = New Size(97, 27)
-        TextBox6.TabIndex = 59
-        TextBox6.TextAlign = HorizontalAlignment.Center
+        txtExpirationYear.Location = New Point(415, 122)
+        txtExpirationYear.Name = "txtExpirationYear"
+        txtExpirationYear.PlaceholderText = "yy"
+        txtExpirationYear.Size = New Size(97, 27)
+        txtExpirationYear.TabIndex = 59
+        txtExpirationYear.TextAlign = HorizontalAlignment.Center
         ' 
-        ' TextBox5
+        ' txtCardHolderName
         ' 
-        TextBox5.Location = New Point(216, 242)
-        TextBox5.Name = "TextBox5"
-        TextBox5.Size = New Size(315, 27)
-        TextBox5.TabIndex = 58
+        txtCardHolderName.Location = New Point(216, 242)
+        txtCardHolderName.Name = "txtCardHolderName"
+        txtCardHolderName.Size = New Size(315, 27)
+        txtCardHolderName.TabIndex = 58
         ' 
-        ' TextBox4
+        ' txtBillingAddress
         ' 
-        TextBox4.Location = New Point(216, 202)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(315, 27)
-        TextBox4.TabIndex = 57
+        txtBillingAddress.Location = New Point(216, 202)
+        txtBillingAddress.Name = "txtBillingAddress"
+        txtBillingAddress.Size = New Size(315, 27)
+        txtBillingAddress.TabIndex = 57
         ' 
-        ' TextBox3
+        ' txtCCV
         ' 
-        TextBox3.Location = New Point(216, 161)
-        TextBox3.Name = "TextBox3"
-        TextBox3.PlaceholderText = "ccv"
-        TextBox3.Size = New Size(138, 27)
-        TextBox3.TabIndex = 56
-        TextBox3.TextAlign = HorizontalAlignment.Center
+        txtCCV.Location = New Point(216, 161)
+        txtCCV.Name = "txtCCV"
+        txtCCV.PlaceholderText = "ccv"
+        txtCCV.Size = New Size(138, 27)
+        txtCCV.TabIndex = 56
+        txtCCV.TextAlign = HorizontalAlignment.Center
         ' 
-        ' TextBox2
+        ' txtEpirationMonth
         ' 
-        TextBox2.Location = New Point(238, 122)
-        TextBox2.Name = "TextBox2"
-        TextBox2.PlaceholderText = "mm"
-        TextBox2.Size = New Size(97, 27)
-        TextBox2.TabIndex = 55
-        TextBox2.TextAlign = HorizontalAlignment.Center
+        txtEpirationMonth.Location = New Point(238, 122)
+        txtEpirationMonth.Name = "txtEpirationMonth"
+        txtEpirationMonth.PlaceholderText = "mm"
+        txtEpirationMonth.Size = New Size(97, 27)
+        txtEpirationMonth.TabIndex = 55
+        txtEpirationMonth.TextAlign = HorizontalAlignment.Center
         ' 
-        ' TextBox1
+        ' txtCardNumber
         ' 
-        TextBox1.Location = New Point(216, 82)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(315, 27)
-        TextBox1.TabIndex = 54
+        txtCardNumber.Location = New Point(216, 82)
+        txtCardNumber.Name = "txtCardNumber"
+        txtCardNumber.Size = New Size(315, 27)
+        txtCardNumber.TabIndex = 54
         ' 
         ' Label12
         ' 
@@ -375,21 +377,21 @@ Partial Class BillingDetails
         Label11.TabIndex = 3
         Label11.Text = "Billing Address:"
         ' 
-        ' btnPay
+        ' btnPayBillCard
         ' 
-        btnPay.Font = New Font("Verdana", 12F)
-        btnPay.IconChar = FontAwesome.Sharp.IconChar.MoneyBill
-        btnPay.IconColor = Color.Black
-        btnPay.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnPay.IconSize = 40
-        btnPay.ImageAlign = ContentAlignment.BottomRight
-        btnPay.Location = New Point(216, 289)
-        btnPay.Name = "btnPay"
-        btnPay.Size = New Size(152, 50)
-        btnPay.TabIndex = 53
-        btnPay.Text = "Pay Bill"
-        btnPay.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnPay.UseVisualStyleBackColor = True
+        btnPayBillCard.Font = New Font("Verdana", 12F)
+        btnPayBillCard.IconChar = FontAwesome.Sharp.IconChar.MoneyBill
+        btnPayBillCard.IconColor = Color.Black
+        btnPayBillCard.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnPayBillCard.IconSize = 40
+        btnPayBillCard.ImageAlign = ContentAlignment.BottomRight
+        btnPayBillCard.Location = New Point(216, 289)
+        btnPayBillCard.Name = "btnPayBillCard"
+        btnPayBillCard.Size = New Size(152, 50)
+        btnPayBillCard.TabIndex = 53
+        btnPayBillCard.Text = "Pay Bill"
+        btnPayBillCard.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnPayBillCard.UseVisualStyleBackColor = True
         ' 
         ' Label9
         ' 
@@ -445,11 +447,11 @@ Partial Class BillingDetails
         Label5.AutoSize = True
         Label5.BackColor = Color.Transparent
         Label5.Font = New Font("Verdana", 10.2F)
-        Label5.Location = New Point(333, 140)
+        Label5.Location = New Point(130, 24)
         Label5.Name = "Label5"
-        Label5.Size = New Size(97, 20)
+        Label5.Size = New Size(57, 20)
         Label5.TabIndex = 49
-        Label5.Text = "Due Date:"
+        Label5.Text = "Date:"
         ' 
         ' Label4
         ' 
@@ -506,16 +508,16 @@ Partial Class BillingDetails
         lblAppointmentHeader.TabIndex = 44
         lblAppointmentHeader.Text = "Billing"
         ' 
-        ' lblDueDate
+        ' lblBillingDate
         ' 
-        lblDueDate.AutoSize = True
-        lblDueDate.BackColor = Color.Transparent
-        lblDueDate.Font = New Font("Verdana", 10.2F)
-        lblDueDate.Location = New Point(436, 140)
-        lblDueDate.Name = "lblDueDate"
-        lblDueDate.Size = New Size(85, 20)
-        lblDueDate.TabIndex = 43
-        lblDueDate.Text = "due date"
+        lblBillingDate.AutoSize = True
+        lblBillingDate.BackColor = Color.Transparent
+        lblBillingDate.Font = New Font("Verdana", 10.2F)
+        lblBillingDate.Location = New Point(193, 24)
+        lblBillingDate.Name = "lblBillingDate"
+        lblBillingDate.Size = New Size(85, 20)
+        lblBillingDate.TabIndex = 43
+        lblBillingDate.Text = "due date"
         ' 
         ' lblLastVisit
         ' 
@@ -565,7 +567,7 @@ Partial Class BillingDetails
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1250, 550)
+        ClientSize = New Size(1192, 505)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
@@ -595,7 +597,7 @@ Partial Class BillingDetails
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents lblAppointmentHeader As Label
-    Friend WithEvents lblDueDate As Label
+    Friend WithEvents lblBillingDate As Label
     Friend WithEvents lblLastVisit As Label
     Friend WithEvents lblGestationalAge As Label
     Friend WithEvents lblPatientID As Label
@@ -603,7 +605,7 @@ Partial Class BillingDetails
     Friend WithEvents pnlItems As Panel
     Friend WithEvents dgvItems As DataGridView
     Friend WithEvents Label6 As Label
-    Friend WithEvents btnPay As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnPayBillCard As FontAwesome.Sharp.IconButton
     Friend WithEvents Label7 As Label
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
@@ -613,22 +615,22 @@ Partial Class BillingDetails
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label13 As Label
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox5 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtExpirationYear As TextBox
+    Friend WithEvents txtCardHolderName As TextBox
+    Friend WithEvents txtBillingAddress As TextBox
+    Friend WithEvents txtCCV As TextBox
+    Friend WithEvents txtEpirationMonth As TextBox
+    Friend WithEvents txtCardNumber As TextBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents txtPostal As TextBox
+    Friend WithEvents txtAmountReceived As TextBox
+    Friend WithEvents txtAmountDueCash As TextBox
     Friend WithEvents Label16 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents Label17 As Label
-    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
-    Friend WithEvents Label18 As Label
-    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents btnPayBillCash As FontAwesome.Sharp.IconButton
+    Friend WithEvents lblChange As Label
+    Friend WithEvents txtAmountDueCard As TextBox
     Friend WithEvents Label19 As Label
 End Class

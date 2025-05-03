@@ -1284,7 +1284,7 @@ Public Class AdminDashboard
     End Sub
 
     Private Sub CloseDropdownAppointmentsHandler(sender As Object, e As EventArgs) Handles dgvAppointments.Click, Panel1.Click, pnlAppointments.Click, btnDashboard.Click, btnPatients.Click, btnDoctors.Click, btnAppointments.Click, btnBilling.Click, Appointments.Click
-        CloseDropdownAppointments
+        CloseDropdownAppointments()
     End Sub
 
     ''''''''''''''''''''''''''''''''
@@ -1484,7 +1484,6 @@ Public Class AdminDashboard
             End If
         End If
     End Sub
-
 End Class
 
 Public Class NumberComparerDoctors

@@ -49,6 +49,10 @@ Partial Class AccountingDashboard
         txtSearchPatient = New TextBox()
         pnlPatientsDataGrid = New Panel()
         dgvPatients = New DataGridView()
+        pnlBilling = New Panel()
+        Panel4 = New Panel()
+        dgvBilling = New DataGridView()
+        Label7 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -58,6 +62,9 @@ Partial Class AccountingDashboard
         pnlPatients.SuspendLayout()
         pnlPatientsDataGrid.SuspendLayout()
         CType(dgvPatients, ComponentModel.ISupportInitialize).BeginInit()
+        pnlBilling.SuspendLayout()
+        Panel4.SuspendLayout()
+        CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -408,11 +415,53 @@ Partial Class AccountingDashboard
         dgvPatients.Size = New Size(852, 514)
         dgvPatients.TabIndex = 4
         ' 
+        ' pnlBilling
+        ' 
+        pnlBilling.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlBilling.Controls.Add(Panel4)
+        pnlBilling.Controls.Add(Label7)
+        pnlBilling.Dock = DockStyle.Fill
+        pnlBilling.Location = New Point(300, 40)
+        pnlBilling.Name = "pnlBilling"
+        pnlBilling.Size = New Size(900, 660)
+        pnlBilling.TabIndex = 13
+        ' 
+        ' Panel4
+        ' 
+        Panel4.Controls.Add(dgvBilling)
+        Panel4.Location = New Point(24, 93)
+        Panel4.Name = "Panel4"
+        Panel4.Size = New Size(852, 555)
+        Panel4.TabIndex = 5
+        ' 
+        ' dgvBilling
+        ' 
+        dgvBilling.AllowUserToResizeColumns = False
+        dgvBilling.ColumnHeadersHeight = 29
+        dgvBilling.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        dgvBilling.Dock = DockStyle.Fill
+        dgvBilling.Location = New Point(0, 0)
+        dgvBilling.Name = "dgvBilling"
+        dgvBilling.RowHeadersWidth = 51
+        dgvBilling.Size = New Size(852, 555)
+        dgvBilling.TabIndex = 4
+        ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Location = New Point(24, 32)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(133, 34)
+        Label7.TabIndex = 1
+        Label7.Text = "Billings"
+        ' 
         ' AccountingDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlBilling)
         Controls.Add(pnlDashboard)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)
@@ -437,6 +486,10 @@ Partial Class AccountingDashboard
         pnlPatients.PerformLayout()
         pnlPatientsDataGrid.ResumeLayout(False)
         CType(dgvPatients, ComponentModel.ISupportInitialize).EndInit()
+        pnlBilling.ResumeLayout(False)
+        pnlBilling.PerformLayout()
+        Panel4.ResumeLayout(False)
+        CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -466,4 +519,8 @@ Partial Class AccountingDashboard
     Friend WithEvents txtSearchPatient As TextBox
     Friend WithEvents pnlPatientsDataGrid As Panel
     Friend WithEvents dgvPatients As DataGridView
+    Friend WithEvents pnlBilling As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents dgvBilling As DataGridView
+    Friend WithEvents Label7 As Label
 End Class
