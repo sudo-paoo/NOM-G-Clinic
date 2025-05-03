@@ -388,5 +388,4 @@ Public Class ConsultationDetails
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(notesObject)
     End Function
-
 End Class

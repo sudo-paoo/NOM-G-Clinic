@@ -26,7 +26,7 @@ Public Class DoctorDashboard
         AppointmentsSetupDataGrid()
         AppointmentsPopulateDataGrid()
 
-        ' Load doctor information for settings panel
+        ' Load doctor for settings 
         LoadDoctorInfo()
 
         ShowPanel(pnlDashboard, btnDashboard)
@@ -105,7 +105,6 @@ Public Class DoctorDashboard
     Private Sub LoadTodaysAppointments()
         flowTodaysAppointments.Controls.Clear()
 
-        ' SQL query to get today's appointments for this doctor
         Dim query As String = "SELECT a.appointment_id, a.patient_id, a.appointment_date, a.reason_for_visit, " &
         "CONCAT(p.first_name, ' ', p.last_name) AS patient_name, " &
         "CONCAT(d.first_name, ' ', d.last_name) AS doctor_name " &
@@ -1024,8 +1023,6 @@ Public Class DoctorDashboard
             End Using
         End Using
     End Sub
-
-
 
     Private Function GetCurrentUsername() As String
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
