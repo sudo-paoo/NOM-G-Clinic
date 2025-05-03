@@ -59,7 +59,7 @@ Public Class AccountingDashboard
     ' patients data grid view setup  '
     '                                '
     ''''''''''''''''''''''''''''''''''
-    ' setup dgvPatients
+    ' Setup dgvPatients
     Public Sub PatientsSetupDataGrid()
         dgvPatients.AllowUserToAddRows = False
         dgvPatients.AllowUserToDeleteRows = False
@@ -139,7 +139,7 @@ Public Class AccountingDashboard
         AddHandler dgvPatients.CellFormatting, AddressOf dgvPatients_CellFormatting
     End Sub
 
-    ' populate the dgvPatients
+    ' Populate the dgvPatients
     Public Sub PatientsPopulateDataGrid()
         If dgvPatients.Columns.Count = 0 Then
             PatientsSetupDataGrid()
@@ -295,7 +295,7 @@ Public Class AccountingDashboard
     '                              '
     ''''''''''''''''''''''''''''''''
 
-    ' setup dgvBilling
+    ' Setup dgvBilling
     Private Sub BillingSetupDataGrid()
         ' Configure the DataGridView
         dgvBilling.AllowUserToAddRows = False
@@ -381,7 +381,7 @@ Public Class AccountingDashboard
         AddHandler dgvBilling.DataBindingComplete, AddressOf dgvBilling_DataBindingComplete
     End Sub
 
-    ' populate the dgvBilling
+    ' Populate the dgvBilling
     Private Sub BillingPopulateDataGrid()
         dgvBilling.Rows.Clear()
 

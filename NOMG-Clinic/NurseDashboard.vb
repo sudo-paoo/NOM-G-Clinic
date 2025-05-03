@@ -22,9 +22,10 @@ Public Class NurseDashboard
         AppointmentsSetupDataGrid()
         AppointmentsPopulateDataGrid()
 
+        ' Load nurse profile for settings
         LoadNurseProfile()
 
-        ' dashboard details
+        ' Dashboard details
         Dim totalPatients As Integer = 0
         Dim totalAppointmentsToday As Integer = 0
         Dim totalDoctors As Integer = 0
@@ -132,7 +133,7 @@ Public Class NurseDashboard
         ctrl.Width = flowRecentAppointments.ClientSize.Width - paddingWidth
     End Sub
 
-    ' populate scheduled today
+    ' Populate scheduled today
     Private Sub PopulateScheduledToday(connectionString As String)
         flowScheduledToday.Controls.Clear()
 
@@ -285,7 +286,7 @@ Public Class NurseDashboard
     ' patients data grid view setup  '
     '                                '
     ''''''''''''''''''''''''''''''''''
-    ' setup dgvPatients
+    ' Setup dgvPatients
     Public Sub PatientsSetupDataGrid()
         dgvPatients.AllowUserToAddRows = False
         dgvPatients.AllowUserToDeleteRows = False
@@ -402,7 +403,7 @@ Public Class NurseDashboard
         End If
     End Sub
 
-    ' populate the dgvPatients
+    ' Populate the dgvPatients
     Public Sub PatientsPopulateDataGrid()
         If dgvPatients.Columns.Count = 0 Then
             PatientsSetupDataGrid()
@@ -455,7 +456,7 @@ Public Class NurseDashboard
         End If
     End Sub
 
-    ' add dropdown menu
+    ' Add dropdown menu
     Private Sub ShowDropdownPatientsMenu(rowIndex As Integer)
         Dim buttonCell = dgvPatients.Rows(rowIndex).Cells(6)
 
@@ -572,7 +573,7 @@ Public Class NurseDashboard
         CloseDropdownPatients()
     End Sub
 
-    ' method to get patient details for appointment scheduling
+    ' Method to get patient details for appointment scheduling
     Private Function GetPatientDetailsForAppointment(patientId As String, ByRef firstName As String, ByRef lastName As String,
         ByRef lastMenstrualDate As Date, ByRef dueDate As Date, ByRef doctorId As String) As Boolean
         Dim success As Boolean = False
@@ -611,7 +612,7 @@ Public Class NurseDashboard
         Return success
     End Function
 
-    ' method to get patient ID by patient name
+    ' Method to get patient ID by patient name
     Private Function GetPatientIdByName(patientName As String) As String
         Dim patientId As String = String.Empty
 
@@ -692,7 +693,7 @@ Public Class NurseDashboard
     '                                   '
     '''''''''''''''''''''''''''''''''''''
 
-    ' setup dgvAppointments
+    ' Setup dgvAppointments
     Private Sub AppointmentsSetupDataGrid()
         dgvAppointments.AllowUserToAddRows = False
         dgvAppointments.AllowUserToDeleteRows = False
@@ -796,7 +797,7 @@ Public Class NurseDashboard
         End If
     End Sub
 
-    ' populate the dgvAppointments
+    ' Populate the dgvAppointments
     Private Sub AppointmentsPopulateDataGrid()
         dgvAppointments.Rows.Clear()
 
@@ -854,7 +855,7 @@ Public Class NurseDashboard
         End If
     End Sub
 
-    ' generate dropdown for appointments
+    ' Generate dropdown for appointments
     Private Sub ShowDropdownAppointments(rowIndex As Integer)
         CloseDropdownAppointments()
 
@@ -981,18 +982,15 @@ Public Class NurseDashboard
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        ' Clear any previous errors
-        ErrorProvider.Clear()
+        errorProvider.Clear()
 
-        ' Validate password match
         If txtPassword.Text <> txtConfirmPassword.Text Then
-            ErrorProvider.SetError(txtConfirmPassword, "Passwords do not match")
+            errorProvider.SetError(txtConfirmPassword, "Passwords do not match")
             Return
         End If
 
-        ' Validate password length if provided
         If txtPassword.Text.Length > 0 AndAlso txtPassword.Text.Length < 6 Then
-            ErrorProvider.SetError(txtPassword, "Password must be at least 6 characters long")
+            errorProvider.SetError(txtPassword, "Password must be at least 6 characters long")
             Return
         End If
 

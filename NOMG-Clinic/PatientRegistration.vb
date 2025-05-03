@@ -1,10 +1,8 @@
 ﻿Imports MySql.Data.MySqlClient
 Imports System.Data
 Public Class PatientRegistration
-    ' Add ErrorProvider to display validation errors
     Private errProvider As New ErrorProvider()
 
-    ' Database connection variables
     Private conn As MySqlConnection
     Private cmd As MySqlCommand
     Private reader As MySqlDataReader
@@ -14,10 +12,8 @@ Public Class PatientRegistration
     Private Sub PatientRegistration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tabPatientRegistration.ItemSize = New Size(tabPatientRegistration.Width \ tabPatientRegistration.TabCount - 2, 30)
 
-        ' Configure ErrorProvider
         errProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink
 
-        ' Disable TabPages 2 and 3 initially
         tabPatientRegistration.TabPages(1).Enabled = False
         tabPatientRegistration.TabPages(2).Enabled = False
 
@@ -35,59 +31,44 @@ Public Class PatientRegistration
 
         ' Set up event handlers for validation - TabPage2
         AddHandler txtEmergencyContactName.Validating, AddressOf ValidateRequiredField
-        AddHandler txtEmergencyContactRelationship.Validating, AddressOf ValidateRequiredField ' Relationship field
-        AddHandler txtEmergencyContactNumber.Validating, AddressOf ValidateContactNumber ' Contact number field
+        AddHandler txtEmergencyContactRelationship.Validating, AddressOf ValidateRequiredField
+        AddHandler txtEmergencyContactNumber.Validating, AddressOf ValidateContactNumber
 
-        ' Set up key press events for numeric-only input
         AddHandler txtContactNumber.KeyPress, AddressOf NumericTextBox_KeyPress
         AddHandler txtEmergencyContactNumber.KeyPress, AddressOf NumericTextBox_KeyPress
 
-        ' Set up event handler for calendar date selection
         AddHandler clrLastMenstrual.DateSelected, AddressOf clrLastMenstrual_DateSelected
 
-        ' Load doctors into combobox
         LoadDoctors()
     End Sub
 
     ' Load doctors from database into the combobox
     Private Sub LoadDoctors()
         Try
-            ' Create connection
             conn = New MySql.Data.MySqlClient.MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
             conn.Open()
 
-            ' Create command
             Dim query As String = "SELECT doctor_id, CONCAT(first_name, ' ', last_name) AS full_name FROM doctor ORDER BY last_name"
             cmd = New MySql.Data.MySqlClient.MySqlCommand(query, conn)
 
-            ' Execute query and load results into combobox
             reader = cmd.ExecuteReader()
 
-            ' Clear existing items
             cbxAssignedOB.Items.Clear()
 
-            ' Add a "Select a doctor" initial item
             cbxAssignedOB.Items.Add("-- Select a doctor --")
 
-            ' Create a dictionary to store doctor IDs and names
             Dim doctorDictionary As New Dictionary(Of String, String)
 
-            ' Add the doctors to the combobox
             While reader.Read()
                 Dim doctorId As String = reader("doctor_id").ToString()
                 Dim doctorName As String = reader("full_name").ToString()
 
-                ' Add to dictionary
                 doctorDictionary.Add(doctorName, doctorId)
-
-                ' Add to combobox
                 cbxAssignedOB.Items.Add(doctorName)
             End While
 
-            ' Store the dictionary in the combobox's Tag property for later use
             cbxAssignedOB.Tag = doctorDictionary
 
-            ' Select the first item
             If cbxAssignedOB.Items.Count > 0 Then
                 cbxAssignedOB.SelectedIndex = 0
             End If
@@ -95,7 +76,6 @@ Public Class PatientRegistration
         Catch ex As Exception
             MessageBox.Show("Error loading doctors: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            ' Close the reader and connection
             If reader IsNot Nothing AndAlso Not reader.IsClosed Then
                 reader.Close()
             End If
@@ -108,9 +88,7 @@ Public Class PatientRegistration
 
     ' Event handler for calendar date selected
     Private Sub clrLastMenstrual_DateSelected(sender As Object, e As DateRangeEventArgs)
-        ' Get the selected date
         Dim selectedDate As Date = clrLastMenstrual.SelectionStart
-        ' Set the label text
         lblSelectedDate.Text = "Date: " & selectedDate.ToString("MMMM dd, yyyy")
     End Sub
 
@@ -126,7 +104,6 @@ Public Class PatientRegistration
 
     Private Sub tabPatientRegistration_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabPatientRegistration.SelectedIndexChanged
         If Not tabPatientRegistration.SelectedTab.Enabled AndAlso tabPatientRegistration.SelectedIndex > tabPatientRegistration.TabPages.IndexOf(tabPatientRegistration.TabPages.Cast(Of TabPage)().LastOrDefault(Function(tab) tab.Enabled)) Then
-            ' Switch back to the previous valid tab
             For i As Integer = 0 To tabPatientRegistration.TabPages.Count - 1
                 If tabPatientRegistration.TabPages(i).Enabled Then
                     tabPatientRegistration.SelectedIndex = i
@@ -138,11 +115,8 @@ Public Class PatientRegistration
 
     ' Validation for the Next button on Personal Information tab
     Private Sub btnPersonalInformationNext_Click(sender As Object, e As EventArgs) Handles btnPersonalInformationNext.Click
-        ' Validate all fields before proceeding to next tab
         If ValidatePersonalInformation() Then
-            ' Enable TabPage 2 if validation passes
             tabPatientRegistration.TabPages(1).Enabled = True
-            ' Switch to TabPage 2
             tabPatientRegistration.SelectedIndex = 1
         Else
             MessageBox.Show("Please fill all required fields with valid information.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -151,11 +125,8 @@ Public Class PatientRegistration
 
     ' Validation for Emergency Contact Next button
     Private Sub btnEmergencyContactNext_Click(sender As Object, e As EventArgs) Handles btnEmergencyContactNext.Click
-        ' Validate emergency contact fields before proceeding to next tab
         If ValidateEmergencyContact() Then
-            ' Enable TabPage 3 if validation passes
             tabPatientRegistration.TabPages(2).Enabled = True
-            ' Switch to TabPage 3
             tabPatientRegistration.SelectedIndex = 2
         Else
             MessageBox.Show("Please fill all emergency contact fields with valid information.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -197,18 +168,17 @@ Public Class PatientRegistration
 
         ' Validate each control
         If Not ValidateControl(txtEmergencyContactName) Then isValid = False
-        If Not ValidateControl(txtEmergencyContactRelationship) Then isValid = False ' Relationship field
-        If Not ValidateControl(txtEmergencyContactNumber) Then isValid = False ' Contact number field
+        If Not ValidateControl(txtEmergencyContactRelationship) Then isValid = False
+        If Not ValidateControl(txtEmergencyContactNumber) Then isValid = False
 
         Return isValid
     End Function
 
-    ' Trigger validation for a specific control
+    ' Validation for a specific control
     Private Function ValidateControl(ctrl As Control) As Boolean
         Dim args As New System.ComponentModel.CancelEventArgs()
         ctrl.Focus()
 
-        ' Trigger the validation event
         Dim methodInfo = ctrl.GetType().GetMethod("OnValidating", System.Reflection.BindingFlags.NonPublic Or System.Reflection.BindingFlags.Instance)
         If methodInfo IsNot Nothing Then
             methodInfo.Invoke(ctrl, New Object() {args})
@@ -243,7 +213,6 @@ Public Class PatientRegistration
     Private Sub ValidateNumericUpDown(sender As Object, e As System.ComponentModel.CancelEventArgs)
         Dim numericUpDown = DirectCast(sender, NumericUpDown)
 
-        ' Set appropriate range validations based on control name
         If numericUpDown Is numAge Then
             If numericUpDown.Value <= 0 Or numericUpDown.Value > 120 Then
                 errProvider.SetError(numericUpDown, "Age must be between 1 and 120.")
@@ -270,10 +239,9 @@ Public Class PatientRegistration
 
     ' Limit input to numeric characters only
     Private Sub NumericTextBox_KeyPress(sender As Object, e As KeyPressEventArgs)
-        ' Allow only digits, control characters (like backspace), and formatting characters
         If Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ControlChars.Back Or e.KeyChar = "+" Or
                 e.KeyChar = "-" Or e.KeyChar = "(" Or e.KeyChar = ")" Or e.KeyChar = " ") Then
-            e.Handled = True ' Cancel the keypress
+            e.Handled = True
         End If
     End Sub
 
@@ -320,7 +288,7 @@ Public Class PatientRegistration
     End Function
 
 
-    ' Validation handler for TextBox when text changes - clears error if any
+    ' Validation handler for TextBox when text changes
     Private Sub TextBox_TextChanged(sender As Object, e As EventArgs) Handles txtFirstName.TextChanged, txtLastName.TextChanged,
         txtAddress.TextChanged, txtContactNumber.TextChanged, txtEmailAddress.TextChanged,
         txtEmergencyContactName.TextChanged, txtEmergencyContactRelationship.TextChanged, txtEmergencyContactNumber.TextChanged
@@ -329,7 +297,7 @@ Public Class PatientRegistration
         errProvider.SetError(textBox, "")
     End Sub
 
-    ' Validation handler for NumericUpDown when value changes - clears error if any
+    ' Validation handler for NumericUpDown when value changes
     Private Sub NumericUpDown_ValueChanged(sender As Object, e As EventArgs) Handles numAge.ValueChanged,
         numWeight.ValueChanged, numHeight.ValueChanged
 
@@ -337,31 +305,26 @@ Public Class PatientRegistration
         errProvider.SetError(numericUpDown, "")
     End Sub
 
-    ' Validation handler for ComboBox when selection changes - clears error if any
+    ' Validation handler for ComboBox when selection changes
     Private Sub ComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbxCivilStatus.SelectedIndexChanged, cbxBloodType.SelectedIndexChanged, cbxAssignedOB.SelectedIndexChanged
         Dim comboBox = DirectCast(sender, ComboBox)
         errProvider.SetError(comboBox, "")
     End Sub
 
-    ' Register Patient - Save to Database
+    ' Register Patient
     Private Sub btnRegisterPatient_Click(sender As Object, e As EventArgs) Handles btnRegisterPatient.Click
-        ' Show confirmation message box
         Dim result As DialogResult = MessageBox.Show("Are you sure you want to register this patient?",
     "Confirm Registration",
     MessageBoxButtons.YesNo,
     MessageBoxIcon.Question)
 
-        ' If user confirms, save the patient
         If result = DialogResult.Yes Then
             Try
-                ' Create connection
                 conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
                 conn.Open()
 
-                ' Generate a new patient ID
                 Dim patientId As String = GeneratePatientId()
 
-                ' Determine if this is the first baby
                 Dim isFirstBaby As Boolean = False
                 If rtbnYes.Checked Then
                     isFirstBaby = True
@@ -369,19 +332,16 @@ Public Class PatientRegistration
                     isFirstBaby = False
                 End If
 
-                ' Get the selected doctor's ID
                 Dim assignedOb As String = ""
                 If cbxAssignedOB.SelectedIndex > 0 Then
                     Dim selectedDoctorName As String = cbxAssignedOB.SelectedItem.ToString()
                     Dim doctorDictionary As Dictionary(Of String, String) = DirectCast(cbxAssignedOB.Tag, Dictionary(Of String, String))
 
-                    ' Get the doctor ID from the dictionary
                     If doctorDictionary.ContainsKey(selectedDoctorName) Then
                         assignedOb = doctorDictionary(selectedDoctorName)
                     End If
                 End If
 
-                ' Prepare default values for optional fields
                 Dim allergies As String = If(String.IsNullOrWhiteSpace(txtAllergies.Text), "None", txtAllergies.Text)
                 Dim currentMedication As String = If(String.IsNullOrWhiteSpace(txtCurrentMedication.Text), "None", txtCurrentMedication.Text)
                 Dim historyOfSurgery As String = If(String.IsNullOrWhiteSpace(txtHistoryOfSurgery.Text), "None", txtHistoryOfSurgery.Text)
@@ -389,10 +349,9 @@ Public Class PatientRegistration
                 ' Get the last menstrual period
                 Dim lastMenstrualPeriod As String = clrLastMenstrual.SelectionStart.ToString("yyyy-MM-dd")
 
-                ' Calculate the estimated due date (approximately 40 weeks from LMP)
+                ' Calculate the estimated due date
                 Dim dueDate As Date = clrLastMenstrual.SelectionStart.AddDays(280)
 
-                ' Create the insert command with parameters
                 Dim query As String = "INSERT INTO patient (patient_id, first_name, middle_name, last_name, age, civil_status, " &
                            "weight, height, blood_type, address, contact_number, email, emergency_contact_name, " &
                            "emergency_contact_relationship, emergency_contact_number, last_menstrual_period, first_baby, " &
@@ -404,7 +363,6 @@ Public Class PatientRegistration
 
                 cmd = New MySqlCommand(query, conn)
 
-                ' Add parameters with values from form controls
                 cmd.Parameters.AddWithValue("@patientId", patientId)
                 cmd.Parameters.AddWithValue("@firstName", txtFirstName.Text.Trim())
                 cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(txtMiddleName.Text), "", txtMiddleName.Text.Trim()))
@@ -429,7 +387,6 @@ Public Class PatientRegistration
                 cmd.Parameters.AddWithValue("@currentMedication", currentMedication)
                 cmd.Parameters.AddWithValue("@historyOfSurgery", historyOfSurgery)
 
-                ' Execute the command
                 cmd.ExecuteNonQuery()
 
                 Dim scheduleNow As DialogResult = MessageBox.Show("Patient successfully registered with ID: " & patientId &
@@ -463,7 +420,6 @@ Public Class PatientRegistration
             Catch ex As Exception
                 MessageBox.Show("Error registering patient: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Finally
-                ' Close the connection
                 If conn IsNot Nothing AndAlso conn.State = ConnectionState.Open Then
                     conn.Close()
                 End If
@@ -521,5 +477,4 @@ Public Class PatientRegistration
         appointmentForm.AppointmentType = "Initial Check-up"
         appointmentForm.ShowDialog()
     End Sub
-
 End Class

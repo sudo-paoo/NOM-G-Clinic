@@ -7,13 +7,11 @@ Public Class DoctorRegistration
     Private isConfirmPasswordVisible As Boolean = False
 
     Private Sub DoctorRegistration_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set the tab control size
         tabDoctorRegistration.ItemSize = New Size(tabDoctorRegistration.Width \ tabDoctorRegistration.TabCount - 2, 30)
 
-        ' Configure ErrorProvider
         errProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink
 
-        ' Position the error icons away from the eye buttons
+        ' Position the error icons
         errProvider.SetIconAlignment(txtEmergencyContactRelationship, ErrorIconAlignment.TopLeft)
         errProvider.SetIconAlignment(txtEmergencyContactNumber, ErrorIconAlignment.TopLeft)
         errProvider.SetIconPadding(txtEmergencyContactRelationship, 10)
@@ -32,7 +30,6 @@ Public Class DoctorRegistration
         AddHandler txtEmergencyContactRelationship.Validating, AddressOf ValidateRequiredField
         AddHandler txtEmergencyContactNumber.Validating, AddressOf ValidateConfirmPassword
 
-        ' Make sure eye buttons are separate from text boxes in the tab order
         btnEyePassword.TabStop = False
         btnEyeConfirmPassword.TabStop = False
     End Sub
@@ -51,9 +48,7 @@ Public Class DoctorRegistration
     Private Sub btnAccountInformationNext_Click(sender As Object, e As EventArgs) Handles btnAccountInformationNext.Click
         ' Validate all account information fields before proceeding
         If ValidateAccountInformation() Then
-            ' Enable TabPage 2 if validation passes
             tabDoctorRegistration.TabPages(1).Enabled = True
-            ' Switch to TabPage 2
             tabDoctorRegistration.SelectedIndex = 1
         Else
             MessageBox.Show("Please fill all required fields correctly. Make sure passwords match.",
@@ -65,9 +60,7 @@ Public Class DoctorRegistration
     Private Sub btnPersonalInformationNext_Click(sender As Object, e As EventArgs) Handles btnPersonalInformationNext.Click
         ' Validate all personal information fields before proceeding
         If ValidatePersonalInformation() Then
-            ' Enable TabPage 3 if validation passes
             tabDoctorRegistration.TabPages(2).Enabled = True
-            ' Switch to TabPage 3
             tabDoctorRegistration.SelectedIndex = 2
         Else
             MessageBox.Show("Please fill all required fields with valid information.",
@@ -77,24 +70,20 @@ Public Class DoctorRegistration
 
     ' Previous buttons
     Private Sub btnPersonalInformationPrevious_Click(sender As Object, e As EventArgs) Handles btnPersonalInformationPrevious.Click
-        ' Go back to TabPage 1
         Me.ActiveControl = btnPersonalInformationPrevious
         tabDoctorRegistration.SelectedIndex = 0
     End Sub
 
     Private Sub btnEmergencyContactPrevious_Click(sender As Object, e As EventArgs) Handles btnEmergencyContactPrevious.Click
-        ' Go back to TabPage 2
         Me.ActiveControl = btnEmergencyContactPrevious
         tabDoctorRegistration.SelectedIndex = 1
     End Sub
 
-    ' Password visibility toggle buttons - use MouseDown instead of Click
+    ' Password visibility toggle buttons
     Private Sub btnEyePassword_MouseDown(sender As Object, e As MouseEventArgs) Handles btnEyePassword.MouseDown
-        ' Toggle password visibility
         isPasswordVisible = Not isPasswordVisible
         txtEmergencyContactRelationship.UseSystemPasswordChar = Not isPasswordVisible
 
-        ' Change icon based on visibility state
         If isPasswordVisible Then
             btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
         Else
@@ -103,11 +92,9 @@ Public Class DoctorRegistration
     End Sub
 
     Private Sub btnEyeConfirmPassword_MouseDown(sender As Object, e As MouseEventArgs) Handles btnEyeConfirmPassword.MouseDown
-        ' Toggle confirm password visibility
         isConfirmPasswordVisible = Not isConfirmPasswordVisible
         txtEmergencyContactNumber.UseSystemPasswordChar = Not isConfirmPasswordVisible
 
-        ' Change icon based on visibility state
         If isConfirmPasswordVisible Then
             btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
         Else
@@ -136,7 +123,6 @@ Public Class DoctorRegistration
                     End If
                 End Using
             Catch ex As Exception
-                ' If database check fails, we'll assume username is valid and continue
                 Console.WriteLine("Database error when checking username: " & ex.Message)
                 errProvider.SetError(txtEmergencyContactName, "")
             End Try
@@ -318,7 +304,6 @@ Public Class DoctorRegistration
     End Function
 
     Private Sub btnRegisterDoctor_Click(sender As Object, e As EventArgs) Handles btnRegisterDoctor.Click
-        ' Show confirmation message box
         Dim result As DialogResult = MessageBox.Show(
         "Are you sure you want to register this doctor?",
         "Confirm Registration",
@@ -328,22 +313,19 @@ Public Class DoctorRegistration
         ' If user confirms, save the doctor
         If result = DialogResult.Yes Then
             Try
-                ' Validate contact tab fields first
                 If Not ValidateContactInformation() Then
                     MessageBox.Show("Please fill all contact information fields with valid data.",
                               "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     Return
                 End If
 
-                ' Create connection
                 Using conn As New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
                     conn.Open()
 
-                    ' Check username again (in case it was added by someone else between validation and save)
                     If IsUsernameExists(conn, txtEmergencyContactName.Text.Trim()) Then
                         MessageBox.Show("Username already exists. Please choose another username.",
                                   "Username Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        tabDoctorRegistration.SelectedIndex = 0 ' Go back to account info tab
+                        tabDoctorRegistration.SelectedIndex = 0
                         txtEmergencyContactName.Focus()
                         Return
                     End If
@@ -351,17 +333,15 @@ Public Class DoctorRegistration
                     ' Generate a new doctor ID
                     Dim doctorId As String = GenerateDoctorId(conn)
 
-                    ' Create the insert command with parameters
                     Dim query As String = "INSERT INTO doctor (doctor_id, username, password, first_name, middle_name, last_name, age, " &
                                    "license_number, email, contact_number, gender, address) " &
                                    "VALUES (@doctorId, @username, @password, @firstName, @middleName, @lastName, @age, " &
                                    "@licenseNumber, @email, @contactNumber, @gender, @address)"
 
                     Using cmd As New MySqlCommand(query, conn)
-                        ' Add parameters with values from form controls
                         cmd.Parameters.AddWithValue("@doctorId", doctorId)
-                        cmd.Parameters.AddWithValue("@username", txtEmergencyContactName.Text.Trim()) ' Username
-                        cmd.Parameters.AddWithValue("@password", txtEmergencyContactRelationship.Text.Trim()) ' Password
+                        cmd.Parameters.AddWithValue("@username", txtEmergencyContactName.Text.Trim())
+                        cmd.Parameters.AddWithValue("@password", txtEmergencyContactRelationship.Text.Trim())
                         cmd.Parameters.AddWithValue("@firstName", txtFirstName.Text.Trim())
                         cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(txtMiddleName.Text), "", txtMiddleName.Text.Trim()))
                         cmd.Parameters.AddWithValue("@lastName", txtLastName.Text.Trim())
@@ -372,7 +352,6 @@ Public Class DoctorRegistration
                         cmd.Parameters.AddWithValue("@gender", txtGender.Text.Trim())
                         cmd.Parameters.AddWithValue("@address", txtAddress.Text.Trim())
 
-                        ' Execute the command
                         cmd.ExecuteNonQuery()
 
                         ' Also add this doctor to the users table for login
@@ -383,15 +362,12 @@ Public Class DoctorRegistration
                                   "Registration Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         Dim adminForm As AdminDashboard = TryCast(Application.OpenForms("AdminDashboard"), AdminDashboard)
                         If adminForm IsNot Nothing Then
-                            ' Call instance methods on the form
                             adminForm.DoctorsSetupDataGrid()
                             adminForm.DoctorsPopulateDataGrid()
                         Else
-                            ' If form not found, inform the user or handle appropriately
                             MessageBox.Show("Admin dashboard not found. Please refresh the dashboard manually.",
                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End If
-                        ' Close the form
                         Me.Close()
                     End Using
                 End Using
@@ -414,7 +390,7 @@ Public Class DoctorRegistration
             End Using
         Catch ex As Exception
             Console.WriteLine("Error checking username: " & ex.Message)
-            Return False ' Assume username doesn't exist in case of error
+            Return False
         End Try
     End Function
 
@@ -433,27 +409,22 @@ Public Class DoctorRegistration
     End Sub
 
     Private Function GenerateDoctorId(conn As MySqlConnection) As String
-        Dim newId As String = "D001" ' Default if no doctors exist
+        Dim newId As String = "D001"
 
         Try
-            ' Query to get the highest doctor ID
             Dim query As String = "SELECT doctor_id FROM doctor ORDER BY CAST(SUBSTRING(doctor_id, 2) AS UNSIGNED) DESC LIMIT 1"
 
             Using cmd As New MySqlCommand(query, conn)
                 Dim result As Object = cmd.ExecuteScalar()
 
                 If result IsNot Nothing Then
-                    ' Extract the numeric part of the ID
                     Dim lastId As String = result.ToString()
 
-                    ' Handle IDs with different formats
                     If lastId.Length >= 2 AndAlso lastId.StartsWith("D") Then
                         Dim numericPart As Integer
                         If Integer.TryParse(lastId.Substring(1), numericPart) Then
-                            ' Increment the numeric part
                             numericPart += 1
 
-                            ' Format with leading zeros based on the number of digits
                             If numericPart < 10 Then
                                 newId = "D00" & numericPart
                             ElseIf numericPart < 100 Then

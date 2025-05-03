@@ -10,7 +10,7 @@ Public Class AdminDashboard
     Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tabDashboard.ItemSize = New Size(tabDashboard.Width \ tabDashboard.TabCount - 2, 30)
 
-        ' call all setup and populate methods
+        ' Call all setup and populate methods
         PatientsSetupDataGrid()
         PatientsPopulateDataGrid()
 
@@ -29,7 +29,7 @@ Public Class AdminDashboard
 
         PopulateRecentAppointments(connectionString)
 
-        ' dashboard details
+        ' Dashboard details
         Dim totalPatients As Integer = 0
         Dim totalAppointmentsToday As Integer = 0
         Dim totalDoctors As Integer = 0
@@ -153,7 +153,7 @@ Public Class AdminDashboard
     '                                  '
     ''''''''''''''''''''''''''''''''''''
 
-    ' populate the recent appointments flow panel
+    ' Populate the recent appointments flow panel
     Private Sub PopulateRecentAppointments(connectionString As String)
         flowRecentAppointments.Controls.Clear()
 
@@ -233,7 +233,7 @@ Public Class AdminDashboard
         Next
     End Sub
 
-    ' populate the recent appointments flow panel
+    ' Populate the recent appointments flow panel
     Private Sub PopulateRecentPayments(connectionString As String)
         flowRecentPayments.Controls.Clear()
 
@@ -282,7 +282,7 @@ Public Class AdminDashboard
     ' patients data grid view setup  '
     '                                '
     ''''''''''''''''''''''''''''''''''
-    ' setup dgvPatients
+    ' Setup dgvPatients
     Public Sub PatientsSetupDataGrid()
         dgvPatients.AllowUserToAddRows = False
         dgvPatients.AllowUserToDeleteRows = False
@@ -399,7 +399,7 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    ' populate the dgvPatients
+    ' Populate the dgvPatients
     Public Sub PatientsPopulateDataGrid()
         If dgvPatients.Columns.Count = 0 Then
             PatientsSetupDataGrid()
@@ -452,7 +452,7 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    ' add dropdown menu
+    ' Add dropdown menu
     Private Sub ShowDropdownPatientsMenu(rowIndex As Integer)
         Dim buttonCell = dgvPatients.Rows(rowIndex).Cells(6)
 
@@ -569,7 +569,7 @@ Public Class AdminDashboard
         CloseDropdownPatients()
     End Sub
 
-    ' method to get patient details for appointment scheduling
+    ' Method to get patient details for appointment scheduling
     Private Function GetPatientDetailsForAppointment(patientId As String, ByRef firstName As String, ByRef lastName As String,
         ByRef lastMenstrualDate As Date, ByRef dueDate As Date, ByRef doctorId As String) As Boolean
         Dim success As Boolean = False
@@ -608,7 +608,7 @@ Public Class AdminDashboard
         Return success
     End Function
 
-    ' method to get patient ID by patient name
+    ' Method to get patient ID by patient name
     Private Function GetPatientIdByName(patientName As String) As String
         Dim patientId As String = String.Empty
 
@@ -690,7 +690,7 @@ Public Class AdminDashboard
     '                              '
     ''''''''''''''''''''''''''''''''
 
-    ' setup dgvDoctors
+    ' Setup dgvDoctors
     Public Sub DoctorsSetupDataGrid()
         dgvDoctors.AllowUserToAddRows = False
         dgvDoctors.AllowUserToDeleteRows = False
@@ -798,7 +798,7 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    ' populate the dgvDoctors
+    ' Populate the dgvDoctors
     Public Sub DoctorsPopulateDataGrid()
         If dgvDoctors.Columns.Count = 0 Then
             DoctorsSetupDataGrid()
@@ -890,7 +890,7 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    ' generate dropdown for doctors
+    ' Generate dropdown for doctors
     Private Sub ShowDoctorsDropdownMenu(rowIndex As Integer)
         Dim buttonCell = dgvDoctors.Rows(rowIndex).Cells("ActionButton")
 
@@ -1023,7 +1023,7 @@ Public Class AdminDashboard
     '                                   '
     '''''''''''''''''''''''''''''''''''''
 
-    ' setup dgvAppointments
+    ' Setup dgvAppointments
     Private Sub AppointmentsSetupDataGrid()
         dgvAppointments.AllowUserToAddRows = False
         dgvAppointments.AllowUserToDeleteRows = False
@@ -1120,7 +1120,7 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    ' populate the dgvAppointments
+    ' Populate the dgvAppointments
     Private Sub AppointmentsPopulateDataGrid()
         dgvAppointments.Rows.Clear()
 
@@ -1169,7 +1169,7 @@ Public Class AdminDashboard
         End If
     End Sub
 
-    ' generate dropdown for appointments
+    ' Generate dropdown for appointments
     Private Sub ShowDropdownAppointments(rowIndex As Integer)
         CloseDropdownAppointments()
 
@@ -1293,7 +1293,7 @@ Public Class AdminDashboard
     '                              '
     ''''''''''''''''''''''''''''''''
 
-    ' setup dgvBilling
+    ' Setup dgvBilling
     Private Sub BillingSetupDataGrid()
         ' Configure the DataGridView
         dgvBilling.AllowUserToAddRows = False
@@ -1379,7 +1379,7 @@ Public Class AdminDashboard
         AddHandler dgvBilling.DataBindingComplete, AddressOf dgvBilling_DataBindingComplete
     End Sub
 
-    ' populate the dgvBilling
+    ' Populate the dgvBilling
     Private Sub BillingPopulateDataGrid()
         dgvBilling.Rows.Clear()
 

@@ -272,19 +272,16 @@ Public Class AppointmentDetails
     End Sub
 
     Private Function ValidateForm() As Boolean
-        ' Check if doctor is selected
         If cboDoctor.SelectedIndex <= 0 Then
             MessageBox.Show("Please select a doctor.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
-        ' Check if time slot is selected
         If cboTimeSlot.SelectedIndex < 0 Then
             MessageBox.Show("Please select an available time slot.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
 
-        ' Check if appointment type is selected
         If cboAppointmentType.SelectedIndex < 0 Then
             MessageBox.Show("Please select an appointment type.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
@@ -300,7 +297,6 @@ Public Class AppointmentDetails
 
             Dim appointmentDateTime As DateTime = CombineDateAndTime()
 
-            ' Verify the time slot is still available
             If Not IsTimeSlotAvailable(appointmentDateTime) Then
                 MessageBox.Show("This time slot was just booked by someone else. Please select another time.",
                        "Time Slot Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -311,7 +307,6 @@ Public Class AppointmentDetails
             Dim appointmentId As Integer = GetNextAppointmentId()
             Dim doctorId As String = GetSelectedDoctorId()
 
-            ' Query to include appointment_time column
             Dim query As String = "INSERT INTO appointment_table (appointment_id, patient_id, doctor_id, " &
                              "appointment_date, appointment_time, reason_for_visit, status, notes) " &
                              "VALUES (@appointmentId, @patientId, @doctorId, @appointmentDate, " &
@@ -352,7 +347,6 @@ Public Class AppointmentDetails
 
     Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
         Try
-            ' Query to check both date and time columns separately
             Dim query As String = "SELECT COUNT(*) FROM appointment_table " &
                              "WHERE appointment_date = @selectedDate " &
                              "AND appointment_time = @selectedTime"
@@ -544,7 +538,7 @@ Public Class AppointmentDetails
                 ' If patient was late, adjust vitamin supply days accordingly
                 If DaysLate > 0 Then
                     Dim adjustedDays As Integer = daysToNextVisit - DaysLate
-                    If adjustedDays < 1 Then adjustedDays = 1 ' Ensure at least 1 day of vitamins
+                    If adjustedDays < 1 Then adjustedDays = 1
 
                     daysToNextVisit = adjustedDays
                     notes += $" + {daysToNextVisit}-day vitamin supply (adjusted for {DaysLate} days late)"
