@@ -27,8 +27,6 @@ Partial Class ViewAppointmentDetails
         Panel1 = New Panel()
         Label7 = New Label()
         txtNotes = New TextBox()
-        btnSubmit = New FontAwesome.Sharp.IconButton()
-        btnCancel = New FontAwesome.Sharp.IconButton()
         lblSelectedDate = New Label()
         Label5 = New Label()
         Label4 = New Label()
@@ -61,6 +59,7 @@ Partial Class ViewAppointmentDetails
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
+        HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
         HopeForm1.Size = New Size(600, 40)
         HopeForm1.TabIndex = 0
@@ -74,8 +73,6 @@ Partial Class ViewAppointmentDetails
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(txtNotes)
-        Panel1.Controls.Add(btnSubmit)
-        Panel1.Controls.Add(btnCancel)
         Panel1.Controls.Add(lblSelectedDate)
         Panel1.Controls.Add(Label5)
         Panel1.Controls.Add(Label4)
@@ -98,7 +95,7 @@ Partial Class ViewAppointmentDetails
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(600, 640)
+        Panel1.Size = New Size(600, 583)
         Panel1.TabIndex = 2
         ' 
         ' Label7
@@ -120,34 +117,6 @@ Partial Class ViewAppointmentDetails
         txtNotes.Name = "txtNotes"
         txtNotes.Size = New Size(576, 100)
         txtNotes.TabIndex = 42
-        ' 
-        ' btnSubmit
-        ' 
-        btnSubmit.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSubmit.IconChar = FontAwesome.Sharp.IconChar.None
-        btnSubmit.IconColor = Color.Black
-        btnSubmit.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSubmit.Location = New Point(286, 594)
-        btnSubmit.Name = "btnSubmit"
-        btnSubmit.Size = New Size(302, 40)
-        btnSubmit.TabIndex = 41
-        btnSubmit.Text = "Schedule Appointment"
-        btnSubmit.TextAlign = ContentAlignment.MiddleLeft
-        btnSubmit.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnSubmit.UseVisualStyleBackColor = True
-        ' 
-        ' btnCancel
-        ' 
-        btnCancel.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCancel.IconChar = FontAwesome.Sharp.IconChar.None
-        btnCancel.IconColor = Color.Black
-        btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnCancel.Location = New Point(12, 594)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Size(111, 40)
-        btnCancel.TabIndex = 40
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = True
         ' 
         ' lblSelectedDate
         ' 
@@ -255,9 +224,9 @@ Partial Class ViewAppointmentDetails
         lblAppointmentHeader.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAppointmentHeader.Location = New Point(9, 23)
         lblAppointmentHeader.Name = "lblAppointmentHeader"
-        lblAppointmentHeader.Size = New Size(265, 25)
+        lblAppointmentHeader.Size = New Size(242, 25)
         lblAppointmentHeader.TabIndex = 29
-        lblAppointmentHeader.Text = "Schedule Appointment"
+        lblAppointmentHeader.Text = "Appointment Details"
         ' 
         ' lblDueDate
         ' 
@@ -349,10 +318,11 @@ Partial Class ViewAppointmentDetails
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        ClientSize = New Size(600, 680)
+        ClientSize = New Size(600, 623)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
+        MaximizeBox = False
         MaximumSize = New Size(1920, 1080)
         MinimumSize = New Size(190, 40)
         Name = "ViewAppointmentDetails"
@@ -367,8 +337,6 @@ Partial Class ViewAppointmentDetails
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label7 As Label
     Friend WithEvents txtNotes As TextBox
-    Friend WithEvents btnSubmit As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancel As FontAwesome.Sharp.IconButton
     Friend WithEvents lblSelectedDate As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
