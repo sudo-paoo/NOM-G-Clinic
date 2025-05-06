@@ -28,7 +28,6 @@ Partial Class ConsultationDetails
         IconPictureBox1 = New FontAwesome.Sharp.IconPictureBox()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
         txtDoctorPlan = New TextBox()
-        Label20 = New Label()
         Label3 = New Label()
         Panel3 = New Panel()
         hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
@@ -37,6 +36,7 @@ Partial Class ConsultationDetails
         rbGlucose = New RadioButton()
         rbProtein = New RadioButton()
         Label17 = New Label()
+        Label20 = New Label()
         cmbVisitType = New ComboBox()
         txtDoctorAssessment = New TextBox()
         cmbReasonVisit = New ComboBox()
@@ -164,18 +164,6 @@ Partial Class ConsultationDetails
         txtDoctorPlan.Size = New Size(1050, 167)
         txtDoctorPlan.TabIndex = 39
         ' 
-        ' Label20
-        ' 
-        Label20.AutoSize = True
-        Label20.BackColor = Color.Transparent
-        Label20.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.ForeColor = Color.Black
-        Label20.Location = New Point(522, 821)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(54, 22)
-        Label20.TabIndex = 38
-        Label20.Text = "Plan"
-        ' 
         ' Label3
         ' 
         Label3.AutoSize = True
@@ -297,6 +285,18 @@ Partial Class ConsultationDetails
         Label17.Size = New Size(167, 31)
         Label17.TabIndex = 30
         Label17.Text = "Urine Analysis"
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.BackColor = Color.Transparent
+        Label20.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.ForeColor = Color.Black
+        Label20.Location = New Point(522, 821)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(54, 22)
+        Label20.TabIndex = 38
+        Label20.Text = "Plan"
         ' 
         ' cmbVisitType
         ' 

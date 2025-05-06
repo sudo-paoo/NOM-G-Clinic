@@ -31,9 +31,7 @@ Partial Class PatientDetails
         HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
         flowRecentAppointments = New FlowLayoutPanel()
         Label12 = New Label()
-        Label11 = New Label()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
-        Label18 = New Label()
         lblAssignedOB = New Label()
         lblNextCheckup = New Label()
         lblGestationalAge = New Label()
@@ -43,7 +41,6 @@ Partial Class PatientDetails
         Label9 = New Label()
         Label10 = New Label()
         HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
-        Label17 = New Label()
         lblAddress = New Label()
         lblFirstBaby = New Label()
         lblCivilStatus = New Label()
@@ -54,6 +51,8 @@ Partial Class PatientDetails
         Label4 = New Label()
         Label2 = New Label()
         Label1 = New Label()
+        Panel6 = New Panel()
+        Label17 = New Label()
         TabPage2 = New TabPage()
         Panel3 = New Panel()
         dgvAppointments = New DataGridView()
@@ -69,9 +68,11 @@ Partial Class PatientDetails
         dgvConsultationDetails = New DataGridView()
         Label19 = New Label()
         Label20 = New Label()
-        IconButton2 = New FontAwesome.Sharp.IconButton()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
         Label7 = New Label()
+        Panel7 = New Panel()
+        Label21 = New Label()
+        Panel8 = New Panel()
+        Label18 = New Label()
         Panel1.SuspendLayout()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
@@ -79,6 +80,7 @@ Partial Class PatientDetails
         HopeGroupBox4.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
+        Panel6.SuspendLayout()
         TabPage2.SuspendLayout()
         Panel3.SuspendLayout()
         CType(dgvAppointments, ComponentModel.ISupportInitialize).BeginInit()
@@ -88,6 +90,8 @@ Partial Class PatientDetails
         TabPage4.SuspendLayout()
         Panel5.SuspendLayout()
         CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).BeginInit()
+        Panel7.SuspendLayout()
+        Panel8.SuspendLayout()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -109,11 +113,8 @@ Partial Class PatientDetails
         ' 
         ' Panel1
         ' 
-        Panel1.BackColor = SystemColors.Control
-        Panel1.BackgroundImage = My.Resources.Resources.bg_img
+        Panel1.BackColor = SystemColors.ControlLightLight
         Panel1.Controls.Add(TabControl1)
-        Panel1.Controls.Add(IconButton2)
-        Panel1.Controls.Add(IconButton1)
         Panel1.Controls.Add(Label7)
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
@@ -147,7 +148,6 @@ Partial Class PatientDetails
         ' 
         ' Panel2
         ' 
-        Panel2.BackgroundImage = My.Resources.Resources.bg_img
         Panel2.BackgroundImageLayout = ImageLayout.Stretch
         Panel2.Controls.Add(HopeGroupBox4)
         Panel2.Controls.Add(HopeGroupBox2)
@@ -162,9 +162,9 @@ Partial Class PatientDetails
         ' 
         HopeGroupBox4.BackColor = Color.Transparent
         HopeGroupBox4.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeGroupBox4.Controls.Add(Panel8)
         HopeGroupBox4.Controls.Add(flowRecentAppointments)
         HopeGroupBox4.Controls.Add(Label12)
-        HopeGroupBox4.Controls.Add(Label11)
         HopeGroupBox4.Font = New Font("Segoe UI", 12F)
         HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
@@ -175,7 +175,7 @@ Partial Class PatientDetails
         HopeGroupBox4.TabIndex = 3
         HopeGroupBox4.TabStop = False
         HopeGroupBox4.Text = "HopeGroupBox4"
-        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        HopeGroupBox4.ThemeColor = SystemColors.ControlLightLight
         ' 
         ' flowRecentAppointments
         ' 
@@ -194,22 +194,11 @@ Partial Class PatientDetails
         Label12.TabIndex = 12
         Label12.Text = "Showing the last 3 appointments"
         ' 
-        ' Label11
-        ' 
-        Label11.AutoSize = True
-        Label11.BackColor = Color.Transparent
-        Label11.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(6, 15)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(287, 28)
-        Label11.TabIndex = 5
-        Label11.Text = "Recent Appointments"
-        ' 
         ' HopeGroupBox2
         ' 
         HopeGroupBox2.BackColor = Color.Transparent
         HopeGroupBox2.BorderColor = Color.Transparent
-        HopeGroupBox2.Controls.Add(Label18)
+        HopeGroupBox2.Controls.Add(Panel7)
         HopeGroupBox2.Controls.Add(lblAssignedOB)
         HopeGroupBox2.Controls.Add(lblNextCheckup)
         HopeGroupBox2.Controls.Add(lblGestationalAge)
@@ -229,24 +218,13 @@ Partial Class PatientDetails
         HopeGroupBox2.TabIndex = 1
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
-        HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
-        ' Label18
-        ' 
-        Label18.AutoSize = True
-        Label18.BackColor = Color.Transparent
-        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.Location = New Point(0, 1)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(310, 28)
-        Label18.TabIndex = 15
-        Label18.Text = "Pregnancy Information"
+        HopeGroupBox2.ThemeColor = SystemColors.ControlLightLight
         ' 
         ' lblAssignedOB
         ' 
         lblAssignedOB.AutoSize = True
         lblAssignedOB.Font = New Font("Verdana", 10.2F)
-        lblAssignedOB.Location = New Point(138, 142)
+        lblAssignedOB.Location = New Point(134, 185)
         lblAssignedOB.Name = "lblAssignedOB"
         lblAssignedOB.Size = New Size(126, 20)
         lblAssignedOB.TabIndex = 15
@@ -256,7 +234,7 @@ Partial Class PatientDetails
         ' 
         lblNextCheckup.AutoSize = True
         lblNextCheckup.Font = New Font("Verdana", 10.2F)
-        lblNextCheckup.Location = New Point(149, 108)
+        lblNextCheckup.Location = New Point(147, 143)
         lblNextCheckup.Name = "lblNextCheckup"
         lblNextCheckup.Size = New Size(137, 20)
         lblNextCheckup.TabIndex = 14
@@ -266,7 +244,7 @@ Partial Class PatientDetails
         ' 
         lblGestationalAge.AutoSize = True
         lblGestationalAge.Font = New Font("Verdana", 10.2F)
-        lblGestationalAge.Location = New Point(157, 77)
+        lblGestationalAge.Location = New Point(160, 104)
         lblGestationalAge.Name = "lblGestationalAge"
         lblGestationalAge.Size = New Size(153, 20)
         lblGestationalAge.TabIndex = 13
@@ -276,7 +254,7 @@ Partial Class PatientDetails
         ' 
         lblLastMenstrual.AutoSize = True
         lblLastMenstrual.Font = New Font("Verdana", 10.2F)
-        lblLastMenstrual.Location = New Point(149, 44)
+        lblLastMenstrual.Location = New Point(149, 63)
         lblLastMenstrual.Name = "lblLastMenstrual"
         lblLastMenstrual.Size = New Size(142, 20)
         lblLastMenstrual.TabIndex = 12
@@ -286,7 +264,7 @@ Partial Class PatientDetails
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Verdana", 10.2F)
-        Label3.Location = New Point(6, 142)
+        Label3.Location = New Point(6, 185)
         Label3.Name = "Label3"
         Label3.Size = New Size(126, 20)
         Label3.TabIndex = 11
@@ -296,7 +274,7 @@ Partial Class PatientDetails
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Verdana", 10.2F)
-        Label8.Location = New Point(6, 108)
+        Label8.Location = New Point(6, 143)
         Label8.Name = "Label8"
         Label8.Size = New Size(137, 20)
         Label8.TabIndex = 10
@@ -306,7 +284,7 @@ Partial Class PatientDetails
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Verdana", 10.2F)
-        Label9.Location = New Point(6, 77)
+        Label9.Location = New Point(6, 104)
         Label9.Name = "Label9"
         Label9.Size = New Size(153, 20)
         Label9.TabIndex = 9
@@ -316,7 +294,7 @@ Partial Class PatientDetails
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Verdana", 10.2F)
-        Label10.Location = New Point(6, 44)
+        Label10.Location = New Point(6, 63)
         Label10.Name = "Label10"
         Label10.Size = New Size(142, 20)
         Label10.TabIndex = 8
@@ -326,7 +304,6 @@ Partial Class PatientDetails
         ' 
         HopeGroupBox1.BackColor = Color.Transparent
         HopeGroupBox1.BorderColor = Color.Transparent
-        HopeGroupBox1.Controls.Add(Label17)
         HopeGroupBox1.Controls.Add(lblAddress)
         HopeGroupBox1.Controls.Add(lblFirstBaby)
         HopeGroupBox1.Controls.Add(lblCivilStatus)
@@ -337,6 +314,7 @@ Partial Class PatientDetails
         HopeGroupBox1.Controls.Add(Label4)
         HopeGroupBox1.Controls.Add(Label2)
         HopeGroupBox1.Controls.Add(Label1)
+        HopeGroupBox1.Controls.Add(Panel6)
         HopeGroupBox1.FlatStyle = FlatStyle.Flat
         HopeGroupBox1.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
@@ -348,24 +326,13 @@ Partial Class PatientDetails
         HopeGroupBox1.TabIndex = 0
         HopeGroupBox1.TabStop = False
         HopeGroupBox1.Text = "HopeGroupBox1"
-        HopeGroupBox1.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
-        ' Label17
-        ' 
-        Label17.AutoSize = True
-        Label17.BackColor = Color.Transparent
-        Label17.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(0, 3)
-        Label17.Name = "Label17"
-        Label17.Size = New Size(287, 28)
-        Label17.TabIndex = 14
-        Label17.Text = "Personal Information"
+        HopeGroupBox1.ThemeColor = SystemColors.ControlLightLight
         ' 
         ' lblAddress
         ' 
         lblAddress.AutoSize = True
         lblAddress.Font = New Font("Verdana", 10.2F)
-        lblAddress.Location = New Point(124, 177)
+        lblAddress.Location = New Point(93, 212)
         lblAddress.MaximumSize = New Size(180, 0)
         lblAddress.Name = "lblAddress"
         lblAddress.Size = New Size(86, 20)
@@ -376,7 +343,7 @@ Partial Class PatientDetails
         ' 
         lblFirstBaby.AutoSize = True
         lblFirstBaby.Font = New Font("Verdana", 10.2F)
-        lblFirstBaby.Location = New Point(124, 144)
+        lblFirstBaby.Location = New Point(116, 173)
         lblFirstBaby.Name = "lblFirstBaby"
         lblFirstBaby.Size = New Size(104, 20)
         lblFirstBaby.TabIndex = 12
@@ -386,7 +353,7 @@ Partial Class PatientDetails
         ' 
         lblCivilStatus.AutoSize = True
         lblCivilStatus.Font = New Font("Verdana", 10.2F)
-        lblCivilStatus.Location = New Point(124, 110)
+        lblCivilStatus.Location = New Point(122, 134)
         lblCivilStatus.Name = "lblCivilStatus"
         lblCivilStatus.Size = New Size(116, 20)
         lblCivilStatus.TabIndex = 11
@@ -396,7 +363,7 @@ Partial Class PatientDetails
         ' 
         lblAge.AutoSize = True
         lblAge.Font = New Font("Verdana", 10.2F)
-        lblAge.Location = New Point(124, 77)
+        lblAge.Location = New Point(60, 95)
         lblAge.Name = "lblAge"
         lblAge.Size = New Size(50, 20)
         lblAge.TabIndex = 10
@@ -406,7 +373,7 @@ Partial Class PatientDetails
         ' 
         lblName.AutoSize = True
         lblName.Font = New Font("Verdana", 10.2F)
-        lblName.Location = New Point(124, 44)
+        lblName.Location = New Point(79, 56)
         lblName.Name = "lblName"
         lblName.Size = New Size(67, 20)
         lblName.TabIndex = 9
@@ -416,7 +383,7 @@ Partial Class PatientDetails
         ' 
         Label6.AutoSize = True
         Label6.Font = New Font("Verdana", 10.2F)
-        Label6.Location = New Point(32, 177)
+        Label6.Location = New Point(6, 212)
         Label6.Name = "Label6"
         Label6.Size = New Size(86, 20)
         Label6.TabIndex = 8
@@ -426,7 +393,7 @@ Partial Class PatientDetails
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Verdana", 10.2F)
-        Label5.Location = New Point(18, 144)
+        Label5.Location = New Point(6, 173)
         Label5.Name = "Label5"
         Label5.Size = New Size(104, 20)
         Label5.TabIndex = 7
@@ -436,7 +403,7 @@ Partial Class PatientDetails
         ' 
         Label4.AutoSize = True
         Label4.Font = New Font("Verdana", 10.2F)
-        Label4.Location = New Point(6, 110)
+        Label4.Location = New Point(6, 134)
         Label4.Name = "Label4"
         Label4.Size = New Size(116, 20)
         Label4.TabIndex = 6
@@ -446,7 +413,7 @@ Partial Class PatientDetails
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Verdana", 10.2F)
-        Label2.Location = New Point(72, 77)
+        Label2.Location = New Point(6, 95)
         Label2.Name = "Label2"
         Label2.Size = New Size(50, 20)
         Label2.TabIndex = 4
@@ -456,11 +423,31 @@ Partial Class PatientDetails
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Verdana", 10.2F)
-        Label1.Location = New Point(55, 44)
+        Label1.Location = New Point(6, 56)
         Label1.Name = "Label1"
         Label1.Size = New Size(67, 20)
         Label1.TabIndex = 2
         Label1.Text = "Name:"
+        ' 
+        ' Panel6
+        ' 
+        Panel6.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
+        Panel6.Controls.Add(Label17)
+        Panel6.Location = New Point(0, 0)
+        Panel6.Name = "Panel6"
+        Panel6.Size = New Size(450, 41)
+        Panel6.TabIndex = 15
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.BackColor = Color.Transparent
+        Label17.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Location = New Point(74, 5)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(287, 28)
+        Label17.TabIndex = 14
+        Label17.Text = "Personal Information"
         ' 
         ' TabPage2
         ' 
@@ -618,44 +605,6 @@ Partial Class PatientDetails
         Label20.TabIndex = 18
         Label20.Text = "Consultaion Notes"
         ' 
-        ' IconButton2
-        ' 
-        IconButton2.BackColor = Color.Transparent
-        IconButton2.FlatAppearance.BorderColor = Color.Black
-        IconButton2.FlatStyle = FlatStyle.Flat
-        IconButton2.Font = New Font("Verdana", 12F)
-        IconButton2.IconChar = FontAwesome.Sharp.IconChar.Pen
-        IconButton2.IconColor = Color.Black
-        IconButton2.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton2.IconSize = 25
-        IconButton2.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton2.Location = New Point(896, 17)
-        IconButton2.Name = "IconButton2"
-        IconButton2.Size = New Size(88, 40)
-        IconButton2.TabIndex = 6
-        IconButton2.Text = "Edit"
-        IconButton2.TextImageRelation = TextImageRelation.ImageBeforeText
-        IconButton2.UseVisualStyleBackColor = False
-        ' 
-        ' IconButton1
-        ' 
-        IconButton1.BackColor = Color.Transparent
-        IconButton1.FlatAppearance.BorderColor = Color.Black
-        IconButton1.FlatStyle = FlatStyle.Flat
-        IconButton1.Font = New Font("Verdana", 12F)
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Calendar
-        IconButton1.IconColor = Color.Black
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.IconSize = 25
-        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton1.Location = New Point(611, 17)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(279, 40)
-        IconButton1.TabIndex = 5
-        IconButton1.Text = "Schedule Appointment"
-        IconButton1.TextImageRelation = TextImageRelation.ImageBeforeText
-        IconButton1.UseVisualStyleBackColor = False
-        ' 
         ' Label7
         ' 
         Label7.AutoSize = True
@@ -666,6 +615,46 @@ Partial Class PatientDetails
         Label7.Size = New Size(251, 34)
         Label7.TabIndex = 4
         Label7.Text = "Patient Details"
+        ' 
+        ' Panel7
+        ' 
+        Panel7.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
+        Panel7.Controls.Add(Label21)
+        Panel7.Location = New Point(0, 0)
+        Panel7.Name = "Panel7"
+        Panel7.Size = New Size(450, 41)
+        Panel7.TabIndex = 16
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.BackColor = Color.Transparent
+        Label21.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label21.Location = New Point(74, 5)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(310, 28)
+        Label21.TabIndex = 14
+        Label21.Text = "Pregnancy Information"
+        ' 
+        ' Panel8
+        ' 
+        Panel8.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
+        Panel8.Controls.Add(Label18)
+        Panel8.Location = New Point(0, 0)
+        Panel8.Name = "Panel8"
+        Panel8.Size = New Size(942, 41)
+        Panel8.TabIndex = 16
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.BackColor = Color.Transparent
+        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.Location = New Point(328, 7)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(287, 28)
+        Label18.TabIndex = 14
+        Label18.Text = "Recent Appointments"
         ' 
         ' PatientDetails
         ' 
@@ -692,6 +681,8 @@ Partial Class PatientDetails
         HopeGroupBox2.PerformLayout()
         HopeGroupBox1.ResumeLayout(False)
         HopeGroupBox1.PerformLayout()
+        Panel6.ResumeLayout(False)
+        Panel6.PerformLayout()
         TabPage2.ResumeLayout(False)
         Panel3.ResumeLayout(False)
         Panel3.PerformLayout()
@@ -704,14 +695,16 @@ Partial Class PatientDetails
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
         CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).EndInit()
+        Panel7.ResumeLayout(False)
+        Panel7.PerformLayout()
+        Panel8.ResumeLayout(False)
+        Panel8.PerformLayout()
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents HopeForm1 As ReaLTaiizor.Forms.HopeForm
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label7 As Label
-    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
-    Friend WithEvents IconButton2 As FontAwesome.Sharp.IconButton
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents Panel2 As Panel
@@ -728,7 +721,6 @@ Partial Class PatientDetails
     Friend WithEvents Label2 As Label
     Friend WithEvents HopeGroupBox4 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents Label11 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
@@ -749,11 +741,15 @@ Partial Class PatientDetails
     Friend WithEvents lblCivilStatus As Label
     Friend WithEvents lblAge As Label
     Friend WithEvents lblName As Label
-    Friend WithEvents Label18 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents Panel5 As Panel
     Friend WithEvents dgvConsultationDetails As DataGridView
     Friend WithEvents Label19 As Label
     Friend WithEvents Label20 As Label
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Label18 As Label
 End Class
