@@ -29,6 +29,8 @@ Partial Class AdminDashboard
         btnLogout = New FontAwesome.Sharp.IconButton()
         btnBilling = New FontAwesome.Sharp.IconButton()
         btnAppointments = New FontAwesome.Sharp.IconButton()
+        btnAccountant = New FontAwesome.Sharp.IconButton()
+        btnNurse = New FontAwesome.Sharp.IconButton()
         btnDoctors = New FontAwesome.Sharp.IconButton()
         btnPatients = New FontAwesome.Sharp.IconButton()
         btnDashboard = New FontAwesome.Sharp.IconButton()
@@ -69,17 +71,8 @@ Partial Class AdminDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettingsAdmin = New Panel()
-        IconButton1 = New FontAwesome.Sharp.IconButton()
+        btnSaveAdminSettings = New FontAwesome.Sharp.IconButton()
         SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
-        btnSave = New FontAwesome.Sharp.IconButton()
-        Label16 = New Label()
-        HopeGroupBox6 = New ReaLTaiizor.Controls.HopeGroupBox()
-        TextBox7 = New TextBox()
-        Label18 = New Label()
-        TextBox8 = New TextBox()
-        Label19 = New Label()
-        Label20 = New Label()
-        TextBox9 = New TextBox()
         Label8 = New Label()
         HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
         btnEyePassword = New FontAwesome.Sharp.IconButton()
@@ -92,6 +85,18 @@ Partial Class AdminDashboard
         Label11 = New Label()
         TextBox1 = New TextBox()
         Label21 = New Label()
+        pnlNurses = New Panel()
+        Panel5 = New Panel()
+        dgvNurses = New DataGridView()
+        TextBox5 = New TextBox()
+        btnAddNurse = New FontAwesome.Sharp.IconButton()
+        Label9 = New Label()
+        pnlAccountants = New Panel()
+        Panel6 = New Panel()
+        dgvAccountants = New DataGridView()
+        TextBox6 = New TextBox()
+        IconButton2 = New FontAwesome.Sharp.IconButton()
+        Label10 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
@@ -113,8 +118,13 @@ Partial Class AdminDashboard
         Panel4.SuspendLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
         pnlSettingsAdmin.SuspendLayout()
-        HopeGroupBox6.SuspendLayout()
         HopeGroupBox4.SuspendLayout()
+        pnlNurses.SuspendLayout()
+        Panel5.SuspendLayout()
+        CType(dgvNurses, ComponentModel.ISupportInitialize).BeginInit()
+        pnlAccountants.SuspendLayout()
+        Panel6.SuspendLayout()
+        CType(dgvAccountants, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -141,6 +151,8 @@ Partial Class AdminDashboard
         Panel1.Controls.Add(btnLogout)
         Panel1.Controls.Add(btnBilling)
         Panel1.Controls.Add(btnAppointments)
+        Panel1.Controls.Add(btnAccountant)
+        Panel1.Controls.Add(btnNurse)
         Panel1.Controls.Add(btnDoctors)
         Panel1.Controls.Add(btnPatients)
         Panel1.Controls.Add(btnDashboard)
@@ -162,7 +174,7 @@ Partial Class AdminDashboard
         btnSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSettings.IconSize = 36
         btnSettings.ImageAlign = ContentAlignment.MiddleLeft
-        btnSettings.Location = New Point(0, 300)
+        btnSettings.Location = New Point(0, 420)
         btnSettings.Margin = New Padding(5)
         btnSettings.Name = "btnSettings"
         btnSettings.Size = New Size(300, 60)
@@ -206,7 +218,7 @@ Partial Class AdminDashboard
         btnBilling.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnBilling.IconSize = 36
         btnBilling.ImageAlign = ContentAlignment.MiddleLeft
-        btnBilling.Location = New Point(0, 240)
+        btnBilling.Location = New Point(0, 360)
         btnBilling.Margin = New Padding(5)
         btnBilling.Name = "btnBilling"
         btnBilling.Size = New Size(300, 60)
@@ -228,7 +240,7 @@ Partial Class AdminDashboard
         btnAppointments.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnAppointments.IconSize = 36
         btnAppointments.ImageAlign = ContentAlignment.MiddleLeft
-        btnAppointments.Location = New Point(0, 180)
+        btnAppointments.Location = New Point(0, 300)
         btnAppointments.Margin = New Padding(5)
         btnAppointments.Name = "btnAppointments"
         btnAppointments.Size = New Size(300, 60)
@@ -237,6 +249,50 @@ Partial Class AdminDashboard
         btnAppointments.TextAlign = ContentAlignment.MiddleLeft
         btnAppointments.TextImageRelation = TextImageRelation.ImageBeforeText
         btnAppointments.UseVisualStyleBackColor = False
+        ' 
+        ' btnAccountant
+        ' 
+        btnAccountant.BackColor = Color.Transparent
+        btnAccountant.Dock = DockStyle.Top
+        btnAccountant.FlatAppearance.BorderSize = 0
+        btnAccountant.FlatStyle = FlatStyle.Flat
+        btnAccountant.Font = New Font("Verdana", 10.2F)
+        btnAccountant.IconChar = FontAwesome.Sharp.IconChar.UserTie
+        btnAccountant.IconColor = Color.Black
+        btnAccountant.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnAccountant.IconSize = 36
+        btnAccountant.ImageAlign = ContentAlignment.MiddleLeft
+        btnAccountant.Location = New Point(0, 240)
+        btnAccountant.Margin = New Padding(5)
+        btnAccountant.Name = "btnAccountant"
+        btnAccountant.Size = New Size(300, 60)
+        btnAccountant.TabIndex = 8
+        btnAccountant.Text = "Accountants"
+        btnAccountant.TextAlign = ContentAlignment.MiddleLeft
+        btnAccountant.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnAccountant.UseVisualStyleBackColor = False
+        ' 
+        ' btnNurse
+        ' 
+        btnNurse.BackColor = Color.Transparent
+        btnNurse.Dock = DockStyle.Top
+        btnNurse.FlatAppearance.BorderSize = 0
+        btnNurse.FlatStyle = FlatStyle.Flat
+        btnNurse.Font = New Font("Verdana", 10.2F)
+        btnNurse.IconChar = FontAwesome.Sharp.IconChar.UserNurse
+        btnNurse.IconColor = Color.Black
+        btnNurse.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnNurse.IconSize = 36
+        btnNurse.ImageAlign = ContentAlignment.MiddleLeft
+        btnNurse.Location = New Point(0, 180)
+        btnNurse.Margin = New Padding(5)
+        btnNurse.Name = "btnNurse"
+        btnNurse.Size = New Size(300, 60)
+        btnNurse.TabIndex = 7
+        btnNurse.Text = "Nurses"
+        btnNurse.TextAlign = ContentAlignment.MiddleLeft
+        btnNurse.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnNurse.UseVisualStyleBackColor = False
         ' 
         ' btnDoctors
         ' 
@@ -716,13 +772,9 @@ Partial Class AdminDashboard
         ' 
         ' pnlSettingsAdmin
         ' 
-        pnlSettingsAdmin.AutoScroll = True
         pnlSettingsAdmin.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        pnlSettingsAdmin.Controls.Add(IconButton1)
+        pnlSettingsAdmin.Controls.Add(btnSaveAdminSettings)
         pnlSettingsAdmin.Controls.Add(SmallLabel1)
-        pnlSettingsAdmin.Controls.Add(btnSave)
-        pnlSettingsAdmin.Controls.Add(Label16)
-        pnlSettingsAdmin.Controls.Add(HopeGroupBox6)
         pnlSettingsAdmin.Controls.Add(Label8)
         pnlSettingsAdmin.Controls.Add(HopeGroupBox4)
         pnlSettingsAdmin.Controls.Add(Label21)
@@ -732,19 +784,19 @@ Partial Class AdminDashboard
         pnlSettingsAdmin.Size = New Size(900, 660)
         pnlSettingsAdmin.TabIndex = 12
         ' 
-        ' IconButton1
+        ' btnSaveAdminSettings
         ' 
-        IconButton1.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        IconButton1.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        IconButton1.IconColor = Color.RosyBrown
-        IconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto
-        IconButton1.ImageAlign = ContentAlignment.MiddleLeft
-        IconButton1.Location = New Point(402, 415)
-        IconButton1.Name = "IconButton1"
-        IconButton1.Size = New Size(118, 44)
-        IconButton1.TabIndex = 21
-        IconButton1.Text = "        SAVE"
-        IconButton1.UseVisualStyleBackColor = True
+        btnSaveAdminSettings.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        btnSaveAdminSettings.IconColor = Color.RosyBrown
+        btnSaveAdminSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSaveAdminSettings.ImageAlign = ContentAlignment.MiddleLeft
+        btnSaveAdminSettings.Location = New Point(664, 411)
+        btnSaveAdminSettings.Name = "btnSaveAdminSettings"
+        btnSaveAdminSettings.Size = New Size(118, 44)
+        btnSaveAdminSettings.TabIndex = 21
+        btnSaveAdminSettings.Text = "        SAVE"
+        btnSaveAdminSettings.UseVisualStyleBackColor = True
         ' 
         ' SmallLabel1
         ' 
@@ -757,105 +809,6 @@ Partial Class AdminDashboard
         SmallLabel1.Size = New Size(12, 19)
         SmallLabel1.TabIndex = 20
         SmallLabel1.Text = "."
-        ' 
-        ' btnSave
-        ' 
-        btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.RosyBrown
-        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(664, 950)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(118, 44)
-        btnSave.TabIndex = 14
-        btnSave.Text = "        SAVE"
-        btnSave.UseVisualStyleBackColor = True
-        ' 
-        ' Label16
-        ' 
-        Label16.AutoSize = True
-        Label16.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(354, 657)
-        Label16.Name = "Label16"
-        Label16.Size = New Size(218, 31)
-        Label16.TabIndex = 19
-        Label16.Text = "Contact Information"
-        ' 
-        ' HopeGroupBox6
-        ' 
-        HopeGroupBox6.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox6.Controls.Add(TextBox7)
-        HopeGroupBox6.Controls.Add(Label18)
-        HopeGroupBox6.Controls.Add(TextBox8)
-        HopeGroupBox6.Controls.Add(Label19)
-        HopeGroupBox6.Controls.Add(Label20)
-        HopeGroupBox6.Controls.Add(TextBox9)
-        HopeGroupBox6.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox6.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox6.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox6.Location = New Point(151, 694)
-        HopeGroupBox6.Name = "HopeGroupBox6"
-        HopeGroupBox6.ShowText = False
-        HopeGroupBox6.Size = New Size(631, 210)
-        HopeGroupBox6.TabIndex = 18
-        HopeGroupBox6.TabStop = False
-        HopeGroupBox6.Text = "HopeGroupBox6"
-        HopeGroupBox6.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
-        ' TextBox7
-        ' 
-        TextBox7.Location = New Point(290, 139)
-        TextBox7.Name = "TextBox7"
-        TextBox7.Size = New Size(300, 34)
-        TextBox7.TabIndex = 13
-        ' 
-        ' Label18
-        ' 
-        Label18.AutoSize = True
-        Label18.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label18.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.Location = New Point(24, 138)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(144, 28)
-        Label18.TabIndex = 12
-        Label18.Text = "Email Address:"
-        ' 
-        ' TextBox8
-        ' 
-        TextBox8.Location = New Point(290, 84)
-        TextBox8.Name = "TextBox8"
-        TextBox8.Size = New Size(300, 34)
-        TextBox8.TabIndex = 11
-        ' 
-        ' Label19
-        ' 
-        Label19.AutoSize = True
-        Label19.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label19.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(24, 30)
-        Label19.Name = "Label19"
-        Label19.Size = New Size(90, 28)
-        Label19.TabIndex = 7
-        Label19.Text = "Address:"
-        ' 
-        ' Label20
-        ' 
-        Label20.AutoSize = True
-        Label20.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label20.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.Location = New Point(24, 83)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(168, 28)
-        Label20.TabIndex = 4
-        Label20.Text = "Contact Number:"
-        ' 
-        ' TextBox9
-        ' 
-        TextBox9.Location = New Point(290, 31)
-        TextBox9.Name = "TextBox9"
-        TextBox9.Size = New Size(300, 34)
-        TextBox9.TabIndex = 8
         ' 
         ' Label8
         ' 
@@ -988,12 +941,148 @@ Partial Class AdminDashboard
         Label21.TabIndex = 1
         Label21.Text = "Settings"
         ' 
+        ' pnlNurses
+        ' 
+        pnlNurses.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlNurses.Controls.Add(Panel5)
+        pnlNurses.Controls.Add(TextBox5)
+        pnlNurses.Controls.Add(btnAddNurse)
+        pnlNurses.Controls.Add(Label9)
+        pnlNurses.Dock = DockStyle.Fill
+        pnlNurses.Location = New Point(300, 40)
+        pnlNurses.Name = "pnlNurses"
+        pnlNurses.Size = New Size(900, 660)
+        pnlNurses.TabIndex = 22
+        ' 
+        ' Panel5
+        ' 
+        Panel5.Controls.Add(dgvNurses)
+        Panel5.Location = New Point(24, 134)
+        Panel5.Name = "Panel5"
+        Panel5.Size = New Size(852, 514)
+        Panel5.TabIndex = 5
+        ' 
+        ' dgvNurses
+        ' 
+        dgvNurses.ColumnHeadersHeight = 29
+        dgvNurses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        dgvNurses.Dock = DockStyle.Fill
+        dgvNurses.Location = New Point(0, 0)
+        dgvNurses.Name = "dgvNurses"
+        dgvNurses.RowHeadersWidth = 51
+        dgvNurses.Size = New Size(852, 514)
+        dgvNurses.TabIndex = 4
+        ' 
+        ' TextBox5
+        ' 
+        TextBox5.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox5.Location = New Point(24, 90)
+        TextBox5.Name = "TextBox5"
+        TextBox5.PlaceholderText = "Search nurse..."
+        TextBox5.Size = New Size(250, 32)
+        TextBox5.TabIndex = 3
+        ' 
+        ' btnAddNurse
+        ' 
+        btnAddNurse.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnAddNurse.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        btnAddNurse.IconColor = Color.Black
+        btnAddNurse.IconFont = FontAwesome.Sharp.IconFont.Regular
+        btnAddNurse.IconSize = 34
+        btnAddNurse.Location = New Point(681, 22)
+        btnAddNurse.Name = "btnAddNurse"
+        btnAddNurse.Size = New Size(195, 60)
+        btnAddNurse.TabIndex = 2
+        btnAddNurse.Text = "Add Nurse"
+        btnAddNurse.TextAlign = ContentAlignment.MiddleRight
+        btnAddNurse.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnAddNurse.UseVisualStyleBackColor = True
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Location = New Point(24, 32)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(126, 34)
+        Label9.TabIndex = 1
+        Label9.Text = "Nurses"
+        ' 
+        ' pnlAccountants
+        ' 
+        pnlAccountants.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlAccountants.Controls.Add(Panel6)
+        pnlAccountants.Controls.Add(TextBox6)
+        pnlAccountants.Controls.Add(IconButton2)
+        pnlAccountants.Controls.Add(Label10)
+        pnlAccountants.Dock = DockStyle.Fill
+        pnlAccountants.Location = New Point(300, 40)
+        pnlAccountants.Name = "pnlAccountants"
+        pnlAccountants.Size = New Size(900, 660)
+        pnlAccountants.TabIndex = 23
+        ' 
+        ' Panel6
+        ' 
+        Panel6.Controls.Add(dgvAccountants)
+        Panel6.Location = New Point(24, 134)
+        Panel6.Name = "Panel6"
+        Panel6.Size = New Size(852, 514)
+        Panel6.TabIndex = 5
+        ' 
+        ' dgvAccountants
+        ' 
+        dgvAccountants.ColumnHeadersHeight = 29
+        dgvAccountants.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        dgvAccountants.Dock = DockStyle.Fill
+        dgvAccountants.Location = New Point(0, 0)
+        dgvAccountants.Name = "dgvAccountants"
+        dgvAccountants.RowHeadersWidth = 51
+        dgvAccountants.Size = New Size(852, 514)
+        dgvAccountants.TabIndex = 4
+        ' 
+        ' TextBox6
+        ' 
+        TextBox6.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        TextBox6.Location = New Point(24, 90)
+        TextBox6.Name = "TextBox6"
+        TextBox6.PlaceholderText = "Search accountant..."
+        TextBox6.Size = New Size(250, 32)
+        TextBox6.TabIndex = 3
+        ' 
+        ' IconButton2
+        ' 
+        IconButton2.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        IconButton2.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        IconButton2.IconColor = Color.Black
+        IconButton2.IconFont = FontAwesome.Sharp.IconFont.Regular
+        IconButton2.IconSize = 34
+        IconButton2.Location = New Point(681, 22)
+        IconButton2.Name = "IconButton2"
+        IconButton2.Size = New Size(195, 60)
+        IconButton2.TabIndex = 2
+        IconButton2.Text = "Add Accountant"
+        IconButton2.TextAlign = ContentAlignment.MiddleRight
+        IconButton2.TextImageRelation = TextImageRelation.ImageBeforeText
+        IconButton2.UseVisualStyleBackColor = True
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label10.Location = New Point(24, 32)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(210, 34)
+        Label10.TabIndex = 1
+        Label10.Text = "Accountants"
+        ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
         Controls.Add(pnlSettingsAdmin)
+        Controls.Add(pnlAccountants)
+        Controls.Add(pnlNurses)
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
@@ -1038,10 +1127,16 @@ Partial Class AdminDashboard
         CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
         pnlSettingsAdmin.ResumeLayout(False)
         pnlSettingsAdmin.PerformLayout()
-        HopeGroupBox6.ResumeLayout(False)
-        HopeGroupBox6.PerformLayout()
         HopeGroupBox4.ResumeLayout(False)
         HopeGroupBox4.PerformLayout()
+        pnlNurses.ResumeLayout(False)
+        pnlNurses.PerformLayout()
+        Panel5.ResumeLayout(False)
+        CType(dgvNurses, ComponentModel.ISupportInitialize).EndInit()
+        pnlAccountants.ResumeLayout(False)
+        pnlAccountants.PerformLayout()
+        Panel6.ResumeLayout(False)
+        CType(dgvAccountants, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -1115,5 +1210,18 @@ Partial Class AdminDashboard
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label21 As Label
     Friend WithEvents btnEyePassword As FontAwesome.Sharp.IconButton
-    Friend WithEvents IconButton1 As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnSaveAdminSettings As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnAccountant As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnNurse As FontAwesome.Sharp.IconButton
+    Friend WithEvents pnlNurses As Panel
+    Friend WithEvents dgvNurses As DataGridView
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents btnAddNurse As FontAwesome.Sharp.IconButton
+    Friend WithEvents Label9 As Label
+    Friend WithEvents pnlAccountants As Panel
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents dgvAccountants As DataGridView
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents IconButton2 As FontAwesome.Sharp.IconButton
+    Friend WithEvents Label10 As Label
 End Class
