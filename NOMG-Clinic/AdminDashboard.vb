@@ -23,6 +23,12 @@ Public Class AdminDashboard
         BillingSetupDataGrid()
         BillingPopulateDataGrid()
 
+        NursesSetupDataGrid()
+        NursesPopulateDataGrid()
+
+        AccountantsSetupDataGrid()
+        AccountantsPopulateDataGrid()
+
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
         PopulateRecentPayments(connectionString)
@@ -96,6 +102,13 @@ Public Class AdminDashboard
         ShowPanel(pnlSettingsAdmin, btnSettings)
     End Sub
 
+    Private Sub btnNurse_Click(sender As Object, e As EventArgs) Handles btnNurse.Click
+        ShowPanel(pnlNurses, btnNurse)
+    End Sub
+
+    Private Sub btnAccountant_Click(sender As Object, e As EventArgs) Handles btnAccountant.Click
+        ShowPanel(pnlAccountants, btnAccountant)
+    End Sub
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         Dim loginForm = New Form1()
         loginForm.Show()
@@ -110,6 +123,8 @@ Public Class AdminDashboard
         pnlAppointments.Visible = False
         pnlBilling.Visible = False
         pnlSettingsAdmin.Visible = False
+        pnlNurses.Visible = False
+        pnlAccountants.Visible = False
 
         ' Show the selected panel
         panelToShow.Visible = True
@@ -141,6 +156,12 @@ Public Class AdminDashboard
 
         btnSettings.BackColor = Color.Transparent
         btnSettings.ForeColor = Color.Black
+
+        btnNurse.BackColor = Color.Transparent
+        btnNurse.ForeColor = Color.Black
+
+        btnAccountant.BackColor = Color.Transparent
+        btnAccountant.ForeColor = Color.Black
     End Sub
 
     Private Sub AdminDashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -664,11 +685,11 @@ Public Class AdminDashboard
         CloseDropdownPatients()
     End Sub
     Private Sub txtSearchPatient_TextChanged_1(sender As Object, e As EventArgs) Handles txtSearchPatient.TextChanged
-        Dim searchText As String = txtSearchPatient.Text.Trim().ToLower()
+        Dim searchText = txtSearchPatient.Text.Trim.ToLower
 
         For Each row As DataGridViewRow In dgvPatients.Rows
-            Dim name As String = row.Cells("Name").Value.ToString().ToLower()
-            Dim assignedOB As String = row.Cells("AssignedOB").Value.ToString().ToLower()
+            Dim name = row.Cells("Name").Value.ToString.ToLower
+            Dim assignedOB = row.Cells("AssignedOB").Value.ToString.ToLower
 
             If name.Contains(searchText) OrElse assignedOB.Contains(searchText) Then
                 row.Visible = True
@@ -1483,6 +1504,260 @@ Public Class AdminDashboard
                 End If
             End If
         End If
+    End Sub
+
+    ''''''''''''''''''''''''''''''''''
+    '                                '
+    ' nurses data grid view setup    '
+    '                                '
+    ''''''''''''''''''''''''''''''''''
+    ' Setup dgvNurses
+    Public Sub NursesSetupDataGrid()
+        dgvNurses.AllowUserToAddRows = False
+        dgvNurses.AllowUserToDeleteRows = False
+        dgvNurses.ReadOnly = True
+        dgvNurses.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvNurses.MultiSelect = False
+        dgvNurses.BackgroundColor = Color.White
+        dgvNurses.BorderStyle = BorderStyle.None
+        dgvNurses.RowHeadersVisible = False
+        dgvNurses.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
+        dgvNurses.GridColor = Color.LightGray
+        dgvNurses.ColumnHeadersVisible = True
+
+        dgvNurses.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        dgvNurses.ColumnHeadersHeight = 40
+        dgvNurses.ColumnHeadersDefaultCellStyle.Font = New Font(dgvNurses.Font, FontStyle.Bold)
+        dgvNurses.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
+        dgvNurses.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+        dgvNurses.RowTemplate.Height = 50
+        dgvNurses.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
+        dgvNurses.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245)
+        dgvNurses.DefaultCellStyle.SelectionForeColor = Color.Black
+
+        dgvNurses.AllowUserToResizeColumns = False
+        dgvNurses.AllowUserToResizeRows = False
+
+        dgvNurses.ScrollBars = ScrollBars.Vertical
+
+        dgvNurses.AutoGenerateColumns = False
+        dgvNurses.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+        dgvNurses.Columns.Clear()
+
+        Dim nameColumn As New DataGridViewTextBoxColumn()
+        nameColumn.HeaderText = "Name"
+        nameColumn.Name = "Name"
+        nameColumn.MinimumWidth = 140
+        nameColumn.FillWeight = 30
+        dgvNurses.Columns.Add(nameColumn)
+
+        Dim ageColumn As New DataGridViewTextBoxColumn()
+        ageColumn.HeaderText = "Age"
+        ageColumn.Name = "Age"
+        ageColumn.MinimumWidth = 80
+        ageColumn.FillWeight = 15
+        dgvNurses.Columns.Add(ageColumn)
+
+        Dim positionColumn As New DataGridViewTextBoxColumn()
+        positionColumn.HeaderText = "Position"
+        positionColumn.Name = "Position"
+        positionColumn.MinimumWidth = 130
+        positionColumn.FillWeight = 25
+        dgvNurses.Columns.Add(positionColumn)
+
+        Dim contactNumberColumn As New DataGridViewTextBoxColumn()
+        contactNumberColumn.HeaderText = "Contact Number"
+        contactNumberColumn.Name = "ContactNumber"
+        contactNumberColumn.MinimumWidth = 140
+        contactNumberColumn.FillWeight = 30
+        dgvNurses.Columns.Add(contactNumberColumn)
+
+        AddHandler dgvNurses.DataBindingComplete, AddressOf dgvNurses_DataBindingComplete
+        AddHandler dgvNurses.CellFormatting, AddressOf dgvNurses_CellFormatting
+    End Sub
+
+    Private Sub dgvNurses_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
+        If dgvNurses.DisplayedRowCount(True) < dgvNurses.RowCount Then
+            Dim scrollWidth As Integer = SystemInformation.VerticalScrollBarWidth
+            dgvNurses.PerformLayout()
+        End If
+    End Sub
+
+    Private Sub dgvNurses_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvNurses.Rows(e.RowIndex)
+
+            If e.ColumnIndex = dgvNurses.Columns("Name").Index Then
+                Dim cell As DataGridViewCell = row.Cells(e.ColumnIndex)
+                cell.Style.Font = New Font(dgvNurses.Font, FontStyle.Bold)
+            End If
+        End If
+    End Sub
+
+    ' Populate the dgvNurses
+    Public Sub NursesPopulateDataGrid()
+        If dgvNurses.Columns.Count = 0 Then
+            NursesSetupDataGrid()
+        End If
+        dgvNurses.Rows.Clear()
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Dim query As String = "
+    SELECT 
+        CONCAT(first_name, ' ', IFNULL(middle_name, ''), ' ', last_name) AS Name, 
+        age AS Age, 
+        position AS Position, 
+        contact_number AS ContactNumber
+    FROM 
+        nurse"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                Try
+                    connection.Open()
+
+                    Dim adapter As New MySqlDataAdapter(command)
+                    Dim dataTable As New DataTable()
+                    adapter.Fill(dataTable)
+
+                    For Each row As DataRow In dataTable.Rows
+                        dgvNurses.Rows.Add(row("Name"), row("Age"), row("Position"), row("ContactNumber"))
+                    Next
+                Catch ex As Exception
+                    MessageBox.Show("An error occurred while fetching nurse data: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    ''''''''''''''''''''''''''''''''''
+    '                                '
+    ' accountants data grid view setup '
+    '                                '
+    ''''''''''''''''''''''''''''''''''
+    ' Setup dgvAccountants
+    Public Sub AccountantsSetupDataGrid()
+        dgvAccountants.AllowUserToAddRows = False
+        dgvAccountants.AllowUserToDeleteRows = False
+        dgvAccountants.ReadOnly = True
+        dgvAccountants.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvAccountants.MultiSelect = False
+        dgvAccountants.BackgroundColor = Color.White
+        dgvAccountants.BorderStyle = BorderStyle.None
+        dgvAccountants.RowHeadersVisible = False
+        dgvAccountants.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
+        dgvAccountants.GridColor = Color.LightGray
+        dgvAccountants.ColumnHeadersVisible = True
+
+        dgvAccountants.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        dgvAccountants.ColumnHeadersHeight = 40
+        dgvAccountants.ColumnHeadersDefaultCellStyle.Font = New Font(dgvAccountants.Font, FontStyle.Bold)
+        dgvAccountants.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
+        dgvAccountants.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+        dgvAccountants.RowTemplate.Height = 50
+        dgvAccountants.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
+        dgvAccountants.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245)
+        dgvAccountants.DefaultCellStyle.SelectionForeColor = Color.Black
+
+        dgvAccountants.AllowUserToResizeColumns = False
+        dgvAccountants.AllowUserToResizeRows = False
+
+        dgvAccountants.ScrollBars = ScrollBars.Vertical
+
+        dgvAccountants.AutoGenerateColumns = False
+        dgvAccountants.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+        dgvAccountants.Columns.Clear()
+
+        Dim nameColumn As New DataGridViewTextBoxColumn()
+        nameColumn.HeaderText = "Name"
+        nameColumn.Name = "Name"
+        nameColumn.MinimumWidth = 140
+        nameColumn.FillWeight = 30
+        dgvAccountants.Columns.Add(nameColumn)
+
+        Dim ageColumn As New DataGridViewTextBoxColumn()
+        ageColumn.HeaderText = "Age"
+        ageColumn.Name = "Age"
+        ageColumn.MinimumWidth = 80
+        ageColumn.FillWeight = 15
+        dgvAccountants.Columns.Add(ageColumn)
+
+        Dim positionColumn As New DataGridViewTextBoxColumn()
+        positionColumn.HeaderText = "Position"
+        positionColumn.Name = "Position"
+        positionColumn.MinimumWidth = 130
+        positionColumn.FillWeight = 25
+        dgvAccountants.Columns.Add(positionColumn)
+
+        Dim contactNumberColumn As New DataGridViewTextBoxColumn()
+        contactNumberColumn.HeaderText = "Contact Number"
+        contactNumberColumn.Name = "ContactNumber"
+        contactNumberColumn.MinimumWidth = 140
+        contactNumberColumn.FillWeight = 30
+        dgvAccountants.Columns.Add(contactNumberColumn)
+
+        AddHandler dgvAccountants.DataBindingComplete, AddressOf dgvAccountants_DataBindingComplete
+        AddHandler dgvAccountants.CellFormatting, AddressOf dgvAccountants_CellFormatting
+    End Sub
+
+    Private Sub dgvAccountants_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
+        If dgvAccountants.DisplayedRowCount(True) < dgvAccountants.RowCount Then
+            Dim scrollWidth As Integer = SystemInformation.VerticalScrollBarWidth
+            dgvAccountants.PerformLayout()
+        End If
+    End Sub
+
+    Private Sub dgvAccountants_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvAccountants.Rows(e.RowIndex)
+
+            If e.ColumnIndex = dgvAccountants.Columns("Name").Index Then
+                Dim cell As DataGridViewCell = row.Cells(e.ColumnIndex)
+                cell.Style.Font = New Font(dgvAccountants.Font, FontStyle.Bold)
+            End If
+        End If
+    End Sub
+
+    ' Populate the dgvAccountants
+    Public Sub AccountantsPopulateDataGrid()
+        If dgvAccountants.Columns.Count = 0 Then
+            AccountantsSetupDataGrid()
+        End If
+        dgvAccountants.Rows.Clear()
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Dim query As String = "
+    SELECT 
+        CONCAT(first_name, ' ', IFNULL(middle_name, ''), ' ', last_name) AS Name, 
+        age AS Age, 
+        position AS Position, 
+        contact_number AS ContactNumber
+    FROM 
+        accountant"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                Try
+                    connection.Open()
+
+                    Dim adapter As New MySqlDataAdapter(command)
+                    Dim dataTable As New DataTable()
+                    adapter.Fill(dataTable)
+
+                    For Each row As DataRow In dataTable.Rows
+                        dgvAccountants.Rows.Add(row("Name"), row("Age"), row("Position"), row("ContactNumber"))
+                    Next
+                Catch ex As Exception
+                    MessageBox.Show("An error occurred while fetching accountant data: " & ex.Message)
+                End Try
+            End Using
+        End Using
     End Sub
 End Class
 
