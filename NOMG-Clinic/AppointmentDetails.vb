@@ -267,6 +267,14 @@ Public Class AppointmentDetails
         If SaveAppointment() Then
             MessageBox.Show("Appointment scheduled successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.DialogResult = DialogResult.OK
+            Dim adminForm As AdminDashboard = TryCast(Application.OpenForms("AdminDashboard"), AdminDashboard)
+            If adminForm IsNot Nothing Then
+                adminForm.AppointmentsSetupDataGrid()
+                adminForm.AppointmentsPopulateDataGrid()
+            Else
+                MessageBox.Show("Admin dashboard not found. Please refresh the dashboard manually.",
+                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
             Me.Close()
         End If
     End Sub

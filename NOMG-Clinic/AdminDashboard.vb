@@ -1045,7 +1045,7 @@ Public Class AdminDashboard
     '''''''''''''''''''''''''''''''''''''
 
     ' Setup dgvAppointments
-    Private Sub AppointmentsSetupDataGrid()
+    Public Sub AppointmentsSetupDataGrid()
         dgvAppointments.AllowUserToAddRows = False
         dgvAppointments.AllowUserToDeleteRows = False
         dgvAppointments.ReadOnly = True
@@ -1142,7 +1142,7 @@ Public Class AdminDashboard
     End Sub
 
     ' Populate the dgvAppointments
-    Private Sub AppointmentsPopulateDataGrid()
+    Public Sub AppointmentsPopulateDataGrid()
         dgvAppointments.Rows.Clear()
 
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
@@ -1633,6 +1633,25 @@ Public Class AdminDashboard
         End Using
     End Sub
 
+    Private Sub txtSearchNurses_TextChanged_1(sender As Object, e As EventArgs) Handles txtSearchNurses.TextChanged
+        Dim searchText = txtSearchNurses.Text.Trim.ToLower
+
+        For Each row As DataGridViewRow In dgvNurses.Rows
+            Dim name = row.Cells("Name").Value.ToString.ToLower
+
+            If name.Contains(searchText) Then
+                row.Visible = True
+            Else
+                row.Visible = False
+            End If
+        Next
+    End Sub
+
+    Private Sub btnAddNurse_Click(sender As Object, e As EventArgs) Handles btnAddNurse.Click
+        Dim nurseRegistrationForm As New NurseRegistration()
+        nurseRegistrationForm.Show()
+    End Sub
+
     ''''''''''''''''''''''''''''''''''
     '                                '
     ' accountants data grid view setup '
@@ -1758,6 +1777,25 @@ Public Class AdminDashboard
                 End Try
             End Using
         End Using
+    End Sub
+
+    Private Sub txtSearchAccountant_TextChanged_1(sender As Object, e As EventArgs) Handles txtSearchAccountant.TextChanged
+        Dim searchText = txtSearchAccountant.Text.Trim.ToLower
+
+        For Each row As DataGridViewRow In dgvAccountants.Rows
+            Dim name = row.Cells("Name").Value.ToString.ToLower
+
+            If name.Contains(searchText) Then
+                row.Visible = True
+            Else
+                row.Visible = False
+            End If
+        Next
+    End Sub
+
+    Private Sub btnAddAccountant_Click(sender As Object, e As EventArgs) Handles btnAddAccountant.Click
+        Dim accountantRegistrationForm As New AccountantRegistration()
+        accountantRegistrationForm.Show()
     End Sub
 End Class
 

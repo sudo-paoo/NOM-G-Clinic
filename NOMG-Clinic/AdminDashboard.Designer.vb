@@ -57,9 +57,9 @@ Partial Class AdminDashboard
         btnAddPatient = New FontAwesome.Sharp.IconButton()
         Label5 = New Label()
         pnlDoctors = New Panel()
+        btnAddDoctor = New FontAwesome.Sharp.IconButton()
         pnlDoctorsDataGrid = New Panel()
         dgvDoctors = New DataGridView()
-        btnAddDoctor = New FontAwesome.Sharp.IconButton()
         txtSearchDoctor = New TextBox()
         Label6 = New Label()
         pnlAppointments = New Panel()
@@ -88,14 +88,14 @@ Partial Class AdminDashboard
         pnlNurses = New Panel()
         Panel5 = New Panel()
         dgvNurses = New DataGridView()
-        TextBox5 = New TextBox()
+        txtSearchNurses = New TextBox()
         btnAddNurse = New FontAwesome.Sharp.IconButton()
         Label9 = New Label()
         pnlAccountants = New Panel()
         Panel6 = New Panel()
         dgvAccountants = New DataGridView()
-        TextBox6 = New TextBox()
-        IconButton2 = New FontAwesome.Sharp.IconButton()
+        txtSearchAccountant = New TextBox()
+        btnAddAccountant = New FontAwesome.Sharp.IconButton()
         Label10 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
@@ -624,6 +624,7 @@ Partial Class AdminDashboard
         ' pnlDoctors
         ' 
         pnlDoctors.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlDoctors.Controls.Add(btnAddDoctor)
         pnlDoctors.Controls.Add(pnlDoctorsDataGrid)
         pnlDoctors.Controls.Add(txtSearchDoctor)
         pnlDoctors.Controls.Add(Label6)
@@ -633,10 +634,25 @@ Partial Class AdminDashboard
         pnlDoctors.Size = New Size(900, 660)
         pnlDoctors.TabIndex = 7
         ' 
+        ' btnAddDoctor
+        ' 
+        btnAddDoctor.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnAddDoctor.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        btnAddDoctor.IconColor = Color.Black
+        btnAddDoctor.IconFont = FontAwesome.Sharp.IconFont.Regular
+        btnAddDoctor.IconSize = 34
+        btnAddDoctor.Location = New Point(681, 22)
+        btnAddDoctor.Name = "btnAddDoctor"
+        btnAddDoctor.Size = New Size(195, 60)
+        btnAddDoctor.TabIndex = 2
+        btnAddDoctor.Text = "Add Doctor"
+        btnAddDoctor.TextAlign = ContentAlignment.MiddleRight
+        btnAddDoctor.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnAddDoctor.UseVisualStyleBackColor = True
+        ' 
         ' pnlDoctorsDataGrid
         ' 
         pnlDoctorsDataGrid.Controls.Add(dgvDoctors)
-        pnlDoctorsDataGrid.Controls.Add(btnAddDoctor)
         pnlDoctorsDataGrid.Location = New Point(24, 134)
         pnlDoctorsDataGrid.Name = "pnlDoctorsDataGrid"
         pnlDoctorsDataGrid.Size = New Size(852, 514)
@@ -652,22 +668,6 @@ Partial Class AdminDashboard
         dgvDoctors.RowHeadersWidth = 51
         dgvDoctors.Size = New Size(852, 514)
         dgvDoctors.TabIndex = 4
-        ' 
-        ' btnAddDoctor
-        ' 
-        btnAddDoctor.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnAddDoctor.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
-        btnAddDoctor.IconColor = Color.Black
-        btnAddDoctor.IconFont = FontAwesome.Sharp.IconFont.Regular
-        btnAddDoctor.IconSize = 34
-        btnAddDoctor.Location = New Point(0, 0)
-        btnAddDoctor.Name = "btnAddDoctor"
-        btnAddDoctor.Size = New Size(195, 60)
-        btnAddDoctor.TabIndex = 2
-        btnAddDoctor.Text = "Add Doctor"
-        btnAddDoctor.TextAlign = ContentAlignment.MiddleRight
-        btnAddDoctor.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnAddDoctor.UseVisualStyleBackColor = True
         ' 
         ' txtSearchDoctor
         ' 
@@ -945,7 +945,7 @@ Partial Class AdminDashboard
         ' 
         pnlNurses.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlNurses.Controls.Add(Panel5)
-        pnlNurses.Controls.Add(TextBox5)
+        pnlNurses.Controls.Add(txtSearchNurses)
         pnlNurses.Controls.Add(btnAddNurse)
         pnlNurses.Controls.Add(Label9)
         pnlNurses.Dock = DockStyle.Fill
@@ -973,14 +973,14 @@ Partial Class AdminDashboard
         dgvNurses.Size = New Size(852, 514)
         dgvNurses.TabIndex = 4
         ' 
-        ' TextBox5
+        ' txtSearchNurses
         ' 
-        TextBox5.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox5.Location = New Point(24, 90)
-        TextBox5.Name = "TextBox5"
-        TextBox5.PlaceholderText = "Search nurse..."
-        TextBox5.Size = New Size(250, 32)
-        TextBox5.TabIndex = 3
+        txtSearchNurses.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchNurses.Location = New Point(24, 90)
+        txtSearchNurses.Name = "txtSearchNurses"
+        txtSearchNurses.PlaceholderText = "Search nurse..."
+        txtSearchNurses.Size = New Size(250, 32)
+        txtSearchNurses.TabIndex = 3
         ' 
         ' btnAddNurse
         ' 
@@ -1012,8 +1012,8 @@ Partial Class AdminDashboard
         ' 
         pnlAccountants.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlAccountants.Controls.Add(Panel6)
-        pnlAccountants.Controls.Add(TextBox6)
-        pnlAccountants.Controls.Add(IconButton2)
+        pnlAccountants.Controls.Add(txtSearchAccountant)
+        pnlAccountants.Controls.Add(btnAddAccountant)
         pnlAccountants.Controls.Add(Label10)
         pnlAccountants.Dock = DockStyle.Fill
         pnlAccountants.Location = New Point(300, 40)
@@ -1040,30 +1040,30 @@ Partial Class AdminDashboard
         dgvAccountants.Size = New Size(852, 514)
         dgvAccountants.TabIndex = 4
         ' 
-        ' TextBox6
+        ' txtSearchAccountant
         ' 
-        TextBox6.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        TextBox6.Location = New Point(24, 90)
-        TextBox6.Name = "TextBox6"
-        TextBox6.PlaceholderText = "Search accountant..."
-        TextBox6.Size = New Size(250, 32)
-        TextBox6.TabIndex = 3
+        txtSearchAccountant.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtSearchAccountant.Location = New Point(24, 90)
+        txtSearchAccountant.Name = "txtSearchAccountant"
+        txtSearchAccountant.PlaceholderText = "Search accountant..."
+        txtSearchAccountant.Size = New Size(250, 32)
+        txtSearchAccountant.TabIndex = 3
         ' 
-        ' IconButton2
+        ' btnAddAccountant
         ' 
-        IconButton2.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        IconButton2.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
-        IconButton2.IconColor = Color.Black
-        IconButton2.IconFont = FontAwesome.Sharp.IconFont.Regular
-        IconButton2.IconSize = 34
-        IconButton2.Location = New Point(681, 22)
-        IconButton2.Name = "IconButton2"
-        IconButton2.Size = New Size(195, 60)
-        IconButton2.TabIndex = 2
-        IconButton2.Text = "Add Accountant"
-        IconButton2.TextAlign = ContentAlignment.MiddleRight
-        IconButton2.TextImageRelation = TextImageRelation.ImageBeforeText
-        IconButton2.UseVisualStyleBackColor = True
+        btnAddAccountant.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnAddAccountant.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
+        btnAddAccountant.IconColor = Color.Black
+        btnAddAccountant.IconFont = FontAwesome.Sharp.IconFont.Regular
+        btnAddAccountant.IconSize = 34
+        btnAddAccountant.Location = New Point(681, 22)
+        btnAddAccountant.Name = "btnAddAccountant"
+        btnAddAccountant.Size = New Size(195, 60)
+        btnAddAccountant.TabIndex = 2
+        btnAddAccountant.Text = "Add Accountant"
+        btnAddAccountant.TextAlign = ContentAlignment.MiddleRight
+        btnAddAccountant.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnAddAccountant.UseVisualStyleBackColor = True
         ' 
         ' Label10
         ' 
@@ -1080,13 +1080,13 @@ Partial Class AdminDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlAccountants)
         Controls.Add(pnlNurses)
+        Controls.Add(pnlDoctors)
+        Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
-        Controls.Add(pnlDoctors)
         Controls.Add(pnlDashboard)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
@@ -1215,13 +1215,13 @@ Partial Class AdminDashboard
     Friend WithEvents btnNurse As FontAwesome.Sharp.IconButton
     Friend WithEvents pnlNurses As Panel
     Friend WithEvents dgvNurses As DataGridView
-    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents txtSearchNurses As TextBox
     Friend WithEvents btnAddNurse As FontAwesome.Sharp.IconButton
     Friend WithEvents Label9 As Label
     Friend WithEvents pnlAccountants As Panel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents dgvAccountants As DataGridView
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents IconButton2 As FontAwesome.Sharp.IconButton
+    Friend WithEvents txtSearchAccountant As TextBox
+    Friend WithEvents btnAddAccountant As FontAwesome.Sharp.IconButton
     Friend WithEvents Label10 As Label
 End Class
