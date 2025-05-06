@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class AppointmentDetails
+Partial Class ViewAppointmentDetails
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,7 +22,7 @@ Partial Class AppointmentDetails
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AppointmentDetails))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ViewAppointmentDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
         Label7 = New Label()
@@ -61,11 +61,10 @@ Partial Class AppointmentDetails
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
-        HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
         HopeForm1.Size = New Size(600, 40)
         HopeForm1.TabIndex = 0
-        HopeForm1.Text = "Appointment Details"
+        HopeForm1.Text = "View Appointment"
         HopeForm1.ThemeColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
         ' 
         ' Panel1
@@ -99,8 +98,8 @@ Partial Class AppointmentDetails
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(600, 660)
-        Panel1.TabIndex = 1
+        Panel1.Size = New Size(600, 640)
+        Panel1.TabIndex = 2
         ' 
         ' Label7
         ' 
@@ -234,9 +233,9 @@ Partial Class AppointmentDetails
         Label6.Font = New Font("Verdana", 10.2F)
         Label6.Location = New Point(286, 184)
         Label6.Name = "Label6"
-        Label6.Size = New Size(132, 20)
+        Label6.Size = New Size(73, 20)
         Label6.TabIndex = 31
-        Label6.Text = "Select Doctor:"
+        Label6.Text = "Doctor:"
         ' 
         ' lblTimeSlotHeader
         ' 
@@ -245,9 +244,9 @@ Partial Class AppointmentDetails
         lblTimeSlotHeader.Font = New Font("Verdana", 10.2F)
         lblTimeSlotHeader.Location = New Point(286, 252)
         lblTimeSlotHeader.Name = "lblTimeSlotHeader"
-        lblTimeSlotHeader.Size = New Size(192, 20)
+        lblTimeSlotHeader.Size = New Size(108, 20)
         lblTimeSlotHeader.TabIndex = 30
-        lblTimeSlotHeader.Text = "Available Time Slots:"
+        lblTimeSlotHeader.Text = "Time Slots:"
         ' 
         ' lblAppointmentHeader
         ' 
@@ -345,20 +344,20 @@ Partial Class AppointmentDetails
         calAppointmentDate.Name = "calAppointmentDate"
         calAppointmentDate.TabIndex = 19
         ' 
-        ' AppointmentDetails
+        ' ViewAppointmentDetails
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(600, 700)
+        BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        ClientSize = New Size(600, 680)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
-        MaximizeBox = False
-        MaximumSize = New Size(1920, 1020)
+        MaximumSize = New Size(1920, 1080)
         MinimumSize = New Size(190, 40)
-        Name = "AppointmentDetails"
+        Name = "ViewAppointmentDetails"
         StartPosition = FormStartPosition.CenterScreen
-        Text = "AppointmentDetails"
+        Text = "ViewAppointmentDetails"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         ResumeLayout(False)
@@ -366,6 +365,11 @@ Partial Class AppointmentDetails
 
     Friend WithEvents HopeForm1 As ReaLTaiizor.Forms.HopeForm
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents txtNotes As TextBox
+    Friend WithEvents btnSubmit As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnCancel As FontAwesome.Sharp.IconButton
+    Friend WithEvents lblSelectedDate As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -384,9 +388,4 @@ Partial Class AppointmentDetails
     Friend WithEvents cboDoctor As ComboBox
     Friend WithEvents cboTimeSlot As ComboBox
     Friend WithEvents calAppointmentDate As MonthCalendar
-    Friend WithEvents btnSubmit As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancel As FontAwesome.Sharp.IconButton
-    Friend WithEvents lblSelectedDate As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents txtNotes As TextBox
 End Class
