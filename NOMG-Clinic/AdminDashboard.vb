@@ -545,10 +545,11 @@ Public Class AdminDashboard
         Dim btn = DirectCast(sender, Button)
         Dim rowIndex = CInt(btn.Tag)
         Dim patientName = dgvPatients.Rows(rowIndex).Cells("Name").Value.ToString()
-
+        Dim patientId As String = GetPatientIdByName(patientName)
         Select Case btn.Text
+
             Case "View patient details"
-                Dim patientId As String = GetPatientIdByName(patientName)
+
                 If Not String.IsNullOrEmpty(patientId) Then
                     Dim patientDetailsForm As New PatientDetails()
                     patientDetailsForm.patientID = patientId
@@ -558,10 +559,15 @@ Public Class AdminDashboard
                 End If
 
             Case "Edit patient"
-                MessageBox.Show("Editing patient " & patientName)
+                If Not String.IsNullOrEmpty(patientId) Then
+                    Dim editPatientDetailsForm As New EditPatientDetails()
+                    editPatientDetailsForm.patientID = patientId
+                    editPatientDetailsForm.ShowDialog()
+                Else
+                    MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
 
             Case "Schedule appointment"
-                Dim patientId As String = GetPatientIdByName(patientName)
                 If Not String.IsNullOrEmpty(patientId) Then
                     Dim lastMenstrualDate As Date = Date.MinValue
                     Dim dueDate As Date = Date.MinValue
