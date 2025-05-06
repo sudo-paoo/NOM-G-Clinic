@@ -1121,24 +1121,27 @@ Public Class AdminDashboard
         statusColumn.FillWeight = 10
         dgvAppointments.Columns.Add(statusColumn)
 
-        Dim actionButtonColumn As New DataGridViewButtonColumn()
-        actionButtonColumn.HeaderText = ""
-        actionButtonColumn.Name = "ActionButton"
-        actionButtonColumn.Text = "..."
-        actionButtonColumn.UseColumnTextForButtonValue = True
-        actionButtonColumn.FlatStyle = FlatStyle.Flat
-        actionButtonColumn.MinimumWidth = 60
-        actionButtonColumn.FillWeight = 5
-        dgvAppointments.Columns.Add(actionButtonColumn)
+        ' Patient ID column (hidden)
+        Dim patientIDColumn As New DataGridViewTextBoxColumn()
+        patientIDColumn.HeaderText = "PatientID"
+        patientIDColumn.Name = "PatientID"
+        patientIDColumn.Visible = False
+        dgvAppointments.Columns.Add(patientIDColumn)
+
+        ' View button
+        Dim viewButtonColumn As New DataGridViewButtonColumn()
+        viewButtonColumn.HeaderText = ""
+        viewButtonColumn.Name = "ViewButton"
+        viewButtonColumn.Text = "View"
+        viewButtonColumn.UseColumnTextForButtonValue = True
+        viewButtonColumn.FlatStyle = FlatStyle.Flat
+        viewButtonColumn.MinimumWidth = 60
+        viewButtonColumn.FillWeight = 5
+        dgvAppointments.Columns.Add(viewButtonColumn)
 
         AddHandler dgvAppointments.DataBindingComplete, AddressOf dgvAppointments_DataBindingComplete
-    End Sub
-
-    Private Sub dgvAppointments_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
-        If dgvAppointments.DisplayedRowCount(True) < dgvAppointments.RowCount Then
-            Dim scrollWidth As Integer = SystemInformation.VerticalScrollBarWidth
-            dgvAppointments.PerformLayout()
-        End If
+        AddHandler dgvAppointments.CellClick, AddressOf dgvAppointments_CellClick
+        AddHandler dgvAppointments.CellFormatting, AddressOf dgvAppointments_CellFormatting
     End Sub
 
     ' Populate the dgvAppointments
@@ -1148,19 +1151,20 @@ Public Class AdminDashboard
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
         Dim query As String = "
-        SELECT 
-            a.appointment_id AS AppointmentID,
-            CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
-            CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
-            DATE_FORMAT(a.appointment_date, '%b %d, %Y') AS AppointmentDate,
-            a.reason_for_visit AS Reason,
-            a.status AS Status
-        FROM 
-            appointment_table a
-        LEFT JOIN 
-            patient p ON a.patient_id = p.patient_id
-        LEFT JOIN 
-            doctor d ON a.doctor_id = d.doctor_id"
+    SELECT 
+        a.appointment_id AS AppointmentID,
+        CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
+        CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
+        DATE_FORMAT(a.appointment_date, '%b %d, %Y') AS AppointmentDate,
+        a.reason_for_visit AS Reason,
+        a.status AS Status,
+        p.patient_id AS PatientID
+    FROM 
+        appointment_table a
+    LEFT JOIN 
+        patient p ON a.patient_id = p.patient_id
+    LEFT JOIN 
+        doctor d ON a.doctor_id = d.doctor_id"
 
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
@@ -1172,7 +1176,15 @@ Public Class AdminDashboard
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        dgvAppointments.Rows.Add(row("AppointmentID"), row("PatientName"), row("DoctorName"), row("AppointmentDate"), row("Reason"), row("Status"))
+                        dgvAppointments.Rows.Add(
+                            row("AppointmentID"),
+                            row("PatientName"),
+                            row("DoctorName"),
+                            row("AppointmentDate"),
+                            row("Reason"),
+                            row("Status"),
+                            row("PatientID")
+                        )
                     Next
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching appointment data: " & ex.Message)
@@ -1180,132 +1192,54 @@ Public Class AdminDashboard
             End Using
         End Using
     End Sub
-    Private Sub dgvAppointments_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvAppointments.CellClick
-        If e.ColumnIndex = dgvAppointments.Columns("ActionButton").Index And e.RowIndex >= 0 Then
-            CloseDropdownAppointments()
 
-            ShowDropdownAppointments(e.RowIndex)
-        ElseIf activeDropdownAppointments IsNot Nothing Then
-            CloseDropdownAppointments()
-        End If
-    End Sub
+    Private Sub dgvAppointments_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvAppointments.Rows(e.RowIndex)
 
-    ' Generate dropdown for appointments
-    Private Sub ShowDropdownAppointments(rowIndex As Integer)
-        CloseDropdownAppointments()
+            If e.ColumnIndex = dgvAppointments.Columns("ViewButton").Index Then
+                Dim cell As DataGridViewButtonCell = DirectCast(row.Cells(e.ColumnIndex), DataGridViewButtonCell)
+                cell.Style.BackColor = Color.FromArgb(0, 120, 215)
+                cell.Style.ForeColor = Color.White
+                cell.Style.SelectionBackColor = Color.FromArgb(0, 100, 190)
+                cell.Style.SelectionForeColor = Color.White
+            End If
 
-        Dim cellRect = dgvAppointments.GetCellDisplayRectangle(dgvAppointments.Columns("ActionButton").Index, rowIndex, False)
-        Dim screenPoint = dgvAppointments.PointToScreen(New Point(cellRect.Right, cellRect.Top))
-        Dim formPoint = Me.PointToClient(screenPoint)
+            If e.ColumnIndex = dgvAppointments.Columns("PatientName").Index Then
+                Dim cell As DataGridViewCell = row.Cells(e.ColumnIndex)
+                cell.Style.Font = New Font(dgvAppointments.Font, FontStyle.Bold)
+            End If
 
-        activeDropdownAppointments = New Panel With {
-        .BorderStyle = BorderStyle.FixedSingle,
-        .BackColor = Color.White,
-        .Size = New Size(200, 130)
-    }
-
-        Dim dropdownX = formPoint.X - activeDropdownAppointments.Width
-        Dim dropdownY = formPoint.Y
-
-        If dropdownX < 0 Then dropdownX = 0
-        If dropdownX + activeDropdownAppointments.Width > Me.ClientSize.Width Then
-            dropdownX = Me.ClientSize.Width - activeDropdownAppointments.Width
-        End If
-
-        If dropdownY + activeDropdownAppointments.Height > Me.ClientSize.Height Then
-            dropdownY = formPoint.Y - activeDropdownAppointments.Height + cellRect.Height
-        End If
-
-        activeDropdownAppointments.Location = New Point(dropdownX, dropdownY)
-
-        Dim lblTitle As New Label With {
-        .Text = "Actions",
-        .Font = New Font(dgvAppointments.Font.FontFamily, 10, FontStyle.Bold),
-        .AutoSize = False,
-        .Size = New Size(200, 30),
-        .TextAlign = ContentAlignment.MiddleLeft,
-        .Padding = New Padding(10, 0, 0, 0)
-    }
-        activeDropdownAppointments.Controls.Add(lblTitle)
-
-        AddMenuOptionAppointments("View details", rowIndex, 30)
-        AddMenuOptionAppointments("Reschedule", rowIndex, 60)
-        AddMenuOptionAppointments("Cancel appointment", rowIndex, 90)
-
-        Me.Controls.Add(activeDropdownAppointments)
-        activeDropdownAppointments.BringToFront()
-    End Sub
-
-    Private Sub AddMenuOptionAppointments(text As String, rowIndex As Integer, topPosition As Integer)
-        Dim btn As New Button With {
-        .Text = text,
-        .FlatStyle = FlatStyle.Flat,
-        .TextAlign = ContentAlignment.MiddleLeft,
-        .Size = New Size(200, 30),
-        .Location = New Point(0, topPosition),
-        .BackColor = Color.White,
-        .Padding = New Padding(10, 0, 0, 0),
-        .Tag = rowIndex
-    }
-
-        btn.FlatAppearance.BorderSize = 0
-
-        AddHandler btn.Click, AddressOf MenuOptionAppointments_Click
-        AddHandler btn.MouseEnter, AddressOf MenuOptionAppointments_MouseEnter
-        AddHandler btn.MouseLeave, AddressOf MenuOptionAppointments_MouseLeave
-
-        activeDropdownAppointments.Controls.Add(btn)
-    End Sub
-
-    Private Sub MenuOptionAppointments_Click(sender As Object, e As EventArgs)
-        Dim btn = DirectCast(sender, Button)
-        Dim rowIndex = CInt(btn.Tag)
-
-        Dim name = dgvAppointments.Rows(rowIndex).Cells("PatientName").Value.ToString()
-
-        Select Case btn.Text
-            Case "View details"
-                MessageBox.Show($"Viewing details for {name}")
-            Case "Reschedule"
-                MessageBox.Show($"Rescheduling appointment with {name}")
-            Case "Cancel appointment"
-                If MessageBox.Show($"Are you sure you want to cancel the appointment with {name}?",
-                          "Confirm Cancellation", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-
-                    If dgvAppointments.DataSource IsNot Nothing Then
-                        Dim dt As DataTable = TryCast(dgvAppointments.DataSource, DataTable)
-                        If dt IsNot Nothing Then
-                            dt.Rows.RemoveAt(rowIndex)
-                        End If
-                    Else
-                        dgvAppointments.Rows.RemoveAt(rowIndex)
-                    End If
+            If e.ColumnIndex = dgvAppointments.Columns("Status").Index Then
+                Dim status As String = row.Cells(e.ColumnIndex).Value.ToString()
+                If status.Equals("Completed", StringComparison.OrdinalIgnoreCase) Then
+                    row.Cells(e.ColumnIndex).Style.ForeColor = Color.Green
+                ElseIf status.Equals("Cancelled", StringComparison.OrdinalIgnoreCase) Then
+                    row.Cells(e.ColumnIndex).Style.ForeColor = Color.Red
+                ElseIf status.Equals("Scheduled", StringComparison.OrdinalIgnoreCase) Then
+                    row.Cells(e.ColumnIndex).Style.ForeColor = Color.Blue
                 End If
-        End Select
-
-        CloseDropdownAppointments()
-    End Sub
-
-    Private Sub MenuOptionAppointments_MouseEnter(sender As Object, e As EventArgs)
-        Dim btn = DirectCast(sender, Button)
-        btn.BackColor = Color.LightGray
-    End Sub
-
-    Private Sub MenuOptionAppointments_MouseLeave(sender As Object, e As EventArgs)
-        Dim btn = DirectCast(sender, Button)
-        btn.BackColor = Color.White
-    End Sub
-
-    Private Sub CloseDropdownAppointments()
-        If activeDropdownAppointments IsNot Nothing Then
-            Me.Controls.Remove(activeDropdownAppointments)
-            activeDropdownAppointments.Dispose()
-            activeDropdownAppointments = Nothing
+            End If
         End If
     End Sub
 
-    Private Sub CloseDropdownAppointmentsHandler(sender As Object, e As EventArgs) Handles dgvAppointments.Click, Panel1.Click, pnlAppointments.Click, btnDashboard.Click, btnPatients.Click, btnDoctors.Click, btnAppointments.Click, btnBilling.Click, Appointments.Click
-        CloseDropdownAppointments()
+    Private Sub dgvAppointments_CellClick(sender As Object, e As DataGridViewCellEventArgs)
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex = dgvAppointments.Columns("ViewButton").Index Then
+            Dim appointmentID As String = dgvAppointments.Rows(e.RowIndex).Cells("AppointmentID").Value.ToString()
+            Dim patientID As String = dgvAppointments.Rows(e.RowIndex).Cells("PatientID").Value.ToString()
+
+            Dim viewAppointmentForm As New ViewAppointmentDetails()
+            viewAppointmentForm.AppointmentID = appointmentID
+            viewAppointmentForm.PatientID = patientID
+            viewAppointmentForm.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub dgvAppointments_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
+        If dgvAppointments.DisplayedRowCount(True) < dgvAppointments.RowCount Then
+            Dim scrollWidth As Integer = SystemInformation.VerticalScrollBarWidth
+            dgvAppointments.PerformLayout()
+        End If
     End Sub
 
     ''''''''''''''''''''''''''''''''
