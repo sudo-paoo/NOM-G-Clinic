@@ -1,5 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
-Imports System.Data
+
 Public Class PatientRegistration
     Private errProvider As New ErrorProvider()
 
@@ -45,11 +45,11 @@ Public Class PatientRegistration
     ' Load doctors from database into the combobox
     Private Sub LoadDoctors()
         Try
-            conn = New MySql.Data.MySqlClient.MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
+            conn = New MySqlConnection(RegistrationModule.ConnectionString)
             conn.Open()
 
             Dim query As String = "SELECT doctor_id, CONCAT(first_name, ' ', last_name) AS full_name FROM doctor ORDER BY last_name"
-            cmd = New MySql.Data.MySqlClient.MySqlCommand(query, conn)
+            cmd = New MySqlCommand(query, conn)
 
             reader = cmd.ExecuteReader()
 
@@ -193,12 +193,7 @@ Public Class PatientRegistration
         Dim comboBox = TryCast(sender, ComboBox)
 
         If textBox IsNot Nothing Then
-            If String.IsNullOrWhiteSpace(textBox.Text) Then
-                errProvider.SetError(textBox, "This field is required.")
-                e.Cancel = True
-            Else
-                errProvider.SetError(textBox, "")
-            End If
+            RegistrationModule.ValidateRequiredField(sender, e, errProvider)
         ElseIf comboBox IsNot Nothing Then
             If comboBox.SelectedIndex = -1 Then
                 errProvider.SetError(comboBox, "Please select an option.")
@@ -269,24 +264,13 @@ Public Class PatientRegistration
         If String.IsNullOrWhiteSpace(email) Then
             errProvider.SetError(textBox, "Email address is required.")
             e.Cancel = True
-        ElseIf Not IsValidEmail(email) Then
+        ElseIf Not RegistrationModule.IsValidEmail(email) Then
             errProvider.SetError(textBox, "Please enter a valid email address.")
             e.Cancel = True
         Else
             errProvider.SetError(textBox, "")
         End If
     End Sub
-
-    Private Function IsValidEmail(email As String) As Boolean
-        Try
-            Dim addr = New System.Net.Mail.MailAddress(email)
-            Dim emailPattern As String = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            Return System.Text.RegularExpressions.Regex.IsMatch(email, emailPattern)
-        Catch
-            Return False
-        End Try
-    End Function
-
 
     ' Validation handler for TextBox when text changes
     Private Sub TextBox_TextChanged(sender As Object, e As EventArgs) Handles txtFirstName.TextChanged, txtLastName.TextChanged,
@@ -320,10 +304,10 @@ Public Class PatientRegistration
 
         If result = DialogResult.Yes Then
             Try
-                conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
+                conn = New MySqlConnection(RegistrationModule.ConnectionString)
                 conn.Open()
 
-                Dim patientId As String = GeneratePatientId()
+                Dim patientId As String = RegistrationModule.GenerateId("patient", "patient_id", "P", 3)
 
                 Dim isFirstBaby As Boolean = False
                 If rtbnYes.Checked Then
@@ -411,6 +395,8 @@ Public Class PatientRegistration
                 If adminForm IsNot Nothing Then
                     adminForm.PatientsSetupDataGrid()
                     adminForm.PatientsPopulateDataGrid()
+                    adminForm.AppointmentsSetupDataGrid()
+                    adminForm.AppointmentsPopulateDataGrid()
                 Else
                     MessageBox.Show("Admin dashboard not found. Please refresh the dashboard manually.",
                     "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -426,44 +412,6 @@ Public Class PatientRegistration
             End Try
         End If
     End Sub
-
-
-    Private Function GeneratePatientId() As String
-        Dim newId As String = "P001"
-
-        Try
-            Using conn As New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
-                conn.Open()
-
-                Dim query As String = "SELECT patient_id FROM patient ORDER BY CAST(SUBSTRING(patient_id, 2) AS UNSIGNED) DESC LIMIT 1"
-                Using cmd As New MySqlCommand(query, conn)
-                    Dim result As Object = cmd.ExecuteScalar()
-
-                    If result IsNot Nothing Then
-                        Dim lastId As String = result.ToString()
-
-                        If lastId.Length >= 2 AndAlso lastId.StartsWith("P") Then
-                            Dim numericPart As Integer
-                            If Integer.TryParse(lastId.Substring(1), numericPart) Then
-                                numericPart += 1
-                                If numericPart < 10 Then
-                                    newId = "P00" & numericPart
-                                ElseIf numericPart < 100 Then
-                                    newId = "P0" & numericPart
-                                Else
-                                    newId = "P" & numericPart
-                                End If
-                            End If
-                        End If
-                    End If
-                End Using
-            End Using
-        Catch ex As Exception
-            Console.WriteLine("Error generating patient ID: " & ex.Message)
-            MessageBox.Show("Error generating patient ID. Using default ID: " & newId, "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End Try
-        Return newId
-    End Function
 
     Private Sub OpenAppointmentScheduling(patientId As String, firstName As String, lastName As String,
                                      lastMenstrualDate As Date, dueDate As Date, assignedDoctorId As String)

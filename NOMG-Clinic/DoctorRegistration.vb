@@ -1,6 +1,5 @@
 ﻿Imports System.ComponentModel
 Imports MySql.Data.MySqlClient
-Imports System.Data
 Public Class DoctorRegistration
     Private errProvider As New ErrorProvider()
     Private isPasswordVisible As Boolean = False
@@ -29,9 +28,16 @@ Public Class DoctorRegistration
         AddHandler txtEmergencyContactName.Validating, AddressOf ValidateRequiredField
         AddHandler txtEmergencyContactRelationship.Validating, AddressOf ValidateRequiredField
         AddHandler txtEmergencyContactNumber.Validating, AddressOf ValidateConfirmPassword
+        AddHandler txtContactNumber.TextChanged, AddressOf txtContactNumber_TextChanged
+        AddHandler txtEmailAddress.TextChanged, AddressOf txtEmailAddress_TextChanged
+        AddHandler txtContactNumber.KeyPress, AddressOf txtContactNumber_KeyPress
 
         btnEyePassword.TabStop = False
         btnEyeConfirmPassword.TabStop = False
+    End Sub
+
+    Private Sub txtContactNumber_KeyPress(sender As Object, e As KeyPressEventArgs)
+        RegistrationModule.HandleNumericKeyPress(e)
     End Sub
 
     Private Sub tabDoctorRegistration_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabDoctorRegistration.SelectedIndexChanged
@@ -81,25 +87,11 @@ Public Class DoctorRegistration
 
     ' Password visibility toggle buttons
     Private Sub btnEyePassword_MouseDown(sender As Object, e As MouseEventArgs) Handles btnEyePassword.MouseDown
-        isPasswordVisible = Not isPasswordVisible
-        txtEmergencyContactRelationship.UseSystemPasswordChar = Not isPasswordVisible
-
-        If isPasswordVisible Then
-            btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
-        Else
-            btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.Eye
-        End If
+        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactRelationship, btnEyePassword, isPasswordVisible)
     End Sub
 
     Private Sub btnEyeConfirmPassword_MouseDown(sender As Object, e As MouseEventArgs) Handles btnEyeConfirmPassword.MouseDown
-        isConfirmPasswordVisible = Not isConfirmPasswordVisible
-        txtEmergencyContactNumber.UseSystemPasswordChar = Not isConfirmPasswordVisible
-
-        If isConfirmPasswordVisible Then
-            btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
-        Else
-            btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.Eye
-        End If
+        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactNumber, btnEyeConfirmPassword, isConfirmPasswordVisible)
     End Sub
 
     ' Validation functions
@@ -112,16 +104,12 @@ Public Class DoctorRegistration
         Else
             ' Check if username exists
             Try
-                Using conn As New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
-                    conn.Open()
-
-                    If IsUsernameExists(conn, txtEmergencyContactName.Text.Trim()) Then
-                        errProvider.SetError(txtEmergencyContactName, "Username already exists. Please choose another.")
-                        isValid = False
-                    Else
-                        errProvider.SetError(txtEmergencyContactName, "")
-                    End If
-                End Using
+                If RegistrationModule.IsUsernameExists(txtEmergencyContactName.Text.Trim()) Then
+                    errProvider.SetError(txtEmergencyContactName, "Username already exists. Please choose another.")
+                    isValid = False
+                Else
+                    errProvider.SetError(txtEmergencyContactName, "")
+                End If
             Catch ex As Exception
                 Console.WriteLine("Database error when checking username: " & ex.Message)
                 errProvider.SetError(txtEmergencyContactName, "")
@@ -197,47 +185,20 @@ Public Class DoctorRegistration
     End Function
 
     Private Sub ValidateRequiredField(sender As Object, e As CancelEventArgs)
-        Dim textBox = DirectCast(sender, TextBox)
-
-        If String.IsNullOrWhiteSpace(textBox.Text) Then
-            errProvider.SetError(textBox, "This field is required.")
-            e.Cancel = True
-        Else
-            errProvider.SetError(textBox, "")
-        End If
+        RegistrationModule.ValidateRequiredField(sender, e, errProvider)
     End Sub
 
     Private Sub ValidateConfirmPassword(sender As Object, e As CancelEventArgs)
-        Dim textBox = DirectCast(sender, TextBox)
-
-        If String.IsNullOrWhiteSpace(textBox.Text) Then
-            errProvider.SetError(textBox, "Confirm Password is required.")
-            e.Cancel = True
-        ElseIf textBox.Text <> txtEmergencyContactRelationship.Text Then
-            errProvider.SetError(textBox, "Passwords do not match.")
-            e.Cancel = True
-        Else
-            errProvider.SetError(textBox, "")
-        End If
-    End Sub
-
-    Public Sub TogglePasswordVisibility(passwordTextBox As TextBox, eyeButton As FontAwesome.Sharp.IconButton, ByRef visibilityState As Boolean)
-        visibilityState = Not visibilityState
-        passwordTextBox.UseSystemPasswordChar = Not visibilityState
-
-        If visibilityState Then
-            eyeButton.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
-        Else
-            eyeButton.IconChar = FontAwesome.Sharp.IconChar.Eye
-        End If
+        Dim confirmPasswordTextBox = DirectCast(sender, TextBox)
+        RegistrationModule.ValidateConfirmPassword(confirmPasswordTextBox, txtEmergencyContactRelationship, e, errProvider)
     End Sub
 
     Private Sub txtEmergencyContactRelationship_DoubleClick(sender As Object, e As EventArgs) Handles txtEmergencyContactRelationship.DoubleClick
-        TogglePasswordVisibility(txtEmergencyContactRelationship, btnEyePassword, isPasswordVisible)
+        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactRelationship, btnEyePassword, isPasswordVisible)
     End Sub
 
     Private Sub txtEmergencyContactNumber_DoubleClick(sender As Object, e As EventArgs) Handles txtEmergencyContactNumber.DoubleClick
-        TogglePasswordVisibility(txtEmergencyContactNumber, btnEyeConfirmPassword, isConfirmPasswordVisible)
+        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactNumber, btnEyeConfirmPassword, isConfirmPasswordVisible)
     End Sub
 
     ' Clear validation errors when text changes
@@ -273,12 +234,23 @@ Public Class DoctorRegistration
         errProvider.SetError(numAge, "")
     End Sub
 
+    Private Sub txtContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txtContactNumber.TextChanged
+        RegistrationModule.ValidateContactNumber(txtContactNumber, errProvider)
+    End Sub
+
+    Private Sub txtEmailAddress_TextChanged(sender As Object, e As EventArgs) Handles txtEmailAddress.TextChanged
+        RegistrationModule.ValidateEmail(txtEmailAddress, errProvider)
+    End Sub
+
     Private Function ValidateContactInformation() As Boolean
         Dim isValid As Boolean = True
 
         ' Validate Contact Number
         If String.IsNullOrWhiteSpace(txtContactNumber.Text) Then
             errProvider.SetError(txtContactNumber, "Contact Number is required.")
+            isValid = False
+        ElseIf Not RegistrationModule.IsNumeric(txtContactNumber.Text.Trim()) Then
+            errProvider.SetError(txtContactNumber, "Contact Number must contain only numbers.")
             isValid = False
         Else
             errProvider.SetError(txtContactNumber, "")
@@ -287,6 +259,9 @@ Public Class DoctorRegistration
         ' Validate Email
         If String.IsNullOrWhiteSpace(txtEmailAddress.Text) Then
             errProvider.SetError(txtEmailAddress, "Email Address is required.")
+            isValid = False
+        ElseIf Not RegistrationModule.IsValidEmail(txtEmailAddress.Text.Trim()) Then
+            errProvider.SetError(txtEmailAddress, "Please enter a valid email address (example@domain.com).")
             isValid = False
         Else
             errProvider.SetError(txtEmailAddress, "")
@@ -319,10 +294,10 @@ Public Class DoctorRegistration
                     Return
                 End If
 
-                Using conn As New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
+                Using conn As New MySqlConnection(RegistrationModule.ConnectionString)
                     conn.Open()
 
-                    If IsUsernameExists(conn, txtEmergencyContactName.Text.Trim()) Then
+                    If RegistrationModule.IsUsernameExists(txtEmergencyContactName.Text.Trim()) Then
                         MessageBox.Show("Username already exists. Please choose another username.",
                                   "Username Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         tabDoctorRegistration.SelectedIndex = 0
@@ -331,7 +306,7 @@ Public Class DoctorRegistration
                     End If
 
                     ' Generate a new doctor ID
-                    Dim doctorId As String = GenerateDoctorId(conn)
+                    Dim doctorId As String = RegistrationModule.GenerateId("doctor", "doctor_id", "D", 3)
 
                     Dim query As String = "INSERT INTO doctor (doctor_id, username, password, first_name, middle_name, last_name, age, " &
                                    "license_number, email, contact_number, gender, address) " &
@@ -354,8 +329,7 @@ Public Class DoctorRegistration
 
                         cmd.ExecuteNonQuery()
 
-                        ' Also add this doctor to the users table for login
-                        AddToUsersTable(conn, txtEmergencyContactName.Text.Trim(), txtEmergencyContactRelationship.Text.Trim())
+                        RegistrationModule.AddToUsersTable(txtEmergencyContactName.Text.Trim(), txtEmergencyContactRelationship.Text.Trim(), "doctor")
 
                         ' Show success message
                         MessageBox.Show("Doctor successfully registered with ID: " & doctorId,
@@ -378,71 +352,4 @@ Public Class DoctorRegistration
             End Try
         End If
     End Sub
-
-    Private Function IsUsernameExists(conn As MySqlConnection, username As String) As Boolean
-        Try
-            Dim query As String = "SELECT COUNT(*) FROM users WHERE username = @username"
-
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@username", username)
-                Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-                Return count > 0
-            End Using
-        Catch ex As Exception
-            Console.WriteLine("Error checking username: " & ex.Message)
-            Return False
-        End Try
-    End Function
-
-    Private Sub AddToUsersTable(conn As MySqlConnection, username As String, password As String)
-        Try
-            Dim query As String = "INSERT INTO users (username, password, role) VALUES (@username, @password, 'doctor')"
-
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@username", username)
-                cmd.Parameters.AddWithValue("@password", password)
-                cmd.ExecuteNonQuery()
-            End Using
-        Catch ex As Exception
-            Console.WriteLine("Error adding to users table: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Function GenerateDoctorId(conn As MySqlConnection) As String
-        Dim newId As String = "D001"
-
-        Try
-            Dim query As String = "SELECT doctor_id FROM doctor ORDER BY CAST(SUBSTRING(doctor_id, 2) AS UNSIGNED) DESC LIMIT 1"
-
-            Using cmd As New MySqlCommand(query, conn)
-                Dim result As Object = cmd.ExecuteScalar()
-
-                If result IsNot Nothing Then
-                    Dim lastId As String = result.ToString()
-
-                    If lastId.Length >= 2 AndAlso lastId.StartsWith("D") Then
-                        Dim numericPart As Integer
-                        If Integer.TryParse(lastId.Substring(1), numericPart) Then
-                            numericPart += 1
-
-                            If numericPart < 10 Then
-                                newId = "D00" & numericPart
-                            ElseIf numericPart < 100 Then
-                                newId = "D0" & numericPart
-                            Else
-                                newId = "D" & numericPart
-                            End If
-                        End If
-                    End If
-                End If
-            End Using
-        Catch ex As Exception
-            ' Log the error but continue with default ID
-            Console.WriteLine("Error generating doctor ID: " & ex.Message)
-            MessageBox.Show("Error generating doctor ID. Using default ID: " & newId,
-                          "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End Try
-
-        Return newId
-    End Function
 End Class

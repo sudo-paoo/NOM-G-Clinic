@@ -26,24 +26,24 @@ Partial Class AccountantRegistration
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
         Label7 = New Label()
-        tabDoctorRegistration = New TabControl()
+        tabAccountantRegistration = New TabControl()
         TabPage1 = New TabPage()
         btnEyeConfirmPassword = New FontAwesome.Sharp.IconButton()
         btnEyePassword = New FontAwesome.Sharp.IconButton()
         btnAccountInformationNext = New FontAwesome.Sharp.IconButton()
         Label17 = New Label()
         labelnum = New Label()
-        txtEmergencyContactNumber = New TextBox()
+        txtConfirmPassword = New TextBox()
         labelrel = New Label()
-        txtEmergencyContactRelationship = New TextBox()
+        txtPassword = New TextBox()
         Label15 = New Label()
-        txtEmergencyContactName = New TextBox()
+        txtUsername = New TextBox()
         TabPage2 = New TabPage()
+        cmbPosition = New ComboBox()
         btnPersonalInformationPrevious = New FontAwesome.Sharp.IconButton()
         btnPersonalInformationNext = New FontAwesome.Sharp.IconButton()
         txtGender = New TextBox()
         Label4 = New Label()
-        txtLicenseNumber = New TextBox()
         numAge = New NumericUpDown()
         Label8 = New Label()
         Label9 = New Label()
@@ -55,8 +55,8 @@ Partial Class AccountantRegistration
         Label1 = New Label()
         txtFirstName = New TextBox()
         TabPage3 = New TabPage()
-        btnEmergencyContactPrevious = New FontAwesome.Sharp.IconButton()
-        btnRegisterDoctor = New FontAwesome.Sharp.IconButton()
+        btnContactInformationPrevious = New FontAwesome.Sharp.IconButton()
+        btnRegisterAccountant = New FontAwesome.Sharp.IconButton()
         Label5 = New Label()
         Label11 = New Label()
         txtEmailAddress = New TextBox()
@@ -65,7 +65,7 @@ Partial Class AccountantRegistration
         Label10 = New Label()
         txtAddress = New TextBox()
         Panel1.SuspendLayout()
-        tabDoctorRegistration.SuspendLayout()
+        tabAccountantRegistration.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         CType(numAge, ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +82,7 @@ Partial Class AccountantRegistration
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
+        HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
         HopeForm1.Size = New Size(1000, 40)
         HopeForm1.TabIndex = 0
@@ -93,7 +94,7 @@ Partial Class AccountantRegistration
         Panel1.AutoScroll = True
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
         Panel1.Controls.Add(Label7)
-        Panel1.Controls.Add(tabDoctorRegistration)
+        Panel1.Controls.Add(tabAccountantRegistration)
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
@@ -111,18 +112,18 @@ Partial Class AccountantRegistration
         Label7.TabIndex = 3
         Label7.Text = "Accountant Registration Form"
         ' 
-        ' tabDoctorRegistration
+        ' tabAccountantRegistration
         ' 
-        tabDoctorRegistration.Controls.Add(TabPage1)
-        tabDoctorRegistration.Controls.Add(TabPage2)
-        tabDoctorRegistration.Controls.Add(TabPage3)
-        tabDoctorRegistration.ImeMode = ImeMode.NoControl
-        tabDoctorRegistration.Location = New Point(12, 55)
-        tabDoctorRegistration.Name = "tabDoctorRegistration"
-        tabDoctorRegistration.SelectedIndex = 0
-        tabDoctorRegistration.Size = New Size(976, 453)
-        tabDoctorRegistration.SizeMode = TabSizeMode.Fixed
-        tabDoctorRegistration.TabIndex = 0
+        tabAccountantRegistration.Controls.Add(TabPage1)
+        tabAccountantRegistration.Controls.Add(TabPage2)
+        tabAccountantRegistration.Controls.Add(TabPage3)
+        tabAccountantRegistration.ImeMode = ImeMode.NoControl
+        tabAccountantRegistration.Location = New Point(12, 55)
+        tabAccountantRegistration.Name = "tabAccountantRegistration"
+        tabAccountantRegistration.SelectedIndex = 0
+        tabAccountantRegistration.Size = New Size(976, 453)
+        tabAccountantRegistration.SizeMode = TabSizeMode.Fixed
+        tabAccountantRegistration.TabIndex = 0
         ' 
         ' TabPage1
         ' 
@@ -133,11 +134,11 @@ Partial Class AccountantRegistration
         TabPage1.Controls.Add(btnAccountInformationNext)
         TabPage1.Controls.Add(Label17)
         TabPage1.Controls.Add(labelnum)
-        TabPage1.Controls.Add(txtEmergencyContactNumber)
+        TabPage1.Controls.Add(txtConfirmPassword)
         TabPage1.Controls.Add(labelrel)
-        TabPage1.Controls.Add(txtEmergencyContactRelationship)
+        TabPage1.Controls.Add(txtPassword)
         TabPage1.Controls.Add(Label15)
-        TabPage1.Controls.Add(txtEmergencyContactName)
+        TabPage1.Controls.Add(txtUsername)
         TabPage1.Location = New Point(4, 29)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
@@ -216,13 +217,14 @@ Partial Class AccountantRegistration
         labelnum.TabIndex = 38
         labelnum.Text = "Confirm Password"
         ' 
-        ' txtEmergencyContactNumber
+        ' txtConfirmPassword
         ' 
-        txtEmergencyContactNumber.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmergencyContactNumber.Location = New Point(20, 275)
-        txtEmergencyContactNumber.Name = "txtEmergencyContactNumber"
-        txtEmergencyContactNumber.Size = New Size(894, 32)
-        txtEmergencyContactNumber.TabIndex = 37
+        txtConfirmPassword.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtConfirmPassword.Location = New Point(20, 275)
+        txtConfirmPassword.Name = "txtConfirmPassword"
+        txtConfirmPassword.Size = New Size(894, 32)
+        txtConfirmPassword.TabIndex = 37
+        txtConfirmPassword.UseSystemPasswordChar = True
         ' 
         ' labelrel
         ' 
@@ -234,13 +236,14 @@ Partial Class AccountantRegistration
         labelrel.TabIndex = 36
         labelrel.Text = "Password"
         ' 
-        ' txtEmergencyContactRelationship
+        ' txtPassword
         ' 
-        txtEmergencyContactRelationship.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmergencyContactRelationship.Location = New Point(20, 192)
-        txtEmergencyContactRelationship.Name = "txtEmergencyContactRelationship"
-        txtEmergencyContactRelationship.Size = New Size(894, 32)
-        txtEmergencyContactRelationship.TabIndex = 35
+        txtPassword.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtPassword.Location = New Point(20, 192)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(894, 32)
+        txtPassword.TabIndex = 35
+        txtPassword.UseSystemPasswordChar = True
         ' 
         ' Label15
         ' 
@@ -252,23 +255,23 @@ Partial Class AccountantRegistration
         Label15.TabIndex = 34
         Label15.Text = "Username"
         ' 
-        ' txtEmergencyContactName
+        ' txtUsername
         ' 
-        txtEmergencyContactName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmergencyContactName.Location = New Point(20, 105)
-        txtEmergencyContactName.Name = "txtEmergencyContactName"
-        txtEmergencyContactName.Size = New Size(894, 32)
-        txtEmergencyContactName.TabIndex = 33
+        txtUsername.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtUsername.Location = New Point(20, 105)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(894, 32)
+        txtUsername.TabIndex = 33
         ' 
         ' TabPage2
         ' 
         TabPage2.BackgroundImage = My.Resources.Resources.bg_img
         TabPage2.BackgroundImageLayout = ImageLayout.Stretch
+        TabPage2.Controls.Add(cmbPosition)
         TabPage2.Controls.Add(btnPersonalInformationPrevious)
         TabPage2.Controls.Add(btnPersonalInformationNext)
         TabPage2.Controls.Add(txtGender)
         TabPage2.Controls.Add(Label4)
-        TabPage2.Controls.Add(txtLicenseNumber)
         TabPage2.Controls.Add(numAge)
         TabPage2.Controls.Add(Label8)
         TabPage2.Controls.Add(Label9)
@@ -286,6 +289,16 @@ Partial Class AccountantRegistration
         TabPage2.TabIndex = 1
         TabPage2.Text = "Personal Information"
         TabPage2.UseVisualStyleBackColor = True
+        ' 
+        ' cmbPosition
+        ' 
+        cmbPosition.Font = New Font("Verdana", 12F)
+        cmbPosition.FormattingEnabled = True
+        cmbPosition.Items.AddRange(New Object() {"Accountant", "Junior Accountant", "Senior Accountant"})
+        cmbPosition.Location = New Point(16, 304)
+        cmbPosition.Name = "cmbPosition"
+        cmbPosition.Size = New Size(937, 33)
+        cmbPosition.TabIndex = 40
         ' 
         ' btnPersonalInformationPrevious
         ' 
@@ -337,17 +350,9 @@ Partial Class AccountantRegistration
         Label4.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
         Label4.Location = New Point(21, 271)
         Label4.Name = "Label4"
-        Label4.Size = New Size(161, 20)
+        Label4.Size = New Size(87, 20)
         Label4.TabIndex = 36
-        Label4.Text = "License Number"
-        ' 
-        ' txtLicenseNumber
-        ' 
-        txtLicenseNumber.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtLicenseNumber.Location = New Point(18, 301)
-        txtLicenseNumber.Name = "txtLicenseNumber"
-        txtLicenseNumber.Size = New Size(932, 32)
-        txtLicenseNumber.TabIndex = 35
+        Label4.Text = "Position"
         ' 
         ' numAge
         ' 
@@ -446,8 +451,8 @@ Partial Class AccountantRegistration
         ' 
         TabPage3.BackgroundImage = My.Resources.Resources.bg_img
         TabPage3.BackgroundImageLayout = ImageLayout.Stretch
-        TabPage3.Controls.Add(btnEmergencyContactPrevious)
-        TabPage3.Controls.Add(btnRegisterDoctor)
+        TabPage3.Controls.Add(btnContactInformationPrevious)
+        TabPage3.Controls.Add(btnRegisterAccountant)
         TabPage3.Controls.Add(Label5)
         TabPage3.Controls.Add(Label11)
         TabPage3.Controls.Add(txtEmailAddress)
@@ -463,41 +468,41 @@ Partial Class AccountantRegistration
         TabPage3.Text = "Contact Information"
         TabPage3.UseVisualStyleBackColor = True
         ' 
-        ' btnEmergencyContactPrevious
+        ' btnContactInformationPrevious
         ' 
-        btnEmergencyContactPrevious.FlatStyle = FlatStyle.Flat
-        btnEmergencyContactPrevious.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnEmergencyContactPrevious.IconChar = FontAwesome.Sharp.IconChar.AngleLeft
-        btnEmergencyContactPrevious.IconColor = Color.Black
-        btnEmergencyContactPrevious.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnEmergencyContactPrevious.IconSize = 28
-        btnEmergencyContactPrevious.ImageAlign = ContentAlignment.BottomRight
-        btnEmergencyContactPrevious.Location = New Point(26, 356)
-        btnEmergencyContactPrevious.Name = "btnEmergencyContactPrevious"
-        btnEmergencyContactPrevious.Size = New Size(131, 40)
-        btnEmergencyContactPrevious.TabIndex = 33
-        btnEmergencyContactPrevious.Text = "Previous"
-        btnEmergencyContactPrevious.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnEmergencyContactPrevious.UseVisualStyleBackColor = True
+        btnContactInformationPrevious.FlatStyle = FlatStyle.Flat
+        btnContactInformationPrevious.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnContactInformationPrevious.IconChar = FontAwesome.Sharp.IconChar.AngleLeft
+        btnContactInformationPrevious.IconColor = Color.Black
+        btnContactInformationPrevious.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnContactInformationPrevious.IconSize = 28
+        btnContactInformationPrevious.ImageAlign = ContentAlignment.BottomRight
+        btnContactInformationPrevious.Location = New Point(26, 356)
+        btnContactInformationPrevious.Name = "btnContactInformationPrevious"
+        btnContactInformationPrevious.Size = New Size(131, 40)
+        btnContactInformationPrevious.TabIndex = 33
+        btnContactInformationPrevious.Text = "Previous"
+        btnContactInformationPrevious.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnContactInformationPrevious.UseVisualStyleBackColor = True
         ' 
-        ' btnRegisterDoctor
+        ' btnRegisterAccountant
         ' 
-        btnRegisterDoctor.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
-        btnRegisterDoctor.FlatAppearance.BorderSize = 0
-        btnRegisterDoctor.FlatStyle = FlatStyle.Flat
-        btnRegisterDoctor.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnRegisterDoctor.IconChar = FontAwesome.Sharp.IconChar.AngleRight
-        btnRegisterDoctor.IconColor = Color.Black
-        btnRegisterDoctor.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnRegisterDoctor.IconSize = 28
-        btnRegisterDoctor.ImageAlign = ContentAlignment.BottomRight
-        btnRegisterDoctor.Location = New Point(717, 356)
-        btnRegisterDoctor.Name = "btnRegisterDoctor"
-        btnRegisterDoctor.Size = New Size(224, 40)
-        btnRegisterDoctor.TabIndex = 32
-        btnRegisterDoctor.Text = "Register Accountant"
-        btnRegisterDoctor.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnRegisterDoctor.UseVisualStyleBackColor = False
+        btnRegisterAccountant.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnRegisterAccountant.FlatAppearance.BorderSize = 0
+        btnRegisterAccountant.FlatStyle = FlatStyle.Flat
+        btnRegisterAccountant.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRegisterAccountant.IconChar = FontAwesome.Sharp.IconChar.AngleRight
+        btnRegisterAccountant.IconColor = Color.Black
+        btnRegisterAccountant.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnRegisterAccountant.IconSize = 28
+        btnRegisterAccountant.ImageAlign = ContentAlignment.BottomRight
+        btnRegisterAccountant.Location = New Point(717, 356)
+        btnRegisterAccountant.Name = "btnRegisterAccountant"
+        btnRegisterAccountant.Size = New Size(224, 40)
+        btnRegisterAccountant.TabIndex = 32
+        btnRegisterAccountant.Text = "Register Accountant"
+        btnRegisterAccountant.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnRegisterAccountant.UseVisualStyleBackColor = False
         ' 
         ' Label5
         ' 
@@ -574,6 +579,7 @@ Partial Class AccountantRegistration
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
+        MaximizeBox = False
         MaximumSize = New Size(1920, 1080)
         MinimumSize = New Size(190, 40)
         Name = "AccountantRegistration"
@@ -581,7 +587,7 @@ Partial Class AccountantRegistration
         Text = "AccountantRegistration"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
-        tabDoctorRegistration.ResumeLayout(False)
+        tabAccountantRegistration.ResumeLayout(False)
         TabPage1.ResumeLayout(False)
         TabPage1.PerformLayout()
         TabPage2.ResumeLayout(False)
@@ -595,24 +601,23 @@ Partial Class AccountantRegistration
     Friend WithEvents HopeForm1 As ReaLTaiizor.Forms.HopeForm
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label7 As Label
-    Friend WithEvents tabDoctorRegistration As TabControl
+    Friend WithEvents tabAccountantRegistration As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents btnEyeConfirmPassword As FontAwesome.Sharp.IconButton
     Friend WithEvents btnEyePassword As FontAwesome.Sharp.IconButton
     Friend WithEvents btnAccountInformationNext As FontAwesome.Sharp.IconButton
     Friend WithEvents Label17 As Label
     Friend WithEvents labelnum As Label
-    Friend WithEvents txtEmergencyContactNumber As TextBox
+    Friend WithEvents txtConfirmPassword As TextBox
     Friend WithEvents labelrel As Label
-    Friend WithEvents txtEmergencyContactRelationship As TextBox
+    Friend WithEvents txtPassword As TextBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents txtEmergencyContactName As TextBox
+    Friend WithEvents txtUsername As TextBox
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents btnPersonalInformationPrevious As FontAwesome.Sharp.IconButton
     Friend WithEvents btnPersonalInformationNext As FontAwesome.Sharp.IconButton
     Friend WithEvents txtGender As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents txtLicenseNumber As TextBox
     Friend WithEvents numAge As NumericUpDown
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
@@ -624,8 +629,8 @@ Partial Class AccountantRegistration
     Friend WithEvents Label1 As Label
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents btnEmergencyContactPrevious As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnRegisterDoctor As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnContactInformationPrevious As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnRegisterAccountant As FontAwesome.Sharp.IconButton
     Friend WithEvents Label5 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents txtEmailAddress As TextBox
@@ -633,4 +638,5 @@ Partial Class AccountantRegistration
     Friend WithEvents txtContactNumber As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents txtAddress As TextBox
+    Friend WithEvents cmbPosition As ComboBox
 End Class
