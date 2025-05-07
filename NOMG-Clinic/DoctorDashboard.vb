@@ -4,6 +4,7 @@ Imports System.Text.RegularExpressions
 Public Class DoctorDashboard
     Public doctorID As String
     Private errorProvider As New ErrorProvider()
+    Private activeDropdownPatients As Panel = Nothing
 
     Private Sub DoctorDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tabDashboard.ItemSize = New Size(tabDashboard.Width \ tabDashboard.TabCount - 2, 30)
@@ -278,6 +279,12 @@ Public Class DoctorDashboard
         Next
     End Sub
 
+    ''''''''''''''''''''''''''''''''''
+    '                                '
+    ' patients data grid view setup  '
+    '                                '
+    ''''''''''''''''''''''''''''''''''
+    ' Setup dgvPatients
     Public Sub PatientsSetupDataGrid()
         dgvPatients.AllowUserToAddRows = False
         dgvPatients.AllowUserToDeleteRows = False
@@ -312,77 +319,360 @@ Public Class DoctorDashboard
 
         dgvPatients.Columns.Clear()
 
-        Dim fullNameColumn As New DataGridViewTextBoxColumn()
-        fullNameColumn.HeaderText = "Full Name"
-        fullNameColumn.Name = "FullName"
-        fullNameColumn.MinimumWidth = 140
-        fullNameColumn.FillWeight = 30
-        dgvPatients.Columns.Add(fullNameColumn)
+        Dim nameColumn As New DataGridViewTextBoxColumn()
+        nameColumn.HeaderText = "Name"
+        nameColumn.Name = "Name"
+        nameColumn.MinimumWidth = 140
+        nameColumn.FillWeight = 20
+        dgvPatients.Columns.Add(nameColumn)
 
         Dim ageColumn As New DataGridViewTextBoxColumn()
         ageColumn.HeaderText = "Age"
         ageColumn.Name = "Age"
         ageColumn.MinimumWidth = 80
-        ageColumn.FillWeight = 15
+        ageColumn.FillWeight = 8
         dgvPatients.Columns.Add(ageColumn)
 
-        Dim lastMensColumn As New DataGridViewTextBoxColumn()
-        lastMensColumn.HeaderText = "Last Menstrual Period"
-        lastMensColumn.Name = "LastMens"
-        lastMensColumn.MinimumWidth = 150
-        lastMensColumn.FillWeight = 25
-        dgvPatients.Columns.Add(lastMensColumn)
+        Dim gestationalAgeColumn As New DataGridViewTextBoxColumn()
+        gestationalAgeColumn.HeaderText = "Gestational Age"
+        gestationalAgeColumn.Name = "GestationalAge"
+        gestationalAgeColumn.MinimumWidth = 120
+        gestationalAgeColumn.FillWeight = 18
+        dgvPatients.Columns.Add(gestationalAgeColumn)
 
-        Dim allergiesColumn As New DataGridViewTextBoxColumn()
-        allergiesColumn.HeaderText = "Allergies"
-        allergiesColumn.Name = "Allergies"
-        allergiesColumn.MinimumWidth = 150
-        allergiesColumn.FillWeight = 30
-        dgvPatients.Columns.Add(allergiesColumn)
+        Dim nextCheckupColumn As New DataGridViewTextBoxColumn()
+        nextCheckupColumn.HeaderText = "Next Checkup"
+        nextCheckupColumn.Name = "NextCheckup"
+        nextCheckupColumn.MinimumWidth = 130
+        nextCheckupColumn.FillWeight = 18
+        dgvPatients.Columns.Add(nextCheckupColumn)
+
+        Dim firstBabyColumn As New DataGridViewTextBoxColumn()
+        firstBabyColumn.HeaderText = "First Baby"
+        firstBabyColumn.Name = "FirstBaby"
+        firstBabyColumn.MinimumWidth = 100
+        firstBabyColumn.FillWeight = 10
+        dgvPatients.Columns.Add(firstBabyColumn)
+
+        Dim buttonColumn As New DataGridViewButtonColumn()
+        buttonColumn.HeaderText = ""
+        buttonColumn.Name = "ActionButton"
+        buttonColumn.Text = "..."
+        buttonColumn.UseColumnTextForButtonValue = True
+        buttonColumn.FlatStyle = FlatStyle.Flat
+        buttonColumn.MinimumWidth = 60
+        buttonColumn.FillWeight = 8
+        dgvPatients.Columns.Add(buttonColumn)
 
         AddHandler dgvPatients.DataBindingComplete, AddressOf dgvPatients_DataBindingComplete
+
+        AddHandler dgvPatients.CellClick, AddressOf dgvPatients_CellClick
+        AddHandler dgvPatients.CellFormatting, AddressOf dgvPatients_CellFormatting
     End Sub
 
     Private Sub dgvPatients_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
         If dgvPatients.DisplayedRowCount(True) < dgvPatients.RowCount Then
+            Dim scrollWidth As Integer = SystemInformation.VerticalScrollBarWidth
             dgvPatients.PerformLayout()
         End If
     End Sub
 
+    Private Sub dgvPatients_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvPatients.Rows(e.RowIndex)
+
+            If e.ColumnIndex = dgvPatients.Columns("ActionButton").Index Then
+                Dim cell As DataGridViewButtonCell = DirectCast(row.Cells(e.ColumnIndex), DataGridViewButtonCell)
+                cell.Style.BackColor = Color.White
+                cell.Style.ForeColor = Color.FromArgb(100, 100, 100)
+            End If
+
+            If e.ColumnIndex = dgvPatients.Columns("Name").Index Then
+                Dim cell As DataGridViewCell = row.Cells(e.ColumnIndex)
+                cell.Style.Font = New Font(dgvPatients.Font, FontStyle.Bold)
+            End If
+        End If
+    End Sub
+
+    ' Populate the dgvPatients
     Public Sub PatientsPopulateDataGrid()
+        If dgvPatients.Columns.Count = 0 Then
+            PatientsSetupDataGrid()
+        End If
         dgvPatients.Rows.Clear()
 
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
         Dim query As String = "
-        SELECT 
-            CONCAT(first_name, ' ', last_name) AS FullName, 
-            age, 
-            DATE_FORMAT(last_menstrual_period, '%b %d, %Y') AS LastMens, 
-            allergies 
-        FROM patient 
-        WHERE assigned_ob = @doctorID"
+    SELECT 
+        CONCAT(p.first_name, ' ', p.last_name) AS Name, 
+        p.age, 
+        TIMESTAMPDIFF(WEEK, STR_TO_DATE(p.last_menstrual_period, '%Y-%m-%d'), CURDATE()) AS GestationalAge, 
+        DATE_FORMAT(p.next_checkup, '%b %d, %Y') AS NextCheckup, 
+        CASE WHEN p.first_baby = 1 THEN 'Yes' ELSE 'No' END AS FirstBaby
+    FROM 
+        patient p
+    LEFT JOIN 
+        doctor d
+    ON 
+        p.assigned_ob = d.doctor_id"
 
-        Using connection As New MySqlConnection("Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;")
+        Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
-                command.Parameters.AddWithValue("@doctorID", doctorID)
+                Try
+                    connection.Open()
 
-                connection.Open()
-                Dim reader As MySqlDataReader = command.ExecuteReader()
+                    Dim adapter As New MySqlDataAdapter(command)
+                    Dim dataTable As New DataTable()
+                    adapter.Fill(dataTable)
 
-                While reader.Read()
-                    dgvPatients.Rows.Add(reader("FullName"), reader("Age"), reader("LastMens"), reader("Allergies"))
-                End While
+                    For Each row As DataRow In dataTable.Rows
+                        dgvPatients.Rows.Add(row("Name"), row("Age"), row("GestationalAge"), row("NextCheckup"), row("FirstBaby"))
+                    Next
+                Catch ex As Exception
+                    MessageBox.Show("An error occurred while fetching patient data: " & ex.Message)
+                End Try
             End Using
         End Using
     End Sub
 
-    Private Sub txtSearchPatient_TextChanged(sender As Object, e As EventArgs) Handles txtSearchPatient.TextChanged
-        Dim searchText As String = txtSearchPatient.Text.Trim().ToLower()
+    Private Sub dgvPatients_CellClick(sender As Object, e As DataGridViewCellEventArgs)
+        If e.ColumnIndex = dgvPatients.Columns("ActionButton").Index And e.RowIndex >= 0 Then
+            CloseDropdownPatients()
+
+            ShowDropdownPatientsMenu(e.RowIndex)
+        ElseIf activeDropdownPatients IsNot Nothing Then
+            CloseDropdownPatients()
+        End If
+    End Sub
+
+    ' Add dropdown menu
+    Private Sub ShowDropdownPatientsMenu(rowIndex As Integer)
+        Dim buttonColumnIndex As Integer = dgvPatients.Columns("ActionButton").Index
+        Dim buttonCell = dgvPatients.Rows(rowIndex).Cells(buttonColumnIndex)
+
+        activeDropdownPatients = New Panel With {
+        .BorderStyle = BorderStyle.FixedSingle,
+        .BackColor = Color.White,
+        .Size = New Size(200, 130)
+    }
+
+        Dim cellRect = dgvPatients.GetCellDisplayRectangle(buttonColumnIndex, rowIndex, False)
+        Dim screenPoint = dgvPatients.PointToScreen(New Point(cellRect.Right, cellRect.Bottom))
+        Dim formPoint = Me.PointToClient(screenPoint)
+
+        Dim dropdownX = formPoint.X - activeDropdownPatients.Width
+        Dim dropdownY = formPoint.Y
+
+        If dropdownY + activeDropdownPatients.Height > Me.ClientSize.Height Then
+            dropdownY = Me.PointToClient(dgvPatients.PointToScreen(New Point(cellRect.Right, cellRect.Top))).Y - activeDropdownPatients.Height
+        End If
+
+        If dropdownX < 0 Then dropdownX = 0
+        If dropdownX + activeDropdownPatients.Width > Me.ClientSize.Width Then
+            dropdownX = Me.ClientSize.Width - activeDropdownPatients.Width
+        End If
+
+        If dropdownY < 0 Then dropdownY = 0
+
+        activeDropdownPatients.Location = New Point(dropdownX, dropdownY)
+
+        Dim lblTitle As New Label With {
+        .Text = "Actions",
+        .Font = New Font(dgvPatients.Font.FontFamily, 10, FontStyle.Bold),
+        .AutoSize = False,
+        .Size = New Size(200, 30),
+        .TextAlign = ContentAlignment.MiddleLeft,
+        .Padding = New Padding(10, 0, 0, 0)
+    }
+        activeDropdownPatients.Controls.Add(lblTitle)
+
+        AddMenuOption("View patient details", rowIndex, 30)
+        AddMenuOption("Edit patient", rowIndex, 60)
+        AddMenuOption("Schedule appointment", rowIndex, 90)
+
+        Me.Controls.Add(activeDropdownPatients)
+        activeDropdownPatients.BringToFront()
+    End Sub
+
+
+    Private Sub AddMenuOption(text As String, rowIndex As Integer, topPosition As Integer)
+        Dim btn As New Button With {
+        .Text = text,
+        .FlatStyle = FlatStyle.Flat,
+        .TextAlign = ContentAlignment.MiddleLeft,
+        .Size = New Size(200, 30),
+        .Location = New Point(0, topPosition),
+        .BackColor = Color.White,
+        .Padding = New Padding(10, 0, 0, 0),
+        .Tag = rowIndex
+    }
+        btn.FlatAppearance.BorderSize = 0
+
+        AddHandler btn.Click, AddressOf MenuOption_Click
+        AddHandler btn.MouseEnter, AddressOf MenuOption_MouseEnter
+        AddHandler btn.MouseLeave, AddressOf MenuOption_MouseLeave
+
+        activeDropdownPatients.Controls.Add(btn)
+    End Sub
+
+    Private Sub MenuOption_Click(sender As Object, e As EventArgs)
+        Dim btn = DirectCast(sender, Button)
+        Dim rowIndex = CInt(btn.Tag)
+        Dim patientName = dgvPatients.Rows(rowIndex).Cells("Name").Value.ToString()
+        Dim patientId As String = GetPatientIdByName(patientName)
+        Select Case btn.Text
+
+            Case "View patient details"
+
+                If Not String.IsNullOrEmpty(patientId) Then
+                    Dim patientDetailsForm As New PatientDetails()
+                    patientDetailsForm.patientID = patientId
+                    patientDetailsForm.ShowDialog()
+                Else
+                    MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+            Case "Edit patient"
+                If Not String.IsNullOrEmpty(patientId) Then
+                    Dim editPatientDetailsForm As New EditPatientDetails()
+                    editPatientDetailsForm.patientID = patientId
+                    editPatientDetailsForm.ShowDialog()
+                Else
+                    MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
+            Case "Schedule appointment"
+                If Not String.IsNullOrEmpty(patientId) Then
+                    Dim lastMenstrualDate As Date = Date.MinValue
+                    Dim dueDate As Date = Date.MinValue
+                    Dim doctorId As String = ""
+                    Dim firstName As String = ""
+                    Dim lastName As String = ""
+
+                    If GetPatientDetailsForAppointment(patientId, firstName, lastName, lastMenstrualDate, dueDate, doctorId) Then
+                        Dim appointmentForm As New AppointmentDetails()
+                        appointmentForm.PatientId = patientId
+                        appointmentForm.PatientName = $"{firstName} {lastName}"
+                        appointmentForm.LastMenstrualDate = lastMenstrualDate
+                        appointmentForm.DueDate = dueDate
+                        appointmentForm.DefaultDoctorId = doctorId
+                        appointmentForm.IsNewAppointment = True
+                        appointmentForm.AppointmentType = "Follow-up Check-up"
+                        appointmentForm.ShowDialog()
+                    Else
+                        MessageBox.Show("Could not retrieve patient details for appointment scheduling.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Else
+                    MessageBox.Show("Could not retrieve patient ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+        End Select
+
+        CloseDropdownPatients()
+    End Sub
+
+    ' Method to get patient details for appointment scheduling
+    Private Function GetPatientDetailsForAppointment(patientId As String, ByRef firstName As String, ByRef lastName As String,
+        ByRef lastMenstrualDate As Date, ByRef dueDate As Date, ByRef doctorId As String) As Boolean
+        Dim success As Boolean = False
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Dim query As String = "SELECT first_name, last_name, last_menstrual_period, due_date, assigned_ob FROM patient WHERE patient_id = @patientId"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@patientId", patientId)
+                Try
+                    connection.Open()
+                    Using reader As MySqlDataReader = command.ExecuteReader()
+                        If reader.Read() Then
+                            firstName = reader("first_name").ToString()
+                            lastName = reader("last_name").ToString()
+
+                            If Not reader.IsDBNull(reader.GetOrdinal("last_menstrual_period")) Then
+                                lastMenstrualDate = Convert.ToDateTime(reader("last_menstrual_period"))
+                            End If
+
+                            If Not reader.IsDBNull(reader.GetOrdinal("due_date")) Then
+                                dueDate = Convert.ToDateTime(reader("due_date"))
+                            End If
+
+                            doctorId = reader("assigned_ob").ToString()
+                            success = True
+                        End If
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("Error retrieving patient details: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+        Return success
+    End Function
+
+    ' Method to get patient ID by patient name
+    Private Function GetPatientIdByName(patientName As String) As String
+        Dim patientId As String = String.Empty
+
+        Dim names As String() = patientName.Trim().Split(" "c)
+        If names.Length < 2 Then
+            Return String.Empty
+        End If
+
+        Dim firstName As String = names(0)
+        Dim lastName As String = names(names.Length - 1)
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Dim query As String = "SELECT patient_id FROM patient WHERE first_name = @firstName AND last_name = @lastName LIMIT 1"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@firstName", firstName)
+                command.Parameters.AddWithValue("@lastName", lastName)
+                Try
+                    connection.Open()
+                    Dim result As Object = command.ExecuteScalar()
+                    If result IsNot Nothing Then
+                        patientId = result.ToString()
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error retrieving patient ID: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+        Return patientId
+    End Function
+
+    Private Sub MenuOption_MouseEnter(sender As Object, e As EventArgs)
+        Dim btn = DirectCast(sender, Button)
+        btn.BackColor = Color.LightGray
+    End Sub
+
+    Private Sub MenuOption_MouseLeave(sender As Object, e As EventArgs)
+        Dim btn = DirectCast(sender, Button)
+        btn.BackColor = Color.White
+    End Sub
+
+    Private Sub CloseDropdownPatients()
+        If activeDropdownPatients IsNot Nothing Then
+            Me.Controls.Remove(activeDropdownPatients)
+            activeDropdownPatients.Dispose()
+            activeDropdownPatients = Nothing
+        End If
+    End Sub
+
+    Private Sub CloseDropdownPatientsHandler(sender As Object, e As EventArgs) Handles dgvPatients.Click, Panel1.Click, pnlPatients.Click, btnDashboard.Click, btnPatients.Click, btnAppointments.Click, txtSearchPatient.Click, Label5.Click
+        CloseDropdownPatients()
+    End Sub
+    Private Sub txtSearchPatient_TextChanged_1(sender As Object, e As EventArgs) Handles txtSearchPatient.TextChanged
+        Dim searchText = txtSearchPatient.Text.Trim.ToLower
 
         For Each row As DataGridViewRow In dgvPatients.Rows
-            Dim fullName As String = row.Cells("FullName").Value.ToString().ToLower()
-            Dim allergies As String = row.Cells("Allergies").Value.ToString().ToLower()
+            Dim name = row.Cells("Name").Value.ToString.ToLower
+            Dim assignedOB = row.Cells("AssignedOB").Value.ToString.ToLower
 
-            If fullName.Contains(searchText) OrElse allergies.Contains(searchText) Then
+            If name.Contains(searchText) OrElse assignedOB.Contains(searchText) Then
                 row.Visible = True
             Else
                 row.Visible = False

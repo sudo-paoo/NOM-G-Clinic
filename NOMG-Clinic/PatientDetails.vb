@@ -8,6 +8,12 @@ Public Class PatientDetails
         TabControl1.ItemSize = New Size(TabControl1.Width \ TabControl1.TabCount - 2, 30)
         If Not String.IsNullOrEmpty(patientID) Then
             LoadPatientData()
+
+            If Not String.IsNullOrEmpty(lblName.Text) Then
+                lblAppointments.Text = $"All appointments for {lblName.Text}"
+                lblBillings.Text = $"All billing records for {lblName.Text}"
+                lblConsultationDetails.Text = $"All consultation details for {lblName.Text}"
+            End If
         Else
             MessageBox.Show("No patient ID provided.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Close()
@@ -45,18 +51,18 @@ Public Class PatientDetails
 
                     Using reader As MySqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
-                            ' Display patient name (without middle name)
+                            ' Display patient name
                             lblName.Text = $"{reader("first_name")} {reader("last_name")}"
 
                             ' Display age
                             lblAge.Text = reader("age").ToString()
 
-                            ' Display civil status (capitalize first letter)
+                            ' Display civil status
                             Dim civilStatus As String = reader("civil_status").ToString()
                             lblCivilStatus.Text = If(String.IsNullOrEmpty(civilStatus), "Unknown",
                                                     civilStatus.Substring(0, 1).ToUpper() & civilStatus.Substring(1))
 
-                            ' Display first baby (convert from integer to Yes/No)
+                            ' Display first baby
                             Dim firstBabyVal As Integer = Convert.ToInt32(reader("first_baby"))
                             lblFirstBaby.Text = If(firstBabyVal = 1, "Yes", "No")
 
@@ -68,7 +74,7 @@ Public Class PatientDetails
                             If DateTime.TryParse(reader("last_menstrual_period").ToString(), lastMenstrualDate) Then
                                 lblLastMenstrual.Text = lastMenstrualDate.ToString("MMMM dd, yyyy")
 
-                                ' Calculate and display gestational age (weeks and days)
+                                ' Calculate and display gestational age
                                 Dim gestationalAge As TimeSpan = DateTime.Now - lastMenstrualDate
                                 Dim totalDays As Integer = gestationalAge.Days
                                 Dim weeks As Integer = totalDays \ 7
@@ -79,7 +85,7 @@ Public Class PatientDetails
                                 lblGestationalAge.Text = "Not available"
                             End If
 
-                            ' Display next checkup date (or "None" if not available)
+                            ' Display next checkup date
                             If Not reader.IsDBNull(reader.GetOrdinal("next_checkup")) Then
                                 Dim nextCheckupDate As DateTime = Convert.ToDateTime(reader("next_checkup"))
                                 ' Only show upcoming checkups
@@ -92,7 +98,7 @@ Public Class PatientDetails
                                 lblNextCheckup.Text = "None"
                             End If
 
-                            ' Display assigned OB (with "Dr." prefix)
+                            ' Display assigned OB
                             If Not reader.IsDBNull(reader.GetOrdinal("doctor_name")) Then
                                 lblAssignedOB.Text = reader("doctor_name").ToString()
                             Else
@@ -124,7 +130,10 @@ Public Class PatientDetails
             SetupAppointmentsDataGrid()
             PopulateAppointmentsDataGrid()
 
-            ' Your existing call to load recent appointments
+            ' Set up and populate the billings grid view
+            BillingSetupDataGrid()
+            BillingPopulateDataGrid()
+
             LoadRecentAppointments()
         Catch ex As Exception
             MessageBox.Show("Error loading patient data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -155,17 +164,13 @@ Public Class PatientDetails
         a.appointment_date DESC
     LIMIT 3"
 
-        ' Create a connection and command
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
-                ' Add parameter for patient ID
                 command.Parameters.AddWithValue("@patientID", patientID)
 
                 Try
-                    ' Open the connection
                     connection.Open()
 
-                    ' Execute the query and read the data
                     Using reader As MySqlDataReader = command.ExecuteReader()
                         Dim hasAppointments As Boolean = False
 
@@ -213,7 +218,7 @@ Public Class PatientDetails
                                 .TextAlign = ContentAlignment.MiddleRight,
                                 .ForeColor = Color.FromArgb(60, 60, 60)
                             }
-                            ' Calculate position to align to far right
+
                             doctorLabel.Location = New Point(appointmentPanel.Width - doctorLabel.PreferredWidth - 15, 15)
                             appointmentPanel.Controls.Add(doctorLabel)
 
@@ -229,7 +234,6 @@ Public Class PatientDetails
                             flowRecentAppointments.Controls.Add(appointmentPanel)
                         End While
 
-                        ' If no appointments, display a message
                         If Not hasAppointments Then
                             Dim noAppointmentsLabel As New Label With {
                                 .Text = "No recent appointments found.",
@@ -272,9 +276,8 @@ Public Class PatientDetails
         Next
     End Sub
 
-    ' Add this method to set up the dgvAppointments grid
+    ' Setup dgvAppointments grid
     Private Sub SetupAppointmentsDataGrid()
-        ' Configure the DataGridView
         dgvAppointments.AllowUserToAddRows = False
         dgvAppointments.AllowUserToDeleteRows = False
         dgvAppointments.ReadOnly = True
@@ -300,21 +303,16 @@ Public Class PatientDetails
         dgvAppointments.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245)
         dgvAppointments.DefaultCellStyle.SelectionForeColor = Color.Black
 
-        ' Disable column and row resizing
         dgvAppointments.AllowUserToResizeColumns = False
         dgvAppointments.AllowUserToResizeRows = False
 
-        ' Enable scrollbars when needed
         dgvAppointments.ScrollBars = ScrollBars.Vertical
 
-        ' Set columns mode
         dgvAppointments.AutoGenerateColumns = False
         dgvAppointments.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
 
-        ' Clear any existing columns
         dgvAppointments.Columns.Clear()
 
-        ' Add columns to match your example
         Dim dateColumn As New DataGridViewTextBoxColumn()
         dateColumn.HeaderText = "Date"
         dateColumn.Name = "Date"
@@ -343,29 +341,25 @@ Public Class PatientDetails
         notesColumn.FillWeight = 40
         dgvAppointments.Columns.Add(notesColumn)
 
-        ' Add handler for cell formatting
         AddHandler dgvAppointments.CellFormatting, AddressOf dgvAppointments_CellFormatting
     End Sub
 
     Private Sub dgvAppointments_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
-        ' Apply custom styling to cells
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvAppointments.Rows(e.RowIndex)
 
-            ' Style for date column
             If e.ColumnIndex = dgvAppointments.Columns("Date").Index AndAlso e.Value IsNot Nothing Then
                 e.CellStyle.Font = New Font(dgvAppointments.Font, FontStyle.Bold)
             End If
 
-            ' Style for Doctor column
             If e.ColumnIndex = dgvAppointments.Columns("Doctor").Index AndAlso e.Value IsNot Nothing Then
-                e.CellStyle.ForeColor = Color.FromArgb(60, 60, 140)  ' Dark blue color for doctor names
+                e.CellStyle.ForeColor = Color.FromArgb(60, 60, 140)
             End If
         End If
     End Sub
 
+    ' Populate dgvAppointments
     Private Sub PopulateAppointmentsDataGrid()
-        ' Clear any existing rows
         dgvAppointments.Rows.Clear()
 
         If String.IsNullOrEmpty(patientID) Then
@@ -419,5 +413,226 @@ Public Class PatientDetails
         End Using
     End Sub
 
+    ' Setup dgvBillings
+    Private Sub BillingSetupDataGrid()
+        dgvBillings.AllowUserToAddRows = False
+        dgvBillings.AllowUserToDeleteRows = False
+        dgvBillings.ReadOnly = True
+        dgvBillings.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvBillings.MultiSelect = False
+        dgvBillings.BackgroundColor = Color.White
+        dgvBillings.BorderStyle = BorderStyle.None
+        dgvBillings.RowHeadersVisible = False
+        dgvBillings.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
+        dgvBillings.GridColor = Color.LightGray
+        dgvBillings.ColumnHeadersVisible = True
 
+        dgvBillings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+        dgvBillings.ColumnHeadersHeight = 40
+        dgvBillings.ColumnHeadersDefaultCellStyle.Font = New Font(dgvBillings.Font, FontStyle.Bold)
+        dgvBillings.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
+        dgvBillings.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+        dgvBillings.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+
+        dgvBillings.RowTemplate.Height = 60
+        dgvBillings.RowTemplate.MinimumHeight = 60
+
+        dgvBillings.DefaultCellStyle.WrapMode = DataGridViewTriState.True
+
+        dgvBillings.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
+        dgvBillings.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245)
+        dgvBillings.DefaultCellStyle.SelectionForeColor = Color.Black
+
+        dgvBillings.AllowUserToResizeColumns = False
+        dgvBillings.AllowUserToResizeRows = False
+
+        dgvBillings.ScrollBars = ScrollBars.Vertical
+
+        dgvBillings.AutoGenerateColumns = False
+        dgvBillings.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+        dgvBillings.Columns.Clear()
+
+        Dim dateColumn As New DataGridViewTextBoxColumn()
+        dateColumn.HeaderText = "Date"
+        dateColumn.Name = "Date"
+        dateColumn.MinimumWidth = 100
+        dateColumn.FillWeight = 15
+        dgvBillings.Columns.Add(dateColumn)
+
+        Dim quantityColumn As New DataGridViewTextBoxColumn()
+        quantityColumn.HeaderText = "Quantity"
+        quantityColumn.Name = "Quantity"
+        quantityColumn.MinimumWidth = 80
+        quantityColumn.FillWeight = 10
+        dgvBillings.Columns.Add(quantityColumn)
+
+        Dim itemsColumn As New DataGridViewTextBoxColumn()
+        itemsColumn.HeaderText = "Items"
+        itemsColumn.Name = "Items"
+        itemsColumn.MinimumWidth = 150
+        itemsColumn.FillWeight = 35
+        itemsColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True
+        itemsColumn.DefaultCellStyle.Padding = New Padding(5, 10, 5, 10)
+        itemsColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft
+        dgvBillings.Columns.Add(itemsColumn)
+
+        Dim totalColumn As New DataGridViewTextBoxColumn()
+        totalColumn.HeaderText = "Total"
+        totalColumn.Name = "Total"
+        totalColumn.MinimumWidth = 100
+        totalColumn.FillWeight = 15
+        dgvBillings.Columns.Add(totalColumn)
+
+        Dim statusColumn As New DataGridViewTextBoxColumn()
+        statusColumn.HeaderText = "Status"
+        statusColumn.Name = "Status"
+        statusColumn.MinimumWidth = 80
+        statusColumn.FillWeight = 15
+        dgvBillings.Columns.Add(statusColumn)
+
+        AddHandler dgvBillings.CellFormatting, AddressOf dgvBillings_CellFormatting
+        AddHandler dgvBillings.DataBindingComplete, AddressOf dgvBillings_DataBindingComplete
+    End Sub
+
+    ' Populate the dgvBillings
+    Private Sub BillingPopulateDataGrid()
+        dgvBillings.Rows.Clear()
+
+        If String.IsNullOrEmpty(patientID) Then
+            Return
+        End If
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Dim query As String = "
+SELECT 
+    b.billing_id AS BillingID,
+    DATE_FORMAT(b.date, '%b %d, %Y') AS Date, 
+    b.items AS Items, 
+    b.item_names AS ItemNames,
+    b.total_amount AS Total, 
+    b.status AS Status
+FROM 
+    billing b
+WHERE 
+    b.patient_id = @patientID
+ORDER BY 
+    b.date DESC"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@patientID", patientID)
+                Try
+                    connection.Open()
+
+                    Dim adapter As New MySqlDataAdapter(command)
+                    Dim dataTable As New DataTable()
+                    adapter.Fill(dataTable)
+
+                    For Each row As DataRow In dataTable.Rows
+                        ' Get formatted item names from JSON
+                        Dim formattedItems As String = FormatItemNames(row("ItemNames").ToString())
+
+                        Dim rowIndex As Integer = dgvBillings.Rows.Add(
+                row("Date"),
+                row("Items"),
+                formattedItems,
+                String.Format("₱{0:N2}", Convert.ToDecimal(row("Total"))),
+                row("Status"))
+
+                        dgvBillings.Rows(rowIndex).Tag = row("BillingID").ToString()
+                    Next
+
+                    ' Ensure rows are properly sized after populating
+                    dgvBillings.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
+
+                    ' If no data found
+                    If dgvBillings.Rows.Count = 0 Then
+                        dgvBillings.Rows.Add("No billing records", "", "No billing records found for this patient", "", "")
+                        dgvBillings.Rows(0).DefaultCellStyle.ForeColor = Color.Gray
+                        dgvBillings.Rows(0).DefaultCellStyle.Font = New Font(dgvBillings.Font, FontStyle.Italic)
+                    End If
+
+                Catch ex As Exception
+                    MessageBox.Show("An error occurred while fetching billing data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    ' Format item names from JSON
+    Private Function FormatItemNames(jsonString As String) As String
+        If String.IsNullOrEmpty(jsonString) Then
+            Return ""
+        End If
+
+        Try
+            If jsonString.Trim() = "[2]" OrElse System.Text.RegularExpressions.Regex.IsMatch(jsonString.Trim(), "^\[\d+\]$") Then
+                Return "Unknown Items"
+            End If
+
+            Dim items As List(Of Dictionary(Of String, Object))
+
+            Try
+                items = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(jsonString)
+            Catch ex As Exception
+                Dim sanitizedJson As String = jsonString.Trim()
+
+                If Not sanitizedJson.StartsWith("[") Then
+                    sanitizedJson = "[" & sanitizedJson & "]"
+                End If
+
+                items = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(sanitizedJson)
+            End Try
+
+            Dim formattedItemsList As New List(Of String)
+
+            For Each item In items
+                Dim itemName As String = If(item.ContainsKey("item_name"), item("item_name").ToString(), "")
+                Dim quantity As Integer = 0
+
+                If item.ContainsKey("quantity") Then
+                    Integer.TryParse(item("quantity").ToString(), quantity)
+                End If
+
+                If Not String.IsNullOrEmpty(itemName) AndAlso quantity > 0 Then
+                    formattedItemsList.Add($"{itemName} x {quantity}")
+                ElseIf Not String.IsNullOrEmpty(itemName) Then
+                    formattedItemsList.Add(itemName)
+                End If
+            Next
+
+            Return String.Join(Environment.NewLine, formattedItemsList)
+
+        Catch ex As Exception
+            Console.WriteLine("Error parsing JSON item names: " & ex.Message)
+            Return "Error parsing items"
+        End Try
+    End Function
+
+    Private Sub dgvBillings_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
+        dgvBillings.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
+
+        If dgvBillings.DisplayedRowCount(True) < dgvBillings.RowCount Then
+            dgvBillings.PerformLayout()
+        End If
+    End Sub
+
+    Private Sub dgvBillings_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvBillings.Rows(e.RowIndex)
+
+            If e.ColumnIndex = dgvBillings.Columns("Status").Index Then
+                Dim status As String = row.Cells(e.ColumnIndex).Value.ToString()
+
+                If status.Equals("Paid", StringComparison.OrdinalIgnoreCase) Then
+                    row.Cells(e.ColumnIndex).Style.ForeColor = Color.Green
+                ElseIf status.Equals("Unpaid", StringComparison.OrdinalIgnoreCase) Then
+                    row.Cells(e.ColumnIndex).Style.ForeColor = Color.Red
+                End If
+            End If
+        End If
+    End Sub
 End Class
