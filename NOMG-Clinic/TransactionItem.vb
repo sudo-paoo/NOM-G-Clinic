@@ -28,7 +28,8 @@
         ' === Description ===
         descLbl.Text = description
         descLbl.Font = New Font("Verdana", 9, FontStyle.Bold)
-        descLbl.AutoSize = True
+        descLbl.AutoSize = False
+        descLbl.Size = New Size(350, 20)
         descLbl.Location = New Point(60, 10)
 
         ' === Date ===
@@ -44,14 +45,20 @@
         priceLbl.ForeColor = Color.Black
         priceLbl.AutoSize = True
 
-        ' === Badge ===
+        ' === Status Badge ===
         badge.Text = status
         badge.Font = New Font("Verdana", 8, FontStyle.Bold)
-        badge.AutoSize = True
-        badge.Padding = New Padding(8, 2, 8, 2)
-        badge.ForeColor = Color.Black
-        badge.BackColor = Color.WhiteSmoke
+        badge.AutoSize = False
+        badge.Size = New Size(65, 20)
         badge.TextAlign = ContentAlignment.MiddleCenter
+        badge.ForeColor = Color.White
+
+        ' Set color based on status
+        If status.ToLower() = "paid" Then
+            badge.BackColor = Color.Green
+        Else
+            badge.BackColor = Color.Red
+        End If
 
         ' === Separator ===
         separator.Height = 1
@@ -70,14 +77,17 @@
     End Sub
 
     Private Sub TransactionItem_Resize(sender As Object, e As EventArgs)
-        ' Right section container width offset
-        Dim rightMargin As Integer = 10
+        ' Calculate available width
+        Dim availableWidth As Integer = Me.ClientSize.Width - 20
 
-        ' Stack price and badge aligned to right
-        Dim totalRightWidth = Math.Max(priceLbl.PreferredWidth, badge.PreferredWidth)
-        Dim xRight = Me.Width - totalRightWidth - rightMargin
+        ' Position price and badge on the right side
+        priceLbl.Location = New Point(availableWidth - priceLbl.Width, 10)
+        badge.Location = New Point(availableWidth - badge.Width, 32)
 
-        priceLbl.Location = New Point(xRight, 10)
-        badge.Location = New Point(xRight, 30)
+        ' Ensure description doesn't overlap with price/status
+        Dim maxDescWidth As Integer = priceLbl.Left - descLbl.Left - 10
+        If maxDescWidth > 50 Then
+            descLbl.Width = maxDescWidth
+        End If
     End Sub
 End Class

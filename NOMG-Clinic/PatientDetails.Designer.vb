@@ -29,9 +29,13 @@ Partial Class PatientDetails
         TabPage1 = New TabPage()
         Panel2 = New Panel()
         HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
+        Panel8 = New Panel()
+        Label18 = New Label()
         flowRecentAppointments = New FlowLayoutPanel()
         Label12 = New Label()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
+        Panel7 = New Panel()
+        Label21 = New Label()
         lblAssignedOB = New Label()
         lblNextCheckup = New Label()
         lblGestationalAge = New Label()
@@ -56,29 +60,27 @@ Partial Class PatientDetails
         TabPage2 = New TabPage()
         Panel3 = New Panel()
         dgvAppointments = New DataGridView()
-        Label13 = New Label()
+        lblAppointments = New Label()
         Label14 = New Label()
         TabPage3 = New TabPage()
         Panel4 = New Panel()
-        dgvBilling = New DataGridView()
-        Label15 = New Label()
+        dgvBillings = New DataGridView()
+        lblBillings = New Label()
         Label16 = New Label()
         TabPage4 = New TabPage()
-        Panel5 = New Panel()
-        dgvConsultationDetails = New DataGridView()
-        Label19 = New Label()
-        Label20 = New Label()
         Label7 = New Label()
-        Panel7 = New Panel()
-        Label21 = New Label()
-        Panel8 = New Panel()
-        Label18 = New Label()
+        Panel5 = New Panel()
+        DataGridView1 = New DataGridView()
+        lblConsultationDetails = New Label()
+        Label13 = New Label()
         Panel1.SuspendLayout()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         Panel2.SuspendLayout()
         HopeGroupBox4.SuspendLayout()
+        Panel8.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
+        Panel7.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         Panel6.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -86,12 +88,10 @@ Partial Class PatientDetails
         CType(dgvAppointments, ComponentModel.ISupportInitialize).BeginInit()
         TabPage3.SuspendLayout()
         Panel4.SuspendLayout()
-        CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvBillings, ComponentModel.ISupportInitialize).BeginInit()
         TabPage4.SuspendLayout()
         Panel5.SuspendLayout()
-        CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).BeginInit()
-        Panel7.SuspendLayout()
-        Panel8.SuspendLayout()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -177,6 +177,26 @@ Partial Class PatientDetails
         HopeGroupBox4.Text = "HopeGroupBox4"
         HopeGroupBox4.ThemeColor = SystemColors.ControlLightLight
         ' 
+        ' Panel8
+        ' 
+        Panel8.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
+        Panel8.Controls.Add(Label18)
+        Panel8.Location = New Point(0, 0)
+        Panel8.Name = "Panel8"
+        Panel8.Size = New Size(942, 41)
+        Panel8.TabIndex = 16
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.BackColor = Color.Transparent
+        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.Location = New Point(328, 7)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(287, 28)
+        Label18.TabIndex = 14
+        Label18.Text = "Recent Appointments"
+        ' 
         ' flowRecentAppointments
         ' 
         flowRecentAppointments.Location = New Point(6, 66)
@@ -219,6 +239,26 @@ Partial Class PatientDetails
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = SystemColors.ControlLightLight
+        ' 
+        ' Panel7
+        ' 
+        Panel7.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
+        Panel7.Controls.Add(Label21)
+        Panel7.Location = New Point(0, 0)
+        Panel7.Name = "Panel7"
+        Panel7.Size = New Size(450, 41)
+        Panel7.TabIndex = 16
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.BackColor = Color.Transparent
+        Label21.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label21.Location = New Point(74, 5)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(310, 28)
+        Label21.TabIndex = 14
+        Label21.Text = "Pregnancy Information"
         ' 
         ' lblAssignedOB
         ' 
@@ -464,7 +504,7 @@ Partial Class PatientDetails
         ' 
         Panel3.BackgroundImage = My.Resources.Resources.bg_img
         Panel3.Controls.Add(dgvAppointments)
-        Panel3.Controls.Add(Label13)
+        Panel3.Controls.Add(lblAppointments)
         Panel3.Controls.Add(Label14)
         Panel3.Dock = DockStyle.Fill
         Panel3.Location = New Point(3, 3)
@@ -481,15 +521,15 @@ Partial Class PatientDetails
         dgvAppointments.Size = New Size(933, 479)
         dgvAppointments.TabIndex = 15
         ' 
-        ' Label13
+        ' lblAppointments
         ' 
-        Label13.AutoSize = True
-        Label13.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
-        Label13.Location = New Point(13, 43)
-        Label13.Name = "Label13"
-        Label13.Size = New Size(297, 20)
-        Label13.TabIndex = 14
-        Label13.Text = "All appointments for Maria Garcia"
+        lblAppointments.AutoSize = True
+        lblAppointments.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        lblAppointments.Location = New Point(13, 43)
+        lblAppointments.Name = "lblAppointments"
+        lblAppointments.Size = New Size(297, 20)
+        lblAppointments.TabIndex = 14
+        lblAppointments.Text = "All appointments for Maria Garcia"
         ' 
         ' Label14
         ' 
@@ -515,8 +555,8 @@ Partial Class PatientDetails
         ' Panel4
         ' 
         Panel4.BackgroundImage = My.Resources.Resources.bg_img
-        Panel4.Controls.Add(dgvBilling)
-        Panel4.Controls.Add(Label15)
+        Panel4.Controls.Add(dgvBillings)
+        Panel4.Controls.Add(lblBillings)
         Panel4.Controls.Add(Label16)
         Panel4.Dock = DockStyle.Fill
         Panel4.Location = New Point(0, 0)
@@ -524,24 +564,24 @@ Partial Class PatientDetails
         Panel4.Size = New Size(967, 554)
         Panel4.TabIndex = 0
         ' 
-        ' dgvBilling
+        ' dgvBillings
         ' 
-        dgvBilling.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvBilling.Location = New Point(17, 71)
-        dgvBilling.Name = "dgvBilling"
-        dgvBilling.RowHeadersWidth = 51
-        dgvBilling.Size = New Size(933, 479)
-        dgvBilling.TabIndex = 17
+        dgvBillings.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvBillings.Location = New Point(17, 71)
+        dgvBillings.Name = "dgvBillings"
+        dgvBillings.RowHeadersWidth = 51
+        dgvBillings.Size = New Size(933, 479)
+        dgvBillings.TabIndex = 17
         ' 
-        ' Label15
+        ' lblBillings
         ' 
-        Label15.AutoSize = True
-        Label15.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(17, 48)
-        Label15.Name = "Label15"
-        Label15.Size = New Size(300, 20)
-        Label15.TabIndex = 16
-        Label15.Text = "All billing records for Maria Garcia"
+        lblBillings.AutoSize = True
+        lblBillings.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        lblBillings.Location = New Point(17, 48)
+        lblBillings.Name = "lblBillings"
+        lblBillings.Size = New Size(300, 20)
+        lblBillings.TabIndex = 16
+        lblBillings.Text = "All billing records for Maria Garcia"
         ' 
         ' Label16
         ' 
@@ -565,46 +605,6 @@ Partial Class PatientDetails
         TabPage4.Text = "Consultation Details"
         TabPage4.UseVisualStyleBackColor = True
         ' 
-        ' Panel5
-        ' 
-        Panel5.Controls.Add(dgvConsultationDetails)
-        Panel5.Controls.Add(Label19)
-        Panel5.Controls.Add(Label20)
-        Panel5.Location = New Point(0, 0)
-        Panel5.Name = "Panel5"
-        Panel5.Size = New Size(967, 554)
-        Panel5.TabIndex = 0
-        ' 
-        ' dgvConsultationDetails
-        ' 
-        dgvConsultationDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        dgvConsultationDetails.Location = New Point(17, 63)
-        dgvConsultationDetails.Name = "dgvConsultationDetails"
-        dgvConsultationDetails.RowHeadersWidth = 51
-        dgvConsultationDetails.Size = New Size(933, 479)
-        dgvConsultationDetails.TabIndex = 20
-        ' 
-        ' Label19
-        ' 
-        Label19.AutoSize = True
-        Label19.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(17, 40)
-        Label19.Name = "Label19"
-        Label19.Size = New Size(346, 20)
-        Label19.TabIndex = 19
-        Label19.Text = "All consultation details for Maria Garcia"
-        ' 
-        ' Label20
-        ' 
-        Label20.AutoSize = True
-        Label20.BackColor = Color.Transparent
-        Label20.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.Location = New Point(17, 12)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(246, 28)
-        Label20.TabIndex = 18
-        Label20.Text = "Consultaion Notes"
-        ' 
         ' Label7
         ' 
         Label7.AutoSize = True
@@ -616,45 +616,47 @@ Partial Class PatientDetails
         Label7.TabIndex = 4
         Label7.Text = "Patient Details"
         ' 
-        ' Panel7
+        ' Panel5
         ' 
-        Panel7.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
-        Panel7.Controls.Add(Label21)
-        Panel7.Location = New Point(0, 0)
-        Panel7.Name = "Panel7"
-        Panel7.Size = New Size(450, 41)
-        Panel7.TabIndex = 16
+        Panel5.BackgroundImage = My.Resources.Resources.bg_img
+        Panel5.Controls.Add(DataGridView1)
+        Panel5.Controls.Add(lblConsultationDetails)
+        Panel5.Controls.Add(Label13)
+        Panel5.Dock = DockStyle.Fill
+        Panel5.Location = New Point(3, 3)
+        Panel5.Name = "Panel5"
+        Panel5.Size = New Size(961, 548)
+        Panel5.TabIndex = 1
         ' 
-        ' Label21
+        ' DataGridView1
         ' 
-        Label21.AutoSize = True
-        Label21.BackColor = Color.Transparent
-        Label21.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label21.Location = New Point(74, 5)
-        Label21.Name = "Label21"
-        Label21.Size = New Size(310, 28)
-        Label21.TabIndex = 14
-        Label21.Text = "Pregnancy Information"
+        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridView1.Location = New Point(17, 71)
+        DataGridView1.Name = "DataGridView1"
+        DataGridView1.RowHeadersWidth = 51
+        DataGridView1.Size = New Size(933, 479)
+        DataGridView1.TabIndex = 17
         ' 
-        ' Panel8
+        ' lblConsultationDetails
         ' 
-        Panel8.BackColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
-        Panel8.Controls.Add(Label18)
-        Panel8.Location = New Point(0, 0)
-        Panel8.Name = "Panel8"
-        Panel8.Size = New Size(942, 41)
-        Panel8.TabIndex = 16
+        lblConsultationDetails.AutoSize = True
+        lblConsultationDetails.Font = New Font("Verdana", 10.2F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
+        lblConsultationDetails.Location = New Point(17, 48)
+        lblConsultationDetails.Name = "lblConsultationDetails"
+        lblConsultationDetails.Size = New Size(300, 20)
+        lblConsultationDetails.TabIndex = 16
+        lblConsultationDetails.Text = "All billing records for Maria Garcia"
         ' 
-        ' Label18
+        ' Label13
         ' 
-        Label18.AutoSize = True
-        Label18.BackColor = Color.Transparent
-        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.Location = New Point(328, 7)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(287, 28)
-        Label18.TabIndex = 14
-        Label18.Text = "Recent Appointments"
+        Label13.AutoSize = True
+        Label13.BackColor = Color.Transparent
+        Label13.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label13.Location = New Point(17, 20)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(271, 28)
+        Label13.TabIndex = 15
+        Label13.Text = "Consultation Details"
         ' 
         ' PatientDetails
         ' 
@@ -677,8 +679,12 @@ Partial Class PatientDetails
         Panel2.ResumeLayout(False)
         HopeGroupBox4.ResumeLayout(False)
         HopeGroupBox4.PerformLayout()
+        Panel8.ResumeLayout(False)
+        Panel8.PerformLayout()
         HopeGroupBox2.ResumeLayout(False)
         HopeGroupBox2.PerformLayout()
+        Panel7.ResumeLayout(False)
+        Panel7.PerformLayout()
         HopeGroupBox1.ResumeLayout(False)
         HopeGroupBox1.PerformLayout()
         Panel6.ResumeLayout(False)
@@ -690,15 +696,11 @@ Partial Class PatientDetails
         TabPage3.ResumeLayout(False)
         Panel4.ResumeLayout(False)
         Panel4.PerformLayout()
-        CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvBillings, ComponentModel.ISupportInitialize).EndInit()
         TabPage4.ResumeLayout(False)
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
-        CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).EndInit()
-        Panel7.ResumeLayout(False)
-        Panel7.PerformLayout()
-        Panel8.ResumeLayout(False)
-        Panel8.PerformLayout()
+        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -727,10 +729,10 @@ Partial Class PatientDetails
     Friend WithEvents Label10 As Label
     Friend WithEvents flowRecentAppointments As FlowLayoutPanel
     Friend WithEvents dgvAppointments As DataGridView
-    Friend WithEvents Label13 As Label
+    Friend WithEvents lblAppointments As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents dgvBilling As DataGridView
-    Friend WithEvents Label15 As Label
+    Friend WithEvents dgvBillings As DataGridView
+    Friend WithEvents lblBillings As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents lblAssignedOB As Label
     Friend WithEvents lblNextCheckup As Label
@@ -743,13 +745,13 @@ Partial Class PatientDetails
     Friend WithEvents lblName As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents TabPage4 As TabPage
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents dgvConsultationDetails As DataGridView
-    Friend WithEvents Label19 As Label
-    Friend WithEvents Label20 As Label
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel7 As Panel
     Friend WithEvents Label21 As Label
     Friend WithEvents Panel8 As Panel
     Friend WithEvents Label18 As Label
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents lblConsultationDetails As Label
+    Friend WithEvents Label13 As Label
 End Class
