@@ -452,7 +452,7 @@ Partial Class AdminDashboard
         HopeGroupBox3.TabIndex = 4
         HopeGroupBox3.TabStop = False
         HopeGroupBox3.Text = "HopeGroupBox3"
-        HopeGroupBox3.ThemeColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        HopeGroupBox3.ThemeColor = SystemColors.ControlLightLight
         ' 
         ' lblActiveDoctors
         ' 
@@ -491,7 +491,7 @@ Partial Class AdminDashboard
         HopeGroupBox2.TabIndex = 4
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
-        HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        HopeGroupBox2.ThemeColor = SystemColors.ControlLightLight
         ' 
         ' lblTodaysAppointments
         ' 
@@ -530,7 +530,7 @@ Partial Class AdminDashboard
         HopeGroupBox1.TabIndex = 3
         HopeGroupBox1.TabStop = False
         HopeGroupBox1.Text = "HopeGroupBox1"
-        HopeGroupBox1.ThemeColor = Color.FromArgb(CByte(59), CByte(130), CByte(246))
+        HopeGroupBox1.ThemeColor = SystemColors.ControlLightLight
         ' 
         ' lblTotalPatients
         ' 
@@ -1080,6 +1080,7 @@ Partial Class AdminDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlAccountants)
         Controls.Add(pnlNurses)
         Controls.Add(pnlDoctors)
@@ -1087,7 +1088,6 @@ Partial Class AdminDashboard
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
-        Controls.Add(pnlDashboard)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
