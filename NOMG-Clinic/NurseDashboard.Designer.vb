@@ -45,6 +45,7 @@ Partial Class NurseDashboard
         lblTodaysAppointments = New Label()
         Label4 = New Label()
         pnlDashboard = New Panel()
+        lblWelcomeMessage = New Label()
         pnlPatients = New Panel()
         btnAddPatient = New FontAwesome.Sharp.IconButton()
         pnlPatientsDataGrid = New Panel()
@@ -68,7 +69,6 @@ Partial Class NurseDashboard
         Label11 = New Label()
         txtUsername = New TextBox()
         Label6 = New Label()
-        lblWelcomeMessage = New Label()
         Panel1.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
@@ -262,9 +262,9 @@ Partial Class NurseDashboard
         Label1.Font = New Font("Verdana", 10.8F, FontStyle.Bold)
         Label1.Location = New Point(11, 25)
         Label1.Name = "Label1"
-        Label1.Size = New Size(216, 22)
+        Label1.Size = New Size(149, 22)
         Label1.TabIndex = 0
-        Label1.Text = "Total Patients Today"
+        Label1.Text = "Total Patients"
         ' 
         ' HopeGroupBox2
         ' 
@@ -347,6 +347,7 @@ Partial Class NurseDashboard
         ' 
         ' flowRecentAppointments
         ' 
+        flowRecentAppointments.AutoScroll = True
         flowRecentAppointments.Dock = DockStyle.Fill
         flowRecentAppointments.Location = New Point(3, 3)
         flowRecentAppointments.Name = "flowRecentAppointments"
@@ -404,6 +405,17 @@ Partial Class NurseDashboard
         pnlDashboard.Name = "pnlDashboard"
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 5
+        ' 
+        ' lblWelcomeMessage
+        ' 
+        lblWelcomeMessage.AutoSize = True
+        lblWelcomeMessage.BackColor = Color.Transparent
+        lblWelcomeMessage.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblWelcomeMessage.Location = New Point(27, 10)
+        lblWelcomeMessage.Name = "lblWelcomeMessage"
+        lblWelcomeMessage.Size = New Size(25, 34)
+        lblWelcomeMessage.TabIndex = 7
+        lblWelcomeMessage.Text = "."
         ' 
         ' pnlPatients
         ' 
@@ -668,17 +680,6 @@ Partial Class NurseDashboard
         Label6.Size = New Size(147, 34)
         Label6.TabIndex = 2
         Label6.Text = "Settings"
-        ' 
-        ' lblWelcomeMessage
-        ' 
-        lblWelcomeMessage.AutoSize = True
-        lblWelcomeMessage.BackColor = Color.Transparent
-        lblWelcomeMessage.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblWelcomeMessage.Location = New Point(27, 10)
-        lblWelcomeMessage.Name = "lblWelcomeMessage"
-        lblWelcomeMessage.Size = New Size(25, 34)
-        lblWelcomeMessage.TabIndex = 7
-        lblWelcomeMessage.Text = "."
         ' 
         ' NurseDashboard
         ' 
