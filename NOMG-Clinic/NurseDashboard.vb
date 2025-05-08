@@ -25,6 +25,8 @@ Public Class NurseDashboard
         ' Load nurse profile for settings
         LoadNurseProfile()
 
+        UpdateWelcomeMessage()
+
         ' Dashboard details
         Dim totalPatients As Integer = 0
         Dim totalAppointmentsToday As Integer = 0
@@ -57,8 +59,40 @@ Public Class NurseDashboard
         lblTotalPatients.Text = totalPatients.ToString()
         lblTodaysAppointments.Text = totalAppointmentsToday.ToString()
         lblActiveDoctors.Text = totalDoctors.ToString()
-
     End Sub
+
+    Private Sub UpdateWelcomeMessage()
+        Dim query As String = "SELECT CONCAT('Welcome back, Nrs. ', first_name, ' ', last_name) FROM nurse WHERE nurse_id = @nurseID"
+        Dim welcomeMessage As String = ExecuteStringQuery(query, New MySqlParameter("@nurseID", nurseID))
+
+        If String.IsNullOrEmpty(welcomeMessage) Then
+            lblWelcomeMessage.Text = "Welcome back, Nurse"
+        Else
+            lblWelcomeMessage.Text = welcomeMessage
+        End If
+    End Sub
+
+    Private Function ExecuteStringQuery(query As String, ParamArray parameters As MySqlParameter()) As String
+        Dim result As String = String.Empty
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddRange(parameters)
+                Try
+                    connection.Open()
+                    Dim scalarResult = command.ExecuteScalar()
+                    If scalarResult IsNot Nothing Then
+                        result = scalarResult.ToString()
+                    End If
+                Catch ex As Exception
+                    Console.WriteLine("Error querying database: " & ex.Message)
+                End Try
+            End Using
+        End Using
+
+        Return result
+    End Function
 
     Private Sub PopulateRecentAppointments(connectionString As String)
         flowRecentAppointments.Controls.Clear()
