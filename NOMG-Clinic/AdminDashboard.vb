@@ -2,9 +2,11 @@
 Imports System.Data.SqlClient
 Imports MySql.Data.MySqlClient
 Public Class AdminDashboard
-
+    Public adminID As String
+    Private errorProvider As New ErrorProvider()
+    Private passwordVisible As Boolean = False
+    Private confirmPasswordVisible As Boolean = False
     Private activeDropdownPatients As Panel = Nothing
-    Private activeDropdownDoctors As Panel = Nothing
     Private activeDropdownAppointments As Panel = Nothing
 
     Private Sub AdminDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -28,6 +30,8 @@ Public Class AdminDashboard
 
         AccountantsSetupDataGrid()
         AccountantsPopulateDataGrid()
+
+        LoadAdminInfo()
 
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
@@ -259,7 +263,6 @@ Public Class AdminDashboard
         Next
     End Sub
 
-
     ' Populate the recent appointments flow panel
     Private Sub PopulateRecentPayments(connectionString As String)
         flowRecentPayments.Controls.Clear()
@@ -274,6 +277,8 @@ Public Class AdminDashboard
             billing b
         LEFT JOIN 
             patient p ON b.patient_id = p.patient_id
+        WHERE
+            b.status != 'Unpaid'
         ORDER BY 
             b.date DESC"
 
@@ -356,6 +361,7 @@ Public Class AdminDashboard
         ageColumn.Name = "Age"
         ageColumn.MinimumWidth = 80
         ageColumn.FillWeight = 8
+        ageColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(ageColumn)
 
         Dim gestationalAgeColumn As New DataGridViewTextBoxColumn()
@@ -363,6 +369,7 @@ Public Class AdminDashboard
         gestationalAgeColumn.Name = "GestationalAge"
         gestationalAgeColumn.MinimumWidth = 120
         gestationalAgeColumn.FillWeight = 18
+        gestationalAgeColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(gestationalAgeColumn)
 
         Dim assignedOBColumn As New DataGridViewTextBoxColumn()
@@ -384,6 +391,7 @@ Public Class AdminDashboard
         firstBabyColumn.Name = "FirstBaby"
         firstBabyColumn.MinimumWidth = 100
         firstBabyColumn.FillWeight = 10
+        firstBabyColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(firstBabyColumn)
 
         Dim buttonColumn As New DataGridViewButtonColumn()
@@ -486,7 +494,7 @@ Public Class AdminDashboard
         activeDropdownPatients = New Panel With {
         .BorderStyle = BorderStyle.FixedSingle,
         .BackColor = Color.White,
-        .Size = New Size(200, 130)
+        .Size = New Size(200, 100)
     }
 
         Dim cellRect = dgvPatients.GetCellDisplayRectangle(6, rowIndex, False)
@@ -521,7 +529,6 @@ Public Class AdminDashboard
 
         AddMenuOption("View patient details", rowIndex, 30)
         AddMenuOption("Edit patient", rowIndex, 60)
-        AddMenuOption("Schedule appointment", rowIndex, 90)
 
         Me.Controls.Add(activeDropdownPatients)
         activeDropdownPatients.BringToFront()
@@ -571,31 +578,6 @@ Public Class AdminDashboard
                     editPatientDetailsForm.ShowDialog()
                 Else
                     MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-
-            Case "Schedule appointment"
-                If Not String.IsNullOrEmpty(patientId) Then
-                    Dim lastMenstrualDate As Date = Date.MinValue
-                    Dim dueDate As Date = Date.MinValue
-                    Dim doctorId As String = ""
-                    Dim firstName As String = ""
-                    Dim lastName As String = ""
-
-                    If GetPatientDetailsForAppointment(patientId, firstName, lastName, lastMenstrualDate, dueDate, doctorId) Then
-                        Dim appointmentForm As New AppointmentDetails()
-                        appointmentForm.PatientId = patientId
-                        appointmentForm.PatientName = $"{firstName} {lastName}"
-                        appointmentForm.LastMenstrualDate = lastMenstrualDate
-                        appointmentForm.DueDate = dueDate
-                        appointmentForm.DefaultDoctorId = doctorId
-                        appointmentForm.IsNewAppointment = True
-                        appointmentForm.AppointmentType = "Follow-up Check-up"
-                        appointmentForm.ShowDialog()
-                    Else
-                        MessageBox.Show("Could not retrieve patient details for appointment scheduling.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Else
-                    MessageBox.Show("Could not retrieve patient ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
         End Select
 
@@ -776,8 +758,15 @@ Public Class AdminDashboard
         emailColumn.HeaderText = "Email"
         emailColumn.Name = "Email"
         emailColumn.MinimumWidth = 150
-        emailColumn.FillWeight = 20
+        emailColumn.FillWeight = 18
         dgvDoctors.Columns.Add(emailColumn)
+
+        Dim genderColumn As New DataGridViewTextBoxColumn()
+        genderColumn.HeaderText = "Gender"
+        genderColumn.Name = "Gender"
+        genderColumn.MinimumWidth = 80
+        genderColumn.FillWeight = 12
+        dgvDoctors.Columns.Add(genderColumn)
 
         Dim phoneColumn As New DataGridViewTextBoxColumn()
         phoneColumn.HeaderText = "Phone"
@@ -791,21 +780,10 @@ Public Class AdminDashboard
         patientsColumn.Name = "Patients"
         patientsColumn.MinimumWidth = 80
         patientsColumn.FillWeight = 10
+        patientsColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvDoctors.Columns.Add(patientsColumn)
 
-        Dim buttonColumn As New DataGridViewButtonColumn()
-        buttonColumn.HeaderText = ""
-        buttonColumn.Name = "ActionButton"
-        buttonColumn.Text = "..."
-        buttonColumn.UseColumnTextForButtonValue = True
-        buttonColumn.FlatStyle = FlatStyle.Flat
-        buttonColumn.MinimumWidth = 60
-        buttonColumn.FillWeight = 10
-        dgvDoctors.Columns.Add(buttonColumn)
-
         AddHandler dgvDoctors.DataBindingComplete, AddressOf dgvDoctors_DataBindingComplete
-
-        AddHandler dgvDoctors.CellClick, AddressOf dgvDoctors_CellClick
         AddHandler dgvDoctors.ColumnHeaderMouseClick, AddressOf dgvDoctors_ColumnHeaderMouseClick
         AddHandler dgvDoctors.CellFormatting, AddressOf dgvDoctors_CellFormatting
     End Sub
@@ -813,14 +791,6 @@ Public Class AdminDashboard
     Private Sub dgvDoctors_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
         If e.RowIndex >= 0 Then
             Dim row As DataGridViewRow = dgvDoctors.Rows(e.RowIndex)
-
-            If e.ColumnIndex = dgvDoctors.Columns("ActionButton").Index Then
-                Dim cell As DataGridViewButtonCell = TryCast(row.Cells(e.ColumnIndex), DataGridViewButtonCell)
-                If cell IsNot Nothing Then
-                    cell.Style.BackColor = Color.White
-                    cell.Style.ForeColor = Color.FromArgb(100, 100, 100)
-                End If
-            End If
 
             If e.ColumnIndex = dgvDoctors.Columns("Name").Index Then
                 Dim cell As DataGridViewCell = row.Cells(e.ColumnIndex)
@@ -842,14 +812,15 @@ Public Class AdminDashboard
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
         Dim query As String = "
-        SELECT 
-            CONCAT('Dr. ', first_name, ' ', last_name) AS Name, 
-            license_number AS LicenseNumber, 
-            email AS Email, 
-            contact_number AS Phone, 
-            (SELECT COUNT(*) FROM patient WHERE assigned_ob = doctor_id) AS Patients
-        FROM 
-            doctor"
+    SELECT 
+        CONCAT('Dr. ', first_name, ' ', last_name) AS Name, 
+        license_number AS LicenseNumber, 
+        email AS Email,
+        gender AS Gender,
+        contact_number AS Phone, 
+        (SELECT COUNT(*) FROM patient WHERE assigned_ob = doctor_id) AS Patients
+    FROM 
+        doctor"
 
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
@@ -861,7 +832,13 @@ Public Class AdminDashboard
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        dgvDoctors.Rows.Add(row("Name"), row("LicenseNumber"), row("Email"), row("Phone"), row("Patients"))
+                        dgvDoctors.Rows.Add(
+                        row("Name"),
+                        row("LicenseNumber"),
+                        row("Email"),
+                        row("Gender"),
+                        row("Phone"),
+                        row("Patients"))
                     Next
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching doctor data: " & ex.Message)
@@ -911,123 +888,6 @@ Public Class AdminDashboard
                 dgvDoctors.Sort(dgvDoctors.Columns(columnIndex), ListSortDirection.Descending)
             End If
         End If
-    End Sub
-
-    Private Sub dgvDoctors_CellClick(sender As Object, e As DataGridViewCellEventArgs)
-        If e.ColumnIndex = dgvDoctors.Columns("ActionButton").Index And e.RowIndex >= 0 Then
-            CloseDoctorsDropdown()
-
-            ShowDoctorsDropdownMenu(e.RowIndex)
-        ElseIf activeDropdownDoctors IsNot Nothing Then
-            CloseDoctorsDropdown()
-        End If
-    End Sub
-
-    ' Generate dropdown for doctors
-    Private Sub ShowDoctorsDropdownMenu(rowIndex As Integer)
-        Dim buttonCell = dgvDoctors.Rows(rowIndex).Cells("ActionButton")
-
-        activeDropdownDoctors = New Panel With {
-        .BorderStyle = BorderStyle.FixedSingle,
-        .BackColor = Color.White,
-        .Size = New Size(200, 130)
-    }
-
-        Dim cellRect = dgvDoctors.GetCellDisplayRectangle(dgvDoctors.Columns("ActionButton").Index, rowIndex, False)
-        Dim screenPoint = dgvDoctors.PointToScreen(New Point(cellRect.Right, cellRect.Top))
-        Dim formPoint = Me.PointToClient(screenPoint)
-
-        Dim dropdownX = formPoint.X - activeDropdownDoctors.Width
-        Dim dropdownY = formPoint.Y
-
-        If dropdownX < 0 Then dropdownX = 0
-        If dropdownX + activeDropdownDoctors.Width > Me.ClientSize.Width Then
-            dropdownX = Me.ClientSize.Width - activeDropdownDoctors.Width
-        End If
-
-        If dropdownY + activeDropdownDoctors.Height > Me.ClientSize.Height Then
-            dropdownY = formPoint.Y - activeDropdownDoctors.Height + cellRect.Height
-        End If
-
-        If dropdownY < 0 Then dropdownY = 0
-
-        activeDropdownDoctors.Location = New Point(dropdownX, dropdownY)
-
-        Dim lblTitle As New Label With {
-        .Text = "Actions",
-        .Font = New Font(dgvDoctors.Font.FontFamily, 10, FontStyle.Bold),
-        .AutoSize = False,
-        .Size = New Size(200, 30),
-        .TextAlign = ContentAlignment.MiddleLeft,
-        .Padding = New Padding(10, 0, 0, 0)
-    }
-        activeDropdownDoctors.Controls.Add(lblTitle)
-
-        AddDoctorsMenuOption("Copy doctor ID", rowIndex, 30)
-        AddDoctorsMenuOption("View doctor details", rowIndex, 60)
-        AddDoctorsMenuOption("Edit doctor", rowIndex, 90)
-
-        Me.Controls.Add(activeDropdownDoctors)
-        activeDropdownDoctors.BringToFront()
-    End Sub
-
-    Private Sub AddDoctorsMenuOption(text As String, rowIndex As Integer, topPosition As Integer)
-        Dim btn As New Button With {
-        .Text = text,
-        .FlatStyle = FlatStyle.Flat,
-        .TextAlign = ContentAlignment.MiddleLeft,
-        .Size = New Size(200, 30),
-        .Location = New Point(0, topPosition),
-        .BackColor = Color.White,
-        .Padding = New Padding(10, 0, 0, 0),
-        .Tag = rowIndex
-    }
-        btn.FlatAppearance.BorderSize = 0
-
-        AddHandler btn.Click, AddressOf DoctorsMenuOption_Click
-        AddHandler btn.MouseEnter, AddressOf DoctorsMenuOption_MouseEnter
-        AddHandler btn.MouseLeave, AddressOf DoctorsMenuOption_MouseLeave
-
-        activeDropdownDoctors.Controls.Add(btn)
-    End Sub
-
-    Private Sub DoctorsMenuOption_Click(sender As Object, e As EventArgs)
-        Dim btn = DirectCast(sender, Button)
-        Dim rowIndex = CInt(btn.Tag)
-        Dim doctorName = dgvDoctors.Rows(rowIndex).Cells("Name").Value.ToString()
-
-        Select Case btn.Text
-            Case "Copy doctor ID"
-                MessageBox.Show("Doctor ID for " & doctorName & " copied to clipboard!")
-            Case "View doctor details"
-                MessageBox.Show("Viewing details for " & doctorName)
-            Case "Edit doctor"
-                MessageBox.Show("Editing doctor " & doctorName)
-        End Select
-
-        CloseDoctorsDropdown()
-    End Sub
-
-    Private Sub DoctorsMenuOption_MouseEnter(sender As Object, e As EventArgs)
-        Dim btn = DirectCast(sender, Button)
-        btn.BackColor = Color.LightGray
-    End Sub
-
-    Private Sub DoctorsMenuOption_MouseLeave(sender As Object, e As EventArgs)
-        Dim btn = DirectCast(sender, Button)
-        btn.BackColor = Color.White
-    End Sub
-
-    Private Sub CloseDoctorsDropdown()
-        If activeDropdownDoctors IsNot Nothing Then
-            Me.Controls.Remove(activeDropdownDoctors)
-            activeDropdownDoctors.Dispose()
-            activeDropdownDoctors = Nothing
-        End If
-    End Sub
-
-    Private Sub CloseDropdownDoctorHandler(sender As Object, e As EventArgs) Handles Panel1.Click, pnlDoctors.Click, btnDashboard.Click, btnPatients.Click, btnDoctors.Click, btnAppointments.Click, btnBilling.Click, btnAddDoctor.Click, txtSearchDoctor.Click, Label6.Click, dgvDoctors.Click
-        CloseDoctorsDropdown()
     End Sub
 
     Private Sub txtSearchDoctor_TextChanged_1(sender As Object, e As EventArgs) Handles txtSearchDoctor.TextChanged
@@ -1094,7 +954,7 @@ Public Class AdminDashboard
         Dim appointmentIDColumn As New DataGridViewTextBoxColumn()
         appointmentIDColumn.HeaderText = "ID"
         appointmentIDColumn.Name = "AppointmentID"
-        appointmentIDColumn.MinimumWidth = 100
+        appointmentIDColumn.MinimumWidth = 90
         appointmentIDColumn.FillWeight = 10
         dgvAppointments.Columns.Add(appointmentIDColumn)
 
@@ -1133,7 +993,7 @@ Public Class AdminDashboard
         statusColumn.FillWeight = 10
         dgvAppointments.Columns.Add(statusColumn)
 
-        ' Patient ID column (hidden)
+        ' Patient ID column
         Dim patientIDColumn As New DataGridViewTextBoxColumn()
         patientIDColumn.HeaderText = "PatientID"
         patientIDColumn.Name = "PatientID"
@@ -1249,7 +1109,6 @@ Public Class AdminDashboard
 
     Private Sub dgvAppointments_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
         If dgvAppointments.DisplayedRowCount(True) < dgvAppointments.RowCount Then
-            Dim scrollWidth As Integer = SystemInformation.VerticalScrollBarWidth
             dgvAppointments.PerformLayout()
         End If
     End Sub
@@ -1262,7 +1121,6 @@ Public Class AdminDashboard
 
     ' Setup dgvBilling
     Private Sub BillingSetupDataGrid()
-        ' Configure the DataGridView
         dgvBilling.AllowUserToAddRows = False
         dgvBilling.AllowUserToDeleteRows = False
         dgvBilling.ReadOnly = True
@@ -1281,7 +1139,7 @@ Public Class AdminDashboard
         dgvBilling.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
         dgvBilling.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
 
-        ' Enable auto-sizing for row height based on content
+        ' Enable auto-sizing for row height
         dgvBilling.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
 
         ' Set default row height
@@ -1323,8 +1181,9 @@ Public Class AdminDashboard
         Dim quantityColumn As New DataGridViewTextBoxColumn()
         quantityColumn.HeaderText = "Quantity"
         quantityColumn.Name = "Quantity"
-        quantityColumn.MinimumWidth = 80
+        quantityColumn.MinimumWidth = 90
         quantityColumn.FillWeight = 10
+        quantityColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvBilling.Columns.Add(quantityColumn)
 
         Dim itemsColumn As New DataGridViewTextBoxColumn()
@@ -1340,7 +1199,7 @@ Public Class AdminDashboard
         Dim totalColumn As New DataGridViewTextBoxColumn()
         totalColumn.HeaderText = "Total"
         totalColumn.Name = "Total"
-        totalColumn.MinimumWidth = 100
+        totalColumn.MinimumWidth = 90
         totalColumn.FillWeight = 15
         dgvBilling.Columns.Add(totalColumn)
 
@@ -1411,7 +1270,6 @@ Public Class AdminDashboard
                         dgvBilling.Rows(rowIndex).Tag = row("BillingID").ToString()
                     Next
 
-                    ' Ensure rows are properly sized after populating
                     dgvBilling.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
 
                 Catch ex As Exception
@@ -1455,11 +1313,6 @@ Public Class AdminDashboard
                 If item.ContainsKey("quantity") Then
                     Integer.TryParse(item("quantity").ToString(), quantity)
                 End If
-
-                'Dim price As Integer = 0
-                'If item.ContainsKey("price") Then
-                '    Integer.TryParse(item("price").ToString(), price)
-                'End If
 
                 If Not String.IsNullOrEmpty(itemName) AndAlso quantity > 0 Then
                     formattedItemsList.Add($"{itemName} x {quantity}")
@@ -1587,7 +1440,7 @@ Public Class AdminDashboard
         Dim nameColumn As New DataGridViewTextBoxColumn()
         nameColumn.HeaderText = "Name"
         nameColumn.Name = "Name"
-        nameColumn.MinimumWidth = 140
+        nameColumn.MinimumWidth = 100
         nameColumn.FillWeight = 30
         dgvNurses.Columns.Add(nameColumn)
 
@@ -1596,6 +1449,7 @@ Public Class AdminDashboard
         ageColumn.Name = "Age"
         ageColumn.MinimumWidth = 80
         ageColumn.FillWeight = 15
+        ageColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvNurses.Columns.Add(ageColumn)
 
         Dim positionColumn As New DataGridViewTextBoxColumn()
@@ -1608,9 +1462,16 @@ Public Class AdminDashboard
         Dim contactNumberColumn As New DataGridViewTextBoxColumn()
         contactNumberColumn.HeaderText = "Contact Number"
         contactNumberColumn.Name = "ContactNumber"
-        contactNumberColumn.MinimumWidth = 140
+        contactNumberColumn.MinimumWidth = 100
         contactNumberColumn.FillWeight = 30
         dgvNurses.Columns.Add(contactNumberColumn)
+
+        Dim emailAddressColumn As New DataGridViewTextBoxColumn()
+        emailAddressColumn.HeaderText = "Email Address"
+        emailAddressColumn.Name = "EmailAddress"
+        emailAddressColumn.MinimumWidth = 100
+        emailAddressColumn.FillWeight = 30
+        dgvNurses.Columns.Add(emailAddressColumn)
 
         AddHandler dgvNurses.DataBindingComplete, AddressOf dgvNurses_DataBindingComplete
         AddHandler dgvNurses.CellFormatting, AddressOf dgvNurses_CellFormatting
@@ -1648,7 +1509,8 @@ Public Class AdminDashboard
         CONCAT(first_name, ' ', IFNULL(middle_name, ''), ' ', last_name) AS Name, 
         age AS Age, 
         position AS Position, 
-        contact_number AS ContactNumber
+        contact_number AS ContactNumber,
+        email_address AS EmailAddress
     FROM 
         nurse"
 
@@ -1662,7 +1524,7 @@ Public Class AdminDashboard
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        dgvNurses.Rows.Add(row("Name"), row("Age"), row("Position"), row("ContactNumber"))
+                        dgvNurses.Rows.Add(row("Name"), row("Age"), row("Position"), row("ContactNumber"), row("EmailAddress"))
                     Next
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching nurse data: " & ex.Message)
@@ -1733,7 +1595,7 @@ Public Class AdminDashboard
         Dim nameColumn As New DataGridViewTextBoxColumn()
         nameColumn.HeaderText = "Name"
         nameColumn.Name = "Name"
-        nameColumn.MinimumWidth = 140
+        nameColumn.MinimumWidth = 100
         nameColumn.FillWeight = 30
         dgvAccountants.Columns.Add(nameColumn)
 
@@ -1742,6 +1604,7 @@ Public Class AdminDashboard
         ageColumn.Name = "Age"
         ageColumn.MinimumWidth = 80
         ageColumn.FillWeight = 15
+        ageColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvAccountants.Columns.Add(ageColumn)
 
         Dim positionColumn As New DataGridViewTextBoxColumn()
@@ -1754,9 +1617,16 @@ Public Class AdminDashboard
         Dim contactNumberColumn As New DataGridViewTextBoxColumn()
         contactNumberColumn.HeaderText = "Contact Number"
         contactNumberColumn.Name = "ContactNumber"
-        contactNumberColumn.MinimumWidth = 140
+        contactNumberColumn.MinimumWidth = 100
         contactNumberColumn.FillWeight = 30
         dgvAccountants.Columns.Add(contactNumberColumn)
+
+        Dim emailAddressColumn As New DataGridViewTextBoxColumn()
+        emailAddressColumn.HeaderText = "Email Address"
+        emailAddressColumn.Name = "EmailAddress"
+        emailAddressColumn.MinimumWidth = 100
+        emailAddressColumn.FillWeight = 30
+        dgvAccountants.Columns.Add(emailAddressColumn)
 
         AddHandler dgvAccountants.DataBindingComplete, AddressOf dgvAccountants_DataBindingComplete
         AddHandler dgvAccountants.CellFormatting, AddressOf dgvAccountants_CellFormatting
@@ -1794,7 +1664,8 @@ Public Class AdminDashboard
         CONCAT(first_name, ' ', IFNULL(middle_name, ''), ' ', last_name) AS Name, 
         age AS Age, 
         position AS Position, 
-        contact_number AS ContactNumber
+        contact_number AS ContactNumber,
+        email_address AS EmailAddress
     FROM 
         accountant"
 
@@ -1808,7 +1679,7 @@ Public Class AdminDashboard
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        dgvAccountants.Rows.Add(row("Name"), row("Age"), row("Position"), row("ContactNumber"))
+                        dgvAccountants.Rows.Add(row("Name"), row("Age"), row("Position"), row("ContactNumber"), row("EmailAddress"))
                     Next
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching accountant data: " & ex.Message)
@@ -1834,6 +1705,262 @@ Public Class AdminDashboard
     Private Sub btnAddAccountant_Click(sender As Object, e As EventArgs) Handles btnAddAccountant.Click
         Dim accountantRegistrationForm As New AccountantRegistration()
         accountantRegistrationForm.Show()
+    End Sub
+
+    ' Load admin information
+    Private Sub LoadAdminInfo()
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim query As String = "SELECT username, email, phone_number " &
+                          "FROM admin WHERE admin_id = @adminID"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@adminID", adminID)
+
+                Try
+                    connection.Open()
+                    Using reader As MySqlDataReader = command.ExecuteReader()
+                        If reader.Read() Then
+                            txtUsername.Text = If(reader.IsDBNull(reader.GetOrdinal("username")), "", reader("username").ToString())
+                            txtEmail.Text = If(reader.IsDBNull(reader.GetOrdinal("email")), "", reader("email").ToString())
+                            txtContactNumber.Text = If(reader.IsDBNull(reader.GetOrdinal("phone_number")), "", reader("phone_number").ToString())
+
+                            txtPassword.Text = ""
+                            txtConfirmPassword.Text = ""
+                        End If
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("Error loading admin information: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    Private Sub txtContactNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContactNumber.KeyPress
+        RegistrationModule.HandleNumericKeyPress(e)
+    End Sub
+
+    Private Sub txtContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txtContactNumber.TextChanged
+        If Not String.IsNullOrEmpty(txtContactNumber.Text) Then
+            If Not RegistrationModule.IsNumeric(txtContactNumber.Text) Then
+                errorProvider.SetError(txtContactNumber, "Contact number should contain only numbers")
+            ElseIf txtContactNumber.Text.Length > 11 Then
+                txtContactNumber.Text = txtContactNumber.Text.Substring(0, 11)
+                txtContactNumber.SelectionStart = txtContactNumber.Text.Length
+                errorProvider.SetError(txtContactNumber, "")
+            Else
+                errorProvider.SetError(txtContactNumber, "")
+            End If
+        Else
+            errorProvider.SetError(txtContactNumber, "")
+        End If
+    End Sub
+
+    Private Sub txtEmail_TextChanged(sender As Object, e As EventArgs) Handles txtEmail.TextChanged
+        If Not String.IsNullOrEmpty(txtEmail.Text) Then
+            If Not RegistrationModule.IsValidEmail(txtEmail.Text) Then
+                errorProvider.SetError(txtEmail, "Please enter a valid email address")
+            Else
+                errorProvider.SetError(txtEmail, "")
+            End If
+        Else
+            errorProvider.SetError(txtEmail, "")
+        End If
+    End Sub
+
+    Private Sub txtConfirmPassword_TextChanged(sender As Object, e As EventArgs) Handles txtConfirmPassword.TextChanged
+        If txtPassword.Text <> txtConfirmPassword.Text Then
+            errorProvider.SetError(txtConfirmPassword, "Passwords do not match")
+        Else
+            errorProvider.SetError(txtConfirmPassword, "")
+        End If
+    End Sub
+
+    Private Sub btnEyePassword_Click(sender As Object, e As EventArgs) Handles btnEyePassword.Click
+        RegistrationModule.TogglePasswordVisibility(txtPassword, btnEyePassword, passwordVisible)
+    End Sub
+
+    Private Sub btnEyeConfirmPassword_Click(sender As Object, e As EventArgs) Handles btnEyeConfirmPassword.Click
+        RegistrationModule.TogglePasswordVisibility(txtConfirmPassword, btnEyeConfirmPassword, confirmPasswordVisible)
+    End Sub
+
+    Private Sub btnSaveAdminSettings_Click(sender As Object, e As EventArgs) Handles btnSaveAdminSettings.Click
+        errorProvider.Clear()
+
+        Dim isValid As Boolean = True
+
+        ' Validate username
+        If String.IsNullOrWhiteSpace(txtUsername.Text) Then
+            errorProvider.SetError(txtUsername, "Username is required")
+            isValid = False
+        End If
+
+        ' Validate passwords
+        If Not String.IsNullOrEmpty(txtPassword.Text) Or Not String.IsNullOrEmpty(txtConfirmPassword.Text) Then
+            If txtPassword.Text <> txtConfirmPassword.Text Then
+                errorProvider.SetError(txtConfirmPassword, "Passwords do not match")
+                isValid = False
+            ElseIf txtPassword.Text.Length < 6 Then
+                errorProvider.SetError(txtPassword, "Password must be at least 6 characters")
+                isValid = False
+            End If
+        End If
+
+        ' Validate contact number
+        If Not String.IsNullOrEmpty(txtContactNumber.Text) Then
+            If Not RegistrationModule.IsNumeric(txtContactNumber.Text) Then
+                errorProvider.SetError(txtContactNumber, "Contact number should contain only numbers")
+                isValid = False
+            ElseIf txtContactNumber.Text.Length <> 11 Then
+                errorProvider.SetError(txtContactNumber, "Contact number must be exactly 11 digits")
+                isValid = False
+            End If
+        End If
+
+        ' Validate email
+        If Not String.IsNullOrEmpty(txtEmail.Text) Then
+            If Not RegistrationModule.IsValidEmail(txtEmail.Text) Then
+                errorProvider.SetError(txtEmail, "Please enter a valid email address")
+                isValid = False
+            End If
+        End If
+
+        If Not isValid Then
+            MessageBox.Show("Please correct the errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+            Dim oldUsername As String = GetCurrentUsername()
+
+            UpdateAdminInfo()
+
+            If Not String.IsNullOrEmpty(oldUsername) Then
+                UpdateUserInUsersTable(oldUsername)
+            Else
+                MessageBox.Show("Warning: Could not retrieve current username.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+
+            MessageBox.Show("Settings updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error updating settings: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Function GetCurrentUsername() As String
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim query As String = "SELECT username FROM admin WHERE admin_id = @adminID"
+        Dim username As String = String.Empty
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@adminID", adminID)
+
+                Try
+                    connection.Open()
+                    Dim result = command.ExecuteScalar()
+
+                    If result IsNot Nothing Then
+                        username = result.ToString()
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error retrieving admin username: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
+
+        Return username
+    End Function
+
+    Private Sub UpdateAdminInfo()
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Try
+            Dim query As String
+            If String.IsNullOrEmpty(txtPassword.Text) Then
+                query = "UPDATE admin SET 
+                    username = @username, 
+                    email = @email, 
+                    phone_number = @contactNumber 
+                    WHERE admin_id = @adminID"
+            Else
+                query = "UPDATE admin SET 
+                    username = @username, 
+                    email = @email, 
+                    phone_number = @contactNumber, 
+                    password = @password 
+                    WHERE admin_id = @adminID"
+            End If
+
+            Using connection As New MySqlConnection(connectionString)
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@username", txtUsername.Text)
+                    command.Parameters.AddWithValue("@email", If(String.IsNullOrEmpty(txtEmail.Text), DBNull.Value, txtEmail.Text))
+                    command.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(txtContactNumber.Text), DBNull.Value, txtContactNumber.Text))
+                    command.Parameters.AddWithValue("@adminID", adminID)
+
+                    If Not String.IsNullOrEmpty(txtPassword.Text) Then
+                        command.Parameters.AddWithValue("@password", txtPassword.Text)
+                    End If
+
+                    connection.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+                    If rowsAffected = 0 Then
+                        Throw New Exception("No admin records were updated. Please check if the admin information exists.")
+                    End If
+                End Using
+            End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Database error updating admin: " & ex.Message & Environment.NewLine & "Error code: " & ex.Number, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw
+        Catch ex As Exception
+            Throw New Exception("Error updating admin information: " & ex.Message, ex)
+        End Try
+    End Sub
+
+    Private Sub UpdateUserInUsersTable(oldUsername As String)
+        If String.IsNullOrEmpty(oldUsername) Then
+            MessageBox.Show("Cannot update user record: old username is empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Try
+            Dim query As String
+            If String.IsNullOrEmpty(txtPassword.Text) Then
+                query = "UPDATE users SET username = @newUsername WHERE username = @oldUsername"
+            Else
+                query = "UPDATE users SET username = @newUsername, password = @password WHERE username = @oldUsername"
+            End If
+
+            Using connection As New MySqlConnection(connectionString)
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@newUsername", txtUsername.Text)
+                    command.Parameters.AddWithValue("@oldUsername", oldUsername)
+
+                    If Not String.IsNullOrEmpty(txtPassword.Text) Then
+                        command.Parameters.AddWithValue("@password", txtPassword.Text)
+                    End If
+
+                    connection.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+                    If rowsAffected = 0 Then
+                        MessageBox.Show("Warning: Could not update user record in the users table. " &
+                        "This may indicate that the admin account is not properly linked to a user record.",
+                        "User Record Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+                End Using
+            End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Database error updating user: " & ex.Message & Environment.NewLine & "Error code: " & ex.Number,
+                   "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw
+        Catch ex As Exception
+            Throw New Exception("Error updating user: " & ex.Message, ex)
+        End Try
     End Sub
 End Class
 

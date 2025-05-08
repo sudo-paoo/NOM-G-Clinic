@@ -75,15 +75,18 @@ Partial Class AdminDashboard
         SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
         Label8 = New Label()
         HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
+        btnEyeConfirmPassword = New FontAwesome.Sharp.IconButton()
+        txtConfirmPassword = New TextBox()
+        Label15 = New Label()
         btnEyePassword = New FontAwesome.Sharp.IconButton()
-        TextBox2 = New TextBox()
-        TextBox4 = New TextBox()
-        TextBox3 = New TextBox()
+        txtContactNumber = New TextBox()
+        txtPassword = New TextBox()
+        txtEmail = New TextBox()
         Label14 = New Label()
         Label13 = New Label()
         Label12 = New Label()
         Label11 = New Label()
-        TextBox1 = New TextBox()
+        txtUsername = New TextBox()
         Label21 = New Label()
         pnlNurses = New Panel()
         Panel5 = New Panel()
@@ -597,6 +600,9 @@ Partial Class AdminDashboard
         ' 
         ' btnAddPatient
         ' 
+        btnAddPatient.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddPatient.FlatAppearance.BorderSize = 0
+        btnAddPatient.FlatStyle = FlatStyle.Flat
         btnAddPatient.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnAddPatient.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
         btnAddPatient.IconColor = Color.Black
@@ -609,7 +615,7 @@ Partial Class AdminDashboard
         btnAddPatient.Text = "Add Patient"
         btnAddPatient.TextAlign = ContentAlignment.MiddleRight
         btnAddPatient.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnAddPatient.UseVisualStyleBackColor = True
+        btnAddPatient.UseVisualStyleBackColor = False
         ' 
         ' Label5
         ' 
@@ -636,6 +642,9 @@ Partial Class AdminDashboard
         ' 
         ' btnAddDoctor
         ' 
+        btnAddDoctor.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddDoctor.FlatAppearance.BorderSize = 0
+        btnAddDoctor.FlatStyle = FlatStyle.Flat
         btnAddDoctor.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnAddDoctor.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
         btnAddDoctor.IconColor = Color.Black
@@ -648,7 +657,7 @@ Partial Class AdminDashboard
         btnAddDoctor.Text = "Add Doctor"
         btnAddDoctor.TextAlign = ContentAlignment.MiddleRight
         btnAddDoctor.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnAddDoctor.UseVisualStyleBackColor = True
+        btnAddDoctor.UseVisualStyleBackColor = False
         ' 
         ' pnlDoctorsDataGrid
         ' 
@@ -786,17 +795,22 @@ Partial Class AdminDashboard
         ' 
         ' btnSaveAdminSettings
         ' 
+        btnSaveAdminSettings.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnSaveAdminSettings.FlatAppearance.BorderSize = 0
+        btnSaveAdminSettings.FlatStyle = FlatStyle.Flat
         btnSaveAdminSettings.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSaveAdminSettings.IconColor = Color.RosyBrown
+        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Check
+        btnSaveAdminSettings.IconColor = Color.Black
         btnSaveAdminSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSaveAdminSettings.ImageAlign = ContentAlignment.MiddleLeft
-        btnSaveAdminSettings.Location = New Point(664, 411)
+        btnSaveAdminSettings.IconSize = 36
+        btnSaveAdminSettings.ImageAlign = ContentAlignment.MiddleRight
+        btnSaveAdminSettings.Location = New Point(664, 463)
         btnSaveAdminSettings.Name = "btnSaveAdminSettings"
         btnSaveAdminSettings.Size = New Size(118, 44)
         btnSaveAdminSettings.TabIndex = 21
-        btnSaveAdminSettings.Text = "        SAVE"
-        btnSaveAdminSettings.UseVisualStyleBackColor = True
+        btnSaveAdminSettings.Text = "Save"
+        btnSaveAdminSettings.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnSaveAdminSettings.UseVisualStyleBackColor = False
         ' 
         ' SmallLabel1
         ' 
@@ -816,33 +830,70 @@ Partial Class AdminDashboard
         Label8.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label8.Location = New Point(354, 100)
         Label8.Name = "Label8"
-        Label8.Size = New Size(225, 31)
+        Label8.Size = New Size(223, 31)
         Label8.TabIndex = 15
-        Label8.Text = "Personal Information"
+        Label8.Text = "Account Information"
         ' 
         ' HopeGroupBox4
         ' 
         HopeGroupBox4.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeGroupBox4.Controls.Add(btnEyeConfirmPassword)
+        HopeGroupBox4.Controls.Add(txtConfirmPassword)
+        HopeGroupBox4.Controls.Add(Label15)
         HopeGroupBox4.Controls.Add(btnEyePassword)
-        HopeGroupBox4.Controls.Add(TextBox2)
-        HopeGroupBox4.Controls.Add(TextBox4)
-        HopeGroupBox4.Controls.Add(TextBox3)
+        HopeGroupBox4.Controls.Add(txtContactNumber)
+        HopeGroupBox4.Controls.Add(txtPassword)
+        HopeGroupBox4.Controls.Add(txtEmail)
         HopeGroupBox4.Controls.Add(Label14)
         HopeGroupBox4.Controls.Add(Label13)
         HopeGroupBox4.Controls.Add(Label12)
         HopeGroupBox4.Controls.Add(Label11)
-        HopeGroupBox4.Controls.Add(TextBox1)
+        HopeGroupBox4.Controls.Add(txtUsername)
         HopeGroupBox4.Font = New Font("Segoe UI", 12F)
         HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
         HopeGroupBox4.Location = New Point(151, 137)
         HopeGroupBox4.Name = "HopeGroupBox4"
         HopeGroupBox4.ShowText = False
-        HopeGroupBox4.Size = New Size(631, 250)
+        HopeGroupBox4.Size = New Size(631, 283)
         HopeGroupBox4.TabIndex = 14
         HopeGroupBox4.TabStop = False
         HopeGroupBox4.Text = "HopeGroupBox4"
         HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        ' 
+        ' btnEyeConfirmPassword
+        ' 
+        btnEyeConfirmPassword.BackColor = Color.Transparent
+        btnEyeConfirmPassword.FlatAppearance.BorderSize = 0
+        btnEyeConfirmPassword.FlatStyle = FlatStyle.Flat
+        btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.Eye
+        btnEyeConfirmPassword.IconColor = Color.Black
+        btnEyeConfirmPassword.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEyeConfirmPassword.IconSize = 25
+        btnEyeConfirmPassword.Location = New Point(593, 128)
+        btnEyeConfirmPassword.Name = "btnEyeConfirmPassword"
+        btnEyeConfirmPassword.Size = New Size(32, 32)
+        btnEyeConfirmPassword.TabIndex = 47
+        btnEyeConfirmPassword.UseVisualStyleBackColor = False
+        ' 
+        ' txtConfirmPassword
+        ' 
+        txtConfirmPassword.Location = New Point(290, 126)
+        txtConfirmPassword.Name = "txtConfirmPassword"
+        txtConfirmPassword.Size = New Size(300, 34)
+        txtConfirmPassword.TabIndex = 46
+        txtConfirmPassword.UseSystemPasswordChar = True
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label15.Location = New Point(24, 129)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(181, 28)
+        Label15.TabIndex = 45
+        Label15.Text = "Confirm Password:"
         ' 
         ' btnEyePassword
         ' 
@@ -853,39 +904,40 @@ Partial Class AdminDashboard
         btnEyePassword.IconColor = Color.Black
         btnEyePassword.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEyePassword.IconSize = 25
-        btnEyePassword.Location = New Point(593, 84)
+        btnEyePassword.Location = New Point(593, 80)
         btnEyePassword.Name = "btnEyePassword"
         btnEyePassword.Size = New Size(32, 32)
         btnEyePassword.TabIndex = 44
         btnEyePassword.UseVisualStyleBackColor = False
         ' 
-        ' TextBox2
+        ' txtContactNumber
         ' 
-        TextBox2.Location = New Point(290, 189)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(300, 34)
-        TextBox2.TabIndex = 12
+        txtContactNumber.Location = New Point(290, 224)
+        txtContactNumber.Name = "txtContactNumber"
+        txtContactNumber.Size = New Size(300, 34)
+        txtContactNumber.TabIndex = 12
         ' 
-        ' TextBox4
+        ' txtPassword
         ' 
-        TextBox4.Location = New Point(290, 84)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(300, 34)
-        TextBox4.TabIndex = 11
+        txtPassword.Location = New Point(290, 77)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(300, 34)
+        txtPassword.TabIndex = 11
+        txtPassword.UseSystemPasswordChar = True
         ' 
-        ' TextBox3
+        ' txtEmail
         ' 
-        TextBox3.Location = New Point(290, 137)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(300, 34)
-        TextBox3.TabIndex = 10
+        txtEmail.Location = New Point(290, 175)
+        txtEmail.Name = "txtEmail"
+        txtEmail.Size = New Size(300, 34)
+        txtEmail.TabIndex = 10
         ' 
         ' Label14
         ' 
         Label14.AutoSize = True
         Label14.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         Label14.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(24, 30)
+        Label14.Location = New Point(96, 31)
         Label14.Name = "Label14"
         Label14.Size = New Size(109, 28)
         Label14.TabIndex = 7
@@ -896,7 +948,7 @@ Partial Class AdminDashboard
         Label13.AutoSize = True
         Label13.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         Label13.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label13.Location = New Point(24, 189)
+        Label13.Location = New Point(37, 227)
         Label13.Name = "Label13"
         Label13.Size = New Size(168, 28)
         Label13.TabIndex = 6
@@ -907,7 +959,7 @@ Partial Class AdminDashboard
         Label12.AutoSize = True
         Label12.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         Label12.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(23, 136)
+        Label12.Location = New Point(140, 178)
         Label12.Name = "Label12"
         Label12.Size = New Size(65, 28)
         Label12.TabIndex = 5
@@ -918,18 +970,18 @@ Partial Class AdminDashboard
         Label11.AutoSize = True
         Label11.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         Label11.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(24, 83)
+        Label11.Location = New Point(103, 80)
         Label11.Name = "Label11"
         Label11.Size = New Size(102, 28)
         Label11.TabIndex = 4
         Label11.Text = "Password:"
         ' 
-        ' TextBox1
+        ' txtUsername
         ' 
-        TextBox1.Location = New Point(290, 31)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(300, 34)
-        TextBox1.TabIndex = 8
+        txtUsername.Location = New Point(290, 28)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(300, 34)
+        txtUsername.TabIndex = 8
         ' 
         ' Label21
         ' 
@@ -984,6 +1036,9 @@ Partial Class AdminDashboard
         ' 
         ' btnAddNurse
         ' 
+        btnAddNurse.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddNurse.FlatAppearance.BorderSize = 0
+        btnAddNurse.FlatStyle = FlatStyle.Flat
         btnAddNurse.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnAddNurse.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
         btnAddNurse.IconColor = Color.Black
@@ -996,7 +1051,7 @@ Partial Class AdminDashboard
         btnAddNurse.Text = "Add Nurse"
         btnAddNurse.TextAlign = ContentAlignment.MiddleRight
         btnAddNurse.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnAddNurse.UseVisualStyleBackColor = True
+        btnAddNurse.UseVisualStyleBackColor = False
         ' 
         ' Label9
         ' 
@@ -1051,6 +1106,9 @@ Partial Class AdminDashboard
         ' 
         ' btnAddAccountant
         ' 
+        btnAddAccountant.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddAccountant.FlatAppearance.BorderSize = 0
+        btnAddAccountant.FlatStyle = FlatStyle.Flat
         btnAddAccountant.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnAddAccountant.IconChar = FontAwesome.Sharp.IconChar.PlusSquare
         btnAddAccountant.IconColor = Color.Black
@@ -1063,7 +1121,7 @@ Partial Class AdminDashboard
         btnAddAccountant.Text = "Add Accountant"
         btnAddAccountant.TextAlign = ContentAlignment.MiddleRight
         btnAddAccountant.TextImageRelation = TextImageRelation.ImageBeforeText
-        btnAddAccountant.UseVisualStyleBackColor = True
+        btnAddAccountant.UseVisualStyleBackColor = False
         ' 
         ' Label10
         ' 
@@ -1080,11 +1138,11 @@ Partial Class AdminDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlDashboard)
         Controls.Add(pnlAccountants)
         Controls.Add(pnlNurses)
         Controls.Add(pnlDoctors)
-        Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
@@ -1200,14 +1258,14 @@ Partial Class AdminDashboard
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents HopeGroupBox4 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txtContactNumber As TextBox
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents txtEmail As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtUsername As TextBox
     Friend WithEvents Label21 As Label
     Friend WithEvents btnEyePassword As FontAwesome.Sharp.IconButton
     Friend WithEvents btnSaveAdminSettings As FontAwesome.Sharp.IconButton
@@ -1224,4 +1282,7 @@ Partial Class AdminDashboard
     Friend WithEvents txtSearchAccountant As TextBox
     Friend WithEvents btnAddAccountant As FontAwesome.Sharp.IconButton
     Friend WithEvents Label10 As Label
+    Friend WithEvents btnEyeConfirmPassword As FontAwesome.Sharp.IconButton
+    Friend WithEvents txtConfirmPassword As TextBox
+    Friend WithEvents Label15 As Label
 End Class
