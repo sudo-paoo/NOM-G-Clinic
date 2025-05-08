@@ -14,8 +14,12 @@ Public Class AccountingDashboard
 
         UpdateWelcomeMessage()
 
+        PopulateRecentPayments(ConnectionString)
+
         ShowPanel(pnlDashboard, btnDashboard)
 
+        CalculateTotalRevenue()
+        CalculateTodayPayments()
     End Sub
 
     Private Sub UpdateWelcomeMessage()
@@ -260,11 +264,16 @@ Public Class AccountingDashboard
         ShowPanel(pnlBilling, btnBilling)
     End Sub
 
+    Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
+        ShowPanel(pnlSettings, btnSettings)
+    End Sub
+
     Private Sub ShowPanel(panelToShow As Panel, activeButton As Button)
         ' Hide all panels
         pnlDashboard.Visible = False
         pnlPatients.Visible = False
         pnlBilling.Visible = False
+        pnlSettings.Visible = False
 
         ' Show the selected panel
         panelToShow.Visible = True
@@ -287,6 +296,9 @@ Public Class AccountingDashboard
 
         btnBilling.BackColor = Color.Transparent
         btnBilling.ForeColor = Color.Black
+
+        btnSettings.BackColor = Color.Transparent
+        btnSettings.ForeColor = Color.Black
     End Sub
 
     ''''''''''''''''''''''''''''''''
@@ -316,7 +328,17 @@ Public Class AccountingDashboard
         dgvBilling.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
         dgvBilling.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
 
-        dgvBilling.RowTemplate.Height = 50
+        ' Enable auto-sizing for row height based on content
+        dgvBilling.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+
+        ' Set default row height
+        dgvBilling.RowTemplate.Height = 60
+        dgvBilling.RowTemplate.MinimumHeight = 60
+
+
+        ' Enable word wrapping for cells
+        dgvBilling.DefaultCellStyle.WrapMode = DataGridViewTriState.True
+
         dgvBilling.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
         dgvBilling.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245)
         dgvBilling.DefaultCellStyle.SelectionForeColor = Color.Black
@@ -335,7 +357,7 @@ Public Class AccountingDashboard
         nameColumn.HeaderText = "Name"
         nameColumn.Name = "Name"
         nameColumn.MinimumWidth = 140
-        nameColumn.FillWeight = 25
+        nameColumn.FillWeight = 20
         dgvBilling.Columns.Add(nameColumn)
 
         Dim dateColumn As New DataGridViewTextBoxColumn()
@@ -345,11 +367,21 @@ Public Class AccountingDashboard
         dateColumn.FillWeight = 15
         dgvBilling.Columns.Add(dateColumn)
 
+        Dim quantityColumn As New DataGridViewTextBoxColumn()
+        quantityColumn.HeaderText = "Quantity"
+        quantityColumn.Name = "Quantity"
+        quantityColumn.MinimumWidth = 80
+        quantityColumn.FillWeight = 10
+        dgvBilling.Columns.Add(quantityColumn)
+
         Dim itemsColumn As New DataGridViewTextBoxColumn()
         itemsColumn.HeaderText = "Items"
         itemsColumn.Name = "Items"
         itemsColumn.MinimumWidth = 150
-        itemsColumn.FillWeight = 30
+        itemsColumn.FillWeight = 25
+        itemsColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True
+        itemsColumn.DefaultCellStyle.Padding = New Padding(5, 10, 5, 10)
+        itemsColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.TopLeft
         dgvBilling.Columns.Add(itemsColumn)
 
         Dim totalColumn As New DataGridViewTextBoxColumn()
@@ -377,7 +409,6 @@ Public Class AccountingDashboard
 
         AddHandler dgvBilling.CellFormatting, AddressOf dgvBilling_CellFormatting
         AddHandler dgvBilling.CellClick, AddressOf dgvBilling_CellClick
-
         AddHandler dgvBilling.DataBindingComplete, AddressOf dgvBilling_DataBindingComplete
     End Sub
 
@@ -393,6 +424,7 @@ Public Class AccountingDashboard
         CONCAT(p.first_name, ' ', p.last_name) AS Name, 
         DATE_FORMAT(b.date, '%b %d, %Y') AS Date, 
         b.items AS Items, 
+        b.item_names AS ItemNames,
         b.total_amount AS Total, 
         b.status AS Status
     FROM 
@@ -412,9 +444,22 @@ Public Class AccountingDashboard
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        Dim rowIndex As Integer = dgvBilling.Rows.Add(row("Name"), row("Date"), row("Items"), row("Total"), row("Status"))
+                        ' Get formatted item names from JSON
+                        Dim formattedItems As String = FormatItemNames(row("ItemNames").ToString())
+
+                        Dim rowIndex As Integer = dgvBilling.Rows.Add(
+                    row("Name"),
+                    row("Date"),
+                    row("Items"),
+                    formattedItems,
+                    row("Total"),
+                    row("Status"))
+
                         dgvBilling.Rows(rowIndex).Tag = row("BillingID").ToString()
                     Next
+
+                    dgvBilling.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
+
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching billing data: " & ex.Message)
                 End Try
@@ -422,7 +467,65 @@ Public Class AccountingDashboard
         End Using
     End Sub
 
+    ' Format item names from JSON
+    Private Function FormatItemNames(jsonString As String) As String
+        If String.IsNullOrEmpty(jsonString) Then
+            Return ""
+        End If
+
+        Try
+            If jsonString.Trim() = "[2]" OrElse System.Text.RegularExpressions.Regex.IsMatch(jsonString.Trim(), "^\[\d+\]$") Then
+                Return "Unknown Items"
+            End If
+
+            Dim items As List(Of Dictionary(Of String, Object))
+
+            Try
+                items = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(jsonString)
+            Catch ex As Exception
+                Dim sanitizedJson As String = jsonString.Trim()
+
+                If Not sanitizedJson.StartsWith("[") Then
+                    sanitizedJson = "[" & sanitizedJson & "]"
+                End If
+
+                items = Newtonsoft.Json.JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(sanitizedJson)
+            End Try
+
+            Dim formattedItemsList As New List(Of String)
+
+            For Each item In items
+                Dim itemName As String = If(item.ContainsKey("item_name"), item("item_name").ToString(), "")
+                Dim quantity As Integer = 0
+
+                If item.ContainsKey("quantity") Then
+                    Integer.TryParse(item("quantity").ToString(), quantity)
+                End If
+
+                'Dim price As Integer = 0
+                'If item.ContainsKey("price") Then
+                '    Integer.TryParse(item("price").ToString(), price)
+                'End If
+
+                If Not String.IsNullOrEmpty(itemName) AndAlso quantity > 0 Then
+                    formattedItemsList.Add($"{itemName} x {quantity}")
+                ElseIf Not String.IsNullOrEmpty(itemName) Then
+                    formattedItemsList.Add(itemName)
+                End If
+            Next
+
+            Return String.Join(Environment.NewLine, formattedItemsList)
+
+        Catch ex As Exception
+            Console.WriteLine("Error parsing JSON item names: " & ex.Message)
+            Return "Error parsing items"
+        End Try
+    End Function
+
+
     Private Sub dgvBilling_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs)
+        dgvBilling.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
+
         If dgvBilling.DisplayedRowCount(True) < dgvBilling.RowCount Then
             dgvBilling.PerformLayout()
         End If
@@ -479,10 +582,136 @@ Public Class AccountingDashboard
 
                 If billingDetailsForm.ShowDialog() = DialogResult.OK Then
                     BillingPopulateDataGrid()
+
+                    Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+                    PopulateRecentPayments(connectionString)
                 End If
             End If
         End If
     End Sub
+
+    Private Sub flowRecentPayments_Resize(sender As Object, e As EventArgs) Handles flowRecentPayments.Resize
+        Dim scrollbarWidth As Integer = 0
+        If flowRecentPayments.VerticalScroll.Visible Then
+            scrollbarWidth = SystemInformation.VerticalScrollBarWidth
+        End If
+
+        For Each ctrl As Control In flowRecentPayments.Controls
+            ctrl.Width = flowRecentPayments.ClientSize.Width - flowRecentPayments.Padding.Left - flowRecentPayments.Padding.Right - scrollbarWidth
+        Next
+    End Sub
+
+    ' Populate the recent appointments flow panel
+    Private Sub PopulateRecentPayments(connectionString As String)
+        flowRecentPayments.Controls.Clear()
+
+        Dim query As String = "
+        SELECT 
+            CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
+            b.date AS BillingDate,
+            b.total_amount AS TotalAmount,
+            b.status AS PaymentStatus
+        FROM 
+            billing b
+        LEFT JOIN 
+            patient p ON b.patient_id = p.patient_id
+        ORDER BY 
+            b.date DESC"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                Try
+                    connection.Open()
+
+                    Using reader As MySqlDataReader = command.ExecuteReader()
+                        While reader.Read()
+                            Dim description As String = $"Billing for {reader("PatientName")}"
+                            Dim billingDate As Date = Convert.ToDateTime(reader("BillingDate"))
+                            Dim totalAmount As Decimal = Convert.ToDecimal(reader("TotalAmount"))
+                            Dim paymentStatus As String = reader("PaymentStatus").ToString()
+
+                            Dim item As New TransactionItem(description, billingDate, totalAmount, paymentStatus)
+                            item.Margin = New Padding(0, 5, 0, 5)
+                            SetItemWidth(item)
+
+                            flowRecentPayments.Controls.Add(item)
+                        End While
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("An error occurred while fetching billing data: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    Private Sub SetItemWidth(ctrl As Control)
+        Dim paddingWidth As Integer = flowRecentPayments.Padding.Left + flowRecentPayments.Padding.Right
+        ctrl.Width = flowRecentPayments.ClientSize.Width - paddingWidth
+    End Sub
+
+    Private Sub CalculateTotalRevenue()
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim totalRevenue As Decimal = 0
+
+        Dim query As String = "
+    SELECT 
+        SUM(total_amount) AS TotalRevenue
+    FROM 
+        billing
+    WHERE 
+        status = 'Paid'"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                Try
+                    connection.Open()
+                    Dim result = command.ExecuteScalar()
+
+                    If result IsNot Nothing AndAlso Not Convert.IsDBNull(result) Then
+                        totalRevenue = Convert.ToDecimal(result)
+                    End If
+
+                    lblTotalRevenue.Text = String.Format("{0:C}", totalRevenue)
+                Catch ex As Exception
+                    MessageBox.Show("Error calculating total revenue: " & ex.Message)
+                    lblTotalRevenue.Text = "$0.00"
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    Private Sub CalculateTodayPayments()
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim todayTotal As Decimal = 0
+
+        Dim query As String = "
+    SELECT 
+        SUM(total_amount) AS TodayTotal
+    FROM 
+        billing
+    WHERE 
+        status = 'Paid'
+        AND DATE(date) = CURDATE()"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                Try
+                    connection.Open()
+                    Dim result = command.ExecuteScalar()
+
+                    If result IsNot Nothing AndAlso Not Convert.IsDBNull(result) Then
+                        todayTotal = Convert.ToDecimal(result)
+                    End If
+
+                    lblTotalPaymentToday.Text = String.Format("{0:C}", todayTotal)
+                Catch ex As Exception
+                    MessageBox.Show("Error calculating today's payments: " & ex.Message)
+                    lblTotalPaymentToday.Text = "$0.00"
+                End Try
+            End Using
+        End Using
+    End Sub
+
 
     Private Sub AccountingDashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Application.Exit()

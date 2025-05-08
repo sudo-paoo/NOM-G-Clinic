@@ -49,7 +49,7 @@ Public Class Form1
             conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
             conn.Open()
 
-            Dim query As String = "SELECT role FROM users WHERE username = @username AND password = @password"
+            Dim query As String = "SELECT role FROM users WHERE username like binary @username AND password like binary @password"
             cmd = New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@username", username)
             cmd.Parameters.AddWithValue("@password", password)
