@@ -34,9 +34,9 @@ Partial Class AccountingDashboard
         tabDashboard = New TabControl()
         TabPage1 = New TabPage()
         TabPage2 = New TabPage()
-        TabPage3 = New TabPage()
+        flowRecentPayments = New FlowLayoutPanel()
         HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
-        lblTotalPayment = New Label()
+        lblTotalPaymentToday = New Label()
         Label2 = New Label()
         HopeGroupBox3 = New ReaLTaiizor.Controls.HopeGroupBox()
         lblTotalRevenue = New Label()
@@ -51,7 +51,7 @@ Partial Class AccountingDashboard
         Panel4 = New Panel()
         dgvBilling = New DataGridView()
         Label7 = New Label()
-        Panel2 = New Panel()
+        pnlSettings = New Panel()
         SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
         btnSave = New FontAwesome.Sharp.IconButton()
         Label16 = New Label()
@@ -86,6 +86,7 @@ Partial Class AccountingDashboard
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
+        TabPage2.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         HopeGroupBox3.SuspendLayout()
         pnlPatients.SuspendLayout()
@@ -94,7 +95,7 @@ Partial Class AccountingDashboard
         pnlBilling.SuspendLayout()
         Panel4.SuspendLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
-        Panel2.SuspendLayout()
+        pnlSettings.SuspendLayout()
         HopeGroupBox6.SuspendLayout()
         HopeGroupBox5.SuspendLayout()
         HopeGroupBox4.SuspendLayout()
@@ -149,7 +150,7 @@ Partial Class AccountingDashboard
         btnSettings.Name = "btnSettings"
         btnSettings.Size = New Size(300, 60)
         btnSettings.TabIndex = 7
-        btnSettings.Text = "Setting"
+        btnSettings.Text = "Settings"
         btnSettings.TextAlign = ContentAlignment.MiddleLeft
         btnSettings.TextImageRelation = TextImageRelation.ImageBeforeText
         btnSettings.UseVisualStyleBackColor = False
@@ -259,7 +260,6 @@ Partial Class AccountingDashboard
         ' 
         tabDashboard.Controls.Add(TabPage1)
         tabDashboard.Controls.Add(TabPage2)
-        tabDashboard.Controls.Add(TabPage3)
         tabDashboard.Location = New Point(22, 215)
         tabDashboard.Name = "tabDashboard"
         tabDashboard.SelectedIndex = 0
@@ -279,6 +279,7 @@ Partial Class AccountingDashboard
         ' 
         ' TabPage2
         ' 
+        TabPage2.Controls.Add(flowRecentPayments)
         TabPage2.Location = New Point(4, 29)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
@@ -287,21 +288,20 @@ Partial Class AccountingDashboard
         TabPage2.Text = "Recent Payments"
         TabPage2.UseVisualStyleBackColor = True
         ' 
-        ' TabPage3
+        ' flowRecentPayments
         ' 
-        TabPage3.Location = New Point(4, 29)
-        TabPage3.Name = "TabPage3"
-        TabPage3.Padding = New Padding(3)
-        TabPage3.Size = New Size(844, 397)
-        TabPage3.TabIndex = 2
-        TabPage3.Text = "Recent Expenses"
-        TabPage3.UseVisualStyleBackColor = True
+        flowRecentPayments.AutoScroll = True
+        flowRecentPayments.Dock = DockStyle.Fill
+        flowRecentPayments.Location = New Point(3, 3)
+        flowRecentPayments.Name = "flowRecentPayments"
+        flowRecentPayments.Size = New Size(838, 391)
+        flowRecentPayments.TabIndex = 0
         ' 
         ' HopeGroupBox1
         ' 
         HopeGroupBox1.BackColor = SystemColors.Control
         HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Controls.Add(lblTotalPayment)
+        HopeGroupBox1.Controls.Add(lblTotalPaymentToday)
         HopeGroupBox1.Controls.Add(Label2)
         HopeGroupBox1.Font = New Font("Segoe UI", 12F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
@@ -315,16 +315,16 @@ Partial Class AccountingDashboard
         HopeGroupBox1.Text = "HopeGroupBox1"
         HopeGroupBox1.ThemeColor = SystemColors.ControlLightLight
         ' 
-        ' lblTotalPayment
+        ' lblTotalPaymentToday
         ' 
-        lblTotalPayment.AutoSize = True
-        lblTotalPayment.BackColor = Color.Transparent
-        lblTotalPayment.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalPayment.Location = New Point(20, 74)
-        lblTotalPayment.Name = "lblTotalPayment"
-        lblTotalPayment.Size = New Size(243, 28)
-        lblTotalPayment.TabIndex = 6
-        lblTotalPayment.Text = "Total within a day"
+        lblTotalPaymentToday.AutoSize = True
+        lblTotalPaymentToday.BackColor = Color.Transparent
+        lblTotalPaymentToday.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotalPaymentToday.Location = New Point(20, 74)
+        lblTotalPaymentToday.Name = "lblTotalPaymentToday"
+        lblTotalPaymentToday.Size = New Size(243, 28)
+        lblTotalPaymentToday.TabIndex = 6
+        lblTotalPaymentToday.Text = "Total within a day"
         ' 
         ' Label2
         ' 
@@ -333,9 +333,9 @@ Partial Class AccountingDashboard
         Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label2.Location = New Point(20, 30)
         Label2.Name = "Label2"
-        Label2.Size = New Size(208, 22)
+        Label2.Size = New Size(275, 22)
         Label2.TabIndex = 5
-        Label2.Text = "Payments Received"
+        Label2.Text = "Payments Received Today"
         ' 
         ' HopeGroupBox3
         ' 
@@ -476,24 +476,24 @@ Partial Class AccountingDashboard
         Label7.TabIndex = 1
         Label7.Text = "Billings"
         ' 
-        ' Panel2
+        ' pnlSettings
         ' 
-        Panel2.AutoScroll = True
-        Panel2.BackColor = SystemColors.ControlLightLight
-        Panel2.Controls.Add(SmallLabel1)
-        Panel2.Controls.Add(btnSave)
-        Panel2.Controls.Add(Label16)
-        Panel2.Controls.Add(HopeGroupBox6)
-        Panel2.Controls.Add(Label9)
-        Panel2.Controls.Add(HopeGroupBox5)
-        Panel2.Controls.Add(Label1)
-        Panel2.Controls.Add(HopeGroupBox4)
-        Panel2.Controls.Add(Label6)
-        Panel2.Dock = DockStyle.Fill
-        Panel2.Location = New Point(300, 40)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(900, 660)
-        Panel2.TabIndex = 14
+        pnlSettings.AutoScroll = True
+        pnlSettings.BackColor = SystemColors.ControlLightLight
+        pnlSettings.Controls.Add(SmallLabel1)
+        pnlSettings.Controls.Add(btnSave)
+        pnlSettings.Controls.Add(Label16)
+        pnlSettings.Controls.Add(HopeGroupBox6)
+        pnlSettings.Controls.Add(Label9)
+        pnlSettings.Controls.Add(HopeGroupBox5)
+        pnlSettings.Controls.Add(Label1)
+        pnlSettings.Controls.Add(HopeGroupBox4)
+        pnlSettings.Controls.Add(Label6)
+        pnlSettings.Dock = DockStyle.Fill
+        pnlSettings.Location = New Point(300, 40)
+        pnlSettings.Name = "pnlSettings"
+        pnlSettings.Size = New Size(900, 660)
+        pnlSettings.TabIndex = 14
         ' 
         ' SmallLabel1
         ' 
@@ -847,8 +847,8 @@ Partial Class AccountingDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(Panel2)
         Controls.Add(pnlDashboard)
+        Controls.Add(pnlSettings)
         Controls.Add(pnlBilling)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)
@@ -863,6 +863,7 @@ Partial Class AccountingDashboard
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
         tabDashboard.ResumeLayout(False)
+        TabPage2.ResumeLayout(False)
         HopeGroupBox1.ResumeLayout(False)
         HopeGroupBox1.PerformLayout()
         HopeGroupBox3.ResumeLayout(False)
@@ -875,8 +876,8 @@ Partial Class AccountingDashboard
         pnlBilling.PerformLayout()
         Panel4.ResumeLayout(False)
         CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
-        Panel2.ResumeLayout(False)
-        Panel2.PerformLayout()
+        pnlSettings.ResumeLayout(False)
+        pnlSettings.PerformLayout()
         HopeGroupBox6.ResumeLayout(False)
         HopeGroupBox6.PerformLayout()
         HopeGroupBox5.ResumeLayout(False)
@@ -896,7 +897,7 @@ Partial Class AccountingDashboard
     Friend WithEvents pnlDashboard As Panel
     Friend WithEvents lblWelcomeMessage As Label
     Friend WithEvents HopeGroupBox1 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents lblTotalPayment As Label
+    Friend WithEvents lblTotalPaymentToday As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents HopeGroupBox3 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents lblTotalRevenue As Label
@@ -904,7 +905,6 @@ Partial Class AccountingDashboard
     Friend WithEvents tabDashboard As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents TabPage3 As TabPage
     Friend WithEvents pnlPatients As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents txtSearchPatient As TextBox
@@ -915,7 +915,7 @@ Partial Class AccountingDashboard
     Friend WithEvents dgvBilling As DataGridView
     Friend WithEvents Label7 As Label
     Friend WithEvents btnSettings As FontAwesome.Sharp.IconButton
-    Friend WithEvents Panel2 As Panel
+    Friend WithEvents pnlSettings As Panel
     Friend WithEvents SmallLabel1 As ReaLTaiizor.Controls.SmallLabel
     Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
     Friend WithEvents Label16 As Label
@@ -947,4 +947,5 @@ Partial Class AccountingDashboard
     Friend WithEvents Label11 As Label
     Friend WithEvents txtFirstName As TextBox
     Friend WithEvents Label6 As Label
+    Friend WithEvents flowRecentPayments As FlowLayoutPanel
 End Class
