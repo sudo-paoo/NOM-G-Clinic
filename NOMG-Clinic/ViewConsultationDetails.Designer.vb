@@ -30,6 +30,8 @@ Partial Class ViewConsultationDetails
         txtDoctorPlan = New TextBox()
         Label3 = New Label()
         Panel3 = New Panel()
+        Label7 = New Label()
+        txtVitaminIntake = New TextBox()
         hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
         rbBlood = New RadioButton()
         rbKetones = New RadioButton()
@@ -61,8 +63,6 @@ Partial Class ViewConsultationDetails
         Panel2 = New Panel()
         Label26 = New Label()
         lblPatientName = New Label()
-        Label25 = New Label()
-        lblGestationalAge = New Label()
         Label8 = New Label()
         Label6 = New Label()
         Label24 = New Label()
@@ -76,8 +76,6 @@ Partial Class ViewConsultationDetails
         Label2 = New Label()
         lblDate = New Label()
         Label1 = New Label()
-        TextBox1 = New TextBox()
-        Label7 = New Label()
         Panel1.SuspendLayout()
         CType(IconPictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         HopeGroupBox2.SuspendLayout()
@@ -97,6 +95,7 @@ Partial Class ViewConsultationDetails
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
+        HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
         HopeForm1.Size = New Size(1200, 40)
         HopeForm1.TabIndex = 0
@@ -176,7 +175,7 @@ Partial Class ViewConsultationDetails
         ' Panel3
         ' 
         Panel3.Controls.Add(Label7)
-        Panel3.Controls.Add(TextBox1)
+        Panel3.Controls.Add(txtVitaminIntake)
         Panel3.Controls.Add(hgbUrineAnalysis)
         Panel3.Controls.Add(Label20)
         Panel3.Controls.Add(cmbVisitType)
@@ -203,6 +202,27 @@ Partial Class ViewConsultationDetails
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(1100, 1332)
         Panel3.TabIndex = 45
+        ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.BackColor = Color.Transparent
+        Label7.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.ForeColor = Color.Black
+        Label7.Location = New Point(441, 1073)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(203, 28)
+        Label7.TabIndex = 46
+        Label7.Text = "Vitamin Intake"
+        ' 
+        ' txtVitaminIntake
+        ' 
+        txtVitaminIntake.BorderStyle = BorderStyle.FixedSingle
+        txtVitaminIntake.Location = New Point(28, 1110)
+        txtVitaminIntake.Multiline = True
+        txtVitaminIntake.Name = "txtVitaminIntake"
+        txtVitaminIntake.Size = New Size(1050, 167)
+        txtVitaminIntake.TabIndex = 45
         ' 
         ' hgbUrineAnalysis
         ' 
@@ -300,7 +320,6 @@ Partial Class ViewConsultationDetails
         ' cmbVisitType
         ' 
         cmbVisitType.FormattingEnabled = True
-        cmbVisitType.Items.AddRange(New Object() {"Prenatal Check-Up", "Ultrasound", "Postpartum Follow-Up", "Consultation"})
         cmbVisitType.Location = New Point(89, 57)
         cmbVisitType.Name = "cmbVisitType"
         cmbVisitType.Size = New Size(362, 36)
@@ -318,7 +337,6 @@ Partial Class ViewConsultationDetails
         ' cmbReasonVisit
         ' 
         cmbReasonVisit.FormattingEnabled = True
-        cmbReasonVisit.Items.AddRange(New Object() {"Initial Check-Up", "Follow-up Check-up"})
         cmbReasonVisit.Location = New Point(660, 57)
         cmbReasonVisit.Name = "cmbReasonVisit"
         cmbReasonVisit.Size = New Size(362, 36)
@@ -569,8 +587,6 @@ Partial Class ViewConsultationDetails
         Panel2.BackColor = SystemColors.ControlLightLight
         Panel2.Controls.Add(Label26)
         Panel2.Controls.Add(lblPatientName)
-        Panel2.Controls.Add(Label25)
-        Panel2.Controls.Add(lblGestationalAge)
         Panel2.Controls.Add(Label8)
         Panel2.Controls.Add(Label6)
         Panel2.Controls.Add(Label24)
@@ -589,7 +605,7 @@ Partial Class ViewConsultationDetails
         ' Label26
         ' 
         Label26.AutoSize = True
-        Label26.Location = New Point(705, 145)
+        Label26.Location = New Point(705, 84)
         Label26.Name = "Label26"
         Label26.Size = New Size(78, 28)
         Label26.TabIndex = 33
@@ -607,30 +623,10 @@ Partial Class ViewConsultationDetails
         lblPatientName.TabIndex = 20
         lblPatientName.Text = "NAME"
         ' 
-        ' Label25
-        ' 
-        Label25.AutoSize = True
-        Label25.Location = New Point(705, 101)
-        Label25.Name = "Label25"
-        Label25.Size = New Size(72, 28)
-        Label25.TabIndex = 32
-        Label25.Text = "Weeks:"
-        ' 
-        ' lblGestationalAge
-        ' 
-        lblGestationalAge.AutoSize = True
-        lblGestationalAge.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblGestationalAge.ForeColor = Color.Black
-        lblGestationalAge.Location = New Point(774, 104)
-        lblGestationalAge.Name = "lblGestationalAge"
-        lblGestationalAge.Size = New Size(177, 25)
-        lblGestationalAge.TabIndex = 23
-        lblGestationalAge.Text = "WEEKS (TRIMESTER)"
-        ' 
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(705, 57)
+        Label8.Location = New Point(705, 40)
         Label8.Name = "Label8"
         Label8.Size = New Size(51, 28)
         Label8.TabIndex = 31
@@ -681,7 +677,7 @@ Partial Class ViewConsultationDetails
         lblPatientAge.AutoSize = True
         lblPatientAge.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientAge.ForeColor = Color.Black
-        lblPatientAge.Location = New Point(762, 57)
+        lblPatientAge.Location = New Point(762, 40)
         lblPatientAge.Name = "lblPatientAge"
         lblPatientAge.Size = New Size(49, 28)
         lblPatientAge.TabIndex = 21
@@ -721,7 +717,7 @@ Partial Class ViewConsultationDetails
         lblAllergies.AutoSize = True
         lblAllergies.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAllergies.ForeColor = Color.Black
-        lblAllergies.Location = New Point(785, 147)
+        lblAllergies.Location = New Point(789, 84)
         lblAllergies.Name = "lblAllergies"
         lblAllergies.Size = New Size(87, 28)
         lblAllergies.TabIndex = 26
@@ -760,27 +756,6 @@ Partial Class ViewConsultationDetails
         Label1.TabIndex = 0
         Label1.Text = "Consultation Notes"
         ' 
-        ' TextBox1
-        ' 
-        TextBox1.BorderStyle = BorderStyle.FixedSingle
-        TextBox1.Location = New Point(28, 1110)
-        TextBox1.Multiline = True
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(1050, 167)
-        TextBox1.TabIndex = 45
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.BackColor = Color.Transparent
-        Label7.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.ForeColor = Color.Black
-        Label7.Location = New Point(441, 1073)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(225, 28)
-        Label7.TabIndex = 46
-        Label7.Text = "Vitamin's Intake"
-        ' 
         ' ViewConsultationDetails
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -789,6 +764,7 @@ Partial Class ViewConsultationDetails
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
+        MaximizeBox = False
         MaximumSize = New Size(1920, 1080)
         MinimumSize = New Size(190, 40)
         Name = "ViewConsultationDetails"
@@ -818,7 +794,7 @@ Partial Class ViewConsultationDetails
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtVitaminIntake As TextBox
     Friend WithEvents hgbUrineAnalysis As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents rbBlood As RadioButton
     Friend WithEvents rbKetones As RadioButton
@@ -850,8 +826,6 @@ Partial Class ViewConsultationDetails
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label26 As Label
     Friend WithEvents lblPatientName As Label
-    Friend WithEvents Label25 As Label
-    Friend WithEvents lblGestationalAge As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents Label24 As Label
