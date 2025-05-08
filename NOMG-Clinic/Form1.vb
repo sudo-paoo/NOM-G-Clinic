@@ -60,8 +60,23 @@ Public Class Form1
                 Dim role As String = reader("role").ToString()
                 Select Case role.ToLower()
                     Case "admin"
-                        Dim adminForm As New AdminDashboard()
-                        adminForm.Show()
+                        reader.Close()
+                        Dim adminQuery As String = "SELECT admin_id FROM admin WHERE username = @username AND password = @password"
+                        cmd = New MySqlCommand(adminQuery, conn)
+                        cmd.Parameters.AddWithValue("@username", username)
+                        cmd.Parameters.AddWithValue("@password", password)
+
+                        reader = cmd.ExecuteReader()
+
+                        If reader.Read() Then
+                            Dim adminID As String = reader("admin_id").ToString()
+                            Dim adminForm As New AdminDashboard()
+                            adminForm.adminID = adminID
+                            adminForm.Show()
+                        Else
+                            MessageBox.Show("Doctor record not found.")
+                            Return
+                        End If
                     Case "doctor"
                         reader.Close()
                         Dim doctorQuery As String = "SELECT doctor_id FROM doctor WHERE username = @username AND password = @password"
