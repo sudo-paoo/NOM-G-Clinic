@@ -10,19 +10,31 @@ Public Class Form1
     Dim reader As MySqlDataReader
 
     Private Sub btnEyeIcon_Click(sender As Object, e As EventArgs) Handles btnEyeIcon.Click
-        ' Toggle the password visibility
         isPasswordVisible = Not isPasswordVisible
 
-        ' Update the TextBox's UseSystemPasswordChar property
         txtPassword.UseSystemPasswordChar = Not isPasswordVisible
 
-        ' Change the button's icon
         If isPasswordVisible Then
             btnEyeIcon.IconChar = IconChar.EyeSlash ' Show "eye-slash" icon
         Else
             btnEyeIcon.IconChar = IconChar.Eye ' Show "eye" icon
         End If
     End Sub
+
+    Private Sub txtUsername_KeyDown(sender As Object, e As KeyEventArgs) Handles txtUsername.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtPassword.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    Private Sub txtPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnLogin_Click(sender, e)
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Dim username As String = txtUsername.Text.Trim()
