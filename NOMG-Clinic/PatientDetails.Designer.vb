@@ -68,11 +68,11 @@ Partial Class PatientDetails
         lblBillings = New Label()
         Label16 = New Label()
         TabPage4 = New TabPage()
-        Label7 = New Label()
         Panel5 = New Panel()
-        DataGridView1 = New DataGridView()
+        dgvConsultationDetails = New DataGridView()
         lblConsultationDetails = New Label()
         Label13 = New Label()
+        Label7 = New Label()
         Panel1.SuspendLayout()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
@@ -91,7 +91,7 @@ Partial Class PatientDetails
         CType(dgvBillings, ComponentModel.ISupportInitialize).BeginInit()
         TabPage4.SuspendLayout()
         Panel5.SuspendLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -605,21 +605,10 @@ Partial Class PatientDetails
         TabPage4.Text = "Consultation Details"
         TabPage4.UseVisualStyleBackColor = True
         ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.BackColor = Color.Transparent
-        Label7.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(12, 17)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(251, 34)
-        Label7.TabIndex = 4
-        Label7.Text = "Patient Details"
-        ' 
         ' Panel5
         ' 
         Panel5.BackgroundImage = My.Resources.Resources.bg_img
-        Panel5.Controls.Add(DataGridView1)
+        Panel5.Controls.Add(dgvConsultationDetails)
         Panel5.Controls.Add(lblConsultationDetails)
         Panel5.Controls.Add(Label13)
         Panel5.Dock = DockStyle.Fill
@@ -628,14 +617,14 @@ Partial Class PatientDetails
         Panel5.Size = New Size(961, 548)
         Panel5.TabIndex = 1
         ' 
-        ' DataGridView1
+        ' dgvConsultationDetails
         ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(17, 71)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.RowHeadersWidth = 51
-        DataGridView1.Size = New Size(933, 479)
-        DataGridView1.TabIndex = 17
+        dgvConsultationDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvConsultationDetails.Location = New Point(17, 71)
+        dgvConsultationDetails.Name = "dgvConsultationDetails"
+        dgvConsultationDetails.RowHeadersWidth = 51
+        dgvConsultationDetails.Size = New Size(933, 479)
+        dgvConsultationDetails.TabIndex = 17
         ' 
         ' lblConsultationDetails
         ' 
@@ -657,6 +646,17 @@ Partial Class PatientDetails
         Label13.Size = New Size(271, 28)
         Label13.TabIndex = 15
         Label13.Text = "Consultation Details"
+        ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.BackColor = Color.Transparent
+        Label7.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Location = New Point(12, 17)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(251, 34)
+        Label7.TabIndex = 4
+        Label7.Text = "Patient Details"
         ' 
         ' PatientDetails
         ' 
@@ -700,7 +700,7 @@ Partial Class PatientDetails
         TabPage4.ResumeLayout(False)
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvConsultationDetails, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -751,7 +751,7 @@ Partial Class PatientDetails
     Friend WithEvents Panel8 As Panel
     Friend WithEvents Label18 As Label
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvConsultationDetails As DataGridView
     Friend WithEvents lblConsultationDetails As Label
     Friend WithEvents Label13 As Label
 End Class

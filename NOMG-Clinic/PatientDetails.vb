@@ -1,5 +1,4 @@
 ﻿Imports MySql.Data.MySqlClient
-Imports System.Data
 
 Public Class PatientDetails
     Public patientID As String
@@ -18,6 +17,13 @@ Public Class PatientDetails
             MessageBox.Show("No patient ID provided.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Me.Close()
         End If
+
+        Try
+            ConsultationSetupDataGrid()
+            PopulateConsultationDetailsDataGrid()
+        Catch ex As Exception
+            MessageBox.Show("Error loading consultation details: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub LoadPatientData()
@@ -634,5 +640,169 @@ ORDER BY
                 End If
             End If
         End If
+    End Sub
+
+    ' Setup dgvConsultationDetails
+    Private Sub ConsultationSetupDataGrid()
+        dgvConsultationDetails.AllowUserToAddRows = False
+        dgvConsultationDetails.AllowUserToDeleteRows = False
+        dgvConsultationDetails.ReadOnly = True
+        dgvConsultationDetails.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvConsultationDetails.MultiSelect = False
+        dgvConsultationDetails.BackgroundColor = Color.White
+        dgvConsultationDetails.BorderStyle = BorderStyle.None
+        dgvConsultationDetails.RowHeadersVisible = False
+        dgvConsultationDetails.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal
+        dgvConsultationDetails.GridColor = Color.LightGray
+        dgvConsultationDetails.ColumnHeadersVisible = True
+
+        dgvConsultationDetails.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
+        dgvConsultationDetails.ColumnHeadersHeight = 40
+        dgvConsultationDetails.ColumnHeadersDefaultCellStyle.Font = New Font(dgvConsultationDetails.Font, FontStyle.Bold)
+        dgvConsultationDetails.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
+        dgvConsultationDetails.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
+
+        dgvConsultationDetails.RowTemplate.Height = 50
+        dgvConsultationDetails.DefaultCellStyle.Padding = New Padding(5, 0, 5, 0)
+        dgvConsultationDetails.DefaultCellStyle.SelectionBackColor = Color.FromArgb(245, 245, 245)
+        dgvConsultationDetails.DefaultCellStyle.SelectionForeColor = Color.Black
+
+        dgvConsultationDetails.AllowUserToResizeColumns = False
+        dgvConsultationDetails.AllowUserToResizeRows = False
+
+        dgvConsultationDetails.ScrollBars = ScrollBars.Vertical
+
+        dgvConsultationDetails.AutoGenerateColumns = False
+        dgvConsultationDetails.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
+
+        dgvConsultationDetails.Columns.Clear()
+
+        Dim idColumn As New DataGridViewTextBoxColumn()
+        idColumn.HeaderText = "ID"
+        idColumn.Name = "ConsultationID"
+        idColumn.Visible = False
+        dgvConsultationDetails.Columns.Add(idColumn)
+
+        Dim dateColumn As New DataGridViewTextBoxColumn()
+        dateColumn.HeaderText = "Date"
+        dateColumn.Name = "Date"
+        dateColumn.MinimumWidth = 120
+        dateColumn.FillWeight = 20
+        dgvConsultationDetails.Columns.Add(dateColumn)
+
+        Dim doctorColumn As New DataGridViewTextBoxColumn()
+        doctorColumn.HeaderText = "Doctor"
+        doctorColumn.Name = "Doctor"
+        doctorColumn.MinimumWidth = 120
+        doctorColumn.FillWeight = 20
+        dgvConsultationDetails.Columns.Add(doctorColumn)
+
+        Dim diagnosisColumn As New DataGridViewTextBoxColumn()
+        diagnosisColumn.HeaderText = "Diagnosis"
+        diagnosisColumn.Name = "Diagnosis"
+        diagnosisColumn.MinimumWidth = 220
+        diagnosisColumn.FillWeight = 40
+        dgvConsultationDetails.Columns.Add(diagnosisColumn)
+
+        Dim viewButtonColumn As New DataGridViewButtonColumn()
+        viewButtonColumn.HeaderText = ""
+        viewButtonColumn.Name = "ViewButton"
+        viewButtonColumn.Text = "View"
+        viewButtonColumn.UseColumnTextForButtonValue = True
+        viewButtonColumn.FlatStyle = FlatStyle.Flat
+        viewButtonColumn.MinimumWidth = 60
+        viewButtonColumn.FillWeight = 10
+        dgvConsultationDetails.Columns.Add(viewButtonColumn)
+
+        AddHandler dgvConsultationDetails.CellFormatting, AddressOf dgvConsultationDetails_CellFormatting
+        AddHandler dgvConsultationDetails.CellClick, AddressOf dgvConsultationDetails_CellClick
+    End Sub
+
+    Private Sub dgvConsultationDetails_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = dgvConsultationDetails.Rows(e.RowIndex)
+
+            If e.ColumnIndex = dgvConsultationDetails.Columns("ViewButton").Index Then
+                Dim cell As DataGridViewButtonCell = DirectCast(row.Cells(e.ColumnIndex), DataGridViewButtonCell)
+                cell.Style.BackColor = Color.FromArgb(0, 120, 215)
+                cell.Style.ForeColor = Color.White
+                cell.Style.SelectionBackColor = Color.FromArgb(0, 100, 190)
+                cell.Style.SelectionForeColor = Color.White
+            End If
+
+            If e.ColumnIndex = dgvConsultationDetails.Columns("Date").Index AndAlso e.Value IsNot Nothing Then
+                e.CellStyle.Font = New Font(dgvConsultationDetails.Font, FontStyle.Bold)
+            End If
+
+            If e.ColumnIndex = dgvConsultationDetails.Columns("Doctor").Index AndAlso e.Value IsNot Nothing Then
+                e.CellStyle.ForeColor = Color.FromArgb(60, 60, 140)
+            End If
+        End If
+    End Sub
+
+    Private Sub dgvConsultationDetails_CellClick(sender As Object, e As DataGridViewCellEventArgs)
+        If e.RowIndex >= 0 AndAlso e.ColumnIndex = dgvConsultationDetails.Columns("ViewButton").Index Then
+            Dim consultationID As String = dgvConsultationDetails.Rows(e.RowIndex).Cells("ConsultationID").Value.ToString()
+
+            Dim viewConsultationForm As New ViewConsultationDetails()
+            viewConsultationForm.ConsultationID = consultationID
+            viewConsultationForm.PatientID = patientID
+            viewConsultationForm.ShowDialog()
+        End If
+    End Sub
+
+    ' Populate dgvConsultationDetails
+    Private Sub PopulateConsultationDetailsDataGrid()
+        dgvConsultationDetails.Rows.Clear()
+
+        If String.IsNullOrEmpty(patientID) Then
+            Return
+        End If
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Dim query As String = "
+    SELECT 
+        c.consultation_id,
+        DATE_FORMAT(c.consultation_date, '%b %d, %Y') AS consultation_date,
+        CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS doctor_name,
+        c.diagnosis
+    FROM 
+        consultation c
+    LEFT JOIN 
+        doctor d ON c.doctor_id = d.doctor_id
+    WHERE 
+        c.patient_id = @patientID
+    ORDER BY 
+        c.consultation_date DESC"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@patientID", patientID)
+
+                Try
+                    connection.Open()
+                    Using reader As MySqlDataReader = command.ExecuteReader()
+                        If Not reader.HasRows Then
+                            dgvConsultationDetails.Rows.Add("", "No consultation records found", "", "", "")
+                            dgvConsultationDetails.Rows(0).DefaultCellStyle.ForeColor = Color.Gray
+                            dgvConsultationDetails.Rows(0).DefaultCellStyle.Font = New Font(dgvConsultationDetails.Font, FontStyle.Italic)
+                            Return
+                        End If
+
+                        While reader.Read()
+                            Dim consultationId As String = reader("consultation_id").ToString()
+                            Dim consultationDate As String = reader("consultation_date").ToString()
+                            Dim doctorName As String = reader("doctor_name").ToString()
+                            Dim diagnosis As String = reader("diagnosis").ToString()
+
+                            dgvConsultationDetails.Rows.Add(consultationId, consultationDate, doctorName, diagnosis)
+                        End While
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("Error loading consultation data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End Using
+        End Using
     End Sub
 End Class
