@@ -32,6 +32,9 @@ Partial Class DoctorDashboard
         btnPatients = New FontAwesome.Sharp.IconButton()
         btnDashboard = New FontAwesome.Sharp.IconButton()
         pnlDashboard = New Panel()
+        HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
+        lblTodaysAppointments = New Label()
+        Label2 = New Label()
         tabDashboard = New TabControl()
         TabPage1 = New TabPage()
         flowTodaysAppointments = New FlowLayoutPanel()
@@ -86,11 +89,9 @@ Partial Class DoctorDashboard
         Label11 = New Label()
         txtFirstName = New TextBox()
         Label3 = New Label()
-        HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
-        lblTodaysAppointments = New Label()
-        Label2 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
+        HopeGroupBox1.SuspendLayout()
         tabDashboard.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -107,7 +108,6 @@ Partial Class DoctorDashboard
         HopeGroupBox5.SuspendLayout()
         HopeGroupBox4.SuspendLayout()
         CType(numAge, ComponentModel.ISupportInitialize).BeginInit()
-        HopeGroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -278,6 +278,45 @@ Partial Class DoctorDashboard
         pnlDashboard.Name = "pnlDashboard"
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 4
+        ' 
+        ' HopeGroupBox1
+        ' 
+        HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeGroupBox1.Controls.Add(lblTodaysAppointments)
+        HopeGroupBox1.Controls.Add(Label2)
+        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
+        HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
+        HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeGroupBox1.Location = New Point(311, 60)
+        HopeGroupBox1.Name = "HopeGroupBox1"
+        HopeGroupBox1.ShowText = False
+        HopeGroupBox1.Size = New Size(280, 150)
+        HopeGroupBox1.TabIndex = 7
+        HopeGroupBox1.TabStop = False
+        HopeGroupBox1.Text = "HopeGroupBox1"
+        HopeGroupBox1.ThemeColor = SystemColors.ControlLightLight
+        ' 
+        ' lblTodaysAppointments
+        ' 
+        lblTodaysAppointments.AutoSize = True
+        lblTodaysAppointments.BackColor = Color.Transparent
+        lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTodaysAppointments.Location = New Point(19, 74)
+        lblTodaysAppointments.Name = "lblTodaysAppointments"
+        lblTodaysAppointments.Size = New Size(190, 28)
+        lblTodaysAppointments.TabIndex = 8
+        lblTodaysAppointments.Text = "Total Patients"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.BackColor = Color.Transparent
+        Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(19, 30)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(230, 22)
+        Label2.TabIndex = 7
+        Label2.Text = "Todays Appointments"
         ' 
         ' tabDashboard
         ' 
@@ -889,52 +928,13 @@ Partial Class DoctorDashboard
         Label3.TabIndex = 1
         Label3.Text = "Settings"
         ' 
-        ' HopeGroupBox1
-        ' 
-        HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Controls.Add(lblTodaysAppointments)
-        HopeGroupBox1.Controls.Add(Label2)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Location = New Point(311, 60)
-        HopeGroupBox1.Name = "HopeGroupBox1"
-        HopeGroupBox1.ShowText = False
-        HopeGroupBox1.Size = New Size(280, 150)
-        HopeGroupBox1.TabIndex = 7
-        HopeGroupBox1.TabStop = False
-        HopeGroupBox1.Text = "HopeGroupBox1"
-        HopeGroupBox1.ThemeColor = SystemColors.ControlLightLight
-        ' 
-        ' lblTodaysAppointments
-        ' 
-        lblTodaysAppointments.AutoSize = True
-        lblTodaysAppointments.BackColor = Color.Transparent
-        lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTodaysAppointments.Location = New Point(25, 25)
-        lblTodaysAppointments.Name = "lblTodaysAppointments"
-        lblTodaysAppointments.Size = New Size(190, 28)
-        lblTodaysAppointments.TabIndex = 8
-        lblTodaysAppointments.Text = "Total Patients"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.Transparent
-        Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(25, 79)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(230, 22)
-        Label2.TabIndex = 7
-        Label2.Text = "Todays Appointments"
-        ' 
         ' DoctorDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(Panel4)
         Controls.Add(pnlDashboard)
+        Controls.Add(Panel4)
         Controls.Add(pnlAppointments)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)
@@ -949,6 +949,8 @@ Partial Class DoctorDashboard
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
         pnlDashboard.PerformLayout()
+        HopeGroupBox1.ResumeLayout(False)
+        HopeGroupBox1.PerformLayout()
         tabDashboard.ResumeLayout(False)
         TabPage1.ResumeLayout(False)
         TabPage2.ResumeLayout(False)
@@ -973,8 +975,6 @@ Partial Class DoctorDashboard
         HopeGroupBox4.ResumeLayout(False)
         HopeGroupBox4.PerformLayout()
         CType(numAge, ComponentModel.ISupportInitialize).EndInit()
-        HopeGroupBox1.ResumeLayout(False)
-        HopeGroupBox1.PerformLayout()
         ResumeLayout(False)
     End Sub
 

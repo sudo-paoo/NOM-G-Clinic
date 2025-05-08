@@ -331,19 +331,21 @@ Public Class DoctorDashboard
         ageColumn.Name = "Age"
         ageColumn.MinimumWidth = 80
         ageColumn.FillWeight = 8
+        ageColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(ageColumn)
 
         Dim gestationalAgeColumn As New DataGridViewTextBoxColumn()
         gestationalAgeColumn.HeaderText = "Gestational Age"
         gestationalAgeColumn.Name = "GestationalAge"
-        gestationalAgeColumn.MinimumWidth = 120
+        gestationalAgeColumn.MinimumWidth = 50
         gestationalAgeColumn.FillWeight = 18
+        gestationalAgeColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(gestationalAgeColumn)
 
         Dim nextCheckupColumn As New DataGridViewTextBoxColumn()
         nextCheckupColumn.HeaderText = "Next Checkup"
         nextCheckupColumn.Name = "NextCheckup"
-        nextCheckupColumn.MinimumWidth = 130
+        nextCheckupColumn.MinimumWidth = 200
         nextCheckupColumn.FillWeight = 18
         dgvPatients.Columns.Add(nextCheckupColumn)
 
@@ -352,6 +354,7 @@ Public Class DoctorDashboard
         firstBabyColumn.Name = "FirstBaby"
         firstBabyColumn.MinimumWidth = 100
         firstBabyColumn.FillWeight = 10
+        firstBabyColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(firstBabyColumn)
 
         Dim buttonColumn As New DataGridViewButtonColumn()
@@ -403,25 +406,25 @@ Public Class DoctorDashboard
 
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
-        Dim query As String = "
-    SELECT 
-        CONCAT(p.first_name, ' ', p.last_name) AS Name, 
-        p.age, 
-        TIMESTAMPDIFF(WEEK, STR_TO_DATE(p.last_menstrual_period, '%Y-%m-%d'), CURDATE()) AS GestationalAge, 
-        DATE_FORMAT(p.next_checkup, '%b %d, %Y') AS NextCheckup, 
-        CASE WHEN p.first_baby = 1 THEN 'Yes' ELSE 'No' END AS FirstBaby
-    FROM 
-        patient p
-    LEFT JOIN 
-        doctor d
-    ON 
-        p.assigned_ob = d.doctor_id"
+        Dim query As String =
+        "SELECT 
+            CONCAT(p.first_name, ' ', p.last_name) AS Name, 
+            p.age, 
+            TIMESTAMPDIFF(WEEK, STR_TO_DATE(p.last_menstrual_period, '%Y-%m-%d'), CURDATE()) AS GestationalAge, 
+            DATE_FORMAT(p.next_checkup, '%b %d, %Y') AS NextCheckup, 
+            CASE WHEN p.first_baby = 1 THEN 'Yes' ELSE 'No' END AS FirstBaby
+        FROM 
+            patient p
+        WHERE 
+            p.assigned_ob = @doctorID
+        ORDER BY 
+            p.last_name, p.first_name"
 
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@doctorID", doctorID)
                 Try
                     connection.Open()
-
                     Dim adapter As New MySqlDataAdapter(command)
                     Dim dataTable As New DataTable()
                     adapter.Fill(dataTable)
@@ -454,7 +457,7 @@ Public Class DoctorDashboard
         activeDropdownPatients = New Panel With {
         .BorderStyle = BorderStyle.FixedSingle,
         .BackColor = Color.White,
-        .Size = New Size(200, 130)
+        .Size = New Size(200, 100)
     }
 
         Dim cellRect = dgvPatients.GetCellDisplayRectangle(buttonColumnIndex, rowIndex, False)
@@ -489,7 +492,6 @@ Public Class DoctorDashboard
 
         AddMenuOption("View patient details", rowIndex, 30)
         AddMenuOption("Edit patient", rowIndex, 60)
-        AddMenuOption("Schedule appointment", rowIndex, 90)
 
         Me.Controls.Add(activeDropdownPatients)
         activeDropdownPatients.BringToFront()
@@ -540,31 +542,6 @@ Public Class DoctorDashboard
                     editPatientDetailsForm.ShowDialog()
                 Else
                     MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-
-            Case "Schedule appointment"
-                If Not String.IsNullOrEmpty(patientId) Then
-                    Dim lastMenstrualDate As Date = Date.MinValue
-                    Dim dueDate As Date = Date.MinValue
-                    Dim doctorId As String = ""
-                    Dim firstName As String = ""
-                    Dim lastName As String = ""
-
-                    If GetPatientDetailsForAppointment(patientId, firstName, lastName, lastMenstrualDate, dueDate, doctorId) Then
-                        Dim appointmentForm As New AppointmentDetails()
-                        appointmentForm.PatientId = patientId
-                        appointmentForm.PatientName = $"{firstName} {lastName}"
-                        appointmentForm.LastMenstrualDate = lastMenstrualDate
-                        appointmentForm.DueDate = dueDate
-                        appointmentForm.DefaultDoctorId = doctorId
-                        appointmentForm.IsNewAppointment = True
-                        appointmentForm.AppointmentType = "Follow-up Check-up"
-                        appointmentForm.ShowDialog()
-                    Else
-                        MessageBox.Show("Could not retrieve patient details for appointment scheduling.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
-                Else
-                    MessageBox.Show("Could not retrieve patient ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
         End Select
 
@@ -722,14 +699,6 @@ Public Class DoctorDashboard
         patientNameColumn.ReadOnly = True
         dgvAppointments.Columns.Add(patientNameColumn)
 
-        Dim doctorNameColumn As New DataGridViewTextBoxColumn()
-        doctorNameColumn.HeaderText = "Doctor"
-        doctorNameColumn.Name = "DoctorName"
-        doctorNameColumn.MinimumWidth = 120
-        doctorNameColumn.FillWeight = 15
-        doctorNameColumn.ReadOnly = True
-        dgvAppointments.Columns.Add(doctorNameColumn)
-
         Dim appointmentDateColumn As New DataGridViewTextBoxColumn()
         appointmentDateColumn.HeaderText = "Date"
         appointmentDateColumn.Name = "AppointmentDate"
@@ -737,6 +706,14 @@ Public Class DoctorDashboard
         appointmentDateColumn.FillWeight = 15
         appointmentDateColumn.ReadOnly = True
         dgvAppointments.Columns.Add(appointmentDateColumn)
+
+        Dim timeColumn As New DataGridViewTextBoxColumn()
+        timeColumn.HeaderText = "Time"
+        timeColumn.Name = "Time"
+        timeColumn.MinimumWidth = 120
+        timeColumn.FillWeight = 15
+        timeColumn.ReadOnly = True
+        dgvAppointments.Columns.Add(timeColumn)
 
         Dim reasonColumn As New DataGridViewTextBoxColumn()
         reasonColumn.HeaderText = "Reason for Visit"
@@ -803,9 +780,10 @@ Public Class DoctorDashboard
             CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
             CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
             a.appointment_date AS RawDate,
-            DATE_FORMAT(a.appointment_date, '%b %d, %Y %h:%i %p') AS AppointmentDate,
+            DATE_FORMAT(a.appointment_date, '%b %d, %Y') AS AppointmentDate,
             a.reason_for_visit AS Reason,
-            a.status AS Status
+            a.status AS Status,
+            a.appointment_time as Time
         FROM 
             appointment_table a
         LEFT JOIN 
@@ -831,7 +809,7 @@ Public Class DoctorDashboard
                     While reader.Read()
                         Dim appointmentID As String = reader("AppointmentID").ToString()
                         Dim patientName As String = reader("PatientName").ToString()
-                        Dim doctorName As String = reader("DoctorName").ToString()
+                        Dim time As String = reader("Time").ToString()
                         Dim appointmentDate As String = reader("AppointmentDate").ToString()
                         Dim reason As String = reader("Reason").ToString()
                         Dim status As String = reader("Status").ToString()
@@ -839,8 +817,8 @@ Public Class DoctorDashboard
 
                         Dim rowIndex As Integer = dgvAppointments.Rows.Add(
                             patientName,
-                            doctorName,
                             appointmentDate,
+                            time,
                             reason,
                             status,
                             "",
