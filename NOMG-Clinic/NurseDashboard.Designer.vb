@@ -68,6 +68,7 @@ Partial Class NurseDashboard
         Label11 = New Label()
         txtUsername = New TextBox()
         Label6 = New Label()
+        lblWelcomeMessage = New Label()
         Panel1.SuspendLayout()
         HopeGroupBox1.SuspendLayout()
         HopeGroupBox2.SuspendLayout()
@@ -393,6 +394,7 @@ Partial Class NurseDashboard
         ' pnlDashboard
         ' 
         pnlDashboard.BackColor = Color.Transparent
+        pnlDashboard.Controls.Add(lblWelcomeMessage)
         pnlDashboard.Controls.Add(HopeGroupBox3)
         pnlDashboard.Controls.Add(tabDashboard)
         pnlDashboard.Controls.Add(HopeGroupBox2)
@@ -667,6 +669,17 @@ Partial Class NurseDashboard
         Label6.TabIndex = 2
         Label6.Text = "Settings"
         ' 
+        ' lblWelcomeMessage
+        ' 
+        lblWelcomeMessage.AutoSize = True
+        lblWelcomeMessage.BackColor = Color.Transparent
+        lblWelcomeMessage.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblWelcomeMessage.Location = New Point(27, 10)
+        lblWelcomeMessage.Name = "lblWelcomeMessage"
+        lblWelcomeMessage.Size = New Size(25, 34)
+        lblWelcomeMessage.TabIndex = 7
+        lblWelcomeMessage.Text = "."
+        ' 
         ' NurseDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -674,9 +687,9 @@ Partial Class NurseDashboard
         BackgroundImage = My.Resources.Resources.bg_img
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
         Controls.Add(pnlPatients)
-        Controls.Add(pnlDashboard)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
@@ -699,6 +712,7 @@ Partial Class NurseDashboard
         HopeGroupBox3.ResumeLayout(False)
         HopeGroupBox3.PerformLayout()
         pnlDashboard.ResumeLayout(False)
+        pnlDashboard.PerformLayout()
         pnlPatients.ResumeLayout(False)
         pnlPatients.PerformLayout()
         pnlPatientsDataGrid.ResumeLayout(False)
@@ -759,4 +773,5 @@ Partial Class NurseDashboard
     Friend WithEvents Label15 As Label
     Friend WithEvents lblTodaysAppointments As Label
     Friend WithEvents btnAddPatient As FontAwesome.Sharp.IconButton
+    Friend WithEvents lblWelcomeMessage As Label
 End Class
