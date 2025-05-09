@@ -16,6 +16,7 @@ Public Class AppointmentDetails
 
     Private NextCheckupDays As Integer = 30
     Private ExpectedNextAppointmentDate As Date = Date.MinValue
+    Private HasFluVaccination As Boolean = False
 
     Private conn As MySqlConnection
     Private cmd As MySqlCommand
@@ -65,17 +66,52 @@ Public Class AppointmentDetails
         ConfigureCalendarForFollowUp()
 
         LoadDoctors()
+        CheckFluVaccinationStatus()
+        UpdateFluVacSwitch()
 
         UpdateAvailableTimeSlots()
+    End Sub
+
+    ' Check if patient has flu vaccination
+    Private Sub CheckFluVaccinationStatus()
+        Try
+            If String.IsNullOrEmpty(PatientId) Then
+                Return
+            End If
+
+            Using conn As New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
+                conn.Open()
+
+                Dim query As String = "SELECT flu_vac FROM patient WHERE patient_id = @patientId"
+                Dim cmd As New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@patientId", PatientId)
+
+                Dim result As Object = cmd.ExecuteScalar()
+                HasFluVaccination = (result IsNot Nothing AndAlso Not DBNull.Value.Equals(result) AndAlso Convert.ToInt32(result) = 1)
+            End Using
+        Catch ex As Exception
+            HasFluVaccination = False
+            Console.WriteLine("Error checking flu vaccination status: " & ex.Message)
+        End Try
+    End Sub
+
+
+    Private Sub UpdateFluVacSwitch()
+        hsFluVac.Visible = Not HasFluVaccination
+
+        If Not HasFluVaccination Then
+            hsFluVac.Text = "Add Flu Vaccination"
+            hsFluVac.Checked = False
+        End If
     End Sub
 
     Private Sub ConfigureCalendarForFollowUp()
         Dim minDate As Date = DateTime.Today
 
         If IsFollowUp AndAlso LastVisitDate.HasValue Then
-            If GestationalWeeks <= 12 Then
+            If GestationalWeeks < 12 Then
                 NextCheckupDays = 30
-            ElseIf GestationalWeeks <= 24 Then
+            ElseIf GestationalWeeks < 24 Then
                 NextCheckupDays = 20
             Else
                 NextCheckupDays = 10
@@ -259,6 +295,10 @@ Public Class AppointmentDetails
         UpdateAvailableTimeSlots()
     End Sub
 
+    Private Sub cboAppointmentType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboAppointmentType.SelectedIndexChanged
+        UpdateFluVacSwitch()
+    End Sub
+
     Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
         If Not ValidateForm() Then
             Return
@@ -268,12 +308,19 @@ Public Class AppointmentDetails
             MessageBox.Show("Appointment scheduled successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Me.DialogResult = DialogResult.OK
             Dim adminForm As AdminDashboard = TryCast(Application.OpenForms("AdminDashboard"), AdminDashboard)
+            Dim doctorForm As DoctorDashboard = TryCast(Application.OpenForms("DoctorDashboard"), DoctorDashboard)
+            Dim nurseForm As NurseDashboard = TryCast(Application.OpenForms("NurseDashboard"), NurseDashboard)
             If adminForm IsNot Nothing Then
                 adminForm.AppointmentsSetupDataGrid()
                 adminForm.AppointmentsPopulateDataGrid()
-            Else
-                MessageBox.Show("Admin dashboard not found. Please refresh the dashboard manually.",
-                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+            If doctorForm IsNot Nothing Then
+                doctorForm.AppointmentsSetupDataGrid()
+                doctorForm.AppointmentsPopulateDataGrid()
+            End If
+            If nurseForm IsNot Nothing Then
+                nurseForm.AppointmentsSetupDataGrid()
+                nurseForm.AppointmentsPopulateDataGrid()
             End If
             Me.Close()
         End If
@@ -529,6 +576,28 @@ Public Class AppointmentDetails
 
             itemsList.Add(checkupItem)
             itemCount += 1
+
+            If hsFluVac.Visible AndAlso hsFluVac.Checked Then
+                Dim fluVacItem As New Dictionary(Of String, Object)
+                fluVacItem.Add("item_name", "Flu Vaccination")
+                fluVacItem.Add("quantity", 1)
+                fluVacItem.Add("description", "One-time flu vaccination during pregnancy")
+                fluVacItem.Add("price", 1500)
+                fluVacItem.Add("total", 1500)
+                itemsList.Add(fluVacItem)
+                totalAmount += 1500
+                itemCount += 1
+                notes += " + Flu vaccination"
+
+                Try
+                    Dim updateFluVacQuery As String = "UPDATE patient SET flu_vac = 1 WHERE patient_id = @patientId"
+                    Dim updateCmd As New MySqlCommand(updateFluVacQuery, conn)
+                    updateCmd.Parameters.AddWithValue("@patientId", PatientId)
+                    updateCmd.ExecuteNonQuery()
+                Catch ex As Exception
+                    Console.WriteLine("Error updating flu vaccination status: " & ex.Message)
+                End Try
+            End If
 
             ' Add vitamins based on gestational age for follow-up appointments
             If appointmentType = "Follow-up Check-up" Then

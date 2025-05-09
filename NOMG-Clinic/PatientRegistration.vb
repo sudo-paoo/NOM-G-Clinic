@@ -337,13 +337,14 @@ Public Class PatientRegistration
                 Dim dueDate As Date = clrLastMenstrual.SelectionStart.AddDays(280)
 
                 Dim query As String = "INSERT INTO patient (patient_id, first_name, middle_name, last_name, age, civil_status, " &
-                           "weight, height, blood_type, address, contact_number, email, emergency_contact_name, " &
-                           "emergency_contact_relationship, emergency_contact_number, last_menstrual_period, first_baby, " &
-                           "allergies, assigned_ob, vitamin_intake, due_date, current_medication, history_of_surgery) " &
-                           "VALUES (@patientId, @firstName, @middleName, @lastName, @age, @civilStatus, @weight, @height, " &
-                           "@bloodType, @address, @contactNumber, @email, @emergencyContactName, @emergencyContactRelationship, " &
-                           "@emergencyContactNumber, @lastMenstrualPeriod, @firstBaby, @allergies, " &
-                           "@assignedOb, @vitaminIntake, @dueDate, @currentMedication, @historyOfSurgery)"
+                   "weight, height, blood_type, address, contact_number, email, emergency_contact_name, " &
+                   "emergency_contact_relationship, emergency_contact_number, last_menstrual_period, first_baby, " &
+                   "allergies, assigned_ob, vitamin_intake, due_date, current_medication, history_of_surgery, flu_vac) " &
+                   "VALUES (@patientId, @firstName, @middleName, @lastName, @age, @civilStatus, @weight, @height, " &
+                   "@bloodType, @address, @contactNumber, @email, @emergencyContactName, @emergencyContactRelationship, " &
+                   "@emergencyContactNumber, @lastMenstrualPeriod, @firstBaby, @allergies, " &
+                   "@assignedOb, @vitaminIntake, @dueDate, @currentMedication, @historyOfSurgery, @fluVac)"
+
 
                 cmd = New MySqlCommand(query, conn)
 
@@ -370,6 +371,7 @@ Public Class PatientRegistration
                 cmd.Parameters.AddWithValue("@dueDate", dueDate.ToString("yyyy-MM-dd"))
                 cmd.Parameters.AddWithValue("@currentMedication", currentMedication)
                 cmd.Parameters.AddWithValue("@historyOfSurgery", historyOfSurgery)
+                cmd.Parameters.AddWithValue("@fluVac", 0)
 
                 cmd.ExecuteNonQuery()
 

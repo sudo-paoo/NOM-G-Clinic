@@ -545,7 +545,7 @@ Public Class DoctorDashboard
             Case "Edit patient"
                 If Not String.IsNullOrEmpty(patientId) Then
                     Dim editPatientDetailsForm As New EditPatientDetails()
-                    editPatientDetailsForm.patientID = patientId
+                    editPatientDetailsForm.PatientID = patientId
                     editPatientDetailsForm.ShowDialog()
                 Else
                     MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
