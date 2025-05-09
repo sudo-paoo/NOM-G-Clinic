@@ -31,16 +31,14 @@ Partial Class AccountingDashboard
         btnPatients = New FontAwesome.Sharp.IconButton()
         btnDashboard = New FontAwesome.Sharp.IconButton()
         pnlDashboard = New Panel()
+        lblTotalRevenue = New Label()
+        lblTotalPaymentToday = New Label()
+        Label4 = New Label()
         tabDashboard = New TabControl()
         TabPage1 = New TabPage()
         TabPage2 = New TabPage()
         flowRecentPayments = New FlowLayoutPanel()
-        HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
-        lblTotalPaymentToday = New Label()
         Label2 = New Label()
-        HopeGroupBox3 = New ReaLTaiizor.Controls.HopeGroupBox()
-        lblTotalRevenue = New Label()
-        Label4 = New Label()
         lblWelcomeMessage = New Label()
         pnlPatients = New Panel()
         Label3 = New Label()
@@ -54,16 +52,12 @@ Partial Class AccountingDashboard
         pnlSettings = New Panel()
         SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
         btnSave = New FontAwesome.Sharp.IconButton()
-        Label16 = New Label()
-        HopeGroupBox6 = New ReaLTaiizor.Controls.HopeGroupBox()
         txtEmailAddress = New TextBox()
         Label18 = New Label()
         txtContactNumber = New TextBox()
         Label19 = New Label()
         Label20 = New Label()
         txtAddress = New TextBox()
-        Label9 = New Label()
-        HopeGroupBox5 = New ReaLTaiizor.Controls.HopeGroupBox()
         btnEyeConfirmPassword = New FontAwesome.Sharp.IconButton()
         txtConfirmPassword = New TextBox()
         btnEyePassword = New FontAwesome.Sharp.IconButton()
@@ -72,8 +66,6 @@ Partial Class AccountingDashboard
         Label10 = New Label()
         Label17 = New Label()
         txtUsername = New TextBox()
-        Label1 = New Label()
-        HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
         numAge = New NumericUpDown()
         txtMiddleName = New TextBox()
         txtLastName = New TextBox()
@@ -82,13 +74,10 @@ Partial Class AccountingDashboard
         Label12 = New Label()
         Label11 = New Label()
         txtFirstName = New TextBox()
-        Label6 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         tabDashboard.SuspendLayout()
         TabPage2.SuspendLayout()
-        HopeGroupBox1.SuspendLayout()
-        HopeGroupBox3.SuspendLayout()
         pnlPatients.SuspendLayout()
         pnlPatientsDataGrid.SuspendLayout()
         CType(dgvPatients, ComponentModel.ISupportInitialize).BeginInit()
@@ -96,9 +85,6 @@ Partial Class AccountingDashboard
         Panel4.SuspendLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
         pnlSettings.SuspendLayout()
-        HopeGroupBox6.SuspendLayout()
-        HopeGroupBox5.SuspendLayout()
-        HopeGroupBox4.SuspendLayout()
         CType(numAge, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -246,9 +232,12 @@ Partial Class AccountingDashboard
         ' pnlDashboard
         ' 
         pnlDashboard.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        pnlDashboard.BackgroundImage = My.Resources.Resources.Untitled_design__1_
+        pnlDashboard.Controls.Add(lblTotalRevenue)
+        pnlDashboard.Controls.Add(lblTotalPaymentToday)
+        pnlDashboard.Controls.Add(Label4)
         pnlDashboard.Controls.Add(tabDashboard)
-        pnlDashboard.Controls.Add(HopeGroupBox1)
-        pnlDashboard.Controls.Add(HopeGroupBox3)
+        pnlDashboard.Controls.Add(Label2)
         pnlDashboard.Controls.Add(lblWelcomeMessage)
         pnlDashboard.Dock = DockStyle.Fill
         pnlDashboard.Location = New Point(300, 40)
@@ -256,14 +245,47 @@ Partial Class AccountingDashboard
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 3
         ' 
+        ' lblTotalRevenue
+        ' 
+        lblTotalRevenue.AutoSize = True
+        lblTotalRevenue.BackColor = Color.Transparent
+        lblTotalRevenue.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotalRevenue.Location = New Point(31, 149)
+        lblTotalRevenue.Name = "lblTotalRevenue"
+        lblTotalRevenue.Size = New Size(185, 28)
+        lblTotalRevenue.TabIndex = 6
+        lblTotalRevenue.Text = "Total Amount"
+        ' 
+        ' lblTotalPaymentToday
+        ' 
+        lblTotalPaymentToday.AutoSize = True
+        lblTotalPaymentToday.BackColor = Color.Transparent
+        lblTotalPaymentToday.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotalPaymentToday.Location = New Point(469, 146)
+        lblTotalPaymentToday.Name = "lblTotalPaymentToday"
+        lblTotalPaymentToday.Size = New Size(243, 28)
+        lblTotalPaymentToday.TabIndex = 6
+        lblTotalPaymentToday.Text = "Total within a day"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.BackColor = Color.Transparent
+        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.Location = New Point(162, 78)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(154, 22)
+        Label4.TabIndex = 5
+        Label4.Text = "Total Revenue"
+        ' 
         ' tabDashboard
         ' 
         tabDashboard.Controls.Add(TabPage1)
         tabDashboard.Controls.Add(TabPage2)
-        tabDashboard.Location = New Point(22, 215)
+        tabDashboard.Location = New Point(27, 230)
         tabDashboard.Name = "tabDashboard"
         tabDashboard.SelectedIndex = 0
-        tabDashboard.Size = New Size(852, 430)
+        tabDashboard.Size = New Size(852, 424)
         tabDashboard.SizeMode = TabSizeMode.Fixed
         tabDashboard.TabIndex = 12
         ' 
@@ -272,7 +294,7 @@ Partial Class AccountingDashboard
         TabPage1.Location = New Point(4, 29)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(844, 397)
+        TabPage1.Size = New Size(844, 391)
         TabPage1.TabIndex = 0
         TabPage1.Text = "Recent Invoices"
         TabPage1.UseVisualStyleBackColor = True
@@ -283,7 +305,7 @@ Partial Class AccountingDashboard
         TabPage2.Location = New Point(4, 29)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(844, 397)
+        TabPage2.Size = New Size(844, 391)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Recent Payments"
         TabPage2.UseVisualStyleBackColor = True
@@ -294,93 +316,25 @@ Partial Class AccountingDashboard
         flowRecentPayments.Dock = DockStyle.Fill
         flowRecentPayments.Location = New Point(3, 3)
         flowRecentPayments.Name = "flowRecentPayments"
-        flowRecentPayments.Size = New Size(838, 391)
+        flowRecentPayments.Size = New Size(838, 385)
         flowRecentPayments.TabIndex = 0
-        ' 
-        ' HopeGroupBox1
-        ' 
-        HopeGroupBox1.BackColor = SystemColors.Control
-        HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Controls.Add(lblTotalPaymentToday)
-        HopeGroupBox1.Controls.Add(Label2)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Location = New Point(459, 59)
-        HopeGroupBox1.Name = "HopeGroupBox1"
-        HopeGroupBox1.ShowText = False
-        HopeGroupBox1.Size = New Size(414, 150)
-        HopeGroupBox1.TabIndex = 10
-        HopeGroupBox1.TabStop = False
-        HopeGroupBox1.Text = "HopeGroupBox1"
-        HopeGroupBox1.ThemeColor = SystemColors.ControlLightLight
-        ' 
-        ' lblTotalPaymentToday
-        ' 
-        lblTotalPaymentToday.AutoSize = True
-        lblTotalPaymentToday.BackColor = Color.Transparent
-        lblTotalPaymentToday.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalPaymentToday.Location = New Point(20, 74)
-        lblTotalPaymentToday.Name = "lblTotalPaymentToday"
-        lblTotalPaymentToday.Size = New Size(243, 28)
-        lblTotalPaymentToday.TabIndex = 6
-        lblTotalPaymentToday.Text = "Total within a day"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
         Label2.BackColor = Color.Transparent
         Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(20, 30)
+        Label2.Location = New Point(539, 79)
         Label2.Name = "Label2"
         Label2.Size = New Size(275, 22)
         Label2.TabIndex = 5
         Label2.Text = "Payments Received Today"
         ' 
-        ' HopeGroupBox3
-        ' 
-        HopeGroupBox3.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox3.Controls.Add(lblTotalRevenue)
-        HopeGroupBox3.Controls.Add(Label4)
-        HopeGroupBox3.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox3.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox3.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox3.Location = New Point(21, 59)
-        HopeGroupBox3.Name = "HopeGroupBox3"
-        HopeGroupBox3.ShowText = False
-        HopeGroupBox3.Size = New Size(414, 150)
-        HopeGroupBox3.TabIndex = 9
-        HopeGroupBox3.TabStop = False
-        HopeGroupBox3.Text = "HopeGroupBox3"
-        HopeGroupBox3.ThemeColor = SystemColors.ControlLightLight
-        ' 
-        ' lblTotalRevenue
-        ' 
-        lblTotalRevenue.AutoSize = True
-        lblTotalRevenue.BackColor = Color.Transparent
-        lblTotalRevenue.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalRevenue.Location = New Point(20, 74)
-        lblTotalRevenue.Name = "lblTotalRevenue"
-        lblTotalRevenue.Size = New Size(185, 28)
-        lblTotalRevenue.TabIndex = 6
-        lblTotalRevenue.Text = "Total Amount"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.BackColor = Color.Transparent
-        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(20, 30)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(154, 22)
-        Label4.TabIndex = 5
-        Label4.Text = "Total Revenue"
-        ' 
         ' lblWelcomeMessage
         ' 
         lblWelcomeMessage.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         lblWelcomeMessage.Font = New Font("Verdana", 16.2F, FontStyle.Bold)
-        lblWelcomeMessage.Location = New Point(23, 10)
+        lblWelcomeMessage.Location = New Point(23, 14)
         lblWelcomeMessage.Name = "lblWelcomeMessage"
         lblWelcomeMessage.Size = New Size(851, 38)
         lblWelcomeMessage.TabIndex = 0
@@ -479,16 +433,33 @@ Partial Class AccountingDashboard
         ' pnlSettings
         ' 
         pnlSettings.AutoScroll = True
-        pnlSettings.BackColor = SystemColors.ControlLightLight
+        pnlSettings.BackColor = Color.Transparent
+        pnlSettings.BackgroundImage = My.Resources.Resources.Settings__1_
+        pnlSettings.BackgroundImageLayout = ImageLayout.Stretch
+        pnlSettings.Controls.Add(txtAddress)
+        pnlSettings.Controls.Add(txtContactNumber)
+        pnlSettings.Controls.Add(txtEmailAddress)
+        pnlSettings.Controls.Add(btnEyeConfirmPassword)
+        pnlSettings.Controls.Add(Label18)
+        pnlSettings.Controls.Add(numAge)
+        pnlSettings.Controls.Add(btnEyePassword)
+        pnlSettings.Controls.Add(Label20)
+        pnlSettings.Controls.Add(Label19)
+        pnlSettings.Controls.Add(txtConfirmPassword)
+        pnlSettings.Controls.Add(Label13)
+        pnlSettings.Controls.Add(txtLastName)
+        pnlSettings.Controls.Add(txtPassword)
+        pnlSettings.Controls.Add(Label15)
+        pnlSettings.Controls.Add(txtUsername)
+        pnlSettings.Controls.Add(txtMiddleName)
         pnlSettings.Controls.Add(SmallLabel1)
+        pnlSettings.Controls.Add(Label17)
+        pnlSettings.Controls.Add(Label10)
+        pnlSettings.Controls.Add(Label12)
         pnlSettings.Controls.Add(btnSave)
-        pnlSettings.Controls.Add(Label16)
-        pnlSettings.Controls.Add(HopeGroupBox6)
-        pnlSettings.Controls.Add(Label9)
-        pnlSettings.Controls.Add(HopeGroupBox5)
-        pnlSettings.Controls.Add(Label1)
-        pnlSettings.Controls.Add(HopeGroupBox4)
-        pnlSettings.Controls.Add(Label6)
+        pnlSettings.Controls.Add(Label14)
+        pnlSettings.Controls.Add(Label11)
+        pnlSettings.Controls.Add(txtFirstName)
         pnlSettings.Dock = DockStyle.Fill
         pnlSettings.Location = New Point(300, 40)
         pnlSettings.Name = "pnlSettings"
@@ -515,7 +486,7 @@ Partial Class AccountingDashboard
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSave.IconSize = 36
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(649, 950)
+        btnSave.Location = New Point(619, 901)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(133, 44)
         btnSave.TabIndex = 14
@@ -523,50 +494,20 @@ Partial Class AccountingDashboard
         btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
         btnSave.UseVisualStyleBackColor = True
         ' 
-        ' Label16
-        ' 
-        Label16.AutoSize = True
-        Label16.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(354, 657)
-        Label16.Name = "Label16"
-        Label16.Size = New Size(218, 31)
-        Label16.TabIndex = 19
-        Label16.Text = "Contact Information"
-        ' 
-        ' HopeGroupBox6
-        ' 
-        HopeGroupBox6.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox6.Controls.Add(txtEmailAddress)
-        HopeGroupBox6.Controls.Add(Label18)
-        HopeGroupBox6.Controls.Add(txtContactNumber)
-        HopeGroupBox6.Controls.Add(Label19)
-        HopeGroupBox6.Controls.Add(Label20)
-        HopeGroupBox6.Controls.Add(txtAddress)
-        HopeGroupBox6.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox6.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox6.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox6.Location = New Point(151, 694)
-        HopeGroupBox6.Name = "HopeGroupBox6"
-        HopeGroupBox6.ShowText = False
-        HopeGroupBox6.Size = New Size(631, 210)
-        HopeGroupBox6.TabIndex = 18
-        HopeGroupBox6.TabStop = False
-        HopeGroupBox6.Text = "HopeGroupBox6"
-        HopeGroupBox6.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
         ' txtEmailAddress
         ' 
-        txtEmailAddress.Location = New Point(290, 139)
+        txtEmailAddress.Location = New Point(318, 794)
         txtEmailAddress.Name = "txtEmailAddress"
-        txtEmailAddress.Size = New Size(300, 34)
+        txtEmailAddress.Size = New Size(399, 27)
         txtEmailAddress.TabIndex = 13
         ' 
         ' Label18
         ' 
         Label18.AutoSize = True
-        Label18.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label18.BackColor = Color.Transparent
         Label18.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.Location = New Point(24, 138)
+        Label18.ForeColor = SystemColors.ControlText
+        Label18.Location = New Point(172, 793)
         Label18.Name = "Label18"
         Label18.Size = New Size(144, 28)
         Label18.TabIndex = 12
@@ -574,17 +515,18 @@ Partial Class AccountingDashboard
         ' 
         ' txtContactNumber
         ' 
-        txtContactNumber.Location = New Point(290, 84)
+        txtContactNumber.Location = New Point(319, 747)
         txtContactNumber.Name = "txtContactNumber"
-        txtContactNumber.Size = New Size(300, 34)
+        txtContactNumber.Size = New Size(398, 27)
         txtContactNumber.TabIndex = 11
         ' 
         ' Label19
         ' 
         Label19.AutoSize = True
-        Label19.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label19.BackColor = Color.Transparent
         Label19.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(24, 30)
+        Label19.ForeColor = SystemColors.ControlText
+        Label19.Location = New Point(222, 699)
         Label19.Name = "Label19"
         Label19.Size = New Size(90, 28)
         Label19.TabIndex = 7
@@ -593,9 +535,10 @@ Partial Class AccountingDashboard
         ' Label20
         ' 
         Label20.AutoSize = True
-        Label20.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label20.BackColor = Color.Transparent
         Label20.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.Location = New Point(24, 83)
+        Label20.ForeColor = SystemColors.ControlText
+        Label20.Location = New Point(148, 746)
         Label20.Name = "Label20"
         Label20.Size = New Size(168, 28)
         Label20.TabIndex = 4
@@ -603,43 +546,10 @@ Partial Class AccountingDashboard
         ' 
         ' txtAddress
         ' 
-        txtAddress.Location = New Point(290, 31)
+        txtAddress.Location = New Point(319, 700)
         txtAddress.Name = "txtAddress"
-        txtAddress.Size = New Size(300, 34)
+        txtAddress.Size = New Size(398, 27)
         txtAddress.TabIndex = 8
-        ' 
-        ' Label9
-        ' 
-        Label9.AutoSize = True
-        Label9.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(354, 408)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(223, 31)
-        Label9.TabIndex = 17
-        Label9.Text = "Account Information"
-        ' 
-        ' HopeGroupBox5
-        ' 
-        HopeGroupBox5.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox5.Controls.Add(btnEyeConfirmPassword)
-        HopeGroupBox5.Controls.Add(txtConfirmPassword)
-        HopeGroupBox5.Controls.Add(btnEyePassword)
-        HopeGroupBox5.Controls.Add(Label15)
-        HopeGroupBox5.Controls.Add(txtPassword)
-        HopeGroupBox5.Controls.Add(Label10)
-        HopeGroupBox5.Controls.Add(Label17)
-        HopeGroupBox5.Controls.Add(txtUsername)
-        HopeGroupBox5.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox5.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox5.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox5.Location = New Point(151, 445)
-        HopeGroupBox5.Name = "HopeGroupBox5"
-        HopeGroupBox5.ShowText = False
-        HopeGroupBox5.Size = New Size(631, 193)
-        HopeGroupBox5.TabIndex = 16
-        HopeGroupBox5.TabStop = False
-        HopeGroupBox5.Text = "HopeGroupBox5"
-        HopeGroupBox5.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         ' 
         ' btnEyeConfirmPassword
         ' 
@@ -650,7 +560,7 @@ Partial Class AccountingDashboard
         btnEyeConfirmPassword.IconColor = Color.Black
         btnEyeConfirmPassword.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEyeConfirmPassword.IconSize = 25
-        btnEyeConfirmPassword.Location = New Point(593, 139)
+        btnEyeConfirmPassword.Location = New Point(715, 543)
         btnEyeConfirmPassword.Name = "btnEyeConfirmPassword"
         btnEyeConfirmPassword.Size = New Size(32, 32)
         btnEyeConfirmPassword.TabIndex = 44
@@ -658,9 +568,9 @@ Partial Class AccountingDashboard
         ' 
         ' txtConfirmPassword
         ' 
-        txtConfirmPassword.Location = New Point(290, 139)
+        txtConfirmPassword.Location = New Point(312, 545)
         txtConfirmPassword.Name = "txtConfirmPassword"
-        txtConfirmPassword.Size = New Size(300, 34)
+        txtConfirmPassword.Size = New Size(400, 27)
         txtConfirmPassword.TabIndex = 13
         txtConfirmPassword.UseSystemPasswordChar = True
         ' 
@@ -673,7 +583,7 @@ Partial Class AccountingDashboard
         btnEyePassword.IconColor = Color.Black
         btnEyePassword.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEyePassword.IconSize = 25
-        btnEyePassword.Location = New Point(593, 86)
+        btnEyePassword.Location = New Point(715, 493)
         btnEyePassword.Name = "btnEyePassword"
         btnEyePassword.Size = New Size(32, 32)
         btnEyePassword.TabIndex = 43
@@ -682,9 +592,9 @@ Partial Class AccountingDashboard
         ' Label15
         ' 
         Label15.AutoSize = True
-        Label15.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label15.BackColor = Color.Transparent
         Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(24, 138)
+        Label15.Location = New Point(126, 542)
         Label15.Name = "Label15"
         Label15.Size = New Size(181, 28)
         Label15.TabIndex = 12
@@ -692,18 +602,18 @@ Partial Class AccountingDashboard
         ' 
         ' txtPassword
         ' 
-        txtPassword.Location = New Point(290, 84)
+        txtPassword.Location = New Point(313, 496)
         txtPassword.Name = "txtPassword"
-        txtPassword.Size = New Size(300, 34)
+        txtPassword.Size = New Size(399, 27)
         txtPassword.TabIndex = 11
         txtPassword.UseSystemPasswordChar = True
         ' 
         ' Label10
         ' 
         Label10.AutoSize = True
-        Label10.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label10.BackColor = Color.Transparent
         Label10.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.Location = New Point(24, 30)
+        Label10.Location = New Point(198, 446)
         Label10.Name = "Label10"
         Label10.Size = New Size(109, 28)
         Label10.TabIndex = 7
@@ -712,9 +622,9 @@ Partial Class AccountingDashboard
         ' Label17
         ' 
         Label17.AutoSize = True
-        Label17.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label17.BackColor = Color.Transparent
         Label17.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(24, 83)
+        Label17.Location = New Point(205, 493)
         Label17.Name = "Label17"
         Label17.Size = New Size(102, 28)
         Label17.TabIndex = 4
@@ -722,71 +632,38 @@ Partial Class AccountingDashboard
         ' 
         ' txtUsername
         ' 
-        txtUsername.Location = New Point(290, 31)
+        txtUsername.Location = New Point(313, 447)
         txtUsername.Name = "txtUsername"
-        txtUsername.Size = New Size(300, 34)
+        txtUsername.Size = New Size(399, 27)
         txtUsername.TabIndex = 8
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(354, 100)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(225, 31)
-        Label1.TabIndex = 15
-        Label1.Text = "Personal Information"
-        ' 
-        ' HopeGroupBox4
-        ' 
-        HopeGroupBox4.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox4.Controls.Add(numAge)
-        HopeGroupBox4.Controls.Add(txtMiddleName)
-        HopeGroupBox4.Controls.Add(txtLastName)
-        HopeGroupBox4.Controls.Add(Label14)
-        HopeGroupBox4.Controls.Add(Label13)
-        HopeGroupBox4.Controls.Add(Label12)
-        HopeGroupBox4.Controls.Add(Label11)
-        HopeGroupBox4.Controls.Add(txtFirstName)
-        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox4.Location = New Point(151, 137)
-        HopeGroupBox4.Name = "HopeGroupBox4"
-        HopeGroupBox4.ShowText = False
-        HopeGroupBox4.Size = New Size(631, 250)
-        HopeGroupBox4.TabIndex = 14
-        HopeGroupBox4.TabStop = False
-        HopeGroupBox4.Text = "HopeGroupBox4"
-        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
         ' 
         ' numAge
         ' 
-        numAge.Location = New Point(290, 187)
+        numAge.Location = New Point(319, 294)
         numAge.Name = "numAge"
-        numAge.Size = New Size(304, 34)
+        numAge.Size = New Size(398, 27)
         numAge.TabIndex = 12
         ' 
         ' txtMiddleName
         ' 
-        txtMiddleName.Location = New Point(290, 84)
+        txtMiddleName.Location = New Point(319, 209)
         txtMiddleName.Name = "txtMiddleName"
-        txtMiddleName.Size = New Size(300, 34)
+        txtMiddleName.Size = New Size(398, 27)
         txtMiddleName.TabIndex = 11
         ' 
         ' txtLastName
         ' 
-        txtLastName.Location = New Point(290, 137)
+        txtLastName.Location = New Point(317, 251)
         txtLastName.Name = "txtLastName"
-        txtLastName.Size = New Size(300, 34)
+        txtLastName.Size = New Size(400, 27)
         txtLastName.TabIndex = 10
         ' 
         ' Label14
         ' 
         Label14.AutoSize = True
-        Label14.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label14.BackColor = Color.Transparent
         Label14.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(24, 30)
+        Label14.Location = New Point(184, 167)
         Label14.Name = "Label14"
         Label14.Size = New Size(112, 28)
         Label14.TabIndex = 7
@@ -795,9 +672,9 @@ Partial Class AccountingDashboard
         ' Label13
         ' 
         Label13.AutoSize = True
-        Label13.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label13.BackColor = Color.Transparent
         Label13.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label13.Location = New Point(24, 189)
+        Label13.Location = New Point(238, 290)
         Label13.Name = "Label13"
         Label13.Size = New Size(53, 28)
         Label13.TabIndex = 6
@@ -806,9 +683,9 @@ Partial Class AccountingDashboard
         ' Label12
         ' 
         Label12.AutoSize = True
-        Label12.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label12.BackColor = Color.Transparent
         Label12.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(23, 136)
+        Label12.Location = New Point(184, 251)
         Label12.Name = "Label12"
         Label12.Size = New Size(110, 28)
         Label12.TabIndex = 5
@@ -817,9 +694,9 @@ Partial Class AccountingDashboard
         ' Label11
         ' 
         Label11.AutoSize = True
-        Label11.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
+        Label11.BackColor = Color.Transparent
         Label11.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(24, 83)
+        Label11.Location = New Point(159, 209)
         Label11.Name = "Label11"
         Label11.Size = New Size(137, 28)
         Label11.TabIndex = 4
@@ -827,28 +704,18 @@ Partial Class AccountingDashboard
         ' 
         ' txtFirstName
         ' 
-        txtFirstName.Location = New Point(290, 31)
+        txtFirstName.Location = New Point(319, 169)
         txtFirstName.Name = "txtFirstName"
-        txtFirstName.Size = New Size(300, 34)
+        txtFirstName.Size = New Size(398, 27)
         txtFirstName.TabIndex = 8
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(24, 22)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(147, 34)
-        Label6.TabIndex = 1
-        Label6.Text = "Settings"
         ' 
         ' AccountingDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlBilling)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)
@@ -862,12 +729,9 @@ Partial Class AccountingDashboard
         Text = "AccountingDashboard"
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
+        pnlDashboard.PerformLayout()
         tabDashboard.ResumeLayout(False)
         TabPage2.ResumeLayout(False)
-        HopeGroupBox1.ResumeLayout(False)
-        HopeGroupBox1.PerformLayout()
-        HopeGroupBox3.ResumeLayout(False)
-        HopeGroupBox3.PerformLayout()
         pnlPatients.ResumeLayout(False)
         pnlPatients.PerformLayout()
         pnlPatientsDataGrid.ResumeLayout(False)
@@ -878,12 +742,6 @@ Partial Class AccountingDashboard
         CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
         pnlSettings.ResumeLayout(False)
         pnlSettings.PerformLayout()
-        HopeGroupBox6.ResumeLayout(False)
-        HopeGroupBox6.PerformLayout()
-        HopeGroupBox5.ResumeLayout(False)
-        HopeGroupBox5.PerformLayout()
-        HopeGroupBox4.ResumeLayout(False)
-        HopeGroupBox4.PerformLayout()
         CType(numAge, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
@@ -896,10 +754,6 @@ Partial Class AccountingDashboard
     Friend WithEvents btnDashboard As FontAwesome.Sharp.IconButton
     Friend WithEvents pnlDashboard As Panel
     Friend WithEvents lblWelcomeMessage As Label
-    Friend WithEvents HopeGroupBox1 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents lblTotalPaymentToday As Label
-    Friend WithEvents Label2 As Label
-    Friend WithEvents HopeGroupBox3 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents lblTotalRevenue As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents tabDashboard As TabControl
@@ -918,16 +772,12 @@ Partial Class AccountingDashboard
     Friend WithEvents pnlSettings As Panel
     Friend WithEvents SmallLabel1 As ReaLTaiizor.Controls.SmallLabel
     Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
-    Friend WithEvents Label16 As Label
-    Friend WithEvents HopeGroupBox6 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents txtEmailAddress As TextBox
     Friend WithEvents Label18 As Label
     Friend WithEvents txtContactNumber As TextBox
     Friend WithEvents Label19 As Label
     Friend WithEvents Label20 As Label
     Friend WithEvents txtAddress As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents HopeGroupBox5 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents btnEyeConfirmPassword As FontAwesome.Sharp.IconButton
     Friend WithEvents txtConfirmPassword As TextBox
     Friend WithEvents btnEyePassword As FontAwesome.Sharp.IconButton
@@ -936,8 +786,6 @@ Partial Class AccountingDashboard
     Friend WithEvents Label10 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents txtUsername As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents HopeGroupBox4 As ReaLTaiizor.Controls.HopeGroupBox
     Friend WithEvents numAge As NumericUpDown
     Friend WithEvents txtMiddleName As TextBox
     Friend WithEvents txtLastName As TextBox
@@ -946,6 +794,7 @@ Partial Class AccountingDashboard
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents txtFirstName As TextBox
-    Friend WithEvents Label6 As Label
     Friend WithEvents flowRecentPayments As FlowLayoutPanel
+    Friend WithEvents lblTotalPaymentToday As Label
+    Friend WithEvents Label2 As Label
 End Class
