@@ -27,12 +27,13 @@ Partial Class Form1
         Panel1 = New Panel()
         Panel2 = New Panel()
         btnLogin = New RoundedButton()
-        btnEyeIcon = New FontAwesome.Sharp.IconButton()
-        txtPassword = New TextBox()
+        Label1 = New Label()
         txtUsername = New TextBox()
+        btnEyeIcon = New FontAwesome.Sharp.IconButton()
         Label3 = New Label()
         Label2 = New Label()
-        Label1 = New Label()
+        txtPassword = New TextBox()
+        Panel1.SuspendLayout()
         Panel2.SuspendLayout()
         SuspendLayout()
         ' 
@@ -55,28 +56,28 @@ Partial Class Form1
         ' 
         ' Panel1
         ' 
-        Panel1.BackgroundImage = My.Resources.Resources.login_img
+        Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), Image)
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
-        Panel1.Dock = DockStyle.Left
+        Panel1.Controls.Add(Panel2)
+        Panel1.Dock = DockStyle.Right
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(500, 460)
+        Panel1.Size = New Size(900, 460)
         Panel1.TabIndex = 1
         ' 
         ' Panel2
         ' 
         Panel2.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         Panel2.Controls.Add(btnLogin)
-        Panel2.Controls.Add(btnEyeIcon)
-        Panel2.Controls.Add(txtPassword)
+        Panel2.Controls.Add(Label1)
         Panel2.Controls.Add(txtUsername)
+        Panel2.Controls.Add(btnEyeIcon)
         Panel2.Controls.Add(Label3)
         Panel2.Controls.Add(Label2)
-        Panel2.Controls.Add(Label1)
-        Panel2.Dock = DockStyle.Right
-        Panel2.Location = New Point(500, 40)
+        Panel2.Controls.Add(txtPassword)
+        Panel2.Location = New Point(36, 71)
         Panel2.Name = "Panel2"
-        Panel2.Size = New Size(400, 460)
+        Panel2.Size = New Size(345, 324)
         Panel2.TabIndex = 2
         ' 
         ' btnLogin
@@ -87,12 +88,29 @@ Partial Class Form1
         btnLogin.FlatStyle = FlatStyle.Flat
         btnLogin.Font = New Font("Verdana", 12F)
         btnLogin.HoverColor = Color.FromArgb(CByte(237), CByte(111), CByte(155))
-        btnLogin.Location = New Point(20, 305)
+        btnLogin.Location = New Point(30, 251)
         btnLogin.Name = "btnLogin"
-        btnLogin.Size = New Size(361, 35)
+        btnLogin.Size = New Size(282, 35)
         btnLogin.TabIndex = 6
         btnLogin.Text = "Login"
         btnLogin.UseVisualStyleBackColor = False
+        ' 
+        ' Label1
+        ' 
+        Label1.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(36, 37)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(272, 29)
+        Label1.TabIndex = 0
+        Label1.Text = "Sign in to your account"
+        ' 
+        ' txtUsername
+        ' 
+        txtUsername.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtUsername.Location = New Point(30, 125)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(282, 32)
+        txtUsername.TabIndex = 3
         ' 
         ' btnEyeIcon
         ' 
@@ -103,34 +121,17 @@ Partial Class Form1
         btnEyeIcon.IconColor = Color.Black
         btnEyeIcon.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEyeIcon.IconSize = 25
-        btnEyeIcon.Location = New Point(346, 250)
+        btnEyeIcon.Location = New Point(310, 196)
         btnEyeIcon.Name = "btnEyeIcon"
         btnEyeIcon.Size = New Size(32, 32)
         btnEyeIcon.TabIndex = 5
         btnEyeIcon.UseVisualStyleBackColor = False
         ' 
-        ' txtPassword
-        ' 
-        txtPassword.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtPassword.Location = New Point(20, 250)
-        txtPassword.Name = "txtPassword"
-        txtPassword.Size = New Size(320, 32)
-        txtPassword.TabIndex = 4
-        txtPassword.UseSystemPasswordChar = True
-        ' 
-        ' txtUsername
-        ' 
-        txtUsername.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtUsername.Location = New Point(20, 179)
-        txtUsername.Name = "txtUsername"
-        txtUsername.Size = New Size(358, 32)
-        txtUsername.TabIndex = 3
-        ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Verdana", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(20, 227)
+        Label3.Location = New Point(33, 173)
         Label3.Name = "Label3"
         Label3.Size = New Size(89, 20)
         Label3.TabIndex = 2
@@ -140,28 +141,26 @@ Partial Class Form1
         ' 
         Label2.AutoSize = True
         Label2.Font = New Font("Verdana", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(20, 156)
+        Label2.Location = New Point(33, 102)
         Label2.Name = "Label2"
         Label2.Size = New Size(95, 20)
         Label2.TabIndex = 1
         Label2.Text = "Username"
         ' 
-        ' Label1
+        ' txtPassword
         ' 
-        Label1.AutoSize = True
-        Label1.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(66, 100)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(272, 25)
-        Label1.TabIndex = 0
-        Label1.Text = "Sign in to your account"
+        txtPassword.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtPassword.Location = New Point(30, 196)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(282, 32)
+        txtPassword.TabIndex = 4
+        txtPassword.UseSystemPasswordChar = True
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(900, 500)
-        Controls.Add(Panel2)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
@@ -171,6 +170,7 @@ Partial Class Form1
         Name = "Form1"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
+        Panel1.ResumeLayout(False)
         Panel2.ResumeLayout(False)
         Panel2.PerformLayout()
         ResumeLayout(False)
