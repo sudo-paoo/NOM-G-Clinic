@@ -25,6 +25,7 @@ Partial Class ViewAppointmentDetails
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ViewAppointmentDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
+        lblFluVac = New Label()
         Label7 = New Label()
         txtNotes = New TextBox()
         lblSelectedDate = New Label()
@@ -46,6 +47,7 @@ Partial Class ViewAppointmentDetails
         cboDoctor = New ComboBox()
         cboTimeSlot = New ComboBox()
         calAppointmentDate = New MonthCalendar()
+        Label9 = New Label()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -71,6 +73,8 @@ Partial Class ViewAppointmentDetails
         Panel1.BackColor = Color.White
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
+        Panel1.Controls.Add(Label9)
+        Panel1.Controls.Add(lblFluVac)
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(txtNotes)
         Panel1.Controls.Add(lblSelectedDate)
@@ -95,15 +99,26 @@ Partial Class ViewAppointmentDetails
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
-        Panel1.Size = New Size(600, 583)
+        Panel1.Size = New Size(600, 600)
         Panel1.TabIndex = 2
+        ' 
+        ' lblFluVac
+        ' 
+        lblFluVac.AutoSize = True
+        lblFluVac.BackColor = Color.Transparent
+        lblFluVac.Font = New Font("Verdana", 10.2F)
+        lblFluVac.Location = New Point(97, 428)
+        lblFluVac.Name = "lblFluVac"
+        lblFluVac.Size = New Size(66, 20)
+        lblFluVac.TabIndex = 44
+        lblFluVac.Text = "Notes:"
         ' 
         ' Label7
         ' 
         Label7.AutoSize = True
         Label7.BackColor = Color.Transparent
         Label7.Font = New Font("Verdana", 10.2F)
-        Label7.Location = New Point(12, 436)
+        Label7.Location = New Point(12, 456)
         Label7.Name = "Label7"
         Label7.Size = New Size(66, 20)
         Label7.TabIndex = 43
@@ -111,7 +126,7 @@ Partial Class ViewAppointmentDetails
         ' 
         ' txtNotes
         ' 
-        txtNotes.Location = New Point(12, 468)
+        txtNotes.Location = New Point(12, 488)
         txtNotes.MinimumSize = New Size(0, 100)
         txtNotes.Multiline = True
         txtNotes.Name = "txtNotes"
@@ -313,12 +328,23 @@ Partial Class ViewAppointmentDetails
         calAppointmentDate.Name = "calAppointmentDate"
         calAppointmentDate.TabIndex = 19
         ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.BackColor = Color.Transparent
+        Label9.Font = New Font("Verdana", 10.2F)
+        Label9.Location = New Point(12, 428)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(79, 20)
+        Label9.TabIndex = 45
+        Label9.Text = "Flu Vac:"
+        ' 
         ' ViewAppointmentDetails
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        ClientSize = New Size(600, 623)
+        ClientSize = New Size(600, 640)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
@@ -356,4 +382,6 @@ Partial Class ViewAppointmentDetails
     Friend WithEvents cboDoctor As ComboBox
     Friend WithEvents cboTimeSlot As ComboBox
     Friend WithEvents calAppointmentDate As MonthCalendar
+    Friend WithEvents lblFluVac As Label
+    Friend WithEvents Label9 As Label
 End Class

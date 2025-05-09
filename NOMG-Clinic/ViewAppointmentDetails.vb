@@ -3,8 +3,6 @@
 Public Class ViewAppointmentDetails
     Public Property AppointmentID As String
     Public Property PatientID As String
-
-    ' Properties to store loaded data
     Private PatientName As String = ""
     Private DoctorID As String = ""
     Private DoctorName As String = ""
@@ -33,27 +31,28 @@ Public Class ViewAppointmentDetails
             conn.Open()
 
             Dim query As String = "
-                SELECT 
-                    a.appointment_date, 
-                    a.appointment_time, 
-                    a.reason_for_visit, 
-                    a.status, 
-                    a.notes,
-                    a.doctor_id,
-                    CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS doctor_name,
-                    CONCAT(p.first_name, ' ', p.last_name) AS patient_name,
-                    p.last_menstrual_period,
-                    p.due_date,
-                    (SELECT MAX(appointment_date) FROM appointment_table 
-                     WHERE patient_id = @patientID AND appointment_date < a.appointment_date) AS last_visit_date
-                FROM 
-                    appointment_table a
-                JOIN 
-                    patient p ON a.patient_id = p.patient_id
-                JOIN 
-                    doctor d ON a.doctor_id = d.doctor_id
-                WHERE 
-                    a.appointment_id = @appointmentID"
+            SELECT 
+                a.appointment_date, 
+                a.appointment_time, 
+                a.reason_for_visit, 
+                a.status, 
+                a.notes,
+                a.doctor_id,
+                CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS doctor_name,
+                CONCAT(p.first_name, ' ', p.last_name) AS patient_name,
+                p.last_menstrual_period,
+                p.due_date,
+                p.flu_vac,
+                (SELECT MAX(appointment_date) FROM appointment_table 
+                 WHERE patient_id = @patientID AND appointment_date < a.appointment_date) AS last_visit_date
+            FROM 
+                appointment_table a
+            JOIN 
+                patient p ON a.patient_id = p.patient_id
+            JOIN 
+                doctor d ON a.doctor_id = d.doctor_id
+            WHERE 
+                a.appointment_id = @appointmentID"
 
             cmd = New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@appointmentID", AppointmentID)
@@ -61,13 +60,26 @@ Public Class ViewAppointmentDetails
 
             Using reader As MySqlDataReader = cmd.ExecuteReader()
                 If reader.Read() Then
-                    ' Store data from reader
                     PatientName = reader("patient_name").ToString()
                     DoctorID = reader("doctor_id").ToString()
                     DoctorName = reader("doctor_name").ToString()
                     AppointmentType = reader("reason_for_visit").ToString()
                     Status = reader("status").ToString()
                     Notes = reader("notes").ToString()
+
+                    ' Check flu vaccination status
+                    Dim fluVacStatus As Boolean = False
+                    If Not reader.IsDBNull(reader.GetOrdinal("flu_vac")) Then
+                        fluVacStatus = Convert.ToInt32(reader("flu_vac")) = 1
+                    End If
+
+                    If fluVacStatus Then
+                        lblFluVac.Text = "Vaccinated"
+                        lblFluVac.ForeColor = Color.Green
+                    Else
+                        lblFluVac.Text = "Not Vaccinated"
+                        lblFluVac.ForeColor = Color.Red
+                    End If
 
                     ' Parse dates
                     If Not reader.IsDBNull(reader.GetOrdinal("appointment_date")) Then
@@ -98,13 +110,12 @@ Public Class ViewAppointmentDetails
                 GestationalAge = $"{weeks} weeks, {days} days"
             End If
 
-            ' Display the patient information and appointment details
             DisplayPatientInfo()
             DisplayAppointmentDetails()
 
         Catch ex As Exception
             MessageBox.Show("Error loading appointment details: " & ex.Message,
-                            "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             If conn IsNot Nothing AndAlso conn.State = ConnectionState.Open Then
                 conn.Close()
@@ -159,7 +170,7 @@ Public Class ViewAppointmentDetails
             CustomizeCalendarAppearance()
 
             calAppointmentDate.SetDate(AppointmentDate)
-            lblSelectedDate.Text = "Appointment Date: " & AppointmentDate.ToString("MMMM dd, yyyy")
+            lblSelectedDate.Text = "Appointment Date: " & AppointmentDate.ToString("MMM dd, yyyy")
         End If
 
         ' Set time slot
