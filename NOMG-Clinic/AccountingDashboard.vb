@@ -719,4 +719,12 @@ Public Class AccountingDashboard
     Private Sub AccountingDashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Application.Exit()
     End Sub
+
+    Private Sub HopeGroupBox4_Enter(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub pnlSettings_Paint(sender As Object, e As PaintEventArgs) Handles pnlSettings.Paint
+
+    End Sub
 End Class

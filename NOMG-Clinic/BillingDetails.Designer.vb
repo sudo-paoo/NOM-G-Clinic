@@ -93,7 +93,7 @@ Partial Class BillingDetails
         ' Panel1
         ' 
         Panel1.AutoScroll = True
-        Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), Image)
+        Panel1.BackgroundImage = My.Resources.Resources.Billing__1_
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
         Panel1.Controls.Add(lblLastVisit)
         Panel1.Controls.Add(lblPatientName)
