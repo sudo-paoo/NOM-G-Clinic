@@ -48,6 +48,8 @@ Partial Class AppointmentDetails
         cboDoctor = New ComboBox()
         cboTimeSlot = New ComboBox()
         calAppointmentDate = New MonthCalendar()
+        HopeSwitch1 = New ReaLTaiizor.Controls.HopeSwitch()
+        Label9 = New Label()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -57,7 +59,7 @@ Partial Class AppointmentDetails
         HopeForm1.ControlBoxColorHC = Color.FromArgb(CByte(245), CByte(108), CByte(108))
         HopeForm1.ControlBoxColorN = Color.White
         HopeForm1.Dock = DockStyle.Top
-        HopeForm1.Font = New Font("Segoe UI", 12F)
+        HopeForm1.Font = New Font("Segoe UI", 12.0F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
@@ -73,6 +75,8 @@ Partial Class AppointmentDetails
         Panel1.BackColor = Color.White
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
+        Panel1.Controls.Add(Label9)
+        Panel1.Controls.Add(HopeSwitch1)
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(txtNotes)
         Panel1.Controls.Add(btnSubmit)
@@ -124,7 +128,7 @@ Partial Class AppointmentDetails
         ' 
         ' btnSubmit
         ' 
-        btnSubmit.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnSubmit.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnSubmit.IconChar = FontAwesome.Sharp.IconChar.None
         btnSubmit.IconColor = Color.Black
         btnSubmit.IconFont = FontAwesome.Sharp.IconFont.Auto
@@ -139,7 +143,7 @@ Partial Class AppointmentDetails
         ' 
         ' btnCancel
         ' 
-        btnCancel.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        btnCancel.Font = New Font("Verdana", 12.0F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnCancel.IconChar = FontAwesome.Sharp.IconChar.None
         btnCancel.IconColor = Color.Black
         btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto
@@ -253,7 +257,7 @@ Partial Class AppointmentDetails
         ' 
         lblAppointmentHeader.AutoSize = True
         lblAppointmentHeader.BackColor = Color.Transparent
-        lblAppointmentHeader.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblAppointmentHeader.Font = New Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAppointmentHeader.Location = New Point(9, 23)
         lblAppointmentHeader.Name = "lblAppointmentHeader"
         lblAppointmentHeader.Size = New Size(265, 25)
@@ -345,9 +349,33 @@ Partial Class AppointmentDetails
         calAppointmentDate.Name = "calAppointmentDate"
         calAppointmentDate.TabIndex = 19
         ' 
+        ' HopeSwitch1
+        ' 
+        HopeSwitch1.BackColor = Color.Transparent
+        HopeSwitch1.BaseColor = Color.White
+        HopeSwitch1.BaseOffColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        HopeSwitch1.BaseOnColor = Color.FromArgb(CByte(64), CByte(158), CByte(255))
+        HopeSwitch1.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        HopeSwitch1.Location = New Point(420, 401)
+        HopeSwitch1.Name = "HopeSwitch1"
+        HopeSwitch1.Size = New Size(40, 20)
+        HopeSwitch1.TabIndex = 44
+        HopeSwitch1.Text = "HopeSwitch1"
+        HopeSwitch1.UseVisualStyleBackColor = False
+        ' 
+        ' Label9
+        ' 
+        Label9.BackColor = Color.Transparent
+        Label9.Font = New Font("Verdana", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Location = New Point(286, 400)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(117, 25)
+        Label9.TabIndex = 45
+        Label9.Text = "Flu Vaccine"
+        ' 
         ' AppointmentDetails
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(8.0F, 20.0F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(600, 700)
         Controls.Add(Panel1)
@@ -389,4 +417,6 @@ Partial Class AppointmentDetails
     Friend WithEvents lblSelectedDate As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents txtNotes As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents HopeSwitch1 As ReaLTaiizor.Controls.HopeSwitch
 End Class
