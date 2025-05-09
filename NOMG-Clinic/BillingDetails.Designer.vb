@@ -25,7 +25,10 @@ Partial Class BillingDetails
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(BillingDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
-        Label7 = New Label()
+        lblLastVisit = New Label()
+        lblPatientName = New Label()
+        Label4 = New Label()
+        lblPatientID = New Label()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
         btnPayBillCash = New FontAwesome.Sharp.IconButton()
@@ -55,18 +58,13 @@ Partial Class BillingDetails
         Label8 = New Label()
         pnlItems = New Panel()
         dgvItems = New DataGridView()
-        Label6 = New Label()
+        lblGestationalAge = New Label()
         Label5 = New Label()
-        Label4 = New Label()
+        Label1 = New Label()
         Label3 = New Label()
         Label2 = New Label()
-        Label1 = New Label()
         lblAppointmentHeader = New Label()
         lblBillingDate = New Label()
-        lblLastVisit = New Label()
-        lblGestationalAge = New Label()
-        lblPatientID = New Label()
-        lblPatientName = New Label()
         Panel1.SuspendLayout()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
@@ -95,53 +93,84 @@ Partial Class BillingDetails
         ' Panel1
         ' 
         Panel1.AutoScroll = True
-        Panel1.BackgroundImage = My.Resources.Resources.bg_img
+        Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), Image)
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
-        Panel1.Controls.Add(Label7)
+        Panel1.Controls.Add(lblLastVisit)
+        Panel1.Controls.Add(lblPatientName)
+        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(lblPatientID)
         Panel1.Controls.Add(TabControl1)
         Panel1.Controls.Add(pnlItems)
-        Panel1.Controls.Add(Label6)
+        Panel1.Controls.Add(lblGestationalAge)
         Panel1.Controls.Add(Label5)
-        Panel1.Controls.Add(Label4)
+        Panel1.Controls.Add(Label1)
         Panel1.Controls.Add(Label3)
         Panel1.Controls.Add(Label2)
-        Panel1.Controls.Add(Label1)
         Panel1.Controls.Add(lblAppointmentHeader)
         Panel1.Controls.Add(lblBillingDate)
-        Panel1.Controls.Add(lblLastVisit)
-        Panel1.Controls.Add(lblGestationalAge)
-        Panel1.Controls.Add(lblPatientID)
-        Panel1.Controls.Add(lblPatientName)
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(1192, 465)
         Panel1.TabIndex = 1
         ' 
-        ' Label7
+        ' lblLastVisit
         ' 
-        Label7.AutoSize = True
-        Label7.BackColor = Color.Transparent
-        Label7.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(835, 21)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(170, 25)
-        Label7.TabIndex = 55
-        Label7.Text = "Mode of Payement"
+        lblLastVisit.AutoSize = True
+        lblLastVisit.BackColor = Color.Transparent
+        lblLastVisit.Font = New Font("Verdana", 10.2F)
+        lblLastVisit.Location = New Point(213, 157)
+        lblLastVisit.Name = "lblLastVisit"
+        lblLastVisit.Size = New Size(82, 20)
+        lblLastVisit.TabIndex = 42
+        lblLastVisit.Text = "last visit"
+        ' 
+        ' lblPatientName
+        ' 
+        lblPatientName.AutoSize = True
+        lblPatientName.BackColor = Color.Transparent
+        lblPatientName.Font = New Font("Verdana", 10.2F)
+        lblPatientName.Location = New Point(212, 97)
+        lblPatientName.Name = "lblPatientName"
+        lblPatientName.Size = New Size(124, 20)
+        lblPatientName.TabIndex = 39
+        lblPatientName.Text = "patient name"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.BackColor = Color.Transparent
+        Label4.Font = New Font("Verdana", 10.2F)
+        Label4.Location = New Point(117, 157)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(96, 20)
+        Label4.TabIndex = 48
+        Label4.Text = "Last Visit:"
+        ' 
+        ' lblPatientID
+        ' 
+        lblPatientID.AutoSize = True
+        lblPatientID.BackColor = Color.Transparent
+        lblPatientID.Font = New Font("Verdana", 10.2F)
+        lblPatientID.Location = New Point(212, 117)
+        lblPatientID.Name = "lblPatientID"
+        lblPatientID.Size = New Size(92, 20)
+        lblPatientID.TabIndex = 40
+        lblPatientID.Text = "patient id"
         ' 
         ' TabControl1
         ' 
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
-        TabControl1.Location = New Point(600, 49)
+        TabControl1.Location = New Point(600, 52)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(575, 396)
+        TabControl1.Size = New Size(562, 387)
         TabControl1.TabIndex = 54
         ' 
         ' TabPage1
         ' 
-        TabPage1.BackColor = Color.LightPink
+        TabPage1.BackColor = Color.FromArgb(CByte(250), CByte(210), CByte(235))
         TabPage1.Controls.Add(btnPayBillCash)
         TabPage1.Controls.Add(lblChange)
         TabPage1.Controls.Add(Label17)
@@ -152,7 +181,7 @@ Partial Class BillingDetails
         TabPage1.Location = New Point(4, 29)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(567, 363)
+        TabPage1.Size = New Size(554, 354)
         TabPage1.TabIndex = 0
         TabPage1.Text = "Cash"
         ' 
@@ -164,31 +193,32 @@ Partial Class BillingDetails
         btnPayBillCash.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnPayBillCash.IconSize = 40
         btnPayBillCash.ImageAlign = ContentAlignment.BottomRight
-        btnPayBillCash.Location = New Point(205, 204)
+        btnPayBillCash.Location = New Point(213, 219)
         btnPayBillCash.Name = "btnPayBillCash"
-        btnPayBillCash.Size = New Size(152, 50)
+        btnPayBillCash.Size = New Size(152, 54)
         btnPayBillCash.TabIndex = 54
         btnPayBillCash.Text = "Pay Bill"
-        btnPayBillCash.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnPayBillCash.TextImageRelation = TextImageRelation.ImageBeforeText
         btnPayBillCash.UseVisualStyleBackColor = True
         ' 
         ' lblChange
         ' 
         lblChange.AutoSize = True
-        lblChange.BackColor = SystemColors.Control
-        lblChange.Location = New Point(136, 140)
+        lblChange.BackColor = Color.Transparent
+        lblChange.Font = New Font("Angsana New", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblChange.Location = New Point(137, 145)
         lblChange.Name = "lblChange"
-        lblChange.Size = New Size(15, 20)
+        lblChange.Size = New Size(19, 32)
         lblChange.TabIndex = 5
         lblChange.Text = "-"
         ' 
         ' Label17
         ' 
         Label17.AutoSize = True
-        Label17.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Font = New Font("Angsana New", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label17.Location = New Point(44, 135)
         Label17.Name = "Label17"
-        Label17.Size = New Size(78, 25)
+        Label17.Size = New Size(99, 47)
         Label17.TabIndex = 4
         Label17.Text = "Change:"
         ' 
@@ -210,26 +240,26 @@ Partial Class BillingDetails
         ' Label16
         ' 
         Label16.AutoSize = True
-        Label16.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(331, 27)
+        Label16.Font = New Font("Angsana New", 19.8000011F, FontStyle.Bold)
+        Label16.Location = New Point(319, 16)
         Label16.Name = "Label16"
-        Label16.Size = New Size(159, 25)
+        Label16.Size = New Size(189, 47)
         Label16.TabIndex = 1
         Label16.Text = "Amount received:"
         ' 
         ' Label15
         ' 
         Label15.AutoSize = True
-        Label15.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(92, 27)
+        Label15.Font = New Font("Angsana New", 19.8000011F, FontStyle.Bold)
+        Label15.Location = New Point(80, 16)
         Label15.Name = "Label15"
-        Label15.Size = New Size(123, 25)
+        Label15.Size = New Size(148, 47)
         Label15.TabIndex = 0
         Label15.Text = "Amount Due:"
         ' 
         ' TabPage2
         ' 
-        TabPage2.BackColor = Color.Pink
+        TabPage2.BackColor = Color.FromArgb(CByte(250), CByte(210), CByte(235))
         TabPage2.Controls.Add(txtAmountDueCard)
         TabPage2.Controls.Add(Label19)
         TabPage2.Controls.Add(Label14)
@@ -250,7 +280,7 @@ Partial Class BillingDetails
         TabPage2.Location = New Point(4, 29)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(567, 363)
+        TabPage2.Size = New Size(554, 354)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Card"
         ' 
@@ -311,10 +341,10 @@ Partial Class BillingDetails
         ' 
         ' txtExpirationYear
         ' 
-        txtExpirationYear.Location = New Point(415, 122)
+        txtExpirationYear.Location = New Point(393, 122)
         txtExpirationYear.Name = "txtExpirationYear"
         txtExpirationYear.PlaceholderText = "yy"
-        txtExpirationYear.Size = New Size(97, 27)
+        txtExpirationYear.Size = New Size(138, 27)
         txtExpirationYear.TabIndex = 59
         txtExpirationYear.TextAlign = HorizontalAlignment.Center
         ' 
@@ -343,10 +373,10 @@ Partial Class BillingDetails
         ' 
         ' txtEpirationMonth
         ' 
-        txtEpirationMonth.Location = New Point(238, 122)
+        txtEpirationMonth.Location = New Point(216, 122)
         txtEpirationMonth.Name = "txtEpirationMonth"
         txtEpirationMonth.PlaceholderText = "mm"
-        txtEpirationMonth.Size = New Size(97, 27)
+        txtEpirationMonth.Size = New Size(135, 27)
         txtEpirationMonth.TabIndex = 55
         txtEpirationMonth.TextAlign = HorizontalAlignment.Center
         ' 
@@ -415,61 +445,63 @@ Partial Class BillingDetails
         ' 
         ' pnlItems
         ' 
+        pnlItems.BackColor = Color.Transparent
         pnlItems.Controls.Add(dgvItems)
-        pnlItems.Location = New Point(13, 216)
+        pnlItems.Location = New Point(46, 259)
         pnlItems.Name = "pnlItems"
-        pnlItems.Size = New Size(575, 200)
+        pnlItems.Size = New Size(541, 176)
         pnlItems.TabIndex = 51
         ' 
         ' dgvItems
         ' 
+        dgvItems.BackgroundColor = SystemColors.ControlLightLight
         dgvItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvItems.Dock = DockStyle.Fill
         dgvItems.Location = New Point(0, 0)
         dgvItems.Name = "dgvItems"
         dgvItems.RowHeadersWidth = 51
-        dgvItems.Size = New Size(575, 200)
+        dgvItems.Size = New Size(541, 176)
         dgvItems.TabIndex = 0
         ' 
-        ' Label6
+        ' lblGestationalAge
         ' 
-        Label6.AutoSize = True
-        Label6.BackColor = Color.Transparent
-        Label6.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(12, 188)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(78, 25)
-        Label6.TabIndex = 50
-        Label6.Text = "Items"
+        lblGestationalAge.AutoSize = True
+        lblGestationalAge.BackColor = Color.Transparent
+        lblGestationalAge.Font = New Font("Verdana", 10.2F)
+        lblGestationalAge.Location = New Point(212, 137)
+        lblGestationalAge.Name = "lblGestationalAge"
+        lblGestationalAge.Size = New Size(141, 20)
+        lblGestationalAge.TabIndex = 41
+        lblGestationalAge.Text = "gestational age"
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
         Label5.BackColor = Color.Transparent
         Label5.Font = New Font("Verdana", 10.2F)
-        Label5.Location = New Point(130, 24)
+        Label5.Location = New Point(46, 15)
         Label5.Name = "Label5"
         Label5.Size = New Size(57, 20)
         Label5.TabIndex = 49
         Label5.Text = "Date:"
         ' 
-        ' Label4
+        ' Label1
         ' 
-        Label4.AutoSize = True
-        Label4.BackColor = Color.Transparent
-        Label4.Font = New Font("Verdana", 10.2F)
-        Label4.Location = New Point(334, 106)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(96, 20)
-        Label4.TabIndex = 48
-        Label4.Text = "Last Visit:"
+        Label1.AutoSize = True
+        Label1.BackColor = Color.Transparent
+        Label1.Font = New Font("Verdana", 10.2F)
+        Label1.Location = New Point(80, 97)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(133, 20)
+        Label1.TabIndex = 45
+        Label1.Text = "Patient Name:"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.BackColor = Color.Transparent
         Label3.Font = New Font("Verdana", 10.2F)
-        Label3.Location = New Point(12, 140)
+        Label3.Location = New Point(60, 137)
         Label3.Name = "Label3"
         Label3.Size = New Size(153, 20)
         Label3.TabIndex = 47
@@ -480,22 +512,11 @@ Partial Class BillingDetails
         Label2.AutoSize = True
         Label2.BackColor = Color.Transparent
         Label2.Font = New Font("Verdana", 10.2F)
-        Label2.Location = New Point(61, 106)
+        Label2.Location = New Point(109, 117)
         Label2.Name = "Label2"
         Label2.Size = New Size(104, 20)
         Label2.TabIndex = 46
         Label2.Text = "Patient ID:"
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.BackColor = Color.Transparent
-        Label1.Font = New Font("Verdana", 10.2F)
-        Label1.Location = New Point(32, 67)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(133, 20)
-        Label1.TabIndex = 45
-        Label1.Text = "Patient Name:"
         ' 
         ' lblAppointmentHeader
         ' 
@@ -504,64 +525,19 @@ Partial Class BillingDetails
         lblAppointmentHeader.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAppointmentHeader.Location = New Point(12, 20)
         lblAppointmentHeader.Name = "lblAppointmentHeader"
-        lblAppointmentHeader.Size = New Size(83, 25)
+        lblAppointmentHeader.Size = New Size(0, 25)
         lblAppointmentHeader.TabIndex = 44
-        lblAppointmentHeader.Text = "Billing"
         ' 
         ' lblBillingDate
         ' 
         lblBillingDate.AutoSize = True
         lblBillingDate.BackColor = Color.Transparent
         lblBillingDate.Font = New Font("Verdana", 10.2F)
-        lblBillingDate.Location = New Point(193, 24)
+        lblBillingDate.Location = New Point(109, 15)
         lblBillingDate.Name = "lblBillingDate"
         lblBillingDate.Size = New Size(85, 20)
         lblBillingDate.TabIndex = 43
         lblBillingDate.Text = "due date"
-        ' 
-        ' lblLastVisit
-        ' 
-        lblLastVisit.AutoSize = True
-        lblLastVisit.BackColor = Color.Transparent
-        lblLastVisit.Font = New Font("Verdana", 10.2F)
-        lblLastVisit.Location = New Point(436, 106)
-        lblLastVisit.Name = "lblLastVisit"
-        lblLastVisit.Size = New Size(82, 20)
-        lblLastVisit.TabIndex = 42
-        lblLastVisit.Text = "last visit"
-        ' 
-        ' lblGestationalAge
-        ' 
-        lblGestationalAge.AutoSize = True
-        lblGestationalAge.BackColor = Color.Transparent
-        lblGestationalAge.Font = New Font("Verdana", 10.2F)
-        lblGestationalAge.Location = New Point(171, 140)
-        lblGestationalAge.Name = "lblGestationalAge"
-        lblGestationalAge.Size = New Size(141, 20)
-        lblGestationalAge.TabIndex = 41
-        lblGestationalAge.Text = "gestational age"
-        ' 
-        ' lblPatientID
-        ' 
-        lblPatientID.AutoSize = True
-        lblPatientID.BackColor = Color.Transparent
-        lblPatientID.Font = New Font("Verdana", 10.2F)
-        lblPatientID.Location = New Point(171, 106)
-        lblPatientID.Name = "lblPatientID"
-        lblPatientID.Size = New Size(92, 20)
-        lblPatientID.TabIndex = 40
-        lblPatientID.Text = "patient id"
-        ' 
-        ' lblPatientName
-        ' 
-        lblPatientName.AutoSize = True
-        lblPatientName.BackColor = Color.Transparent
-        lblPatientName.Font = New Font("Verdana", 10.2F)
-        lblPatientName.Location = New Point(171, 67)
-        lblPatientName.Name = "lblPatientName"
-        lblPatientName.Size = New Size(124, 20)
-        lblPatientName.TabIndex = 39
-        lblPatientName.Text = "patient name"
         ' 
         ' BillingDetails
         ' 
@@ -598,15 +574,12 @@ Partial Class BillingDetails
     Friend WithEvents Label1 As Label
     Friend WithEvents lblAppointmentHeader As Label
     Friend WithEvents lblBillingDate As Label
-    Friend WithEvents lblLastVisit As Label
     Friend WithEvents lblGestationalAge As Label
     Friend WithEvents lblPatientID As Label
     Friend WithEvents lblPatientName As Label
     Friend WithEvents pnlItems As Panel
     Friend WithEvents dgvItems As DataGridView
-    Friend WithEvents Label6 As Label
     Friend WithEvents btnPayBillCard As FontAwesome.Sharp.IconButton
-    Friend WithEvents Label7 As Label
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
@@ -633,4 +606,5 @@ Partial Class BillingDetails
     Friend WithEvents lblChange As Label
     Friend WithEvents txtAmountDueCard As TextBox
     Friend WithEvents Label19 As Label
+    Friend WithEvents lblLastVisit As Label
 End Class

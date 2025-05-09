@@ -575,4 +575,5 @@ Public Class BillingDetails
             txtPostal.Focus()
         End If
     End Sub
+
 End Class
