@@ -472,6 +472,7 @@ Public Class PatientDetails
         quantityColumn.Name = "Quantity"
         quantityColumn.MinimumWidth = 80
         quantityColumn.FillWeight = 10
+        quantityColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvBillings.Columns.Add(quantityColumn)
 
         Dim itemsColumn As New DataGridViewTextBoxColumn()
@@ -538,7 +539,6 @@ ORDER BY
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        ' Get formatted item names from JSON
                         Dim formattedItems As String = FormatItemNames(row("ItemNames").ToString())
 
                         Dim rowIndex As Integer = dgvBillings.Rows.Add(

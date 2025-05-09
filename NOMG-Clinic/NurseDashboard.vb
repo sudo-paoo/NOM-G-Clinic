@@ -367,6 +367,7 @@ Public Class NurseDashboard
         ageColumn.Name = "Age"
         ageColumn.MinimumWidth = 80
         ageColumn.FillWeight = 8
+        ageColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(ageColumn)
 
         Dim gestationalAgeColumn As New DataGridViewTextBoxColumn()
@@ -374,6 +375,7 @@ Public Class NurseDashboard
         gestationalAgeColumn.Name = "GestationalAge"
         gestationalAgeColumn.MinimumWidth = 120
         gestationalAgeColumn.FillWeight = 18
+        gestationalAgeColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(gestationalAgeColumn)
 
         Dim assignedOBColumn As New DataGridViewTextBoxColumn()
@@ -395,6 +397,7 @@ Public Class NurseDashboard
         firstBabyColumn.Name = "FirstBaby"
         firstBabyColumn.MinimumWidth = 100
         firstBabyColumn.FillWeight = 10
+        firstBabyColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(firstBabyColumn)
 
         Dim buttonColumn As New DataGridViewButtonColumn()
@@ -804,7 +807,7 @@ Public Class NurseDashboard
         statusColumn.FillWeight = 10
         dgvAppointments.Columns.Add(statusColumn)
 
-        ' Patient ID column (hidden)
+        ' Patient ID column
         Dim patientIDColumn As New DataGridViewTextBoxColumn()
         patientIDColumn.HeaderText = "PatientID"
         patientIDColumn.Name = "PatientID"
@@ -969,15 +972,41 @@ Public Class NurseDashboard
         Try
             Dim query As String
             If String.IsNullOrEmpty(txtPassword.Text) Then
-                query = "UPDATE nurse SET username = @username WHERE nurse_id = @nurseId"
+                query = "UPDATE nurse SET 
+                    first_name = @firstName, 
+                    middle_name = @middleName, 
+                    last_name = @lastName, 
+                    age = @age, 
+                    email_address = @emailAddress, 
+                    contact_number = @contactNumber, 
+                    address = @address, 
+                    username = @username 
+                    WHERE nurse_id = @nurseID"
             Else
-                query = "UPDATE nurse SET username = @username, password = @password WHERE nurse_id = @nurseId"
+                query = "UPDATE nurse SET 
+                    first_name = @firstName, 
+                    middle_name = @middleName, 
+                    last_name = @lastName, 
+                    age = @age, 
+                    email_address = @emailAddress, 
+                    contact_number = @contactNumber, 
+                    address = @address, 
+                    username = @username, 
+                    password = @password 
+                    WHERE nurse_id = @nurseID"
             End If
 
             Using connection As New MySqlConnection(connectionString)
                 Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@firstName", txtFirstName.Text)
+                    command.Parameters.AddWithValue("@middleName", If(String.IsNullOrEmpty(txtMiddleName.Text), DBNull.Value, txtMiddleName.Text))
+                    command.Parameters.AddWithValue("@lastName", txtLastName.Text)
+                    command.Parameters.AddWithValue("@age", numAge.Value)
+                    command.Parameters.AddWithValue("@emailAddress", If(String.IsNullOrEmpty(txtEmailAddress.Text), DBNull.Value, txtEmailAddress.Text))
+                    command.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(txtContactNumber.Text), DBNull.Value, txtContactNumber.Text))
+                    command.Parameters.AddWithValue("@address", If(String.IsNullOrEmpty(txtAddress.Text), DBNull.Value, txtAddress.Text))
                     command.Parameters.AddWithValue("@username", txtUsername.Text)
-                    command.Parameters.AddWithValue("@nurseId", nurseID)
+                    command.Parameters.AddWithValue("@nurseID", nurseID)
 
                     If Not String.IsNullOrEmpty(txtPassword.Text) Then
                         command.Parameters.AddWithValue("@password", txtPassword.Text)
@@ -989,10 +1018,15 @@ Public Class NurseDashboard
                     If rowsAffected = 0 Then
                         Throw New Exception("No nurse records were updated. Please check if the nurse information exists.")
                     End If
+
+                    Console.WriteLine($"Successfully updated nurse info. Rows affected: {rowsAffected}")
                 End Using
             End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Database error updating doctor: " & ex.Message & Environment.NewLine & "Error code: " & ex.Number, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw
         Catch ex As Exception
-            Throw New Exception("Error updating nurse information: " & ex.Message, ex)
+            Throw New Exception("Error updating doctor information: " & ex.Message, ex)
         End Try
     End Sub
 
@@ -1005,6 +1039,7 @@ Public Class NurseDashboard
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
         Try
+            Console.WriteLine($"Attempting to update user record from '{oldUsername}' to '{txtUsername.Text}'")
             Dim query As String
             If String.IsNullOrEmpty(txtPassword.Text) Then
                 query = "UPDATE users SET username = @newUsername WHERE username = @oldUsername"
@@ -1024,16 +1059,22 @@ Public Class NurseDashboard
                     connection.Open()
                     Dim rowsAffected As Integer = command.ExecuteNonQuery()
 
+                    Console.WriteLine($"User update completed. Rows affected: {rowsAffected}")
+
                     If rowsAffected = 0 Then
-                        If Not String.IsNullOrEmpty(txtPassword.Text) Then
-                            InsertUserRecord()
-                        Else
+                        If String.IsNullOrEmpty(txtPassword.Text) Then
                             MessageBox.Show("No user record was updated. You may need to enter a password to create a new user record.",
-                                  "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                       "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Else
+                            InsertUserRecord()
                         End If
                     End If
                 End Using
             End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Database error updating user: " & ex.Message & Environment.NewLine & "Error code: " & ex.Number,
+                       "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw
         Catch ex As Exception
             Throw New Exception("Error updating user: " & ex.Message, ex)
         End Try
@@ -1061,12 +1102,12 @@ Public Class NurseDashboard
 
     Private Function GetCurrentUsername() As String
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
-        Dim query As String = "SELECT username FROM nurse WHERE nurse_id = @nurseId"
+        Dim query As String = "SELECT username FROM nurse WHERE nurse_id = @nurseID"
         Dim username As String = String.Empty
 
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
-                command.Parameters.AddWithValue("@nurseId", nurseID)
+                command.Parameters.AddWithValue("@nurseID", nurseID)
 
                 connection.Open()
                 Dim result = command.ExecuteScalar()
@@ -1082,29 +1123,28 @@ Public Class NurseDashboard
 
     Private Sub LoadNurseProfile()
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim query As String = "SELECT first_name, middle_name, last_name, age, username, " &
+                          "email_address, contact_number, address " &
+                          "FROM nurse WHERE nurse_id = @nurseID"
 
         Using connection As New MySqlConnection(connectionString)
-            Try
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@nurseID", nurseID)
+
                 connection.Open()
-
-                Dim query As String = "SELECT username FROM nurse WHERE nurse_id = @nurseId"
-
-                Using command As New MySqlCommand(query, connection)
-                    command.Parameters.AddWithValue("@nurseId", nurseID)
-
-                    Using reader As MySqlDataReader = command.ExecuteReader()
-                        If reader.Read() Then
-                            txtUsername.Text = reader("username").ToString()
-
-                            txtPassword.Clear()
-                            txtConfirmPassword.Clear()
-                        End If
-                    End Using
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    If reader.Read() Then
+                        txtFirstName.Text = If(reader.IsDBNull(reader.GetOrdinal("first_name")), "", reader("first_name").ToString())
+                        txtMiddleName.Text = If(reader.IsDBNull(reader.GetOrdinal("middle_name")), "", reader("middle_name").ToString())
+                        txtLastName.Text = If(reader.IsDBNull(reader.GetOrdinal("last_name")), "", reader("last_name").ToString())
+                        numAge.Value = If(reader.IsDBNull(reader.GetOrdinal("age")), 0, Convert.ToInt32(reader("age")))
+                        txtUsername.Text = If(reader.IsDBNull(reader.GetOrdinal("username")), "", reader("username").ToString())
+                        txtEmailAddress.Text = If(reader.IsDBNull(reader.GetOrdinal("email_address")), "", reader("email_address").ToString())
+                        txtContactNumber.Text = If(reader.IsDBNull(reader.GetOrdinal("contact_number")), "", reader("contact_number").ToString())
+                        txtAddress.Text = If(reader.IsDBNull(reader.GetOrdinal("address")), "", reader("address").ToString())
+                    End If
                 End Using
-
-            Catch ex As Exception
-                MessageBox.Show("Error loading nurse profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+            End Using
         End Using
     End Sub
     Private Sub NurseDashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing

@@ -199,6 +199,7 @@ Partial Class PatientDetails
         ' 
         ' flowRecentAppointments
         ' 
+        flowRecentAppointments.AutoScroll = True
         flowRecentAppointments.Location = New Point(6, 66)
         flowRecentAppointments.Name = "flowRecentAppointments"
         flowRecentAppointments.Size = New Size(930, 204)

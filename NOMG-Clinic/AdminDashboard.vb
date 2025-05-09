@@ -186,7 +186,8 @@ Public Class AdminDashboard
         SELECT 
             CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
             CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
-            a.appointment_date AS AppointmentDate,
+            a.appointment_date AS AppointmentDate, 
+            a.appointment_time AS AppointmentTime,
             a.reason_for_visit AS Reason
         FROM 
             appointment_table a
@@ -213,9 +214,10 @@ Public Class AdminDashboard
                             Dim patientName As String = reader("PatientName").ToString()
                             Dim doctorName As String = reader("DoctorName").ToString()
                             Dim appointmentDate As Date = Convert.ToDateTime(reader("AppointmentDate"))
+                            Dim appointmentTime As String = reader("AppointmentTime").ToString()
                             Dim reason As String = reader("Reason").ToString()
 
-                            Dim item As New AppointmentItem(patientName.Substring(0, 2).ToUpper(), patientName, appointmentDate.ToString("hh:mm tt"), reason, doctorName)
+                            Dim item As New AppointmentItem(patientName.Substring(0, 2).ToUpper(), patientName, appointmentDate.ToString("MMM, dd yyyy") & " " & appointmentTime, reason, doctorName)
                             item.Margin = New Padding(0, 5, 0, 5)
                             SetItemWidth(item)
 
