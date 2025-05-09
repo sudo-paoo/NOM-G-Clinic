@@ -10,6 +10,8 @@ Public Class NurseDashboard
         tabDashboard.ItemSize = New Size(tabDashboard.Width \ tabDashboard.TabCount - 2, 30)
         ShowPanel(pnlDashboard, btnDashboard)
 
+
+
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
         PopulateRecentAppointments(connectionString)
