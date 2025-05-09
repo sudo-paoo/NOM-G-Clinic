@@ -25,6 +25,8 @@ Partial Class AppointmentDetails
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AppointmentDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
+        Label9 = New Label()
+        hsFluVac = New ReaLTaiizor.Controls.HopeSwitch()
         Label7 = New Label()
         txtNotes = New TextBox()
         btnSubmit = New FontAwesome.Sharp.IconButton()
@@ -48,8 +50,6 @@ Partial Class AppointmentDetails
         cboDoctor = New ComboBox()
         cboTimeSlot = New ComboBox()
         calAppointmentDate = New MonthCalendar()
-        HopeSwitch1 = New ReaLTaiizor.Controls.HopeSwitch()
-        Label9 = New Label()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -76,7 +76,7 @@ Partial Class AppointmentDetails
         Panel1.BackgroundImage = My.Resources.Resources.bg_img
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
         Panel1.Controls.Add(Label9)
-        Panel1.Controls.Add(HopeSwitch1)
+        Panel1.Controls.Add(hsFluVac)
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(txtNotes)
         Panel1.Controls.Add(btnSubmit)
@@ -105,6 +105,30 @@ Partial Class AppointmentDetails
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(600, 660)
         Panel1.TabIndex = 1
+        ' 
+        ' Label9
+        ' 
+        Label9.BackColor = Color.Transparent
+        Label9.Font = New Font("Verdana", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label9.Location = New Point(286, 400)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(117, 25)
+        Label9.TabIndex = 45
+        Label9.Text = "Flu Vaccine"
+        ' 
+        ' hsFluVac
+        ' 
+        hsFluVac.BackColor = Color.Transparent
+        hsFluVac.BaseColor = Color.White
+        hsFluVac.BaseOffColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
+        hsFluVac.BaseOnColor = Color.FromArgb(CByte(64), CByte(158), CByte(255))
+        hsFluVac.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        hsFluVac.Location = New Point(420, 401)
+        hsFluVac.Name = "hsFluVac"
+        hsFluVac.Size = New Size(40, 20)
+        hsFluVac.TabIndex = 44
+        hsFluVac.Text = "HopeSwitch1"
+        hsFluVac.UseVisualStyleBackColor = False
         ' 
         ' Label7
         ' 
@@ -349,30 +373,6 @@ Partial Class AppointmentDetails
         calAppointmentDate.Name = "calAppointmentDate"
         calAppointmentDate.TabIndex = 19
         ' 
-        ' HopeSwitch1
-        ' 
-        HopeSwitch1.BackColor = Color.Transparent
-        HopeSwitch1.BaseColor = Color.White
-        HopeSwitch1.BaseOffColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeSwitch1.BaseOnColor = Color.FromArgb(CByte(64), CByte(158), CByte(255))
-        HopeSwitch1.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        HopeSwitch1.Location = New Point(420, 401)
-        HopeSwitch1.Name = "HopeSwitch1"
-        HopeSwitch1.Size = New Size(40, 20)
-        HopeSwitch1.TabIndex = 44
-        HopeSwitch1.Text = "HopeSwitch1"
-        HopeSwitch1.UseVisualStyleBackColor = False
-        ' 
-        ' Label9
-        ' 
-        Label9.BackColor = Color.Transparent
-        Label9.Font = New Font("Verdana", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(286, 400)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(117, 25)
-        Label9.TabIndex = 45
-        Label9.Text = "Flu Vaccine"
-        ' 
         ' AppointmentDetails
         ' 
         AutoScaleDimensions = New SizeF(8.0F, 20.0F)
@@ -418,5 +418,5 @@ Partial Class AppointmentDetails
     Friend WithEvents Label7 As Label
     Friend WithEvents txtNotes As TextBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents HopeSwitch1 As ReaLTaiizor.Controls.HopeSwitch
+    Friend WithEvents hsFluVac As ReaLTaiizor.Controls.HopeSwitch
 End Class
