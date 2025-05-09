@@ -372,6 +372,7 @@ Public Class AccountingDashboard
         quantityColumn.Name = "Quantity"
         quantityColumn.MinimumWidth = 80
         quantityColumn.FillWeight = 10
+        quantityColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvBilling.Columns.Add(quantityColumn)
 
         Dim itemsColumn As New DataGridViewTextBoxColumn()
@@ -615,6 +616,8 @@ Public Class AccountingDashboard
             billing b
         LEFT JOIN 
             patient p ON b.patient_id = p.patient_id
+        WHERE
+            b.status != 'Unpaid'
         ORDER BY 
             b.date DESC"
 

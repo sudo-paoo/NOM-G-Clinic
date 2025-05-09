@@ -348,4 +348,6 @@ Public Class NurseRegistration
     Private Sub txtEmailAddress_TextChanged(sender As Object, e As EventArgs) Handles txtEmailAddress.TextChanged
         RegistrationModule.ValidateEmail(txtEmailAddress, errProvider)
     End Sub
+
+
 End Class

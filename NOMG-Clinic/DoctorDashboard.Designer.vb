@@ -933,8 +933,8 @@ Partial Class DoctorDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlDashboard)
         Controls.Add(Panel4)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlAppointments)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)

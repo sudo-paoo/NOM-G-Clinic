@@ -134,8 +134,7 @@ Public Class DoctorDashboard
                         Dim appointmentPanel As Panel = CreateAppointmentPanel(
                             reader("patient_name").ToString(),
                             Convert.ToDateTime(reader("appointment_date")).ToString("h:mm tt"),
-                            reader("reason_for_visit").ToString(),
-                            reader("doctor_name").ToString()
+                            reader("reason_for_visit").ToString()
                         )
 
                         ' Add to flow layout panel
@@ -194,8 +193,7 @@ Public Class DoctorDashboard
                         Dim appointmentPanel As Panel = CreateAppointmentPanel(
                             reader("patient_name").ToString(),
                             Convert.ToDateTime(reader("appointment_date")).ToString("MMM dd, h:mm tt"),
-                            reader("reason_for_visit").ToString(),
-                            reader("doctor_name").ToString()
+                            reader("reason_for_visit").ToString()
                         )
 
                         ' Add to flow layout panel
@@ -221,7 +219,7 @@ Public Class DoctorDashboard
         End Using
     End Sub
 
-    Private Function CreateAppointmentPanel(patientName As String, appointmentDateTime As String, reason As String, doctorName As String) As Panel
+    Private Function CreateAppointmentPanel(patientName As String, appointmentDateTime As String, reason As String) As Panel
         Dim panelWidth As Integer = flowTodaysAppointments.ClientSize.Width - 20
 
         ' Create the main panel
@@ -259,15 +257,6 @@ Public Class DoctorDashboard
         reasonLabel.Location = New Point(10, 50)
         panel.Controls.Add(reasonLabel)
 
-        ' Doctor name label
-        Dim doctorLabel As New Label()
-        doctorLabel.Text = doctorName
-        doctorLabel.Font = New Font("Verdana", 9)
-        doctorLabel.AutoSize = True
-        doctorLabel.TextAlign = ContentAlignment.MiddleRight
-        doctorLabel.Location = New Point(panel.Width - 150, 10)
-        panel.Controls.Add(doctorLabel)
-
         Return panel
     End Function
     Private Sub flowTodaysAppointments_Resize(sender As Object, e As EventArgs) Handles flowTodaysAppointments.Resize
@@ -299,7 +288,7 @@ Public Class DoctorDashboard
         dgvPatients.ColumnHeadersVisible = True
 
         dgvPatients.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing
-        dgvPatients.ColumnHeadersHeight = 40
+        dgvPatients.ColumnHeadersHeight = 50
         dgvPatients.ColumnHeadersDefaultCellStyle.Font = New Font(dgvPatients.Font, FontStyle.Bold)
         dgvPatients.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240)
         dgvPatients.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft
@@ -345,9 +334,17 @@ Public Class DoctorDashboard
         Dim nextCheckupColumn As New DataGridViewTextBoxColumn()
         nextCheckupColumn.HeaderText = "Next Checkup"
         nextCheckupColumn.Name = "NextCheckup"
-        nextCheckupColumn.MinimumWidth = 200
+        nextCheckupColumn.MinimumWidth = 100
         nextCheckupColumn.FillWeight = 18
         dgvPatients.Columns.Add(nextCheckupColumn)
+
+        Dim bloodTypeColumn As New DataGridViewTextBoxColumn()
+        bloodTypeColumn.HeaderText = "Blood Type"
+        bloodTypeColumn.Name = "BloodType"
+        bloodTypeColumn.MinimumWidth = 100
+        bloodTypeColumn.FillWeight = 10
+        bloodTypeColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dgvPatients.Columns.Add(bloodTypeColumn)
 
         Dim firstBabyColumn As New DataGridViewTextBoxColumn()
         firstBabyColumn.HeaderText = "First Baby"
@@ -356,6 +353,14 @@ Public Class DoctorDashboard
         firstBabyColumn.FillWeight = 10
         firstBabyColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
         dgvPatients.Columns.Add(firstBabyColumn)
+
+        Dim fluVacColumn As New DataGridViewTextBoxColumn()
+        fluVacColumn.HeaderText = "Flu Vac"
+        fluVacColumn.Name = "FluVac"
+        fluVacColumn.MinimumWidth = 90
+        fluVacColumn.FillWeight = 10
+        fluVacColumn.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        dgvPatients.Columns.Add(fluVacColumn)
 
         Dim buttonColumn As New DataGridViewButtonColumn()
         buttonColumn.HeaderText = ""
@@ -412,7 +417,9 @@ Public Class DoctorDashboard
             p.age, 
             TIMESTAMPDIFF(WEEK, STR_TO_DATE(p.last_menstrual_period, '%Y-%m-%d'), CURDATE()) AS GestationalAge, 
             DATE_FORMAT(p.next_checkup, '%b %d, %Y') AS NextCheckup, 
-            CASE WHEN p.first_baby = 1 THEN 'Yes' ELSE 'No' END AS FirstBaby
+            CASE WHEN p.first_baby = 1 THEN 'Yes' ELSE 'No' END AS FirstBaby,
+            CASE WHEN p.flu_vac = 1 THEN 'Yes' ELSE 'No' END AS FluVac,
+            p.blood_type AS BloodType
         FROM 
             patient p
         WHERE 
@@ -430,7 +437,7 @@ Public Class DoctorDashboard
                     adapter.Fill(dataTable)
 
                     For Each row As DataRow In dataTable.Rows
-                        dgvPatients.Rows.Add(row("Name"), row("Age"), row("GestationalAge"), row("NextCheckup"), row("FirstBaby"))
+                        dgvPatients.Rows.Add(row("Name"), row("Age"), row("GestationalAge"), row("NextCheckup"), row("BloodType"), row("FirstBaby"), row("FluVac"))
                     Next
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching patient data: " & ex.Message)
@@ -1156,7 +1163,6 @@ Public Class DoctorDashboard
             MessageBox.Show("Error updating settings: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
 
     Private Sub UpdateDoctorInfo()
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
