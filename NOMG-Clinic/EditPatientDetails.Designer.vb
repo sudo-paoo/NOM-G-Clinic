@@ -28,56 +28,68 @@ Partial Class EditPatientDetails
         Label29 = New Label()
         Label28 = New Label()
         btnSave = New FontAwesome.Sharp.IconButton()
-        Label3 = New Label()
-        HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
-        lblAssignedOB = New Label()
-        lblNextCheckup = New Label()
-        lblGestationalAge = New Label()
-        lblLastMenstrualAge = New Label()
+        tabPatientRegistration = New TabControl()
+        TabPage1 = New TabPage()
+        numHeight = New NumericUpDown()
+        numWeight = New NumericUpDown()
+        cbxBloodType = New ComboBox()
+        cbxCivilStatus = New ComboBox()
+        Label16 = New Label()
+        btnPersonalInformationNext = New FontAwesome.Sharp.IconButton()
+        Label11 = New Label()
+        txtEmailAddress = New TextBox()
+        Label12 = New Label()
+        txtContactNumber = New TextBox()
+        Label10 = New Label()
+        txtAddress = New TextBox()
+        Label8 = New Label()
+        Label9 = New Label()
+        Label4 = New Label()
         Label5 = New Label()
         Label6 = New Label()
-        Label7 = New Label()
-        Label9 = New Label()
-        Label8 = New Label()
-        HopeGroupBox4 = New ReaLTaiizor.Controls.HopeGroupBox()
-        ComboBox2 = New ComboBox()
-        ComboBox1 = New ComboBox()
-        txtHistoryOfSurgery = New TextBox()
-        Label27 = New Label()
-        txtCurrentMedication = New TextBox()
-        Label26 = New Label()
-        txtEmergencyContactNumber = New TextBox()
-        Label25 = New Label()
-        txtEmergencyContactRelationship = New TextBox()
-        Label24 = New Label()
-        txtEmergencyContactName = New TextBox()
-        Label23 = New Label()
-        txtEmailAddress = New TextBox()
-        Label22 = New Label()
-        txtContactNumber = New TextBox()
-        Label21 = New Label()
-        Label20 = New Label()
-        txtHeight = New TextBox()
-        Label19 = New Label()
-        txtWeight = New TextBox()
-        Label18 = New Label()
-        Label17 = New Label()
-        txtLastName = New TextBox()
-        Label16 = New Label()
-        txtMiddleName = New TextBox()
-        txtAddress = New TextBox()
+        Label3 = New Label()
         Label2 = New Label()
-        rbtnNo = New RadioButton()
-        rbtnYes = New RadioButton()
         Label1 = New Label()
+        TabPage2 = New TabPage()
+        Label17 = New Label()
+        btnEmergencyContactPrevious = New FontAwesome.Sharp.IconButton()
+        btnEmergencyContactNext = New FontAwesome.Sharp.IconButton()
+        labelnum = New Label()
+        txtEmergencyContactNumber = New TextBox()
+        labelrel = New Label()
+        txtEmergencyContactRelationship = New TextBox()
         Label15 = New Label()
-        txtAge = New TextBox()
-        Label14 = New Label()
-        Label11 = New Label()
+        txtEmergencyContactName = New TextBox()
+        TabPage3 = New TabPage()
+        lblSelectedDate = New Label()
+        txtHistoryOfSurgery = New TextBox()
+        txtCurrentMedication = New TextBox()
+        Label24 = New Label()
+        Label23 = New Label()
+        Label22 = New Label()
+        txtAllergies = New TextBox()
+        cbxAssignedOB = New ComboBox()
+        Label21 = New Label()
+        btnMedicalInformationPrevious = New FontAwesome.Sharp.IconButton()
+        btnRegisterPatient = New FontAwesome.Sharp.IconButton()
+        rbtnNo = New RadioButton()
+        rtbnYes = New RadioButton()
+        Label20 = New Label()
+        clrLastMenstrual = New MonthCalendar()
+        Label19 = New Label()
+        Label18 = New Label()
+        numAge = New NumericUpDown()
+        txtLastName = New TextBox()
+        txtMiddleName = New TextBox()
         txtFirstName = New TextBox()
         Panel1.SuspendLayout()
-        HopeGroupBox1.SuspendLayout()
-        HopeGroupBox4.SuspendLayout()
+        tabPatientRegistration.SuspendLayout()
+        TabPage1.SuspendLayout()
+        CType(numHeight, ComponentModel.ISupportInitialize).BeginInit()
+        CType(numWeight, ComponentModel.ISupportInitialize).BeginInit()
+        TabPage2.SuspendLayout()
+        TabPage3.SuspendLayout()
+        CType(numAge, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -101,13 +113,10 @@ Partial Class EditPatientDetails
         ' 
         Panel1.AutoScroll = True
         Panel1.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
+        Panel1.Controls.Add(tabPatientRegistration)
         Panel1.Controls.Add(Label29)
         Panel1.Controls.Add(Label28)
         Panel1.Controls.Add(btnSave)
-        Panel1.Controls.Add(Label3)
-        Panel1.Controls.Add(HopeGroupBox1)
-        Panel1.Controls.Add(Label8)
-        Panel1.Controls.Add(HopeGroupBox4)
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
@@ -117,7 +126,7 @@ Partial Class EditPatientDetails
         ' Label29
         ' 
         Label29.AutoSize = True
-        Label29.Location = New Point(773, 1484)
+        Label29.Location = New Point(814, 807)
         Label29.Name = "Label29"
         Label29.Size = New Size(18, 20)
         Label29.TabIndex = 31
@@ -128,7 +137,7 @@ Partial Class EditPatientDetails
         Label28.AutoSize = True
         Label28.BackColor = Color.Transparent
         Label28.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label28.Location = New Point(47, 17)
+        Label28.Location = New Point(21, 24)
         Label28.Name = "Label28"
         Label28.Size = New Size(323, 34)
         Label28.TabIndex = 30
@@ -145,7 +154,7 @@ Partial Class EditPatientDetails
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSave.IconSize = 36
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(829, 1471)
+        btnSave.Location = New Point(814, 738)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(118, 44)
         btnSave.TabIndex = 29
@@ -153,515 +162,627 @@ Partial Class EditPatientDetails
         btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
         btnSave.UseVisualStyleBackColor = False
         ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(388, 1138)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(246, 31)
-        Label3.TabIndex = 27
-        Label3.Text = "Pregnancy Information"
-        ' 
-        ' HopeGroupBox1
-        ' 
-        HopeGroupBox1.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Controls.Add(lblAssignedOB)
-        HopeGroupBox1.Controls.Add(lblNextCheckup)
-        HopeGroupBox1.Controls.Add(lblGestationalAge)
-        HopeGroupBox1.Controls.Add(lblLastMenstrualAge)
-        HopeGroupBox1.Controls.Add(Label5)
-        HopeGroupBox1.Controls.Add(Label6)
-        HopeGroupBox1.Controls.Add(Label7)
-        HopeGroupBox1.Controls.Add(Label9)
-        HopeGroupBox1.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Location = New Point(52, 1185)
-        HopeGroupBox1.Name = "HopeGroupBox1"
-        HopeGroupBox1.ShowText = False
-        HopeGroupBox1.Size = New Size(895, 270)
-        HopeGroupBox1.TabIndex = 26
-        HopeGroupBox1.TabStop = False
-        HopeGroupBox1.Text = "HopeGroupBox1"
-        HopeGroupBox1.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
-        ' lblAssignedOB
-        ' 
-        lblAssignedOB.AutoSize = True
-        lblAssignedOB.BackColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        lblAssignedOB.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblAssignedOB.Location = New Point(411, 192)
-        lblAssignedOB.Name = "lblAssignedOB"
-        lblAssignedOB.Size = New Size(22, 23)
-        lblAssignedOB.TabIndex = 52
-        lblAssignedOB.Text = "..."
-        ' 
-        ' lblNextCheckup
-        ' 
-        lblNextCheckup.AutoSize = True
-        lblNextCheckup.BackColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        lblNextCheckup.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblNextCheckup.Location = New Point(411, 141)
-        lblNextCheckup.Name = "lblNextCheckup"
-        lblNextCheckup.Size = New Size(22, 23)
-        lblNextCheckup.TabIndex = 51
-        lblNextCheckup.Text = "..."
-        ' 
-        ' lblGestationalAge
-        ' 
-        lblGestationalAge.AutoSize = True
-        lblGestationalAge.BackColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        lblGestationalAge.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblGestationalAge.Location = New Point(411, 88)
-        lblGestationalAge.Name = "lblGestationalAge"
-        lblGestationalAge.Size = New Size(22, 23)
-        lblGestationalAge.TabIndex = 50
-        lblGestationalAge.Text = "..."
-        ' 
-        ' lblLastMenstrualAge
-        ' 
-        lblLastMenstrualAge.AutoSize = True
-        lblLastMenstrualAge.BackColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
-        lblLastMenstrualAge.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        lblLastMenstrualAge.Location = New Point(411, 35)
-        lblLastMenstrualAge.Name = "lblLastMenstrualAge"
-        lblLastMenstrualAge.Size = New Size(22, 23)
-        lblLastMenstrualAge.TabIndex = 49
-        lblLastMenstrualAge.Text = "..."
-        ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label5.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(24, 187)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(133, 28)
-        Label5.TabIndex = 48
-        Label5.Text = "Assigned OB:"
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label6.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(24, 136)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(145, 28)
-        Label6.TabIndex = 45
-        Label6.Text = "Next Checkup:"
-        ' 
-        ' Label7
-        ' 
-        Label7.AutoSize = True
-        Label7.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label7.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label7.Location = New Point(24, 30)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(150, 28)
-        Label7.TabIndex = 7
-        Label7.Text = "Last Menstrual:"
-        ' 
-        ' Label9
-        ' 
-        Label9.AutoSize = True
-        Label9.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label9.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(24, 83)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(161, 28)
-        Label9.TabIndex = 4
-        Label9.Text = "Gestational Age:"
-        ' 
-        ' Label8
-        ' 
-        Label8.AutoSize = True
-        Label8.Font = New Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        Label8.Location = New Point(382, 75)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(225, 31)
-        Label8.TabIndex = 25
-        Label8.Text = "Personal Information"
-        ' 
-        ' HopeGroupBox4
-        ' 
-        HopeGroupBox4.BorderColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox4.Controls.Add(Label27)
-        HopeGroupBox4.Controls.Add(ComboBox2)
-        HopeGroupBox4.Controls.Add(ComboBox1)
-        HopeGroupBox4.Controls.Add(txtHistoryOfSurgery)
-        HopeGroupBox4.Controls.Add(txtCurrentMedication)
-        HopeGroupBox4.Controls.Add(Label26)
-        HopeGroupBox4.Controls.Add(txtEmergencyContactNumber)
-        HopeGroupBox4.Controls.Add(Label25)
-        HopeGroupBox4.Controls.Add(txtEmergencyContactRelationship)
-        HopeGroupBox4.Controls.Add(Label24)
-        HopeGroupBox4.Controls.Add(txtEmergencyContactName)
-        HopeGroupBox4.Controls.Add(Label23)
-        HopeGroupBox4.Controls.Add(txtEmailAddress)
-        HopeGroupBox4.Controls.Add(Label22)
-        HopeGroupBox4.Controls.Add(txtContactNumber)
-        HopeGroupBox4.Controls.Add(Label21)
-        HopeGroupBox4.Controls.Add(Label20)
-        HopeGroupBox4.Controls.Add(txtHeight)
-        HopeGroupBox4.Controls.Add(Label19)
-        HopeGroupBox4.Controls.Add(txtWeight)
-        HopeGroupBox4.Controls.Add(Label18)
-        HopeGroupBox4.Controls.Add(Label17)
-        HopeGroupBox4.Controls.Add(txtLastName)
-        HopeGroupBox4.Controls.Add(Label16)
-        HopeGroupBox4.Controls.Add(txtMiddleName)
-        HopeGroupBox4.Controls.Add(txtAddress)
-        HopeGroupBox4.Controls.Add(Label2)
-        HopeGroupBox4.Controls.Add(rbtnNo)
-        HopeGroupBox4.Controls.Add(rbtnYes)
-        HopeGroupBox4.Controls.Add(Label1)
-        HopeGroupBox4.Controls.Add(Label15)
-        HopeGroupBox4.Controls.Add(txtAge)
-        HopeGroupBox4.Controls.Add(Label14)
-        HopeGroupBox4.Controls.Add(Label11)
-        HopeGroupBox4.Controls.Add(txtFirstName)
-        HopeGroupBox4.Font = New Font("Segoe UI", 12F)
-        HopeGroupBox4.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
-        HopeGroupBox4.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox4.Location = New Point(47, 118)
-        HopeGroupBox4.Name = "HopeGroupBox4"
-        HopeGroupBox4.ShowText = False
-        HopeGroupBox4.Size = New Size(895, 1017)
-        HopeGroupBox4.TabIndex = 24
-        HopeGroupBox4.TabStop = False
-        HopeGroupBox4.Text = "HopeGroupBox4"
-        HopeGroupBox4.ThemeColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        ' 
-        ' ComboBox2
-        ' 
-        ComboBox2.FormattingEnabled = True
-        ComboBox2.Items.AddRange(New Object() {"Single", "Married", "Widowed", "Divorced"})
-        ComboBox2.Location = New Point(341, 450)
-        ComboBox2.Name = "ComboBox2"
-        ComboBox2.Size = New Size(523, 36)
-        ComboBox2.TabIndex = 78
-        ' 
-        ' ComboBox1
-        ' 
-        ComboBox1.FormattingEnabled = True
-        ComboBox1.Items.AddRange(New Object() {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"})
-        ComboBox1.Location = New Point(341, 398)
-        ComboBox1.Name = "ComboBox1"
-        ComboBox1.Size = New Size(523, 36)
-        ComboBox1.TabIndex = 77
-        ' 
-        ' txtHistoryOfSurgery
-        ' 
-        txtHistoryOfSurgery.Location = New Point(341, 909)
-        txtHistoryOfSurgery.MinimumSize = New Size(0, 75)
-        txtHistoryOfSurgery.Name = "txtHistoryOfSurgery"
-        txtHistoryOfSurgery.Size = New Size(523, 34)
-        txtHistoryOfSurgery.TabIndex = 76
-        ' 
-        ' Label27
-        ' 
-        Label27.AutoSize = True
-        Label27.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label27.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label27.Location = New Point(24, 909)
-        Label27.Name = "Label27"
-        Label27.Size = New Size(183, 28)
-        Label27.TabIndex = 75
-        Label27.Text = "History of surgery:"
-        ' 
-        ' txtCurrentMedication
-        ' 
-        txtCurrentMedication.Location = New Point(341, 809)
-        txtCurrentMedication.MinimumSize = New Size(0, 75)
-        txtCurrentMedication.Name = "txtCurrentMedication"
-        txtCurrentMedication.Size = New Size(523, 75)
-        txtCurrentMedication.TabIndex = 74
-        ' 
-        ' Label26
-        ' 
-        Label26.AutoSize = True
-        Label26.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label26.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label26.Location = New Point(24, 809)
-        Label26.Name = "Label26"
-        Label26.Size = New Size(192, 28)
-        Label26.TabIndex = 73
-        Label26.Text = "Current medication:"
-        ' 
-        ' txtEmergencyContactNumber
-        ' 
-        txtEmergencyContactNumber.Location = New Point(341, 756)
-        txtEmergencyContactNumber.Name = "txtEmergencyContactNumber"
-        txtEmergencyContactNumber.Size = New Size(523, 34)
-        txtEmergencyContactNumber.TabIndex = 72
-        ' 
-        ' Label25
-        ' 
-        Label25.AutoSize = True
-        Label25.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label25.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label25.Location = New Point(24, 756)
-        Label25.Name = "Label25"
-        Label25.Size = New Size(268, 28)
-        Label25.TabIndex = 71
-        Label25.Text = "Emergency contact number:"
-        ' 
-        ' txtEmergencyContactRelationship
-        ' 
-        txtEmergencyContactRelationship.Location = New Point(341, 703)
-        txtEmergencyContactRelationship.Name = "txtEmergencyContactRelationship"
-        txtEmergencyContactRelationship.Size = New Size(523, 34)
-        txtEmergencyContactRelationship.TabIndex = 70
-        ' 
-        ' Label24
-        ' 
-        Label24.AutoSize = True
-        Label24.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label24.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label24.Location = New Point(24, 703)
-        Label24.Name = "Label24"
-        Label24.Size = New Size(302, 28)
-        Label24.TabIndex = 69
-        Label24.Text = "Emergency contact relationship:"
-        ' 
-        ' txtEmergencyContactName
-        ' 
-        txtEmergencyContactName.Location = New Point(341, 650)
-        txtEmergencyContactName.Name = "txtEmergencyContactName"
-        txtEmergencyContactName.Size = New Size(523, 34)
-        txtEmergencyContactName.TabIndex = 68
-        ' 
-        ' Label23
-        ' 
-        Label23.AutoSize = True
-        Label23.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label23.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label23.Location = New Point(24, 650)
-        Label23.Name = "Label23"
-        Label23.Size = New Size(246, 28)
-        Label23.TabIndex = 67
-        Label23.Text = "Emergency contact name:"
-        ' 
-        ' txtEmailAddress
-        ' 
-        txtEmailAddress.Location = New Point(341, 600)
-        txtEmailAddress.Name = "txtEmailAddress"
-        txtEmailAddress.Size = New Size(523, 34)
-        txtEmailAddress.TabIndex = 66
-        ' 
-        ' Label22
-        ' 
-        Label22.AutoSize = True
-        Label22.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label22.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label22.Location = New Point(24, 600)
-        Label22.Name = "Label22"
-        Label22.Size = New Size(144, 28)
-        Label22.TabIndex = 65
-        Label22.Text = "Email Address:"
-        ' 
-        ' txtContactNumber
-        ' 
-        txtContactNumber.Location = New Point(341, 240)
-        txtContactNumber.Name = "txtContactNumber"
-        txtContactNumber.Size = New Size(523, 34)
-        txtContactNumber.TabIndex = 64
-        ' 
-        ' Label21
-        ' 
-        Label21.AutoSize = True
-        Label21.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label21.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label21.Location = New Point(24, 243)
-        Label21.Name = "Label21"
-        Label21.Size = New Size(165, 28)
-        Label21.TabIndex = 63
-        Label21.Text = "Contact number:"
-        ' 
-        ' Label20
-        ' 
-        Label20.AutoSize = True
-        Label20.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label20.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.Location = New Point(24, 401)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(116, 28)
-        Label20.TabIndex = 61
-        Label20.Text = "Blood type:"
-        ' 
-        ' txtHeight
-        ' 
-        txtHeight.Location = New Point(341, 345)
-        txtHeight.Name = "txtHeight"
-        txtHeight.Size = New Size(523, 34)
-        txtHeight.TabIndex = 60
-        ' 
-        ' Label19
-        ' 
-        Label19.AutoSize = True
-        Label19.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label19.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(24, 348)
-        Label19.Name = "Label19"
-        Label19.Size = New Size(79, 28)
-        Label19.TabIndex = 59
-        Label19.Text = "Height:"
-        ' 
-        ' txtWeight
-        ' 
-        txtWeight.Location = New Point(341, 292)
-        txtWeight.Name = "txtWeight"
-        txtWeight.Size = New Size(523, 34)
-        txtWeight.TabIndex = 58
-        ' 
-        ' Label18
-        ' 
-        Label18.AutoSize = True
-        Label18.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label18.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.Location = New Point(24, 295)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(82, 28)
-        Label18.TabIndex = 57
-        Label18.Text = "Weight:"
-        ' 
-        ' Label17
-        ' 
-        Label17.AutoSize = True
-        Label17.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label17.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(24, 137)
-        Label17.Name = "Label17"
-        Label17.Size = New Size(110, 28)
-        Label17.TabIndex = 55
-        Label17.Text = "Last name:"
-        ' 
-        ' txtLastName
-        ' 
-        txtLastName.Location = New Point(341, 134)
-        txtLastName.Name = "txtLastName"
-        txtLastName.Size = New Size(523, 34)
-        txtLastName.TabIndex = 56
+        ' tabPatientRegistration
+        ' 
+        tabPatientRegistration.Controls.Add(TabPage1)
+        tabPatientRegistration.Controls.Add(TabPage2)
+        tabPatientRegistration.Controls.Add(TabPage3)
+        tabPatientRegistration.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tabPatientRegistration.Location = New Point(1, 75)
+        tabPatientRegistration.Name = "tabPatientRegistration"
+        tabPatientRegistration.SelectedIndex = 0
+        tabPatientRegistration.Size = New Size(976, 641)
+        tabPatientRegistration.SizeMode = TabSizeMode.Fixed
+        tabPatientRegistration.TabIndex = 32
+        ' 
+        ' TabPage1
+        ' 
+        TabPage1.BackgroundImage = My.Resources.Resources.bg_img
+        TabPage1.BackgroundImageLayout = ImageLayout.Stretch
+        TabPage1.Controls.Add(numHeight)
+        TabPage1.Controls.Add(numWeight)
+        TabPage1.Controls.Add(numAge)
+        TabPage1.Controls.Add(cbxBloodType)
+        TabPage1.Controls.Add(cbxCivilStatus)
+        TabPage1.Controls.Add(Label16)
+        TabPage1.Controls.Add(btnPersonalInformationNext)
+        TabPage1.Controls.Add(Label11)
+        TabPage1.Controls.Add(txtEmailAddress)
+        TabPage1.Controls.Add(Label12)
+        TabPage1.Controls.Add(txtContactNumber)
+        TabPage1.Controls.Add(Label10)
+        TabPage1.Controls.Add(txtAddress)
+        TabPage1.Controls.Add(Label8)
+        TabPage1.Controls.Add(Label9)
+        TabPage1.Controls.Add(Label4)
+        TabPage1.Controls.Add(Label5)
+        TabPage1.Controls.Add(Label6)
+        TabPage1.Controls.Add(Label3)
+        TabPage1.Controls.Add(txtLastName)
+        TabPage1.Controls.Add(Label2)
+        TabPage1.Controls.Add(txtMiddleName)
+        TabPage1.Controls.Add(Label1)
+        TabPage1.Controls.Add(txtFirstName)
+        TabPage1.Location = New Point(4, 27)
+        TabPage1.Name = "TabPage1"
+        TabPage1.Padding = New Padding(3)
+        TabPage1.Size = New Size(968, 610)
+        TabPage1.TabIndex = 0
+        TabPage1.Text = "Personal Information"
+        TabPage1.UseVisualStyleBackColor = True
+        ' 
+        ' numHeight
+        ' 
+        numHeight.Font = New Font("Verdana", 12F)
+        numHeight.Location = New Point(506, 281)
+        numHeight.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        numHeight.Name = "numHeight"
+        numHeight.Size = New Size(445, 32)
+        numHeight.TabIndex = 28
+        ' 
+        ' numWeight
+        ' 
+        numWeight.Font = New Font("Verdana", 12F)
+        numWeight.Location = New Point(16, 281)
+        numWeight.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
+        numWeight.Name = "numWeight"
+        numWeight.Size = New Size(445, 32)
+        numWeight.TabIndex = 27
+        ' 
+        ' cbxBloodType
+        ' 
+        cbxBloodType.AutoCompleteMode = AutoCompleteMode.Suggest
+        cbxBloodType.AutoCompleteSource = AutoCompleteSource.ListItems
+        cbxBloodType.Font = New Font("Verdana", 12F)
+        cbxBloodType.FormattingEnabled = True
+        cbxBloodType.Items.AddRange(New Object() {"A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"})
+        cbxBloodType.Location = New Point(661, 196)
+        cbxBloodType.Name = "cbxBloodType"
+        cbxBloodType.Size = New Size(290, 33)
+        cbxBloodType.TabIndex = 25
+        ' 
+        ' cbxCivilStatus
+        ' 
+        cbxCivilStatus.AutoCompleteMode = AutoCompleteMode.Suggest
+        cbxCivilStatus.AutoCompleteSource = AutoCompleteSource.ListItems
+        cbxCivilStatus.Font = New Font("Verdana", 12F)
+        cbxCivilStatus.FormattingEnabled = True
+        cbxCivilStatus.Items.AddRange(New Object() {"Single", "Married", "Widowed", "Divorced"})
+        cbxCivilStatus.Location = New Point(340, 196)
+        cbxCivilStatus.Name = "cbxCivilStatus"
+        cbxCivilStatus.Size = New Size(290, 33)
+        cbxCivilStatus.TabIndex = 24
         ' 
         ' Label16
         ' 
         Label16.AutoSize = True
-        Label16.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label16.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label16.Location = New Point(24, 83)
+        Label16.BackColor = Color.Transparent
+        Label16.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label16.Location = New Point(19, 27)
         Label16.Name = "Label16"
-        Label16.Size = New Size(137, 28)
-        Label16.TabIndex = 53
-        Label16.Text = "Middle name:"
+        Label16.Size = New Size(287, 28)
+        Label16.TabIndex = 23
+        Label16.Text = "Personal Information"
         ' 
-        ' txtMiddleName
+        ' btnPersonalInformationNext
         ' 
-        txtMiddleName.Location = New Point(341, 80)
-        txtMiddleName.Name = "txtMiddleName"
-        txtMiddleName.Size = New Size(523, 34)
-        txtMiddleName.TabIndex = 54
-        ' 
-        ' txtAddress
-        ' 
-        txtAddress.Location = New Point(341, 549)
-        txtAddress.Name = "txtAddress"
-        txtAddress.Size = New Size(523, 34)
-        txtAddress.TabIndex = 52
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label2.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(24, 549)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(90, 28)
-        Label2.TabIndex = 51
-        Label2.Text = "Address:"
-        ' 
-        ' rbtnNo
-        ' 
-        rbtnNo.AutoSize = True
-        rbtnNo.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        rbtnNo.Location = New Point(454, 507)
-        rbtnNo.Name = "rbtnNo"
-        rbtnNo.Size = New Size(54, 27)
-        rbtnNo.TabIndex = 50
-        rbtnNo.TabStop = True
-        rbtnNo.Text = "No"
-        rbtnNo.UseVisualStyleBackColor = True
-        ' 
-        ' rbtnYes
-        ' 
-        rbtnYes.AutoSize = True
-        rbtnYes.Font = New Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        rbtnYes.Location = New Point(341, 507)
-        rbtnYes.Name = "rbtnYes"
-        rbtnYes.Size = New Size(55, 27)
-        rbtnYes.TabIndex = 49
-        rbtnYes.TabStop = True
-        rbtnYes.Text = "Yes"
-        rbtnYes.UseVisualStyleBackColor = True
-        ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label1.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(24, 504)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(105, 28)
-        Label1.TabIndex = 48
-        Label1.Text = "First baby:"
-        ' 
-        ' Label15
-        ' 
-        Label15.AutoSize = True
-        Label15.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(24, 453)
-        Label15.Name = "Label15"
-        Label15.Size = New Size(115, 28)
-        Label15.TabIndex = 45
-        Label15.Text = "Civil Status:"
-        ' 
-        ' txtAge
-        ' 
-        txtAge.Location = New Point(341, 186)
-        txtAge.Name = "txtAge"
-        txtAge.Size = New Size(523, 34)
-        txtAge.TabIndex = 11
-        ' 
-        ' Label14
-        ' 
-        Label14.AutoSize = True
-        Label14.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label14.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(24, 30)
-        Label14.Name = "Label14"
-        Label14.Size = New Size(112, 28)
-        Label14.TabIndex = 7
-        Label14.Text = "First name:"
+        btnPersonalInformationNext.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnPersonalInformationNext.FlatAppearance.BorderSize = 0
+        btnPersonalInformationNext.FlatStyle = FlatStyle.Flat
+        btnPersonalInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnPersonalInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
+        btnPersonalInformationNext.IconColor = Color.Black
+        btnPersonalInformationNext.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnPersonalInformationNext.IconSize = 28
+        btnPersonalInformationNext.ImageAlign = ContentAlignment.BottomRight
+        btnPersonalInformationNext.Location = New Point(857, 554)
+        btnPersonalInformationNext.Name = "btnPersonalInformationNext"
+        btnPersonalInformationNext.Size = New Size(94, 40)
+        btnPersonalInformationNext.TabIndex = 22
+        btnPersonalInformationNext.Text = "Next"
+        btnPersonalInformationNext.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnPersonalInformationNext.UseVisualStyleBackColor = False
         ' 
         ' Label11
         ' 
         Label11.AutoSize = True
-        Label11.BackColor = Color.FromArgb(CByte(250), CByte(180), CByte(188))
-        Label11.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(24, 189)
+        Label11.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label11.Location = New Point(509, 480)
         Label11.Name = "Label11"
-        Label11.Size = New Size(53, 28)
-        Label11.TabIndex = 4
-        Label11.Text = "Age:"
+        Label11.Size = New Size(144, 20)
+        Label11.TabIndex = 21
+        Label11.Text = "Email Address"
+        ' 
+        ' txtEmailAddress
+        ' 
+        txtEmailAddress.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtEmailAddress.Location = New Point(506, 510)
+        txtEmailAddress.Name = "txtEmailAddress"
+        txtEmailAddress.Size = New Size(445, 32)
+        txtEmailAddress.TabIndex = 20
+        ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label12.Location = New Point(19, 480)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(163, 20)
+        Label12.TabIndex = 19
+        Label12.Text = "Contact Number"
+        ' 
+        ' txtContactNumber
+        ' 
+        txtContactNumber.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtContactNumber.Location = New Point(16, 510)
+        txtContactNumber.Name = "txtContactNumber"
+        txtContactNumber.Size = New Size(445, 32)
+        txtContactNumber.TabIndex = 18
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label10.Location = New Point(19, 333)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(85, 20)
+        Label10.TabIndex = 17
+        Label10.Text = "Address"
+        ' 
+        ' txtAddress
+        ' 
+        txtAddress.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtAddress.Location = New Point(16, 363)
+        txtAddress.MinimumSize = New Size(0, 100)
+        txtAddress.Name = "txtAddress"
+        txtAddress.Size = New Size(935, 100)
+        txtAddress.TabIndex = 16
+        ' 
+        ' Label8
+        ' 
+        Label8.AutoSize = True
+        Label8.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label8.Location = New Point(509, 250)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(124, 20)
+        Label8.TabIndex = 15
+        Label8.Text = "Height (cm)"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label9.Location = New Point(19, 250)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(124, 20)
+        Label9.TabIndex = 13
+        Label9.Text = "Weight (kg)"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label4.Location = New Point(664, 167)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(116, 20)
+        Label4.TabIndex = 11
+        Label4.Text = "Blood Type"
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label5.Location = New Point(343, 167)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(117, 20)
+        Label5.TabIndex = 9
+        Label5.Text = "Civil Status"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label6.Location = New Point(19, 167)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(45, 20)
+        Label6.TabIndex = 7
+        Label6.Text = "Age"
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label3.Location = New Point(664, 80)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(109, 20)
+        Label3.TabIndex = 5
+        Label3.Text = "Last Name"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label2.Location = New Point(343, 80)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(132, 20)
+        Label2.TabIndex = 3
+        Label2.Text = "Middle Name"
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label1.Location = New Point(19, 80)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(112, 20)
+        Label1.TabIndex = 1
+        Label1.Text = "First Name"
+        ' 
+        ' TabPage2
+        ' 
+        TabPage2.BackgroundImage = My.Resources.Resources.bg_img
+        TabPage2.BackgroundImageLayout = ImageLayout.Stretch
+        TabPage2.Controls.Add(Label17)
+        TabPage2.Controls.Add(btnEmergencyContactPrevious)
+        TabPage2.Controls.Add(btnEmergencyContactNext)
+        TabPage2.Controls.Add(labelnum)
+        TabPage2.Controls.Add(txtEmergencyContactNumber)
+        TabPage2.Controls.Add(labelrel)
+        TabPage2.Controls.Add(txtEmergencyContactRelationship)
+        TabPage2.Controls.Add(Label15)
+        TabPage2.Controls.Add(txtEmergencyContactName)
+        TabPage2.Location = New Point(4, 27)
+        TabPage2.Name = "TabPage2"
+        TabPage2.Padding = New Padding(3)
+        TabPage2.Size = New Size(968, 610)
+        TabPage2.TabIndex = 1
+        TabPage2.Text = "Emergency Contact"
+        TabPage2.UseVisualStyleBackColor = True
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.BackColor = Color.Transparent
+        Label17.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Location = New Point(19, 25)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(423, 28)
+        Label17.TabIndex = 25
+        Label17.Text = "Emergency Contact Information"
+        ' 
+        ' btnEmergencyContactPrevious
+        ' 
+        btnEmergencyContactPrevious.FlatStyle = FlatStyle.Flat
+        btnEmergencyContactPrevious.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEmergencyContactPrevious.IconChar = FontAwesome.Sharp.IconChar.AngleLeft
+        btnEmergencyContactPrevious.IconColor = Color.Black
+        btnEmergencyContactPrevious.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEmergencyContactPrevious.IconSize = 28
+        btnEmergencyContactPrevious.ImageAlign = ContentAlignment.BottomRight
+        btnEmergencyContactPrevious.Location = New Point(16, 317)
+        btnEmergencyContactPrevious.Name = "btnEmergencyContactPrevious"
+        btnEmergencyContactPrevious.Size = New Size(131, 40)
+        btnEmergencyContactPrevious.TabIndex = 24
+        btnEmergencyContactPrevious.Text = "Previous"
+        btnEmergencyContactPrevious.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnEmergencyContactPrevious.UseVisualStyleBackColor = True
+        ' 
+        ' btnEmergencyContactNext
+        ' 
+        btnEmergencyContactNext.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnEmergencyContactNext.FlatAppearance.BorderSize = 0
+        btnEmergencyContactNext.FlatStyle = FlatStyle.Flat
+        btnEmergencyContactNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnEmergencyContactNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
+        btnEmergencyContactNext.IconColor = Color.Black
+        btnEmergencyContactNext.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnEmergencyContactNext.IconSize = 28
+        btnEmergencyContactNext.ImageAlign = ContentAlignment.BottomRight
+        btnEmergencyContactNext.Location = New Point(854, 317)
+        btnEmergencyContactNext.Name = "btnEmergencyContactNext"
+        btnEmergencyContactNext.Size = New Size(94, 40)
+        btnEmergencyContactNext.TabIndex = 23
+        btnEmergencyContactNext.Text = "Next"
+        btnEmergencyContactNext.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnEmergencyContactNext.UseVisualStyleBackColor = False
+        ' 
+        ' labelnum
+        ' 
+        labelnum.AutoSize = True
+        labelnum.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        labelnum.Location = New Point(19, 244)
+        labelnum.Name = "labelnum"
+        labelnum.Size = New Size(163, 20)
+        labelnum.TabIndex = 19
+        labelnum.Text = "Contact Number"
+        ' 
+        ' txtEmergencyContactNumber
+        ' 
+        txtEmergencyContactNumber.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtEmergencyContactNumber.Location = New Point(16, 274)
+        txtEmergencyContactNumber.Name = "txtEmergencyContactNumber"
+        txtEmergencyContactNumber.Size = New Size(932, 32)
+        txtEmergencyContactNumber.TabIndex = 18
+        ' 
+        ' labelrel
+        ' 
+        labelrel.AutoSize = True
+        labelrel.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        labelrel.Location = New Point(19, 161)
+        labelrel.Name = "labelrel"
+        labelrel.Size = New Size(128, 20)
+        labelrel.TabIndex = 17
+        labelrel.Text = "Relationship"
+        ' 
+        ' txtEmergencyContactRelationship
+        ' 
+        txtEmergencyContactRelationship.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtEmergencyContactRelationship.Location = New Point(16, 191)
+        txtEmergencyContactRelationship.Name = "txtEmergencyContactRelationship"
+        txtEmergencyContactRelationship.Size = New Size(932, 32)
+        txtEmergencyContactRelationship.TabIndex = 16
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label15.Location = New Point(19, 74)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(142, 20)
+        Label15.TabIndex = 15
+        Label15.Text = "Contact Name"
+        ' 
+        ' txtEmergencyContactName
+        ' 
+        txtEmergencyContactName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtEmergencyContactName.Location = New Point(16, 104)
+        txtEmergencyContactName.Name = "txtEmergencyContactName"
+        txtEmergencyContactName.Size = New Size(932, 32)
+        txtEmergencyContactName.TabIndex = 14
+        ' 
+        ' TabPage3
+        ' 
+        TabPage3.BackgroundImage = My.Resources.Resources.bg_img
+        TabPage3.BackgroundImageLayout = ImageLayout.Stretch
+        TabPage3.Controls.Add(lblSelectedDate)
+        TabPage3.Controls.Add(txtHistoryOfSurgery)
+        TabPage3.Controls.Add(txtCurrentMedication)
+        TabPage3.Controls.Add(Label24)
+        TabPage3.Controls.Add(Label23)
+        TabPage3.Controls.Add(Label22)
+        TabPage3.Controls.Add(txtAllergies)
+        TabPage3.Controls.Add(cbxAssignedOB)
+        TabPage3.Controls.Add(Label21)
+        TabPage3.Controls.Add(btnMedicalInformationPrevious)
+        TabPage3.Controls.Add(btnRegisterPatient)
+        TabPage3.Controls.Add(rbtnNo)
+        TabPage3.Controls.Add(rtbnYes)
+        TabPage3.Controls.Add(Label20)
+        TabPage3.Controls.Add(clrLastMenstrual)
+        TabPage3.Controls.Add(Label19)
+        TabPage3.Controls.Add(Label18)
+        TabPage3.Location = New Point(4, 27)
+        TabPage3.Name = "TabPage3"
+        TabPage3.Size = New Size(968, 610)
+        TabPage3.TabIndex = 2
+        TabPage3.Text = "Medical Information"
+        TabPage3.UseVisualStyleBackColor = True
+        ' 
+        ' lblSelectedDate
+        ' 
+        lblSelectedDate.AutoSize = True
+        lblSelectedDate.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        lblSelectedDate.Location = New Point(20, 326)
+        lblSelectedDate.Name = "lblSelectedDate"
+        lblSelectedDate.Size = New Size(66, 20)
+        lblSelectedDate.TabIndex = 35
+        lblSelectedDate.Text = "Date: "
+        ' 
+        ' txtHistoryOfSurgery
+        ' 
+        txtHistoryOfSurgery.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtHistoryOfSurgery.Location = New Point(331, 415)
+        txtHistoryOfSurgery.MinimumSize = New Size(0, 100)
+        txtHistoryOfSurgery.Name = "txtHistoryOfSurgery"
+        txtHistoryOfSurgery.Size = New Size(621, 100)
+        txtHistoryOfSurgery.TabIndex = 34
+        ' 
+        ' txtCurrentMedication
+        ' 
+        txtCurrentMedication.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtCurrentMedication.Location = New Point(331, 264)
+        txtCurrentMedication.MinimumSize = New Size(0, 100)
+        txtCurrentMedication.Name = "txtCurrentMedication"
+        txtCurrentMedication.Size = New Size(621, 100)
+        txtCurrentMedication.TabIndex = 33
+        ' 
+        ' Label24
+        ' 
+        Label24.AutoSize = True
+        Label24.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label24.Location = New Point(331, 392)
+        Label24.Name = "Label24"
+        Label24.Size = New Size(183, 20)
+        Label24.TabIndex = 32
+        Label24.Text = "History of Surgery"
+        ' 
+        ' Label23
+        ' 
+        Label23.AutoSize = True
+        Label23.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label23.Location = New Point(331, 241)
+        Label23.Name = "Label23"
+        Label23.Size = New Size(190, 20)
+        Label23.TabIndex = 31
+        Label23.Text = "Current Medication"
+        ' 
+        ' Label22
+        ' 
+        Label22.AutoSize = True
+        Label22.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label22.Location = New Point(331, 81)
+        Label22.Name = "Label22"
+        Label22.Size = New Size(169, 20)
+        Label22.TabIndex = 30
+        Label22.Text = "Allergies (if any)"
+        ' 
+        ' txtAllergies
+        ' 
+        txtAllergies.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtAllergies.Location = New Point(331, 110)
+        txtAllergies.MinimumSize = New Size(0, 100)
+        txtAllergies.Name = "txtAllergies"
+        txtAllergies.Size = New Size(621, 100)
+        txtAllergies.TabIndex = 29
+        ' 
+        ' cbxAssignedOB
+        ' 
+        cbxAssignedOB.AutoCompleteMode = AutoCompleteMode.Suggest
+        cbxAssignedOB.AutoCompleteSource = AutoCompleteSource.ListItems
+        cbxAssignedOB.Font = New Font("Verdana", 12F)
+        cbxAssignedOB.FormattingEnabled = True
+        cbxAssignedOB.Location = New Point(20, 482)
+        cbxAssignedOB.Name = "cbxAssignedOB"
+        cbxAssignedOB.Size = New Size(262, 33)
+        cbxAssignedOB.TabIndex = 28
+        ' 
+        ' Label21
+        ' 
+        Label21.AutoSize = True
+        Label21.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label21.Location = New Point(20, 448)
+        Label21.Name = "Label21"
+        Label21.Size = New Size(177, 20)
+        Label21.TabIndex = 27
+        Label21.Text = "Assigned OB-GYN"
+        ' 
+        ' btnMedicalInformationPrevious
+        ' 
+        btnMedicalInformationPrevious.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnMedicalInformationPrevious.IconChar = FontAwesome.Sharp.IconChar.AngleLeft
+        btnMedicalInformationPrevious.IconColor = Color.Black
+        btnMedicalInformationPrevious.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnMedicalInformationPrevious.IconSize = 28
+        btnMedicalInformationPrevious.ImageAlign = ContentAlignment.BottomRight
+        btnMedicalInformationPrevious.Location = New Point(20, 553)
+        btnMedicalInformationPrevious.Name = "btnMedicalInformationPrevious"
+        btnMedicalInformationPrevious.Size = New Size(131, 40)
+        btnMedicalInformationPrevious.TabIndex = 26
+        btnMedicalInformationPrevious.Text = "Previous"
+        btnMedicalInformationPrevious.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnMedicalInformationPrevious.UseVisualStyleBackColor = True
+        ' 
+        ' btnRegisterPatient
+        ' 
+        btnRegisterPatient.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnRegisterPatient.FlatAppearance.BorderSize = 0
+        btnRegisterPatient.FlatStyle = FlatStyle.Flat
+        btnRegisterPatient.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRegisterPatient.IconChar = FontAwesome.Sharp.IconChar.AngleRight
+        btnRegisterPatient.IconColor = Color.Black
+        btnRegisterPatient.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnRegisterPatient.IconSize = 28
+        btnRegisterPatient.ImageAlign = ContentAlignment.BottomRight
+        btnRegisterPatient.Location = New Point(772, 553)
+        btnRegisterPatient.Name = "btnRegisterPatient"
+        btnRegisterPatient.Size = New Size(180, 40)
+        btnRegisterPatient.TabIndex = 25
+        btnRegisterPatient.Text = "Register Patient"
+        btnRegisterPatient.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnRegisterPatient.UseVisualStyleBackColor = False
+        ' 
+        ' rbtnNo
+        ' 
+        rbtnNo.AutoSize = True
+        rbtnNo.Font = New Font("Verdana", 10.8F)
+        rbtnNo.Location = New Point(111, 398)
+        rbtnNo.Name = "rbtnNo"
+        rbtnNo.Size = New Size(55, 26)
+        rbtnNo.TabIndex = 20
+        rbtnNo.TabStop = True
+        rbtnNo.Text = "No"
+        rbtnNo.UseVisualStyleBackColor = True
+        ' 
+        ' rtbnYes
+        ' 
+        rtbnYes.AutoSize = True
+        rtbnYes.Font = New Font("Verdana", 10.8F)
+        rtbnYes.Location = New Point(20, 398)
+        rtbnYes.Name = "rtbnYes"
+        rtbnYes.Size = New Size(61, 26)
+        rtbnYes.TabIndex = 19
+        rtbnYes.TabStop = True
+        rtbnYes.Text = "Yes"
+        rtbnYes.UseVisualStyleBackColor = True
+        ' 
+        ' Label20
+        ' 
+        Label20.AutoSize = True
+        Label20.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label20.Location = New Point(20, 369)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(226, 20)
+        Label20.TabIndex = 18
+        Label20.Text = "Is this your first baby?"
+        ' 
+        ' clrLastMenstrual
+        ' 
+        clrLastMenstrual.Location = New Point(20, 110)
+        clrLastMenstrual.Name = "clrLastMenstrual"
+        clrLastMenstrual.TabIndex = 17
+        ' 
+        ' Label19
+        ' 
+        Label19.AutoSize = True
+        Label19.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
+        Label19.Location = New Point(20, 81)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(216, 20)
+        Label19.TabIndex = 16
+        Label19.Text = "Last Menstrual Period"
+        ' 
+        ' Label18
+        ' 
+        Label18.AutoSize = True
+        Label18.BackColor = Color.Transparent
+        Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.Location = New Point(20, 24)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(273, 28)
+        Label18.TabIndex = 3
+        Label18.Text = "Medical Information"
+        ' 
+        ' numAge
+        ' 
+        numAge.Font = New Font("Verdana", 12F)
+        numAge.Location = New Point(16, 197)
+        numAge.Name = "numAge"
+        numAge.Size = New Size(287, 32)
+        numAge.TabIndex = 26
+        ' 
+        ' txtLastName
+        ' 
+        txtLastName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtLastName.Location = New Point(661, 110)
+        txtLastName.Name = "txtLastName"
+        txtLastName.Size = New Size(290, 32)
+        txtLastName.TabIndex = 4
+        ' 
+        ' txtMiddleName
+        ' 
+        txtMiddleName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtMiddleName.Location = New Point(340, 110)
+        txtMiddleName.Name = "txtMiddleName"
+        txtMiddleName.Size = New Size(290, 32)
+        txtMiddleName.TabIndex = 2
         ' 
         ' txtFirstName
         ' 
-        txtFirstName.Location = New Point(341, 27)
+        txtFirstName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtFirstName.Location = New Point(16, 110)
         txtFirstName.Name = "txtFirstName"
-        txtFirstName.Size = New Size(523, 34)
-        txtFirstName.TabIndex = 8
+        txtFirstName.Size = New Size(290, 32)
+        txtFirstName.TabIndex = 0
         ' 
         ' EditPatientDetails
         ' 
@@ -679,63 +800,79 @@ Partial Class EditPatientDetails
         Text = "EditPatientDetails"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
-        HopeGroupBox1.ResumeLayout(False)
-        HopeGroupBox1.PerformLayout()
-        HopeGroupBox4.ResumeLayout(False)
-        HopeGroupBox4.PerformLayout()
+        tabPatientRegistration.ResumeLayout(False)
+        TabPage1.ResumeLayout(False)
+        TabPage1.PerformLayout()
+        CType(numHeight, ComponentModel.ISupportInitialize).EndInit()
+        CType(numWeight, ComponentModel.ISupportInitialize).EndInit()
+        TabPage2.ResumeLayout(False)
+        TabPage2.PerformLayout()
+        TabPage3.ResumeLayout(False)
+        TabPage3.PerformLayout()
+        CType(numAge, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents HopeForm1 As ReaLTaiizor.Forms.HopeForm
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label8 As Label
-    Friend WithEvents HopeGroupBox4 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents Label15 As Label
-    Friend WithEvents txtAge As TextBox
-    Friend WithEvents Label14 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents txtFirstName As TextBox
-    Friend WithEvents rbtnNo As RadioButton
-    Friend WithEvents rbtnYes As RadioButton
-    Friend WithEvents Label1 As Label
-    Friend WithEvents Label3 As Label
-    Friend WithEvents HopeGroupBox1 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents txtAddress As TextBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents lblAssignedOB As Label
-    Friend WithEvents lblNextCheckup As Label
-    Friend WithEvents lblGestationalAge As Label
-    Friend WithEvents lblLastMenstrualAge As Label
-    Friend WithEvents txtWeight As TextBox
-    Friend WithEvents Label18 As Label
-    Friend WithEvents Label17 As Label
-    Friend WithEvents txtLastName As TextBox
-    Friend WithEvents Label16 As Label
-    Friend WithEvents txtMiddleName As TextBox
-    Friend WithEvents txtEmailAddress As TextBox
-    Friend WithEvents Label22 As Label
-    Friend WithEvents txtContactNumber As TextBox
-    Friend WithEvents Label21 As Label
-    Friend WithEvents Label20 As Label
-    Friend WithEvents txtHeight As TextBox
-    Friend WithEvents Label19 As Label
-    Friend WithEvents txtHistoryOfSurgery As TextBox
-    Friend WithEvents Label27 As Label
-    Friend WithEvents txtCurrentMedication As TextBox
-    Friend WithEvents Label26 As Label
-    Friend WithEvents txtEmergencyContactNumber As TextBox
-    Friend WithEvents Label25 As Label
-    Friend WithEvents txtEmergencyContactRelationship As TextBox
-    Friend WithEvents Label24 As Label
-    Friend WithEvents txtEmergencyContactName As TextBox
-    Friend WithEvents Label23 As Label
     Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
     Friend WithEvents Label28 As Label
     Friend WithEvents Label29 As Label
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents tabPatientRegistration As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents numHeight As NumericUpDown
+    Friend WithEvents numWeight As NumericUpDown
+    Friend WithEvents cbxBloodType As ComboBox
+    Friend WithEvents cbxCivilStatus As ComboBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents btnPersonalInformationNext As FontAwesome.Sharp.IconButton
+    Friend WithEvents Label11 As Label
+    Friend WithEvents txtEmailAddress As TextBox
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtContactNumber As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txtAddress As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents Label17 As Label
+    Friend WithEvents btnEmergencyContactPrevious As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnEmergencyContactNext As FontAwesome.Sharp.IconButton
+    Friend WithEvents labelnum As Label
+    Friend WithEvents txtEmergencyContactNumber As TextBox
+    Friend WithEvents labelrel As Label
+    Friend WithEvents txtEmergencyContactRelationship As TextBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtEmergencyContactName As TextBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents lblSelectedDate As Label
+    Friend WithEvents txtHistoryOfSurgery As TextBox
+    Friend WithEvents txtCurrentMedication As TextBox
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents txtAllergies As TextBox
+    Friend WithEvents cbxAssignedOB As ComboBox
+    Friend WithEvents Label21 As Label
+    Friend WithEvents btnMedicalInformationPrevious As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnRegisterPatient As FontAwesome.Sharp.IconButton
+    Friend WithEvents rbtnNo As RadioButton
+    Friend WithEvents rtbnYes As RadioButton
+    Friend WithEvents Label20 As Label
+    Friend WithEvents clrLastMenstrual As MonthCalendar
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label13 As Label
+    Friend WithEvents lblPatientName As Label
+    Friend WithEvents numAge As NumericUpDown
+    Friend WithEvents txtLastName As TextBox
+    Friend WithEvents txtMiddleName As TextBox
+    Friend WithEvents txtFirstName As TextBox
 End Class
