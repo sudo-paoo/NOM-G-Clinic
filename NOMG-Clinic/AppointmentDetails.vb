@@ -212,6 +212,7 @@ Public Class AppointmentDetails
 
         Dim selectedDate As Date = calAppointmentDate.SelectionStart
         Dim doctorId As String = GetSelectedDoctorId()
+        Dim currentDateTime As DateTime = DateTime.Now
 
         If String.IsNullOrEmpty(doctorId) Then
             Return
@@ -220,6 +221,27 @@ Public Class AppointmentDetails
         Dim allTimeSlots As New List(Of Date)
         Dim startTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 8, 30, 0)
         Dim endTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 16, 30, 0)
+
+        If selectedDate.Date = currentDateTime.Date Then
+            Dim bufferTime As TimeSpan = TimeSpan.FromMinutes(30)
+            Dim adjustedCurrentTime As DateTime = currentDateTime.Add(bufferTime)
+
+            Dim nextHour As Integer = adjustedCurrentTime.Hour + 1
+            If nextHour > 16 Then
+                MessageBox.Show("The clinic is closed for today. All remaining time slots for today are unavailable. " &
+                           "Please select another date.", "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return
+            End If
+
+            startTime = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, nextHour, 0, 0)
+        End If
+
+        If selectedDate.Date < currentDateTime.Date Then
+            MessageBox.Show("Cannot schedule appointments for past dates. Please select today or a future date.",
+                       "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            calAppointmentDate.SetDate(currentDateTime.Date)
+            Return
+        End If
 
         Dim currentTime As Date = startTime
         While currentTime <= endTime
@@ -233,7 +255,7 @@ Public Class AppointmentDetails
             conn.Open()
 
             Dim query As String = "SELECT appointment_time FROM appointment_table " &
-                             "WHERE appointment_date = @selectedDate"
+                         "WHERE appointment_date = @selectedDate"
 
             cmd = New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@selectedDate", selectedDate.ToString("yyyy-MM-dd"))
@@ -267,15 +289,26 @@ Public Class AppointmentDetails
             cboTimeSlot.SelectedIndex = 0
         Else
             MessageBox.Show("No available time slots for the selected date. Please select another date.",
-                  "No Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
+              "No Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
     Private Sub calAppointmentDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles calAppointmentDate.DateChanged
         Dim selectedDate As Date = calAppointmentDate.SelectionStart
+        Dim currentDate As Date = DateTime.Now.Date
 
+        If selectedDate.Date < currentDate Then
+            MessageBox.Show("Cannot schedule appointments for past dates. Please select today or a future date.",
+                        "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            calAppointmentDate.SetDate(currentDate)
+            Return
+        End If
+
+        ' Check if clinic is closed on the selected day
         If selectedDate.DayOfWeek = DayOfWeek.Sunday OrElse selectedDate.DayOfWeek = DayOfWeek.Monday Then
-            MessageBox.Show("The clinic is closed on Sundays and Mondays. Please select another day.", "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("The clinic is closed on Sundays and Mondays. Please select another day.",
+                        "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             Dim nextValidDay As Date = selectedDate
             While nextValidDay.DayOfWeek = DayOfWeek.Sunday OrElse nextValidDay.DayOfWeek = DayOfWeek.Monday
