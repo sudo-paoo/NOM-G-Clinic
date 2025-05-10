@@ -57,8 +57,6 @@ Partial Class ConsultationDetails
         Label12 = New Label()
         Label13 = New Label()
         Label14 = New Label()
-        btnSave = New FontAwesome.Sharp.IconButton()
-        btnCancel = New FontAwesome.Sharp.IconButton()
         HopeGroupBox1 = New ReaLTaiizor.Controls.HopeGroupBox()
         Panel2 = New Panel()
         Label26 = New Label()
@@ -78,6 +76,7 @@ Partial Class ConsultationDetails
         Label2 = New Label()
         lblDate = New Label()
         Label1 = New Label()
+        btnSave = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         CType(IconPictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         HopeGroupBox2.SuspendLayout()
@@ -111,8 +110,6 @@ Partial Class ConsultationDetails
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
         Panel1.Controls.Add(IconPictureBox1)
         Panel1.Controls.Add(HopeGroupBox2)
-        Panel1.Controls.Add(btnSave)
-        Panel1.Controls.Add(btnCancel)
         Panel1.Controls.Add(HopeGroupBox1)
         Panel1.Controls.Add(lblDate)
         Panel1.Controls.Add(Label1)
@@ -140,7 +137,6 @@ Partial Class ConsultationDetails
         ' 
         HopeGroupBox2.BackColor = SystemColors.ControlLightLight
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        HopeGroupBox2.Controls.Add(txtDoctorPlan)
         HopeGroupBox2.Controls.Add(Label3)
         HopeGroupBox2.Controls.Add(Panel3)
         HopeGroupBox2.Font = New Font("Segoe UI", 12F)
@@ -149,7 +145,7 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Location = New Point(42, 397)
         HopeGroupBox2.Name = "HopeGroupBox2"
         HopeGroupBox2.ShowText = False
-        HopeGroupBox2.Size = New Size(1100, 1201)
+        HopeGroupBox2.Size = New Size(1100, 1153)
         HopeGroupBox2.TabIndex = 3
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
@@ -158,7 +154,7 @@ Partial Class ConsultationDetails
         ' txtDoctorPlan
         ' 
         txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorPlan.Location = New Point(28, 925)
+        txtDoctorPlan.Location = New Point(30, 803)
         txtDoctorPlan.Multiline = True
         txtDoctorPlan.Name = "txtDoctorPlan"
         txtDoctorPlan.Size = New Size(1050, 167)
@@ -178,6 +174,8 @@ Partial Class ConsultationDetails
         ' 
         ' Panel3
         ' 
+        Panel3.Controls.Add(txtDoctorPlan)
+        Panel3.Controls.Add(btnSave)
         Panel3.Controls.Add(hgbUrineAnalysis)
         Panel3.Controls.Add(Label20)
         Panel3.Controls.Add(cmbVisitType)
@@ -292,7 +290,7 @@ Partial Class ConsultationDetails
         Label20.BackColor = Color.Transparent
         Label20.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label20.ForeColor = Color.Black
-        Label20.Location = New Point(522, 821)
+        Label20.Location = New Point(524, 760)
         Label20.Name = "Label20"
         Label20.Size = New Size(54, 22)
         Label20.TabIndex = 38
@@ -310,7 +308,7 @@ Partial Class ConsultationDetails
         ' txtDoctorAssessment
         ' 
         txtDoctorAssessment.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorAssessment.Location = New Point(28, 616)
+        txtDoctorAssessment.Location = New Point(30, 572)
         txtDoctorAssessment.Multiline = True
         txtDoctorAssessment.Name = "txtDoctorAssessment"
         txtDoctorAssessment.Size = New Size(1050, 167)
@@ -331,7 +329,7 @@ Partial Class ConsultationDetails
         Label19.BackColor = Color.Transparent
         Label19.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label19.ForeColor = Color.Black
-        Label19.Location = New Point(484, 591)
+        Label19.Location = New Point(486, 529)
         Label19.Name = "Label19"
         Label19.Size = New Size(132, 22)
         Label19.TabIndex = 36
@@ -355,7 +353,7 @@ Partial Class ConsultationDetails
         Label18.BackColor = Color.Transparent
         Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(457, 563)
+        Label18.Location = New Point(459, 501)
         Label18.Name = "Label18"
         Label18.Size = New Size(188, 28)
         Label18.TabIndex = 35
@@ -392,12 +390,12 @@ Partial Class ConsultationDetails
         smlWeight.CustomBGColor = Color.White
         smlWeight.Font = New Font("Tahoma", 11F)
         smlWeight.ForeColor = Color.DimGray
-        smlWeight.Location = New Point(859, 206)
+        smlWeight.Location = New Point(660, 267)
         smlWeight.MaxLength = 32767
         smlWeight.Multiline = False
         smlWeight.Name = "smlWeight"
         smlWeight.ReadOnly = False
-        smlWeight.Size = New Size(163, 33)
+        smlWeight.Size = New Size(362, 33)
         smlWeight.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlWeight.TabIndex = 25
         smlWeight.TextAlignment = HorizontalAlignment.Left
@@ -405,18 +403,18 @@ Partial Class ConsultationDetails
         ' 
         ' txtFetalHeart
         ' 
-        txtFetalHeart.Location = New Point(705, 329)
+        txtFetalHeart.Location = New Point(660, 327)
         txtFetalHeart.Name = "txtFetalHeart"
-        txtFetalHeart.Size = New Size(163, 34)
+        txtFetalHeart.Size = New Size(362, 34)
         txtFetalHeart.TabIndex = 29
         ' 
         ' txtFundalHeight
         ' 
         txtFundalHeight.Font = New Font("Tahoma", 11F)
         txtFundalHeight.ForeColor = Color.DimGray
-        txtFundalHeight.Location = New Point(232, 334)
+        txtFundalHeight.Location = New Point(89, 331)
         txtFundalHeight.Name = "txtFundalHeight"
-        txtFundalHeight.Size = New Size(163, 30)
+        txtFundalHeight.Size = New Size(362, 30)
         txtFundalHeight.TabIndex = 26
         ' 
         ' smlTemperature
@@ -426,12 +424,12 @@ Partial Class ConsultationDetails
         smlTemperature.CustomBGColor = Color.White
         smlTemperature.Font = New Font("Tahoma", 11F)
         smlTemperature.ForeColor = Color.DimGray
-        smlTemperature.Location = New Point(608, 206)
+        smlTemperature.Location = New Point(660, 207)
         smlTemperature.MaxLength = 32767
         smlTemperature.Multiline = False
         smlTemperature.Name = "smlTemperature"
         smlTemperature.ReadOnly = False
-        smlTemperature.Size = New Size(163, 33)
+        smlTemperature.Size = New Size(362, 33)
         smlTemperature.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlTemperature.TabIndex = 24
         smlTemperature.TextAlignment = HorizontalAlignment.Left
@@ -443,7 +441,7 @@ Partial Class ConsultationDetails
         Label16.BackColor = Color.Transparent
         Label16.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label16.ForeColor = Color.Black
-        Label16.Location = New Point(695, 296)
+        Label16.Location = New Point(660, 301)
         Label16.Name = "Label16"
         Label16.Size = New Size(201, 25)
         Label16.TabIndex = 28
@@ -456,12 +454,12 @@ Partial Class ConsultationDetails
         smlPulse.CustomBGColor = Color.White
         smlPulse.Font = New Font("Tahoma", 11F)
         smlPulse.ForeColor = Color.DimGray
-        smlPulse.Location = New Point(362, 206)
+        smlPulse.Location = New Point(89, 269)
         smlPulse.MaxLength = 32767
         smlPulse.Multiline = False
         smlPulse.Name = "smlPulse"
         smlPulse.ReadOnly = False
-        smlPulse.Size = New Size(163, 33)
+        smlPulse.Size = New Size(362, 33)
         smlPulse.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlPulse.TabIndex = 23
         smlPulse.TextAlignment = HorizontalAlignment.Left
@@ -473,7 +471,7 @@ Partial Class ConsultationDetails
         Label15.BackColor = Color.Transparent
         Label15.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label15.ForeColor = Color.Black
-        Label15.Location = New Point(256, 296)
+        Label15.Location = New Point(89, 304)
         Label15.Name = "Label15"
         Label15.Size = New Size(129, 25)
         Label15.TabIndex = 26
@@ -486,12 +484,12 @@ Partial Class ConsultationDetails
         smlBloodPressure.CustomBGColor = Color.White
         smlBloodPressure.Font = New Font("Tahoma", 11F)
         smlBloodPressure.ForeColor = Color.DimGray
-        smlBloodPressure.Location = New Point(89, 206)
+        smlBloodPressure.Location = New Point(89, 207)
         smlBloodPressure.MaxLength = 32767
         smlBloodPressure.Multiline = False
         smlBloodPressure.Name = "smlBloodPressure"
         smlBloodPressure.ReadOnly = False
-        smlBloodPressure.Size = New Size(163, 33)
+        smlBloodPressure.Size = New Size(362, 33)
         smlBloodPressure.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlBloodPressure.TabIndex = 22
         smlBloodPressure.TextAlignment = HorizontalAlignment.Left
@@ -503,7 +501,7 @@ Partial Class ConsultationDetails
         Label11.BackColor = Color.Transparent
         Label11.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(102, 181)
+        Label11.Location = New Point(89, 180)
         Label11.Name = "Label11"
         Label11.Size = New Size(138, 25)
         Label11.TabIndex = 17
@@ -515,7 +513,7 @@ Partial Class ConsultationDetails
         Label12.BackColor = Color.Transparent
         Label12.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label12.ForeColor = Color.Black
-        Label12.Location = New Point(389, 181)
+        Label12.Location = New Point(89, 242)
         Label12.Name = "Label12"
         Label12.Size = New Size(112, 25)
         Label12.TabIndex = 18
@@ -527,7 +525,7 @@ Partial Class ConsultationDetails
         Label13.BackColor = Color.Transparent
         Label13.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label13.ForeColor = Color.Black
-        Label13.Location = New Point(636, 181)
+        Label13.Location = New Point(660, 181)
         Label13.Name = "Label13"
         Label13.Size = New Size(118, 25)
         Label13.TabIndex = 19
@@ -539,39 +537,11 @@ Partial Class ConsultationDetails
         Label14.BackColor = Color.Transparent
         Label14.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label14.ForeColor = Color.Black
-        Label14.Location = New Point(888, 181)
+        Label14.Location = New Point(660, 241)
         Label14.Name = "Label14"
         Label14.Size = New Size(109, 25)
         Label14.TabIndex = 20
         Label14.Text = "Weight (kg)"
-        ' 
-        ' btnSave
-        ' 
-        btnSave.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
-        btnSave.BackgroundImageLayout = ImageLayout.None
-        btnSave.FlatStyle = FlatStyle.Flat
-        btnSave.ForeColor = SystemColors.ControlLightLight
-        btnSave.IconChar = FontAwesome.Sharp.IconChar.None
-        btnSave.IconColor = Color.RosyBrown
-        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSave.Location = New Point(1052, 31)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(83, 49)
-        btnSave.TabIndex = 7
-        btnSave.Text = "Save"
-        btnSave.UseVisualStyleBackColor = False
-        ' 
-        ' btnCancel
-        ' 
-        btnCancel.IconChar = FontAwesome.Sharp.IconChar.None
-        btnCancel.IconColor = Color.Black
-        btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnCancel.Location = New Point(956, 31)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Size(78, 49)
-        btnCancel.TabIndex = 6
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = True
         ' 
         ' HopeGroupBox1
         ' 
@@ -789,6 +759,22 @@ Partial Class ConsultationDetails
         Label1.TabIndex = 0
         Label1.Text = "Consultation Notes"
         ' 
+        ' btnSave
+        ' 
+        btnSave.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
+        btnSave.BackgroundImageLayout = ImageLayout.None
+        btnSave.FlatStyle = FlatStyle.Flat
+        btnSave.ForeColor = SystemColors.ControlLightLight
+        btnSave.IconChar = FontAwesome.Sharp.IconChar.None
+        btnSave.IconColor = Color.RosyBrown
+        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSave.Location = New Point(997, 1015)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(83, 49)
+        btnSave.TabIndex = 45
+        btnSave.Text = "Save"
+        btnSave.UseVisualStyleBackColor = False
+        ' 
         ' ConsultationDetails
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -858,8 +844,6 @@ Partial Class ConsultationDetails
     Friend WithEvents txtFundalHeight As TextBox
     Friend WithEvents cmbReasonVisit As ComboBox
     Friend WithEvents cmbVisitType As ComboBox
-    Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancel As FontAwesome.Sharp.IconButton
     Friend WithEvents IconPictureBox1 As FontAwesome.Sharp.IconPictureBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
@@ -877,5 +861,6 @@ Partial Class ConsultationDetails
     Friend WithEvents lblBloodType As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents lblAllergies As Label
+    Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
 
 End Class

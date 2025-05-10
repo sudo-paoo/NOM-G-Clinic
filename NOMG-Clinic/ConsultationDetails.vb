@@ -91,7 +91,7 @@ Public Class ConsultationDetails
             Return
         End If
 
-        Dim result As DialogResult = MessageBox.Show(
+        Dim result = MessageBox.Show(
         "Routine vitamins will be automatically prescribed to the patient. Continue?",
         "Confirm Save",
         MessageBoxButtons.YesNo,
@@ -104,7 +104,7 @@ Public Class ConsultationDetails
         If SaveConsultationData() Then
             MessageBox.Show("Consultation details saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-            Dim scheduleResult As DialogResult = MessageBox.Show(
+            Dim scheduleResult = MessageBox.Show(
             "Do you want to schedule a follow-up appointment for this patient?",
             "Schedule Follow-up",
             MessageBoxButtons.YesNo,
@@ -118,7 +118,7 @@ Public Class ConsultationDetails
                 End If
             End If
 
-            Me.Close()
+            Close()
         End If
     End Sub
 
@@ -388,6 +388,4 @@ Public Class ConsultationDetails
 
         Return Newtonsoft.Json.JsonConvert.SerializeObject(notesObject)
     End Function
-
-
 End Class

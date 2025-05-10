@@ -103,7 +103,6 @@ Public Class ViewConsultationDetails
                                 Try
                                     ParseAndDisplayConsultationNotes(notesJson)
                                 Catch ex As Exception
-                                    MessageBox.Show($"Error parsing consultation notes: {ex.Message}", "JSON Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                                     Console.WriteLine($"Invalid JSON: {notesJson}")
                                     Console.WriteLine($"Error: {ex.Message}")
                                 End Try
@@ -116,7 +115,6 @@ Public Class ViewConsultationDetails
                                 Try
                                     ParseAndDisplayVitaminIntake(itemNamesJson)
                                 Catch ex As Exception
-                                    MessageBox.Show($"Error parsing vitamin data: {ex.Message}", "JSON Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                                     Console.WriteLine($"Invalid JSON: {itemNamesJson}")
                                 End Try
                             End If
@@ -229,7 +227,6 @@ Public Class ViewConsultationDetails
             Catch ex As Exception
                 Console.WriteLine("JSON deserialization error: " & ex.Message)
                 If Not TryParseConsultationNotesWithRegex(jsonString) Then
-                    MessageBox.Show($"Unable to parse consultation notes: {ex.Message}", "JSON Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
                 Return
             End Try
@@ -341,7 +338,6 @@ Public Class ViewConsultationDetails
                     items = JsonConvert.DeserializeObject(Of List(Of Dictionary(Of String, Object)))(sanitizedJson)
                 Catch innerEx As Exception
                     If Not TryParseVitaminIntakeWithRegex(jsonString) Then
-                        MessageBox.Show($"Unable to parse vitamin data: {innerEx.Message}", "JSON Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End If
                     Return
                 End Try
