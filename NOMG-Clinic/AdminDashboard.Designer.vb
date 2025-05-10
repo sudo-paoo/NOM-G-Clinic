@@ -36,15 +36,20 @@ Partial Class AdminDashboard
         btnDashboard = New FontAwesome.Sharp.IconButton()
         Label1 = New Label()
         pnlDashboard = New Panel()
+        Panel8 = New Panel()
+        lblActiveDoctors = New Label()
+        Label4 = New Label()
+        Panel7 = New Panel()
+        lblTodaysAppointments = New Label()
+        Label3 = New Label()
+        Panel2 = New Panel()
+        lblTotalPatients = New Label()
+        Label2 = New Label()
         tabDashboard = New TabControl()
         TabPage1 = New TabPage()
         flowRecentAppointments = New FlowLayoutPanel()
         TabPage2 = New TabPage()
         flowRecentPayments = New FlowLayoutPanel()
-        lblActiveDoctors = New Label()
-        Label4 = New Label()
-        lblTodaysAppointments = New Label()
-        Label3 = New Label()
         pnlPatients = New Panel()
         pnlPatientsDataGrid = New Panel()
         dgvPatients = New DataGridView()
@@ -66,8 +71,7 @@ Partial Class AdminDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettingsAdmin = New Panel()
-        btnSaveAdminSettings = New FontAwesome.Sharp.IconButton()
-        SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
+        Panel9 = New Panel()
         btnEyeConfirmPassword = New FontAwesome.Sharp.IconButton()
         txtConfirmPassword = New TextBox()
         Label15 = New Label()
@@ -80,6 +84,8 @@ Partial Class AdminDashboard
         Label12 = New Label()
         Label11 = New Label()
         txtUsername = New TextBox()
+        btnSaveAdminSettings = New FontAwesome.Sharp.IconButton()
+        SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
         Label21 = New Label()
         pnlNurses = New Panel()
         Panel5 = New Panel()
@@ -93,14 +99,11 @@ Partial Class AdminDashboard
         txtSearchAccountant = New TextBox()
         btnAddAccountant = New FontAwesome.Sharp.IconButton()
         Label10 = New Label()
-        Panel2 = New Panel()
-        Label2 = New Label()
-        lblTotalPatients = New Label()
-        Panel7 = New Panel()
-        Panel8 = New Panel()
-        Panel9 = New Panel()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
+        Panel8.SuspendLayout()
+        Panel7.SuspendLayout()
+        Panel2.SuspendLayout()
         tabDashboard.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -117,16 +120,13 @@ Partial Class AdminDashboard
         Panel4.SuspendLayout()
         CType(dgvBilling, ComponentModel.ISupportInitialize).BeginInit()
         pnlSettingsAdmin.SuspendLayout()
+        Panel9.SuspendLayout()
         pnlNurses.SuspendLayout()
         Panel5.SuspendLayout()
         CType(dgvNurses, ComponentModel.ISupportInitialize).BeginInit()
         pnlAccountants.SuspendLayout()
         Panel6.SuspendLayout()
         CType(dgvAccountants, ComponentModel.ISupportInitialize).BeginInit()
-        Panel2.SuspendLayout()
-        Panel7.SuspendLayout()
-        Panel8.SuspendLayout()
-        Panel9.SuspendLayout()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -386,6 +386,105 @@ Partial Class AdminDashboard
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 2
         ' 
+        ' Panel8
+        ' 
+        Panel8.BackgroundImage = My.Resources.Resources._8
+        Panel8.BackgroundImageLayout = ImageLayout.Stretch
+        Panel8.Controls.Add(lblActiveDoctors)
+        Panel8.Controls.Add(Label4)
+        Panel8.Location = New Point(596, 60)
+        Panel8.Name = "Panel8"
+        Panel8.Size = New Size(280, 150)
+        Panel8.TabIndex = 7
+        ' 
+        ' lblActiveDoctors
+        ' 
+        lblActiveDoctors.AutoSize = True
+        lblActiveDoctors.BackColor = Color.Transparent
+        lblActiveDoctors.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblActiveDoctors.Location = New Point(19, 74)
+        lblActiveDoctors.Name = "lblActiveDoctors"
+        lblActiveDoctors.Size = New Size(190, 28)
+        lblActiveDoctors.TabIndex = 6
+        lblActiveDoctors.Text = "Total Patients"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.BackColor = Color.Transparent
+        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label4.Location = New Point(19, 13)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(157, 22)
+        Label4.TabIndex = 5
+        Label4.Text = "Active Doctors"
+        ' 
+        ' Panel7
+        ' 
+        Panel7.BackgroundImage = My.Resources.Resources._8
+        Panel7.BackgroundImageLayout = ImageLayout.Stretch
+        Panel7.Controls.Add(lblTodaysAppointments)
+        Panel7.Controls.Add(Label3)
+        Panel7.Location = New Point(310, 60)
+        Panel7.Name = "Panel7"
+        Panel7.Size = New Size(280, 150)
+        Panel7.TabIndex = 6
+        ' 
+        ' lblTodaysAppointments
+        ' 
+        lblTodaysAppointments.AutoSize = True
+        lblTodaysAppointments.BackColor = Color.Transparent
+        lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTodaysAppointments.Location = New Point(17, 74)
+        lblTodaysAppointments.Name = "lblTodaysAppointments"
+        lblTodaysAppointments.Size = New Size(190, 28)
+        lblTodaysAppointments.TabIndex = 5
+        lblTodaysAppointments.Text = "Total Patients"
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.BackColor = Color.Transparent
+        Label3.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label3.Location = New Point(17, 13)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(236, 22)
+        Label3.TabIndex = 4
+        Label3.Text = "Today's Appointments"
+        ' 
+        ' Panel2
+        ' 
+        Panel2.BackgroundImage = My.Resources.Resources._8
+        Panel2.BackgroundImageLayout = ImageLayout.Stretch
+        Panel2.Controls.Add(lblTotalPatients)
+        Panel2.Controls.Add(Label2)
+        Panel2.Location = New Point(24, 60)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(280, 150)
+        Panel2.TabIndex = 5
+        ' 
+        ' lblTotalPatients
+        ' 
+        lblTotalPatients.AutoSize = True
+        lblTotalPatients.BackColor = Color.Transparent
+        lblTotalPatients.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotalPatients.Location = New Point(17, 77)
+        lblTotalPatients.Name = "lblTotalPatients"
+        lblTotalPatients.Size = New Size(190, 28)
+        lblTotalPatients.TabIndex = 4
+        lblTotalPatients.Text = "Total Patients"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.BackColor = Color.Transparent
+        Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label2.Location = New Point(17, 13)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(149, 22)
+        Label2.TabIndex = 3
+        Label2.Text = "Total Patients"
+        ' 
         ' tabDashboard
         ' 
         tabDashboard.Controls.Add(TabPage1)
@@ -438,50 +537,6 @@ Partial Class AdminDashboard
         flowRecentPayments.Name = "flowRecentPayments"
         flowRecentPayments.Size = New Size(838, 391)
         flowRecentPayments.TabIndex = 0
-        ' 
-        ' lblActiveDoctors
-        ' 
-        lblActiveDoctors.AutoSize = True
-        lblActiveDoctors.BackColor = Color.Transparent
-        lblActiveDoctors.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblActiveDoctors.Location = New Point(19, 74)
-        lblActiveDoctors.Name = "lblActiveDoctors"
-        lblActiveDoctors.Size = New Size(190, 28)
-        lblActiveDoctors.TabIndex = 6
-        lblActiveDoctors.Text = "Total Patients"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.BackColor = Color.Transparent
-        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(19, 13)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(157, 22)
-        Label4.TabIndex = 5
-        Label4.Text = "Active Doctors"
-        ' 
-        ' lblTodaysAppointments
-        ' 
-        lblTodaysAppointments.AutoSize = True
-        lblTodaysAppointments.BackColor = Color.Transparent
-        lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTodaysAppointments.Location = New Point(17, 74)
-        lblTodaysAppointments.Name = "lblTodaysAppointments"
-        lblTodaysAppointments.Size = New Size(190, 28)
-        lblTodaysAppointments.TabIndex = 5
-        lblTodaysAppointments.Text = "Total Patients"
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.BackColor = Color.Transparent
-        Label3.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(17, 13)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(236, 22)
-        Label3.TabIndex = 4
-        Label3.Text = "Today's Appointments"
         ' 
         ' pnlPatients
         ' 
@@ -718,36 +773,26 @@ Partial Class AdminDashboard
         pnlSettingsAdmin.Size = New Size(900, 660)
         pnlSettingsAdmin.TabIndex = 12
         ' 
-        ' btnSaveAdminSettings
+        ' Panel9
         ' 
-        btnSaveAdminSettings.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
-        btnSaveAdminSettings.FlatAppearance.BorderSize = 0
-        btnSaveAdminSettings.FlatStyle = FlatStyle.Flat
-        btnSaveAdminSettings.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Check
-        btnSaveAdminSettings.IconColor = Color.Black
-        btnSaveAdminSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSaveAdminSettings.IconSize = 36
-        btnSaveAdminSettings.ImageAlign = ContentAlignment.MiddleRight
-        btnSaveAdminSettings.Location = New Point(664, 463)
-        btnSaveAdminSettings.Name = "btnSaveAdminSettings"
-        btnSaveAdminSettings.Size = New Size(118, 44)
-        btnSaveAdminSettings.TabIndex = 21
-        btnSaveAdminSettings.Text = "Save"
-        btnSaveAdminSettings.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnSaveAdminSettings.UseVisualStyleBackColor = False
-        ' 
-        ' SmallLabel1
-        ' 
-        SmallLabel1.AutoSize = True
-        SmallLabel1.BackColor = Color.Transparent
-        SmallLabel1.Font = New Font("Segoe UI", 8F)
-        SmallLabel1.ForeColor = Color.FromArgb(CByte(142), CByte(142), CByte(142))
-        SmallLabel1.Location = New Point(11, 1017)
-        SmallLabel1.Name = "SmallLabel1"
-        SmallLabel1.Size = New Size(12, 19)
-        SmallLabel1.TabIndex = 20
-        SmallLabel1.Text = "."
+        Panel9.BackgroundImage = CType(resources.GetObject("Panel9.BackgroundImage"), Image)
+        Panel9.BackgroundImageLayout = ImageLayout.Stretch
+        Panel9.Controls.Add(btnEyeConfirmPassword)
+        Panel9.Controls.Add(txtConfirmPassword)
+        Panel9.Controls.Add(Label15)
+        Panel9.Controls.Add(btnEyePassword)
+        Panel9.Controls.Add(txtContactNumber)
+        Panel9.Controls.Add(txtPassword)
+        Panel9.Controls.Add(txtEmail)
+        Panel9.Controls.Add(Label14)
+        Panel9.Controls.Add(Label13)
+        Panel9.Controls.Add(Label12)
+        Panel9.Controls.Add(Label11)
+        Panel9.Controls.Add(txtUsername)
+        Panel9.Location = New Point(157, 98)
+        Panel9.Name = "Panel9"
+        Panel9.Size = New Size(631, 332)
+        Panel9.TabIndex = 48
         ' 
         ' btnEyeConfirmPassword
         ' 
@@ -870,6 +915,37 @@ Partial Class AdminDashboard
         txtUsername.Name = "txtUsername"
         txtUsername.Size = New Size(300, 27)
         txtUsername.TabIndex = 8
+        ' 
+        ' btnSaveAdminSettings
+        ' 
+        btnSaveAdminSettings.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnSaveAdminSettings.FlatAppearance.BorderSize = 0
+        btnSaveAdminSettings.FlatStyle = FlatStyle.Flat
+        btnSaveAdminSettings.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Check
+        btnSaveAdminSettings.IconColor = Color.Black
+        btnSaveAdminSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSaveAdminSettings.IconSize = 36
+        btnSaveAdminSettings.ImageAlign = ContentAlignment.MiddleRight
+        btnSaveAdminSettings.Location = New Point(664, 463)
+        btnSaveAdminSettings.Name = "btnSaveAdminSettings"
+        btnSaveAdminSettings.Size = New Size(118, 44)
+        btnSaveAdminSettings.TabIndex = 21
+        btnSaveAdminSettings.Text = "Save"
+        btnSaveAdminSettings.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnSaveAdminSettings.UseVisualStyleBackColor = False
+        ' 
+        ' SmallLabel1
+        ' 
+        SmallLabel1.AutoSize = True
+        SmallLabel1.BackColor = Color.Transparent
+        SmallLabel1.Font = New Font("Segoe UI", 8F)
+        SmallLabel1.ForeColor = Color.FromArgb(CByte(142), CByte(142), CByte(142))
+        SmallLabel1.Location = New Point(11, 1017)
+        SmallLabel1.Name = "SmallLabel1"
+        SmallLabel1.Size = New Size(12, 19)
+        SmallLabel1.TabIndex = 20
+        SmallLabel1.Text = "."
         ' 
         ' Label21
         ' 
@@ -1021,94 +1097,18 @@ Partial Class AdminDashboard
         Label10.TabIndex = 1
         Label10.Text = "Accountants"
         ' 
-        ' Panel2
-        ' 
-        Panel2.BackgroundImage = My.Resources.Resources._8
-        Panel2.BackgroundImageLayout = ImageLayout.Stretch
-        Panel2.Controls.Add(lblTotalPatients)
-        Panel2.Controls.Add(Label2)
-        Panel2.Location = New Point(24, 60)
-        Panel2.Name = "Panel2"
-        Panel2.Size = New Size(280, 150)
-        Panel2.TabIndex = 5
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.Transparent
-        Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(17, 13)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(149, 22)
-        Label2.TabIndex = 3
-        Label2.Text = "Total Patients"
-        ' 
-        ' lblTotalPatients
-        ' 
-        lblTotalPatients.AutoSize = True
-        lblTotalPatients.BackColor = Color.Transparent
-        lblTotalPatients.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalPatients.Location = New Point(17, 77)
-        lblTotalPatients.Name = "lblTotalPatients"
-        lblTotalPatients.Size = New Size(190, 28)
-        lblTotalPatients.TabIndex = 4
-        lblTotalPatients.Text = "Total Patients"
-        ' 
-        ' Panel7
-        ' 
-        Panel7.BackgroundImage = My.Resources.Resources._8
-        Panel7.BackgroundImageLayout = ImageLayout.Stretch
-        Panel7.Controls.Add(lblTodaysAppointments)
-        Panel7.Controls.Add(Label3)
-        Panel7.Location = New Point(310, 60)
-        Panel7.Name = "Panel7"
-        Panel7.Size = New Size(280, 150)
-        Panel7.TabIndex = 6
-        ' 
-        ' Panel8
-        ' 
-        Panel8.BackgroundImage = My.Resources.Resources._8
-        Panel8.BackgroundImageLayout = ImageLayout.Stretch
-        Panel8.Controls.Add(lblActiveDoctors)
-        Panel8.Controls.Add(Label4)
-        Panel8.Location = New Point(596, 60)
-        Panel8.Name = "Panel8"
-        Panel8.Size = New Size(280, 150)
-        Panel8.TabIndex = 7
-        ' 
-        ' Panel9
-        ' 
-        Panel9.BackgroundImage = CType(resources.GetObject("Panel9.BackgroundImage"), Image)
-        Panel9.BackgroundImageLayout = ImageLayout.Stretch
-        Panel9.Controls.Add(btnEyeConfirmPassword)
-        Panel9.Controls.Add(txtConfirmPassword)
-        Panel9.Controls.Add(Label15)
-        Panel9.Controls.Add(btnEyePassword)
-        Panel9.Controls.Add(txtContactNumber)
-        Panel9.Controls.Add(txtPassword)
-        Panel9.Controls.Add(txtEmail)
-        Panel9.Controls.Add(Label14)
-        Panel9.Controls.Add(Label13)
-        Panel9.Controls.Add(Label12)
-        Panel9.Controls.Add(Label11)
-        Panel9.Controls.Add(txtUsername)
-        Panel9.Location = New Point(157, 98)
-        Panel9.Name = "Panel9"
-        Panel9.Size = New Size(631, 332)
-        Panel9.TabIndex = 48
-        ' 
         ' AdminDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlBilling)
         Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlDashboard)
         Controls.Add(pnlAccountants)
         Controls.Add(pnlNurses)
         Controls.Add(pnlDoctors)
         Controls.Add(pnlPatients)
-        Controls.Add(pnlBilling)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
@@ -1122,6 +1122,12 @@ Partial Class AdminDashboard
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
         pnlDashboard.PerformLayout()
+        Panel8.ResumeLayout(False)
+        Panel8.PerformLayout()
+        Panel7.ResumeLayout(False)
+        Panel7.PerformLayout()
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
         tabDashboard.ResumeLayout(False)
         TabPage1.ResumeLayout(False)
         TabPage2.ResumeLayout(False)
@@ -1143,6 +1149,8 @@ Partial Class AdminDashboard
         CType(dgvBilling, ComponentModel.ISupportInitialize).EndInit()
         pnlSettingsAdmin.ResumeLayout(False)
         pnlSettingsAdmin.PerformLayout()
+        Panel9.ResumeLayout(False)
+        Panel9.PerformLayout()
         pnlNurses.ResumeLayout(False)
         pnlNurses.PerformLayout()
         Panel5.ResumeLayout(False)
@@ -1151,14 +1159,6 @@ Partial Class AdminDashboard
         pnlAccountants.PerformLayout()
         Panel6.ResumeLayout(False)
         CType(dgvAccountants, ComponentModel.ISupportInitialize).EndInit()
-        Panel2.ResumeLayout(False)
-        Panel2.PerformLayout()
-        Panel7.ResumeLayout(False)
-        Panel7.PerformLayout()
-        Panel8.ResumeLayout(False)
-        Panel8.PerformLayout()
-        Panel9.ResumeLayout(False)
-        Panel9.PerformLayout()
         ResumeLayout(False)
     End Sub
 

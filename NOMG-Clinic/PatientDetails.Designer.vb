@@ -34,6 +34,8 @@ Partial Class PatientDetails
         flowRecentAppointments = New FlowLayoutPanel()
         Label12 = New Label()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
+        lblHsFluVac = New Label()
+        Label15 = New Label()
         Panel7 = New Panel()
         Label21 = New Label()
         lblAssignedOB = New Label()
@@ -219,6 +221,8 @@ Partial Class PatientDetails
         ' 
         HopeGroupBox2.BackColor = Color.Transparent
         HopeGroupBox2.BorderColor = Color.Transparent
+        HopeGroupBox2.Controls.Add(lblHsFluVac)
+        HopeGroupBox2.Controls.Add(Label15)
         HopeGroupBox2.Controls.Add(Panel7)
         HopeGroupBox2.Controls.Add(lblAssignedOB)
         HopeGroupBox2.Controls.Add(lblNextCheckup)
@@ -240,6 +244,26 @@ Partial Class PatientDetails
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = SystemColors.ControlLightLight
+        ' 
+        ' lblHsFluVac
+        ' 
+        lblHsFluVac.AutoSize = True
+        lblHsFluVac.Font = New Font("Verdana", 10.2F)
+        lblHsFluVac.Location = New Point(126, 216)
+        lblHsFluVac.Name = "lblHsFluVac"
+        lblHsFluVac.Size = New Size(126, 20)
+        lblHsFluVac.TabIndex = 18
+        lblHsFluVac.Text = "Assigned OB:"
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.Font = New Font("Verdana", 10.2F)
+        Label15.Location = New Point(6, 216)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(114, 20)
+        Label15.TabIndex = 17
+        Label15.Text = "Flu Vaccine:"
         ' 
         ' Panel7
         ' 
@@ -265,7 +289,7 @@ Partial Class PatientDetails
         ' 
         lblAssignedOB.AutoSize = True
         lblAssignedOB.Font = New Font("Verdana", 10.2F)
-        lblAssignedOB.Location = New Point(134, 185)
+        lblAssignedOB.Location = New Point(139, 176)
         lblAssignedOB.Name = "lblAssignedOB"
         lblAssignedOB.Size = New Size(126, 20)
         lblAssignedOB.TabIndex = 15
@@ -275,7 +299,7 @@ Partial Class PatientDetails
         ' 
         lblNextCheckup.AutoSize = True
         lblNextCheckup.Font = New Font("Verdana", 10.2F)
-        lblNextCheckup.Location = New Point(147, 143)
+        lblNextCheckup.Location = New Point(152, 136)
         lblNextCheckup.Name = "lblNextCheckup"
         lblNextCheckup.Size = New Size(137, 20)
         lblNextCheckup.TabIndex = 14
@@ -285,7 +309,7 @@ Partial Class PatientDetails
         ' 
         lblGestationalAge.AutoSize = True
         lblGestationalAge.Font = New Font("Verdana", 10.2F)
-        lblGestationalAge.Location = New Point(160, 104)
+        lblGestationalAge.Location = New Point(165, 96)
         lblGestationalAge.Name = "lblGestationalAge"
         lblGestationalAge.Size = New Size(153, 20)
         lblGestationalAge.TabIndex = 13
@@ -295,7 +319,7 @@ Partial Class PatientDetails
         ' 
         lblLastMenstrual.AutoSize = True
         lblLastMenstrual.Font = New Font("Verdana", 10.2F)
-        lblLastMenstrual.Location = New Point(149, 63)
+        lblLastMenstrual.Location = New Point(154, 56)
         lblLastMenstrual.Name = "lblLastMenstrual"
         lblLastMenstrual.Size = New Size(142, 20)
         lblLastMenstrual.TabIndex = 12
@@ -305,7 +329,7 @@ Partial Class PatientDetails
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Verdana", 10.2F)
-        Label3.Location = New Point(6, 185)
+        Label3.Location = New Point(6, 176)
         Label3.Name = "Label3"
         Label3.Size = New Size(126, 20)
         Label3.TabIndex = 11
@@ -315,7 +339,7 @@ Partial Class PatientDetails
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Verdana", 10.2F)
-        Label8.Location = New Point(6, 143)
+        Label8.Location = New Point(6, 136)
         Label8.Name = "Label8"
         Label8.Size = New Size(137, 20)
         Label8.TabIndex = 10
@@ -325,7 +349,7 @@ Partial Class PatientDetails
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Verdana", 10.2F)
-        Label9.Location = New Point(6, 104)
+        Label9.Location = New Point(6, 96)
         Label9.Name = "Label9"
         Label9.Size = New Size(153, 20)
         Label9.TabIndex = 9
@@ -335,7 +359,7 @@ Partial Class PatientDetails
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Verdana", 10.2F)
-        Label10.Location = New Point(6, 63)
+        Label10.Location = New Point(6, 56)
         Label10.Name = "Label10"
         Label10.Size = New Size(142, 20)
         Label10.TabIndex = 8
@@ -755,4 +779,6 @@ Partial Class PatientDetails
     Friend WithEvents dgvConsultationDetails As DataGridView
     Friend WithEvents lblConsultationDetails As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents lblHsFluVac As Label
+    Friend WithEvents Label15 As Label
 End Class

@@ -1143,7 +1143,6 @@ Public Class AdminDashboard
 
         ' Enable auto-sizing for row height
         dgvBilling.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
-
         ' Set default row height
         dgvBilling.RowTemplate.Height = 60
         dgvBilling.RowTemplate.MinimumHeight = 60
@@ -1271,8 +1270,6 @@ Public Class AdminDashboard
 
                         dgvBilling.Rows(rowIndex).Tag = row("BillingID").ToString()
                     Next
-
-                    dgvBilling.AutoResizeRows(DataGridViewAutoSizeRowsMode.AllCells)
 
                 Catch ex As Exception
                     MessageBox.Show("An error occurred while fetching billing data: " & ex.Message)

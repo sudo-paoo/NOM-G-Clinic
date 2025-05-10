@@ -454,6 +454,10 @@ Partial Class BillingDetails
         ' 
         ' dgvItems
         ' 
+        dgvItems.AllowUserToAddRows = False
+        dgvItems.AllowUserToDeleteRows = False
+        dgvItems.AllowUserToResizeColumns = False
+        dgvItems.AllowUserToResizeRows = False
         dgvItems.BackgroundColor = SystemColors.ControlLightLight
         dgvItems.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvItems.Dock = DockStyle.Fill
