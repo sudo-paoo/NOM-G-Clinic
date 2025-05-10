@@ -34,9 +34,6 @@ Partial Class AccountingDashboard
         lblTotalRevenue = New Label()
         lblTotalPaymentToday = New Label()
         Label4 = New Label()
-        tabDashboard = New TabControl()
-        TabPage1 = New TabPage()
-        TabPage2 = New TabPage()
         flowRecentPayments = New FlowLayoutPanel()
         Label2 = New Label()
         lblWelcomeMessage = New Label()
@@ -50,34 +47,33 @@ Partial Class AccountingDashboard
         dgvBilling = New DataGridView()
         Label7 = New Label()
         pnlSettings = New Panel()
-        SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
-        btnSave = New FontAwesome.Sharp.IconButton()
-        txtEmailAddress = New TextBox()
-        Label18 = New Label()
-        txtContactNumber = New TextBox()
-        Label19 = New Label()
-        Label20 = New Label()
         txtAddress = New TextBox()
+        txtContactNumber = New TextBox()
+        txtEmailAddress = New TextBox()
         btnEyeConfirmPassword = New FontAwesome.Sharp.IconButton()
-        txtConfirmPassword = New TextBox()
-        btnEyePassword = New FontAwesome.Sharp.IconButton()
-        Label15 = New Label()
-        txtPassword = New TextBox()
-        Label10 = New Label()
-        Label17 = New Label()
-        txtUsername = New TextBox()
+        Label18 = New Label()
         numAge = New NumericUpDown()
-        txtMiddleName = New TextBox()
-        txtLastName = New TextBox()
-        Label14 = New Label()
+        btnEyePassword = New FontAwesome.Sharp.IconButton()
+        Label20 = New Label()
+        Label19 = New Label()
+        txtConfirmPassword = New TextBox()
         Label13 = New Label()
+        txtLastName = New TextBox()
+        txtPassword = New TextBox()
+        Label15 = New Label()
+        txtUsername = New TextBox()
+        txtMiddleName = New TextBox()
+        SmallLabel1 = New ReaLTaiizor.Controls.SmallLabel()
+        Label17 = New Label()
+        Label10 = New Label()
         Label12 = New Label()
+        btnSave = New FontAwesome.Sharp.IconButton()
+        Label14 = New Label()
         Label11 = New Label()
         txtFirstName = New TextBox()
+        Label1 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
-        tabDashboard.SuspendLayout()
-        TabPage2.SuspendLayout()
         pnlPatients.SuspendLayout()
         pnlPatientsDataGrid.SuspendLayout()
         CType(dgvPatients, ComponentModel.ISupportInitialize).BeginInit()
@@ -233,10 +229,11 @@ Partial Class AccountingDashboard
         ' 
         pnlDashboard.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlDashboard.BackgroundImage = My.Resources.Resources.Untitled_design__1_
+        pnlDashboard.Controls.Add(Label1)
+        pnlDashboard.Controls.Add(flowRecentPayments)
         pnlDashboard.Controls.Add(lblTotalRevenue)
         pnlDashboard.Controls.Add(lblTotalPaymentToday)
         pnlDashboard.Controls.Add(Label4)
-        pnlDashboard.Controls.Add(tabDashboard)
         pnlDashboard.Controls.Add(Label2)
         pnlDashboard.Controls.Add(lblWelcomeMessage)
         pnlDashboard.Dock = DockStyle.Fill
@@ -278,43 +275,10 @@ Partial Class AccountingDashboard
         Label4.TabIndex = 5
         Label4.Text = "Total Revenue"
         ' 
-        ' tabDashboard
-        ' 
-        tabDashboard.Controls.Add(TabPage1)
-        tabDashboard.Controls.Add(TabPage2)
-        tabDashboard.Location = New Point(27, 230)
-        tabDashboard.Name = "tabDashboard"
-        tabDashboard.SelectedIndex = 0
-        tabDashboard.Size = New Size(852, 424)
-        tabDashboard.SizeMode = TabSizeMode.Fixed
-        tabDashboard.TabIndex = 12
-        ' 
-        ' TabPage1
-        ' 
-        TabPage1.Location = New Point(4, 29)
-        TabPage1.Name = "TabPage1"
-        TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(844, 391)
-        TabPage1.TabIndex = 0
-        TabPage1.Text = "Recent Invoices"
-        TabPage1.UseVisualStyleBackColor = True
-        ' 
-        ' TabPage2
-        ' 
-        TabPage2.Controls.Add(flowRecentPayments)
-        TabPage2.Location = New Point(4, 29)
-        TabPage2.Name = "TabPage2"
-        TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(844, 391)
-        TabPage2.TabIndex = 1
-        TabPage2.Text = "Recent Payments"
-        TabPage2.UseVisualStyleBackColor = True
-        ' 
         ' flowRecentPayments
         ' 
         flowRecentPayments.AutoScroll = True
-        flowRecentPayments.Dock = DockStyle.Fill
-        flowRecentPayments.Location = New Point(3, 3)
+        flowRecentPayments.Location = New Point(27, 260)
         flowRecentPayments.Name = "flowRecentPayments"
         flowRecentPayments.Size = New Size(838, 385)
         flowRecentPayments.TabIndex = 0
@@ -466,52 +430,12 @@ Partial Class AccountingDashboard
         pnlSettings.Size = New Size(900, 660)
         pnlSettings.TabIndex = 14
         ' 
-        ' SmallLabel1
+        ' txtAddress
         ' 
-        SmallLabel1.AutoSize = True
-        SmallLabel1.BackColor = Color.Transparent
-        SmallLabel1.Font = New Font("Segoe UI", 8F)
-        SmallLabel1.ForeColor = Color.FromArgb(CByte(142), CByte(142), CByte(142))
-        SmallLabel1.Location = New Point(11, 1017)
-        SmallLabel1.Name = "SmallLabel1"
-        SmallLabel1.Size = New Size(12, 19)
-        SmallLabel1.TabIndex = 20
-        SmallLabel1.Text = "."
-        ' 
-        ' btnSave
-        ' 
-        btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.RosyBrown
-        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSave.IconSize = 36
-        btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(619, 901)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(133, 44)
-        btnSave.TabIndex = 14
-        btnSave.Text = "SAVE"
-        btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnSave.UseVisualStyleBackColor = True
-        ' 
-        ' txtEmailAddress
-        ' 
-        txtEmailAddress.Location = New Point(318, 794)
-        txtEmailAddress.Name = "txtEmailAddress"
-        txtEmailAddress.Size = New Size(399, 27)
-        txtEmailAddress.TabIndex = 13
-        ' 
-        ' Label18
-        ' 
-        Label18.AutoSize = True
-        Label18.BackColor = Color.Transparent
-        Label18.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label18.ForeColor = SystemColors.ControlText
-        Label18.Location = New Point(172, 793)
-        Label18.Name = "Label18"
-        Label18.Size = New Size(144, 28)
-        Label18.TabIndex = 12
-        Label18.Text = "Email Address:"
+        txtAddress.Location = New Point(319, 700)
+        txtAddress.Name = "txtAddress"
+        txtAddress.Size = New Size(398, 27)
+        txtAddress.TabIndex = 8
         ' 
         ' txtContactNumber
         ' 
@@ -520,36 +444,12 @@ Partial Class AccountingDashboard
         txtContactNumber.Size = New Size(398, 27)
         txtContactNumber.TabIndex = 11
         ' 
-        ' Label19
+        ' txtEmailAddress
         ' 
-        Label19.AutoSize = True
-        Label19.BackColor = Color.Transparent
-        Label19.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.ForeColor = SystemColors.ControlText
-        Label19.Location = New Point(222, 699)
-        Label19.Name = "Label19"
-        Label19.Size = New Size(90, 28)
-        Label19.TabIndex = 7
-        Label19.Text = "Address:"
-        ' 
-        ' Label20
-        ' 
-        Label20.AutoSize = True
-        Label20.BackColor = Color.Transparent
-        Label20.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label20.ForeColor = SystemColors.ControlText
-        Label20.Location = New Point(148, 746)
-        Label20.Name = "Label20"
-        Label20.Size = New Size(168, 28)
-        Label20.TabIndex = 4
-        Label20.Text = "Contact Number:"
-        ' 
-        ' txtAddress
-        ' 
-        txtAddress.Location = New Point(319, 700)
-        txtAddress.Name = "txtAddress"
-        txtAddress.Size = New Size(398, 27)
-        txtAddress.TabIndex = 8
+        txtEmailAddress.Location = New Point(318, 794)
+        txtEmailAddress.Name = "txtEmailAddress"
+        txtEmailAddress.Size = New Size(399, 27)
+        txtEmailAddress.TabIndex = 13
         ' 
         ' btnEyeConfirmPassword
         ' 
@@ -566,13 +466,24 @@ Partial Class AccountingDashboard
         btnEyeConfirmPassword.TabIndex = 44
         btnEyeConfirmPassword.UseVisualStyleBackColor = False
         ' 
-        ' txtConfirmPassword
+        ' Label18
         ' 
-        txtConfirmPassword.Location = New Point(312, 545)
-        txtConfirmPassword.Name = "txtConfirmPassword"
-        txtConfirmPassword.Size = New Size(400, 27)
-        txtConfirmPassword.TabIndex = 13
-        txtConfirmPassword.UseSystemPasswordChar = True
+        Label18.AutoSize = True
+        Label18.BackColor = Color.Transparent
+        Label18.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label18.ForeColor = SystemColors.ControlText
+        Label18.Location = New Point(172, 793)
+        Label18.Name = "Label18"
+        Label18.Size = New Size(144, 28)
+        Label18.TabIndex = 12
+        Label18.Text = "Email Address:"
+        ' 
+        ' numAge
+        ' 
+        numAge.Location = New Point(319, 294)
+        numAge.Name = "numAge"
+        numAge.Size = New Size(398, 27)
+        numAge.TabIndex = 12
         ' 
         ' btnEyePassword
         ' 
@@ -589,85 +500,37 @@ Partial Class AccountingDashboard
         btnEyePassword.TabIndex = 43
         btnEyePassword.UseVisualStyleBackColor = False
         ' 
-        ' Label15
+        ' Label20
         ' 
-        Label15.AutoSize = True
-        Label15.BackColor = Color.Transparent
-        Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label15.Location = New Point(126, 542)
-        Label15.Name = "Label15"
-        Label15.Size = New Size(181, 28)
-        Label15.TabIndex = 12
-        Label15.Text = "Confirm Password:"
+        Label20.AutoSize = True
+        Label20.BackColor = Color.Transparent
+        Label20.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label20.ForeColor = SystemColors.ControlText
+        Label20.Location = New Point(148, 746)
+        Label20.Name = "Label20"
+        Label20.Size = New Size(168, 28)
+        Label20.TabIndex = 4
+        Label20.Text = "Contact Number:"
         ' 
-        ' txtPassword
+        ' Label19
         ' 
-        txtPassword.Location = New Point(313, 496)
-        txtPassword.Name = "txtPassword"
-        txtPassword.Size = New Size(399, 27)
-        txtPassword.TabIndex = 11
-        txtPassword.UseSystemPasswordChar = True
+        Label19.AutoSize = True
+        Label19.BackColor = Color.Transparent
+        Label19.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label19.ForeColor = SystemColors.ControlText
+        Label19.Location = New Point(222, 699)
+        Label19.Name = "Label19"
+        Label19.Size = New Size(90, 28)
+        Label19.TabIndex = 7
+        Label19.Text = "Address:"
         ' 
-        ' Label10
+        ' txtConfirmPassword
         ' 
-        Label10.AutoSize = True
-        Label10.BackColor = Color.Transparent
-        Label10.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.Location = New Point(198, 446)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(109, 28)
-        Label10.TabIndex = 7
-        Label10.Text = "Username:"
-        ' 
-        ' Label17
-        ' 
-        Label17.AutoSize = True
-        Label17.BackColor = Color.Transparent
-        Label17.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(205, 493)
-        Label17.Name = "Label17"
-        Label17.Size = New Size(102, 28)
-        Label17.TabIndex = 4
-        Label17.Text = "Password:"
-        ' 
-        ' txtUsername
-        ' 
-        txtUsername.Location = New Point(313, 447)
-        txtUsername.Name = "txtUsername"
-        txtUsername.Size = New Size(399, 27)
-        txtUsername.TabIndex = 8
-        ' 
-        ' numAge
-        ' 
-        numAge.Location = New Point(319, 294)
-        numAge.Name = "numAge"
-        numAge.Size = New Size(398, 27)
-        numAge.TabIndex = 12
-        ' 
-        ' txtMiddleName
-        ' 
-        txtMiddleName.Location = New Point(319, 209)
-        txtMiddleName.Name = "txtMiddleName"
-        txtMiddleName.Size = New Size(398, 27)
-        txtMiddleName.TabIndex = 11
-        ' 
-        ' txtLastName
-        ' 
-        txtLastName.Location = New Point(317, 251)
-        txtLastName.Name = "txtLastName"
-        txtLastName.Size = New Size(400, 27)
-        txtLastName.TabIndex = 10
-        ' 
-        ' Label14
-        ' 
-        Label14.AutoSize = True
-        Label14.BackColor = Color.Transparent
-        Label14.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label14.Location = New Point(184, 167)
-        Label14.Name = "Label14"
-        Label14.Size = New Size(112, 28)
-        Label14.TabIndex = 7
-        Label14.Text = "First name:"
+        txtConfirmPassword.Location = New Point(312, 545)
+        txtConfirmPassword.Name = "txtConfirmPassword"
+        txtConfirmPassword.Size = New Size(400, 27)
+        txtConfirmPassword.TabIndex = 13
+        txtConfirmPassword.UseSystemPasswordChar = True
         ' 
         ' Label13
         ' 
@@ -680,6 +543,80 @@ Partial Class AccountingDashboard
         Label13.TabIndex = 6
         Label13.Text = "Age:"
         ' 
+        ' txtLastName
+        ' 
+        txtLastName.Location = New Point(317, 251)
+        txtLastName.Name = "txtLastName"
+        txtLastName.Size = New Size(400, 27)
+        txtLastName.TabIndex = 10
+        ' 
+        ' txtPassword
+        ' 
+        txtPassword.Location = New Point(313, 496)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(399, 27)
+        txtPassword.TabIndex = 11
+        txtPassword.UseSystemPasswordChar = True
+        ' 
+        ' Label15
+        ' 
+        Label15.AutoSize = True
+        Label15.BackColor = Color.Transparent
+        Label15.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label15.Location = New Point(126, 542)
+        Label15.Name = "Label15"
+        Label15.Size = New Size(181, 28)
+        Label15.TabIndex = 12
+        Label15.Text = "Confirm Password:"
+        ' 
+        ' txtUsername
+        ' 
+        txtUsername.Location = New Point(313, 447)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(399, 27)
+        txtUsername.TabIndex = 8
+        ' 
+        ' txtMiddleName
+        ' 
+        txtMiddleName.Location = New Point(319, 209)
+        txtMiddleName.Name = "txtMiddleName"
+        txtMiddleName.Size = New Size(398, 27)
+        txtMiddleName.TabIndex = 11
+        ' 
+        ' SmallLabel1
+        ' 
+        SmallLabel1.AutoSize = True
+        SmallLabel1.BackColor = Color.Transparent
+        SmallLabel1.Font = New Font("Segoe UI", 8F)
+        SmallLabel1.ForeColor = Color.FromArgb(CByte(142), CByte(142), CByte(142))
+        SmallLabel1.Location = New Point(11, 1017)
+        SmallLabel1.Name = "SmallLabel1"
+        SmallLabel1.Size = New Size(12, 19)
+        SmallLabel1.TabIndex = 20
+        SmallLabel1.Text = "."
+        ' 
+        ' Label17
+        ' 
+        Label17.AutoSize = True
+        Label17.BackColor = Color.Transparent
+        Label17.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Location = New Point(205, 493)
+        Label17.Name = "Label17"
+        Label17.Size = New Size(102, 28)
+        Label17.TabIndex = 4
+        Label17.Text = "Password:"
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.BackColor = Color.Transparent
+        Label10.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label10.Location = New Point(198, 446)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(109, 28)
+        Label10.TabIndex = 7
+        Label10.Text = "Username:"
+        ' 
         ' Label12
         ' 
         Label12.AutoSize = True
@@ -690,6 +627,36 @@ Partial Class AccountingDashboard
         Label12.Size = New Size(110, 28)
         Label12.TabIndex = 5
         Label12.Text = "Last name:"
+        ' 
+        ' btnSave
+        ' 
+        btnSave.BackColor = Color.Chartreuse
+        btnSave.FlatAppearance.BorderSize = 0
+        btnSave.FlatStyle = FlatStyle.Flat
+        btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        btnSave.IconColor = Color.Black
+        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSave.IconSize = 36
+        btnSave.ImageAlign = ContentAlignment.MiddleLeft
+        btnSave.Location = New Point(619, 901)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(133, 44)
+        btnSave.TabIndex = 14
+        btnSave.Text = "Save"
+        btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnSave.UseVisualStyleBackColor = False
+        ' 
+        ' Label14
+        ' 
+        Label14.AutoSize = True
+        Label14.BackColor = Color.Transparent
+        Label14.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label14.Location = New Point(184, 167)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(112, 28)
+        Label14.TabIndex = 7
+        Label14.Text = "First name:"
         ' 
         ' Label11
         ' 
@@ -709,13 +676,24 @@ Partial Class AccountingDashboard
         txtFirstName.Size = New Size(398, 27)
         txtFirstName.TabIndex = 8
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.BackColor = Color.Transparent
+        Label1.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(25, 229)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(186, 22)
+        Label1.TabIndex = 7
+        Label1.Text = "Recent Payments"
+        ' 
         ' AccountingDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlSettings)
         Controls.Add(pnlDashboard)
+        Controls.Add(pnlSettings)
         Controls.Add(pnlBilling)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)
@@ -730,8 +708,6 @@ Partial Class AccountingDashboard
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
         pnlDashboard.PerformLayout()
-        tabDashboard.ResumeLayout(False)
-        TabPage2.ResumeLayout(False)
         pnlPatients.ResumeLayout(False)
         pnlPatients.PerformLayout()
         pnlPatientsDataGrid.ResumeLayout(False)
@@ -756,9 +732,6 @@ Partial Class AccountingDashboard
     Friend WithEvents lblWelcomeMessage As Label
     Friend WithEvents lblTotalRevenue As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents tabDashboard As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
     Friend WithEvents pnlPatients As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents txtSearchPatient As TextBox
@@ -797,4 +770,5 @@ Partial Class AccountingDashboard
     Friend WithEvents flowRecentPayments As FlowLayoutPanel
     Friend WithEvents lblTotalPaymentToday As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
 End Class

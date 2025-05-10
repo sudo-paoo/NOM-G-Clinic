@@ -25,13 +25,11 @@ Partial Class EditPatientDetails
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(EditPatientDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
-        Label29 = New Label()
-        Label28 = New Label()
-        btnSave = New FontAwesome.Sharp.IconButton()
-        tabPatientRegistration = New TabControl()
+        tabPatientEdit = New TabControl()
         TabPage1 = New TabPage()
         numHeight = New NumericUpDown()
         numWeight = New NumericUpDown()
+        numAge = New NumericUpDown()
         cbxBloodType = New ComboBox()
         cbxCivilStatus = New ComboBox()
         Label16 = New Label()
@@ -48,8 +46,11 @@ Partial Class EditPatientDetails
         Label5 = New Label()
         Label6 = New Label()
         Label3 = New Label()
+        txtLastName = New TextBox()
         Label2 = New Label()
+        txtMiddleName = New TextBox()
         Label1 = New Label()
+        txtFirstName = New TextBox()
         TabPage2 = New TabPage()
         Label17 = New Label()
         btnEmergencyContactPrevious = New FontAwesome.Sharp.IconButton()
@@ -71,25 +72,23 @@ Partial Class EditPatientDetails
         cbxAssignedOB = New ComboBox()
         Label21 = New Label()
         btnMedicalInformationPrevious = New FontAwesome.Sharp.IconButton()
-        btnRegisterPatient = New FontAwesome.Sharp.IconButton()
         rbtnNo = New RadioButton()
         rtbnYes = New RadioButton()
         Label20 = New Label()
         clrLastMenstrual = New MonthCalendar()
         Label19 = New Label()
         Label18 = New Label()
-        numAge = New NumericUpDown()
-        txtLastName = New TextBox()
-        txtMiddleName = New TextBox()
-        txtFirstName = New TextBox()
+        Label29 = New Label()
+        Label28 = New Label()
+        btnUpdatePatient = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
-        tabPatientRegistration.SuspendLayout()
+        tabPatientEdit.SuspendLayout()
         TabPage1.SuspendLayout()
         CType(numHeight, ComponentModel.ISupportInitialize).BeginInit()
         CType(numWeight, ComponentModel.ISupportInitialize).BeginInit()
+        CType(numAge, ComponentModel.ISupportInitialize).BeginInit()
         TabPage2.SuspendLayout()
         TabPage3.SuspendLayout()
-        CType(numAge, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' HopeForm1
@@ -113,67 +112,28 @@ Partial Class EditPatientDetails
         ' 
         Panel1.AutoScroll = True
         Panel1.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        Panel1.Controls.Add(tabPatientRegistration)
+        Panel1.Controls.Add(tabPatientEdit)
         Panel1.Controls.Add(Label29)
         Panel1.Controls.Add(Label28)
-        Panel1.Controls.Add(btnSave)
+        Panel1.Controls.Add(btnUpdatePatient)
         Panel1.Dock = DockStyle.Fill
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(1000, 660)
         Panel1.TabIndex = 1
         ' 
-        ' Label29
+        ' tabPatientEdit
         ' 
-        Label29.AutoSize = True
-        Label29.Location = New Point(814, 807)
-        Label29.Name = "Label29"
-        Label29.Size = New Size(18, 20)
-        Label29.TabIndex = 31
-        Label29.Text = "..."
-        ' 
-        ' Label28
-        ' 
-        Label28.AutoSize = True
-        Label28.BackColor = Color.Transparent
-        Label28.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label28.Location = New Point(21, 24)
-        Label28.Name = "Label28"
-        Label28.Size = New Size(323, 34)
-        Label28.TabIndex = 30
-        Label28.Text = "Edit Patient Details"
-        ' 
-        ' btnSave
-        ' 
-        btnSave.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
-        btnSave.FlatAppearance.BorderSize = 0
-        btnSave.FlatStyle = FlatStyle.Flat
-        btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.White
-        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSave.IconSize = 36
-        btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(814, 738)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(118, 44)
-        btnSave.TabIndex = 29
-        btnSave.Text = "SAVE"
-        btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnSave.UseVisualStyleBackColor = False
-        ' 
-        ' tabPatientRegistration
-        ' 
-        tabPatientRegistration.Controls.Add(TabPage1)
-        tabPatientRegistration.Controls.Add(TabPage2)
-        tabPatientRegistration.Controls.Add(TabPage3)
-        tabPatientRegistration.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        tabPatientRegistration.Location = New Point(1, 75)
-        tabPatientRegistration.Name = "tabPatientRegistration"
-        tabPatientRegistration.SelectedIndex = 0
-        tabPatientRegistration.Size = New Size(976, 641)
-        tabPatientRegistration.SizeMode = TabSizeMode.Fixed
-        tabPatientRegistration.TabIndex = 32
+        tabPatientEdit.Controls.Add(TabPage1)
+        tabPatientEdit.Controls.Add(TabPage2)
+        tabPatientEdit.Controls.Add(TabPage3)
+        tabPatientEdit.Font = New Font("Verdana", 9F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        tabPatientEdit.Location = New Point(1, 75)
+        tabPatientEdit.Name = "tabPatientEdit"
+        tabPatientEdit.SelectedIndex = 0
+        tabPatientEdit.Size = New Size(976, 641)
+        tabPatientEdit.SizeMode = TabSizeMode.Fixed
+        tabPatientEdit.TabIndex = 32
         ' 
         ' TabPage1
         ' 
@@ -228,6 +188,14 @@ Partial Class EditPatientDetails
         numWeight.Name = "numWeight"
         numWeight.Size = New Size(445, 32)
         numWeight.TabIndex = 27
+        ' 
+        ' numAge
+        ' 
+        numAge.Font = New Font("Verdana", 12F)
+        numAge.Location = New Point(16, 197)
+        numAge.Name = "numAge"
+        numAge.Size = New Size(287, 32)
+        numAge.TabIndex = 26
         ' 
         ' cbxBloodType
         ' 
@@ -398,6 +366,14 @@ Partial Class EditPatientDetails
         Label3.TabIndex = 5
         Label3.Text = "Last Name"
         ' 
+        ' txtLastName
+        ' 
+        txtLastName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtLastName.Location = New Point(661, 110)
+        txtLastName.Name = "txtLastName"
+        txtLastName.Size = New Size(290, 32)
+        txtLastName.TabIndex = 4
+        ' 
         ' Label2
         ' 
         Label2.AutoSize = True
@@ -408,6 +384,14 @@ Partial Class EditPatientDetails
         Label2.TabIndex = 3
         Label2.Text = "Middle Name"
         ' 
+        ' txtMiddleName
+        ' 
+        txtMiddleName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtMiddleName.Location = New Point(340, 110)
+        txtMiddleName.Name = "txtMiddleName"
+        txtMiddleName.Size = New Size(290, 32)
+        txtMiddleName.TabIndex = 2
+        ' 
         ' Label1
         ' 
         Label1.AutoSize = True
@@ -417,6 +401,14 @@ Partial Class EditPatientDetails
         Label1.Size = New Size(112, 20)
         Label1.TabIndex = 1
         Label1.Text = "First Name"
+        ' 
+        ' txtFirstName
+        ' 
+        txtFirstName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtFirstName.Location = New Point(16, 110)
+        txtFirstName.Name = "txtFirstName"
+        txtFirstName.Size = New Size(290, 32)
+        txtFirstName.TabIndex = 0
         ' 
         ' TabPage2
         ' 
@@ -554,7 +546,6 @@ Partial Class EditPatientDetails
         TabPage3.Controls.Add(cbxAssignedOB)
         TabPage3.Controls.Add(Label21)
         TabPage3.Controls.Add(btnMedicalInformationPrevious)
-        TabPage3.Controls.Add(btnRegisterPatient)
         TabPage3.Controls.Add(rbtnNo)
         TabPage3.Controls.Add(rtbnYes)
         TabPage3.Controls.Add(Label20)
@@ -658,6 +649,7 @@ Partial Class EditPatientDetails
         ' 
         ' btnMedicalInformationPrevious
         ' 
+        btnMedicalInformationPrevious.FlatStyle = FlatStyle.Flat
         btnMedicalInformationPrevious.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnMedicalInformationPrevious.IconChar = FontAwesome.Sharp.IconChar.AngleLeft
         btnMedicalInformationPrevious.IconColor = Color.Black
@@ -671,25 +663,6 @@ Partial Class EditPatientDetails
         btnMedicalInformationPrevious.Text = "Previous"
         btnMedicalInformationPrevious.TextImageRelation = TextImageRelation.ImageBeforeText
         btnMedicalInformationPrevious.UseVisualStyleBackColor = True
-        ' 
-        ' btnRegisterPatient
-        ' 
-        btnRegisterPatient.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
-        btnRegisterPatient.FlatAppearance.BorderSize = 0
-        btnRegisterPatient.FlatStyle = FlatStyle.Flat
-        btnRegisterPatient.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnRegisterPatient.IconChar = FontAwesome.Sharp.IconChar.AngleRight
-        btnRegisterPatient.IconColor = Color.Black
-        btnRegisterPatient.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnRegisterPatient.IconSize = 28
-        btnRegisterPatient.ImageAlign = ContentAlignment.BottomRight
-        btnRegisterPatient.Location = New Point(772, 553)
-        btnRegisterPatient.Name = "btnRegisterPatient"
-        btnRegisterPatient.Size = New Size(180, 40)
-        btnRegisterPatient.TabIndex = 25
-        btnRegisterPatient.Text = "Register Patient"
-        btnRegisterPatient.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnRegisterPatient.UseVisualStyleBackColor = False
         ' 
         ' rbtnNo
         ' 
@@ -752,37 +725,44 @@ Partial Class EditPatientDetails
         Label18.TabIndex = 3
         Label18.Text = "Medical Information"
         ' 
-        ' numAge
+        ' Label29
         ' 
-        numAge.Font = New Font("Verdana", 12F)
-        numAge.Location = New Point(16, 197)
-        numAge.Name = "numAge"
-        numAge.Size = New Size(287, 32)
-        numAge.TabIndex = 26
+        Label29.AutoSize = True
+        Label29.Location = New Point(814, 807)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(18, 20)
+        Label29.TabIndex = 31
+        Label29.Text = "..."
         ' 
-        ' txtLastName
+        ' Label28
         ' 
-        txtLastName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtLastName.Location = New Point(661, 110)
-        txtLastName.Name = "txtLastName"
-        txtLastName.Size = New Size(290, 32)
-        txtLastName.TabIndex = 4
+        Label28.AutoSize = True
+        Label28.BackColor = Color.Transparent
+        Label28.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label28.Location = New Point(21, 24)
+        Label28.Name = "Label28"
+        Label28.Size = New Size(323, 34)
+        Label28.TabIndex = 30
+        Label28.Text = "Edit Patient Details"
         ' 
-        ' txtMiddleName
+        ' btnUpdatePatient
         ' 
-        txtMiddleName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtMiddleName.Location = New Point(340, 110)
-        txtMiddleName.Name = "txtMiddleName"
-        txtMiddleName.Size = New Size(290, 32)
-        txtMiddleName.TabIndex = 2
-        ' 
-        ' txtFirstName
-        ' 
-        txtFirstName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtFirstName.Location = New Point(16, 110)
-        txtFirstName.Name = "txtFirstName"
-        txtFirstName.Size = New Size(290, 32)
-        txtFirstName.TabIndex = 0
+        btnUpdatePatient.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
+        btnUpdatePatient.FlatAppearance.BorderSize = 0
+        btnUpdatePatient.FlatStyle = FlatStyle.Flat
+        btnUpdatePatient.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnUpdatePatient.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        btnUpdatePatient.IconColor = Color.White
+        btnUpdatePatient.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnUpdatePatient.IconSize = 36
+        btnUpdatePatient.ImageAlign = ContentAlignment.MiddleLeft
+        btnUpdatePatient.Location = New Point(855, 22)
+        btnUpdatePatient.Name = "btnUpdatePatient"
+        btnUpdatePatient.Size = New Size(118, 44)
+        btnUpdatePatient.TabIndex = 29
+        btnUpdatePatient.Text = "SAVE"
+        btnUpdatePatient.TextImageRelation = TextImageRelation.TextBeforeImage
+        btnUpdatePatient.UseVisualStyleBackColor = False
         ' 
         ' EditPatientDetails
         ' 
@@ -800,25 +780,25 @@ Partial Class EditPatientDetails
         Text = "EditPatientDetails"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
-        tabPatientRegistration.ResumeLayout(False)
+        tabPatientEdit.ResumeLayout(False)
         TabPage1.ResumeLayout(False)
         TabPage1.PerformLayout()
         CType(numHeight, ComponentModel.ISupportInitialize).EndInit()
         CType(numWeight, ComponentModel.ISupportInitialize).EndInit()
+        CType(numAge, ComponentModel.ISupportInitialize).EndInit()
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
         TabPage3.ResumeLayout(False)
         TabPage3.PerformLayout()
-        CType(numAge, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
     Friend WithEvents HopeForm1 As ReaLTaiizor.Forms.HopeForm
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents btnSave As FontAwesome.Sharp.IconButton
+    Friend WithEvents btnUpdatePatient As FontAwesome.Sharp.IconButton
     Friend WithEvents Label28 As Label
     Friend WithEvents Label29 As Label
-    Friend WithEvents tabPatientRegistration As TabControl
+    Friend WithEvents tabPatientEdit As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents numHeight As NumericUpDown
     Friend WithEvents numWeight As NumericUpDown
@@ -861,7 +841,6 @@ Partial Class EditPatientDetails
     Friend WithEvents cbxAssignedOB As ComboBox
     Friend WithEvents Label21 As Label
     Friend WithEvents btnMedicalInformationPrevious As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnRegisterPatient As FontAwesome.Sharp.IconButton
     Friend WithEvents rbtnNo As RadioButton
     Friend WithEvents rtbnYes As RadioButton
     Friend WithEvents Label20 As Label
