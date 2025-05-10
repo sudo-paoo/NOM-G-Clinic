@@ -317,6 +317,7 @@ Partial Class AccountingDashboard
         ' 
         ' pnlPatients
         ' 
+        pnlPatients.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlPatients.Controls.Add(Label3)
         pnlPatients.Controls.Add(txtSearchPatient)
         pnlPatients.Controls.Add(pnlPatientsDataGrid)
@@ -641,18 +642,18 @@ Partial Class AccountingDashboard
         ' 
         ' btnSave
         ' 
-        btnSave.BackColor = Color.Chartreuse
+        btnSave.BackColor = SystemColors.ControlLightLight
         btnSave.FlatAppearance.BorderSize = 0
         btnSave.FlatStyle = FlatStyle.Flat
         btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.Black
+        btnSave.IconColor = Color.RosyBrown
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSave.IconSize = 36
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(619, 901)
+        btnSave.Location = New Point(641, 913)
         btnSave.Name = "btnSave"
-        btnSave.Size = New Size(133, 44)
+        btnSave.Size = New Size(115, 44)
         btnSave.TabIndex = 14
         btnSave.Text = "Save"
         btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
@@ -693,9 +694,9 @@ Partial Class AccountingDashboard
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
         Controls.Add(pnlSettings)
-        Controls.Add(pnlDashboard)
-        Controls.Add(pnlBilling)
         Controls.Add(pnlPatients)
+        Controls.Add(pnlBilling)
+        Controls.Add(pnlDashboard)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None

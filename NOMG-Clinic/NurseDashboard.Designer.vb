@@ -808,9 +808,9 @@ Partial Class NurseDashboard
         BackgroundImage = My.Resources.Resources.bg_img
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlPatients)
         Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
-        Controls.Add(pnlPatients)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
