@@ -31,10 +31,11 @@ Partial Class AccountingDashboard
         btnPatients = New FontAwesome.Sharp.IconButton()
         btnDashboard = New FontAwesome.Sharp.IconButton()
         pnlDashboard = New Panel()
+        Label1 = New Label()
+        flowRecentPayments = New FlowLayoutPanel()
         lblTotalRevenue = New Label()
         lblTotalPaymentToday = New Label()
         Label4 = New Label()
-        flowRecentPayments = New FlowLayoutPanel()
         Label2 = New Label()
         lblWelcomeMessage = New Label()
         pnlPatients = New Panel()
@@ -71,7 +72,6 @@ Partial Class AccountingDashboard
         Label14 = New Label()
         Label11 = New Label()
         txtFirstName = New TextBox()
-        Label1 = New Label()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
         pnlPatients.SuspendLayout()
@@ -242,6 +242,25 @@ Partial Class AccountingDashboard
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 3
         ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.BackColor = Color.Transparent
+        Label1.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label1.Location = New Point(25, 229)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(186, 22)
+        Label1.TabIndex = 7
+        Label1.Text = "Recent Payments"
+        ' 
+        ' flowRecentPayments
+        ' 
+        flowRecentPayments.AutoScroll = True
+        flowRecentPayments.Location = New Point(27, 260)
+        flowRecentPayments.Name = "flowRecentPayments"
+        flowRecentPayments.Size = New Size(838, 385)
+        flowRecentPayments.TabIndex = 0
+        ' 
         ' lblTotalRevenue
         ' 
         lblTotalRevenue.AutoSize = True
@@ -274,14 +293,6 @@ Partial Class AccountingDashboard
         Label4.Size = New Size(154, 22)
         Label4.TabIndex = 5
         Label4.Text = "Total Revenue"
-        ' 
-        ' flowRecentPayments
-        ' 
-        flowRecentPayments.AutoScroll = True
-        flowRecentPayments.Location = New Point(27, 260)
-        flowRecentPayments.Name = "flowRecentPayments"
-        flowRecentPayments.Size = New Size(838, 385)
-        flowRecentPayments.TabIndex = 0
         ' 
         ' Label2
         ' 
@@ -676,24 +687,13 @@ Partial Class AccountingDashboard
         txtFirstName.Size = New Size(398, 27)
         txtFirstName.TabIndex = 8
         ' 
-        ' Label1
-        ' 
-        Label1.AutoSize = True
-        Label1.BackColor = Color.Transparent
-        Label1.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(25, 229)
-        Label1.Name = "Label1"
-        Label1.Size = New Size(186, 22)
-        Label1.TabIndex = 7
-        Label1.Text = "Recent Payments"
-        ' 
         ' AccountingDashboard
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlBilling)
         Controls.Add(pnlPatients)
         Controls.Add(Panel1)
