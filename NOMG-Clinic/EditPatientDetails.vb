@@ -451,29 +451,29 @@ Public Class EditPatientDetails
                 Dim dueDate As Date = clrLastMenstrual.SelectionStart.AddDays(280)
 
                 Dim query As String = "UPDATE patient SET " &
-                    "first_name = @firstName, " &
-                    "middle_name = @middleName, " &
-                    "last_name = @lastName, " &
-                    "age = @age, " &
-                    "civil_status = @civilStatus, " &
-                    "weight = @weight, " &
-                    "height = @height, " &
-                    "blood_type = @bloodType, " &
-                    "address = @address, " &
-                    "contact_number = @contactNumber, " &
-                    "email = @email, " &
-                    "emergency_contact_name = @emergencyContactName, " &
-                    "emergency_contact_relationship = @emergencyContactRelationship, " &
-                    "emergency_contact_number = @emergencyContactNumber, " &
-                    "last_menstrual_period = @lastMenstrualPeriod, " &
-                    "first_baby = @firstBaby, " &
-                    "allergies = @allergies, " &
-                    "assigned_ob = @assignedOb, " &
-                    "due_date = @dueDate, " &
-                    "current_medication = @currentMedication, " &
-                    "history_of_surgery = @historyOfSurgery, " &
-                    "flu_vac = @fluVac " &
-                    "WHERE patient_id = @patientId"
+                "first_name = @firstName, " &
+                "middle_name = @middleName, " &
+                "last_name = @lastName, " &
+                "age = @age, " &
+                "civil_status = @civilStatus, " &
+                "weight = @weight, " &
+                "height = @height, " &
+                "blood_type = @bloodType, " &
+                "address = @address, " &
+                "contact_number = @contactNumber, " &
+                "email = @email, " &
+                "emergency_contact_name = @emergencyContactName, " &
+                "emergency_contact_relationship = @emergencyContactRelationship, " &
+                "emergency_contact_number = @emergencyContactNumber, " &
+                "last_menstrual_period = @lastMenstrualPeriod, " &
+                "first_baby = @firstBaby, " &
+                "allergies = @allergies, " &
+                "assigned_ob = @assignedOb, " &
+                "due_date = @dueDate, " &
+                "current_medication = @currentMedication, " &
+                "history_of_surgery = @historyOfSurgery " &
+                "WHERE patient_id = @patientId"
+
 
                 cmd = New MySqlCommand(query, conn)
 

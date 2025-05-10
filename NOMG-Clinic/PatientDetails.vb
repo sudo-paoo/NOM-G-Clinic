@@ -40,6 +40,7 @@ Public Class PatientDetails
                 p.last_menstrual_period, 
                 p.next_checkup, 
                 p.assigned_ob,
+                p.flu_vac,
                 CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS doctor_name
             FROM 
                 patient p
@@ -109,6 +110,20 @@ Public Class PatientDetails
                                 lblAssignedOB.Text = reader("doctor_name").ToString()
                             Else
                                 lblAssignedOB.Text = "Not assigned"
+                            End If
+
+                            ' Check flu vaccination status
+                            Dim fluVacStatus As Boolean = False
+                            If Not reader.IsDBNull(reader.GetOrdinal("flu_vac")) Then
+                                fluVacStatus = Convert.ToInt32(reader("flu_vac")) = 1
+                            End If
+
+                            If fluVacStatus Then
+                                lblHsFluVac.Text = "Vaccinated"
+                                lblHsFluVac.ForeColor = Color.Green
+                            Else
+                                lblHsFluVac.Text = "Not Vaccinated"
+                                lblHsFluVac.ForeColor = Color.Red
                             End If
                         Else
                             MessageBox.Show("Patient not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
