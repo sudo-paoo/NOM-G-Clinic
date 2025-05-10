@@ -478,10 +478,10 @@ Partial Class BillingDetails
         ' 
         Label5.AutoSize = True
         Label5.BackColor = Color.Transparent
-        Label5.Font = New Font("Verdana", 10.2F)
+        Label5.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
         Label5.Location = New Point(46, 15)
         Label5.Name = "Label5"
-        Label5.Size = New Size(57, 20)
+        Label5.Size = New Size(60, 20)
         Label5.TabIndex = 49
         Label5.Text = "Date:"
         ' 
@@ -532,10 +532,10 @@ Partial Class BillingDetails
         ' 
         lblBillingDate.AutoSize = True
         lblBillingDate.BackColor = Color.Transparent
-        lblBillingDate.Font = New Font("Verdana", 10.2F)
+        lblBillingDate.Font = New Font("Verdana", 10.2F, FontStyle.Bold)
         lblBillingDate.Location = New Point(109, 15)
         lblBillingDate.Name = "lblBillingDate"
-        lblBillingDate.Size = New Size(85, 20)
+        lblBillingDate.Size = New Size(92, 20)
         lblBillingDate.TabIndex = 43
         lblBillingDate.Text = "due date"
         ' 
