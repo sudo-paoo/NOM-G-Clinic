@@ -502,7 +502,7 @@ Public Class NurseDashboard
         activeDropdownPatients = New Panel With {
         .BorderStyle = BorderStyle.FixedSingle,
         .BackColor = Color.White,
-        .Size = New Size(200, 130)
+        .Size = New Size(200, 100)
     }
 
         Dim cellRect = dgvPatients.GetCellDisplayRectangle(6, rowIndex, False)
@@ -537,7 +537,6 @@ Public Class NurseDashboard
 
         AddMenuOption("View patient details", rowIndex, 30)
         AddMenuOption("Edit patient", rowIndex, 60)
-        AddMenuOption("Schedule appointment", rowIndex, 90)
 
         Me.Controls.Add(activeDropdownPatients)
         activeDropdownPatients.BringToFront()
@@ -567,10 +566,10 @@ Public Class NurseDashboard
         Dim btn = DirectCast(sender, Button)
         Dim rowIndex = CInt(btn.Tag)
         Dim patientName = dgvPatients.Rows(rowIndex).Cells("Name").Value.ToString()
+        Dim patientId As String = GetPatientIdByName(patientName)
 
         Select Case btn.Text
             Case "View patient details"
-                Dim patientId As String = GetPatientIdByName(patientName)
                 If Not String.IsNullOrEmpty(patientId) Then
                     Dim patientDetailsForm As New PatientDetails()
                     patientDetailsForm.patientID = patientId
@@ -580,32 +579,12 @@ Public Class NurseDashboard
                 End If
 
             Case "Edit patient"
-                MessageBox.Show("Editing patient " & patientName)
-
-            Case "Schedule appointment"
-                Dim patientId As String = GetPatientIdByName(patientName)
                 If Not String.IsNullOrEmpty(patientId) Then
-                    Dim lastMenstrualDate As Date = Date.MinValue
-                    Dim dueDate As Date = Date.MinValue
-                    Dim doctorId As String = ""
-                    Dim firstName As String = ""
-                    Dim lastName As String = ""
-
-                    If GetPatientDetailsForAppointment(patientId, firstName, lastName, lastMenstrualDate, dueDate, doctorId) Then
-                        Dim appointmentForm As New AppointmentDetails()
-                        appointmentForm.PatientId = patientId
-                        appointmentForm.PatientName = $"{firstName} {lastName}"
-                        appointmentForm.LastMenstrualDate = lastMenstrualDate
-                        appointmentForm.DueDate = dueDate
-                        appointmentForm.DefaultDoctorId = doctorId
-                        appointmentForm.IsNewAppointment = True
-                        appointmentForm.AppointmentType = "Follow-up Check-up"
-                        appointmentForm.ShowDialog()
-                    Else
-                        MessageBox.Show("Could not retrieve patient details for appointment scheduling.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    End If
+                    Dim editPatientDetailsForm As New EditPatientDetails()
+                    editPatientDetailsForm.PatientID = patientId
+                    editPatientDetailsForm.ShowDialog()
                 Else
-                    MessageBox.Show("Could not retrieve patient ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Could not retrieve patient details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
         End Select
 
