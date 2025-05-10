@@ -193,7 +193,7 @@ Partial Class BillingDetails
         btnPayBillCash.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnPayBillCash.IconSize = 40
         btnPayBillCash.ImageAlign = ContentAlignment.BottomRight
-        btnPayBillCash.Location = New Point(213, 219)
+        btnPayBillCash.Location = New Point(201, 280)
         btnPayBillCash.Name = "btnPayBillCash"
         btnPayBillCash.Size = New Size(152, 54)
         btnPayBillCash.TabIndex = 54
@@ -206,7 +206,7 @@ Partial Class BillingDetails
         lblChange.AutoSize = True
         lblChange.BackColor = Color.Transparent
         lblChange.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblChange.Location = New Point(137, 145)
+        lblChange.Location = New Point(225, 225)
         lblChange.Name = "lblChange"
         lblChange.Size = New Size(22, 29)
         lblChange.TabIndex = 5
@@ -216,7 +216,7 @@ Partial Class BillingDetails
         ' 
         Label17.AutoSize = True
         Label17.Font = New Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label17.Location = New Point(44, 135)
+        Label17.Location = New Point(41, 220)
         Label17.Name = "Label17"
         Label17.Size = New Size(153, 39)
         Label17.TabIndex = 4
@@ -224,7 +224,7 @@ Partial Class BillingDetails
         ' 
         ' txtAmountReceived
         ' 
-        txtAmountReceived.Location = New Point(304, 73)
+        txtAmountReceived.Location = New Point(170, 169)
         txtAmountReceived.Name = "txtAmountReceived"
         txtAmountReceived.Size = New Size(212, 27)
         txtAmountReceived.TabIndex = 3
@@ -232,7 +232,7 @@ Partial Class BillingDetails
         ' txtAmountDueCash
         ' 
         txtAmountDueCash.Enabled = False
-        txtAmountDueCash.Location = New Point(47, 73)
+        txtAmountDueCash.Location = New Point(171, 78)
         txtAmountDueCash.Name = "txtAmountDueCash"
         txtAmountDueCash.Size = New Size(212, 27)
         txtAmountDueCash.TabIndex = 2
@@ -240,22 +240,22 @@ Partial Class BillingDetails
         ' Label16
         ' 
         Label16.AutoSize = True
-        Label16.Font = New Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold)
-        Label16.Location = New Point(319, 16)
+        Label16.Font = New Font("Microsoft Sans Serif", 16.2F, FontStyle.Bold)
+        Label16.Location = New Point(156, 128)
         Label16.Name = "Label16"
-        Label16.Size = New Size(297, 39)
+        Label16.Size = New Size(242, 32)
         Label16.TabIndex = 1
-        Label16.Text = "Amount received:"
+        Label16.Text = "Amount received"
         ' 
         ' Label15
         ' 
         Label15.AutoSize = True
-        Label15.Font = New Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold)
-        Label15.Location = New Point(80, 16)
+        Label15.Font = New Font("Microsoft Sans Serif", 16.2F, FontStyle.Bold)
+        Label15.Location = New Point(184, 40)
         Label15.Name = "Label15"
-        Label15.Size = New Size(226, 39)
+        Label15.Size = New Size(181, 32)
         Label15.TabIndex = 0
-        Label15.Text = "Amount Due:"
+        Label15.Text = "Amount Due"
         ' 
         ' TabPage2
         ' 
