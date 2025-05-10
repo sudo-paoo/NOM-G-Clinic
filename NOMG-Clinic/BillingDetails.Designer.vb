@@ -29,7 +29,7 @@ Partial Class BillingDetails
         lblPatientName = New Label()
         Label4 = New Label()
         lblPatientID = New Label()
-        TabControl1 = New TabControl()
+        tabModePayment = New TabControl()
         TabPage1 = New TabPage()
         btnPayBillCash = New FontAwesome.Sharp.IconButton()
         lblChange = New Label()
@@ -66,7 +66,7 @@ Partial Class BillingDetails
         lblAppointmentHeader = New Label()
         lblBillingDate = New Label()
         Panel1.SuspendLayout()
-        TabControl1.SuspendLayout()
+        tabModePayment.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         pnlItems.SuspendLayout()
@@ -99,7 +99,7 @@ Partial Class BillingDetails
         Panel1.Controls.Add(lblPatientName)
         Panel1.Controls.Add(Label4)
         Panel1.Controls.Add(lblPatientID)
-        Panel1.Controls.Add(TabControl1)
+        Panel1.Controls.Add(tabModePayment)
         Panel1.Controls.Add(pnlItems)
         Panel1.Controls.Add(lblGestationalAge)
         Panel1.Controls.Add(Label5)
@@ -158,15 +158,15 @@ Partial Class BillingDetails
         lblPatientID.TabIndex = 40
         lblPatientID.Text = "patient id"
         ' 
-        ' TabControl1
+        ' tabModePayment
         ' 
-        TabControl1.Controls.Add(TabPage1)
-        TabControl1.Controls.Add(TabPage2)
-        TabControl1.Location = New Point(600, 52)
-        TabControl1.Name = "TabControl1"
-        TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(562, 387)
-        TabControl1.TabIndex = 54
+        tabModePayment.Controls.Add(TabPage1)
+        tabModePayment.Controls.Add(TabPage2)
+        tabModePayment.Location = New Point(600, 52)
+        tabModePayment.Name = "tabModePayment"
+        tabModePayment.SelectedIndex = 0
+        tabModePayment.Size = New Size(562, 387)
+        tabModePayment.TabIndex = 54
         ' 
         ' TabPage1
         ' 
@@ -205,20 +205,20 @@ Partial Class BillingDetails
         ' 
         lblChange.AutoSize = True
         lblChange.BackColor = Color.Transparent
-        lblChange.Font = New Font("Angsana New", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblChange.Font = New Font("Microsoft Sans Serif", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblChange.Location = New Point(137, 145)
         lblChange.Name = "lblChange"
-        lblChange.Size = New Size(19, 32)
+        lblChange.Size = New Size(22, 29)
         lblChange.TabIndex = 5
         lblChange.Text = "-"
         ' 
         ' Label17
         ' 
         Label17.AutoSize = True
-        Label17.Font = New Font("Angsana New", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label17.Font = New Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label17.Location = New Point(44, 135)
         Label17.Name = "Label17"
-        Label17.Size = New Size(99, 47)
+        Label17.Size = New Size(153, 39)
         Label17.TabIndex = 4
         Label17.Text = "Change:"
         ' 
@@ -240,20 +240,20 @@ Partial Class BillingDetails
         ' Label16
         ' 
         Label16.AutoSize = True
-        Label16.Font = New Font("Angsana New", 19.8000011F, FontStyle.Bold)
+        Label16.Font = New Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold)
         Label16.Location = New Point(319, 16)
         Label16.Name = "Label16"
-        Label16.Size = New Size(189, 47)
+        Label16.Size = New Size(297, 39)
         Label16.TabIndex = 1
         Label16.Text = "Amount received:"
         ' 
         ' Label15
         ' 
         Label15.AutoSize = True
-        Label15.Font = New Font("Angsana New", 19.8000011F, FontStyle.Bold)
+        Label15.Font = New Font("Microsoft Sans Serif", 19.8000011F, FontStyle.Bold)
         Label15.Location = New Point(80, 16)
         Label15.Name = "Label15"
-        Label15.Size = New Size(148, 47)
+        Label15.Size = New Size(226, 39)
         Label15.TabIndex = 0
         Label15.Text = "Amount Due:"
         ' 
@@ -555,7 +555,7 @@ Partial Class BillingDetails
         Text = "BillingDetails"
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
-        TabControl1.ResumeLayout(False)
+        tabModePayment.ResumeLayout(False)
         TabPage1.ResumeLayout(False)
         TabPage1.PerformLayout()
         TabPage2.ResumeLayout(False)
@@ -580,7 +580,7 @@ Partial Class BillingDetails
     Friend WithEvents pnlItems As Panel
     Friend WithEvents dgvItems As DataGridView
     Friend WithEvents btnPayBillCard As FontAwesome.Sharp.IconButton
-    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tabModePayment As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents Label12 As Label

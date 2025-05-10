@@ -2,10 +2,10 @@
 
 Public Class AccountingDashboard
     Private activeDropdownPatients As Panel = Nothing
+    Private errorProvider As New ErrorProvider()
+
     Public Property AccountantID As String
     Private Sub AccountingDashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        tabDashboard.ItemSize = New Size(tabDashboard.Width \ tabDashboard.TabCount - 2, 30)
-
         PatientsSetupDataGrid()
         PatientsPopulateDataGrid()
 
@@ -20,6 +20,8 @@ Public Class AccountingDashboard
 
         CalculateTotalRevenue()
         CalculateTodayPayments()
+
+        LoadAccountantProfile()
     End Sub
 
     Private Sub UpdateWelcomeMessage()
@@ -715,16 +717,247 @@ Public Class AccountingDashboard
         End Using
     End Sub
 
+    Private Sub LoadAccountantProfile()
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim query As String = "SELECT first_name, middle_name, last_name, age, username, " &
+                      "email_address, contact_number, address " &
+                      "FROM accountant WHERE accountant_id = @accountantID"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@accountantID", AccountantID)
+
+                connection.Open()
+                Using reader As MySqlDataReader = command.ExecuteReader()
+                    If reader.Read() Then
+                        txtFirstName.Text = If(reader.IsDBNull(reader.GetOrdinal("first_name")), "", reader("first_name").ToString())
+                        txtMiddleName.Text = If(reader.IsDBNull(reader.GetOrdinal("middle_name")), "", reader("middle_name").ToString())
+                        txtLastName.Text = If(reader.IsDBNull(reader.GetOrdinal("last_name")), "", reader("last_name").ToString())
+                        numAge.Value = If(reader.IsDBNull(reader.GetOrdinal("age")), 0, Convert.ToInt32(reader("age")))
+                        txtUsername.Text = If(reader.IsDBNull(reader.GetOrdinal("username")), "", reader("username").ToString())
+                        txtEmailAddress.Text = If(reader.IsDBNull(reader.GetOrdinal("email_address")), "", reader("email_address").ToString())
+                        txtContactNumber.Text = If(reader.IsDBNull(reader.GetOrdinal("contact_number")), "", reader("contact_number").ToString())
+                        txtAddress.Text = If(reader.IsDBNull(reader.GetOrdinal("address")), "", reader("address").ToString())
+                    End If
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        errorProvider.Clear()
+
+        If txtPassword.Text <> txtConfirmPassword.Text Then
+            errorProvider.SetError(txtConfirmPassword, "Passwords do not match")
+            Return
+        End If
+
+        If txtPassword.Text.Length > 0 AndAlso txtPassword.Text.Length < 6 Then
+            errorProvider.SetError(txtPassword, "Password must be at least 6 characters long")
+            Return
+        End If
+
+        Try
+            Dim oldUsername As String = GetCurrentUsername()
+
+            UpdateAccountantInfo()
+
+            If Not String.IsNullOrEmpty(oldUsername) Then
+                UpdateUserInUsersTable(oldUsername)
+            Else
+                MessageBox.Show("Warning: Could not retrieve current username.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+
+            MessageBox.Show("Profile updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error updating profile: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub UpdateAccountantInfo()
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Try
+            Dim query As String
+            If String.IsNullOrEmpty(txtPassword.Text) Then
+                query = "UPDATE accountant SET 
+                first_name = @firstName, 
+                middle_name = @middleName, 
+                last_name = @lastName, 
+                age = @age, 
+                email_address = @emailAddress, 
+                contact_number = @contactNumber, 
+                address = @address, 
+                username = @username 
+                WHERE accountant_id = @accountantID"
+            Else
+                query = "UPDATE accountant SET 
+                first_name = @firstName, 
+                middle_name = @middleName, 
+                last_name = @lastName, 
+                age = @age, 
+                email_address = @emailAddress, 
+                contact_number = @contactNumber, 
+                address = @address, 
+                username = @username, 
+                password = @password 
+                WHERE accountant_id = @accountantID"
+            End If
+
+            Using connection As New MySqlConnection(connectionString)
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@firstName", txtFirstName.Text)
+                    command.Parameters.AddWithValue("@middleName", If(String.IsNullOrEmpty(txtMiddleName.Text), DBNull.Value, txtMiddleName.Text))
+                    command.Parameters.AddWithValue("@lastName", txtLastName.Text)
+                    command.Parameters.AddWithValue("@age", numAge.Value)
+                    command.Parameters.AddWithValue("@emailAddress", If(String.IsNullOrEmpty(txtEmailAddress.Text), DBNull.Value, txtEmailAddress.Text))
+                    command.Parameters.AddWithValue("@contactNumber", If(String.IsNullOrEmpty(txtContactNumber.Text), DBNull.Value, txtContactNumber.Text))
+                    command.Parameters.AddWithValue("@address", If(String.IsNullOrEmpty(txtAddress.Text), DBNull.Value, txtAddress.Text))
+                    command.Parameters.AddWithValue("@username", txtUsername.Text)
+                    command.Parameters.AddWithValue("@accountantID", AccountantID)
+
+                    If Not String.IsNullOrEmpty(txtPassword.Text) Then
+                        command.Parameters.AddWithValue("@password", txtPassword.Text)
+                    End If
+
+                    connection.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+                    If rowsAffected = 0 Then
+                        Throw New Exception("No accountant records were updated. Please check if the accountant information exists.")
+                    End If
+
+                    Console.WriteLine($"Successfully updated accountant info. Rows affected: {rowsAffected}")
+                End Using
+            End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Database error updating accountant: " & ex.Message & Environment.NewLine & "Error code: " & ex.Number, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw
+        Catch ex As Exception
+            Throw New Exception("Error updating accountant information: " & ex.Message, ex)
+        End Try
+    End Sub
+
+    Private Sub UpdateUserInUsersTable(oldUsername As String)
+        If String.IsNullOrEmpty(oldUsername) Then
+            MessageBox.Show("Cannot update user record: old username is empty", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return
+        End If
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+
+        Try
+            Console.WriteLine($"Attempting to update user record from '{oldUsername}' to '{txtUsername.Text}'")
+            Dim query As String
+            If String.IsNullOrEmpty(txtPassword.Text) Then
+                query = "UPDATE users SET username = @newUsername WHERE username = @oldUsername"
+            Else
+                query = "UPDATE users SET username = @newUsername, password = @password WHERE username = @oldUsername"
+            End If
+
+            Using connection As New MySqlConnection(connectionString)
+                Using command As New MySqlCommand(query, connection)
+                    command.Parameters.AddWithValue("@newUsername", txtUsername.Text)
+                    command.Parameters.AddWithValue("@oldUsername", oldUsername)
+
+                    If Not String.IsNullOrEmpty(txtPassword.Text) Then
+                        command.Parameters.AddWithValue("@password", txtPassword.Text)
+                    End If
+
+                    connection.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+
+                    Console.WriteLine($"User update completed. Rows affected: {rowsAffected}")
+
+                    If rowsAffected = 0 Then
+                        If String.IsNullOrEmpty(txtPassword.Text) Then
+                            MessageBox.Show("No user record was updated. You may need to enter a password to create a new user record.",
+                                   "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Else
+                            InsertUserRecord()
+                        End If
+                    End If
+                End Using
+            End Using
+        Catch ex As MySqlException
+            MessageBox.Show("Database error updating user: " & ex.Message & Environment.NewLine & "Error code: " & ex.Number,
+                   "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Throw
+        Catch ex As Exception
+            Throw New Exception("Error updating user: " & ex.Message, ex)
+        End Try
+    End Sub
+
+    Private Sub InsertUserRecord()
+        If String.IsNullOrEmpty(txtPassword.Text) Then
+            MessageBox.Show("Password is required to create a new user record.", "Password Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim insertQuery As String = "INSERT INTO users (username, password, role) VALUES (@username, @password, 'accountant')"
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(insertQuery, connection)
+                command.Parameters.AddWithValue("@username", txtUsername.Text)
+                command.Parameters.AddWithValue("@password", txtPassword.Text)
+
+                connection.Open()
+                command.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
+
+    Private Function GetCurrentUsername() As String
+        Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
+        Dim query As String = "SELECT username FROM accountant WHERE accountant_id = @accountantID"
+        Dim username As String = String.Empty
+
+        Using connection As New MySqlConnection(connectionString)
+            Using command As New MySqlCommand(query, connection)
+                command.Parameters.AddWithValue("@accountantID", AccountantID)
+
+                connection.Open()
+                Dim result = command.ExecuteScalar()
+
+                If result IsNot Nothing Then
+                    username = result.ToString()
+                End If
+            End Using
+        End Using
+
+        Return username
+    End Function
+
+    Private Sub btnEyePassword_Click(sender As Object, e As EventArgs) Handles btnEyePassword.Click
+        txtPassword.UseSystemPasswordChar = Not txtPassword.UseSystemPasswordChar
+
+        If txtPassword.UseSystemPasswordChar Then
+            btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.Eye
+        Else
+            btnEyePassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
+        End If
+    End Sub
+
+    Private Sub btnEyeConfirmPassword_Click(sender As Object, e As EventArgs) Handles btnEyeConfirmPassword.Click
+        txtConfirmPassword.UseSystemPasswordChar = Not txtConfirmPassword.UseSystemPasswordChar
+
+        If txtConfirmPassword.UseSystemPasswordChar Then
+            btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.Eye
+        Else
+            btnEyeConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash
+        End If
+    End Sub
+
+    Private Sub txtConfirmPassword_TextChanged(sender As Object, e As EventArgs) Handles txtConfirmPassword.TextChanged
+        If txtPassword.Text <> txtConfirmPassword.Text Then
+            errorProvider.SetError(txtConfirmPassword, "Passwords do not match")
+        Else
+            errorProvider.SetError(txtConfirmPassword, "")
+        End If
+    End Sub
 
     Private Sub AccountingDashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Application.Exit()
-    End Sub
-
-    Private Sub HopeGroupBox4_Enter(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub pnlSettings_Paint(sender As Object, e As PaintEventArgs) Handles pnlSettings.Paint
-
     End Sub
 End Class

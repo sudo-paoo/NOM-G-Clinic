@@ -14,6 +14,7 @@ Public Class BillingDetails
     Private billingStatus As String = ""
 
     Private Sub BillingDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        tabModePayment.ItemSize = New Size(tabModePayment.Width \ tabModePayment.TabCount - 2, 30)
         txtAmountDueCash.ReadOnly = True
         txtAmountDueCash.BackColor = SystemColors.Control
 
