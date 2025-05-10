@@ -27,9 +27,9 @@ Partial Class ViewConsultationDetails
         Panel1 = New Panel()
         IconPictureBox1 = New FontAwesome.Sharp.IconPictureBox()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
-        txtDoctorPlan = New TextBox()
         Label3 = New Label()
         Panel3 = New Panel()
+        txtDoctorPlan = New TextBox()
         Label7 = New Label()
         txtVitaminIntake = New TextBox()
         hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
@@ -116,7 +116,7 @@ Partial Class ViewConsultationDetails
         Panel1.Location = New Point(0, 40)
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(1200, 660)
-        Panel1.TabIndex = 2
+        Panel1.TabIndex = 3
         ' 
         ' IconPictureBox1
         ' 
@@ -136,29 +136,19 @@ Partial Class ViewConsultationDetails
         ' 
         HopeGroupBox2.BackColor = SystemColors.ControlLightLight
         HopeGroupBox2.BorderColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        HopeGroupBox2.Controls.Add(txtDoctorPlan)
         HopeGroupBox2.Controls.Add(Label3)
         HopeGroupBox2.Controls.Add(Panel3)
         HopeGroupBox2.Font = New Font("Segoe UI", 12F)
         HopeGroupBox2.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox2.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox2.Location = New Point(42, 397)
+        HopeGroupBox2.Location = New Point(39, 404)
         HopeGroupBox2.Name = "HopeGroupBox2"
         HopeGroupBox2.ShowText = False
-        HopeGroupBox2.Size = New Size(1100, 1399)
+        HopeGroupBox2.Size = New Size(1100, 1253)
         HopeGroupBox2.TabIndex = 3
         HopeGroupBox2.TabStop = False
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
-        ' 
-        ' txtDoctorPlan
-        ' 
-        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorPlan.Location = New Point(28, 925)
-        txtDoctorPlan.Multiline = True
-        txtDoctorPlan.Name = "txtDoctorPlan"
-        txtDoctorPlan.Size = New Size(1050, 167)
-        txtDoctorPlan.TabIndex = 39
         ' 
         ' Label3
         ' 
@@ -174,6 +164,7 @@ Partial Class ViewConsultationDetails
         ' 
         ' Panel3
         ' 
+        Panel3.Controls.Add(txtDoctorPlan)
         Panel3.Controls.Add(Label7)
         Panel3.Controls.Add(txtVitaminIntake)
         Panel3.Controls.Add(hgbUrineAnalysis)
@@ -198,10 +189,19 @@ Partial Class ViewConsultationDetails
         Panel3.Controls.Add(Label12)
         Panel3.Controls.Add(Label13)
         Panel3.Controls.Add(Label14)
-        Panel3.Location = New Point(0, 67)
+        Panel3.Location = New Point(3, 50)
         Panel3.Name = "Panel3"
-        Panel3.Size = New Size(1100, 1332)
+        Panel3.Size = New Size(1100, 1208)
         Panel3.TabIndex = 45
+        ' 
+        ' txtDoctorPlan
+        ' 
+        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
+        txtDoctorPlan.Location = New Point(25, 795)
+        txtDoctorPlan.Multiline = True
+        txtDoctorPlan.Name = "txtDoctorPlan"
+        txtDoctorPlan.Size = New Size(1050, 167)
+        txtDoctorPlan.TabIndex = 39
         ' 
         ' Label7
         ' 
@@ -209,7 +209,7 @@ Partial Class ViewConsultationDetails
         Label7.BackColor = Color.Transparent
         Label7.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label7.ForeColor = Color.Black
-        Label7.Location = New Point(441, 1073)
+        Label7.Location = New Point(447, 976)
         Label7.Name = "Label7"
         Label7.Size = New Size(203, 28)
         Label7.TabIndex = 46
@@ -218,7 +218,7 @@ Partial Class ViewConsultationDetails
         ' txtVitaminIntake
         ' 
         txtVitaminIntake.BorderStyle = BorderStyle.FixedSingle
-        txtVitaminIntake.Location = New Point(28, 1110)
+        txtVitaminIntake.Location = New Point(34, 1018)
         txtVitaminIntake.Multiline = True
         txtVitaminIntake.Name = "txtVitaminIntake"
         txtVitaminIntake.Size = New Size(1050, 167)
@@ -311,7 +311,7 @@ Partial Class ViewConsultationDetails
         Label20.BackColor = Color.Transparent
         Label20.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label20.ForeColor = Color.Black
-        Label20.Location = New Point(514, 821)
+        Label20.Location = New Point(511, 753)
         Label20.Name = "Label20"
         Label20.Size = New Size(68, 28)
         Label20.TabIndex = 38
@@ -328,7 +328,7 @@ Partial Class ViewConsultationDetails
         ' txtDoctorAssessment
         ' 
         txtDoctorAssessment.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorAssessment.Location = New Point(28, 616)
+        txtDoctorAssessment.Location = New Point(25, 572)
         txtDoctorAssessment.Multiline = True
         txtDoctorAssessment.Name = "txtDoctorAssessment"
         txtDoctorAssessment.Size = New Size(1050, 167)
@@ -348,7 +348,7 @@ Partial Class ViewConsultationDetails
         Label19.BackColor = Color.Transparent
         Label19.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label19.ForeColor = Color.Black
-        Label19.Location = New Point(484, 591)
+        Label19.Location = New Point(481, 536)
         Label19.Name = "Label19"
         Label19.Size = New Size(132, 22)
         Label19.TabIndex = 36
@@ -372,7 +372,7 @@ Partial Class ViewConsultationDetails
         Label18.BackColor = Color.Transparent
         Label18.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label18.ForeColor = Color.Black
-        Label18.Location = New Point(457, 563)
+        Label18.Location = New Point(448, 493)
         Label18.Name = "Label18"
         Label18.Size = New Size(188, 28)
         Label18.TabIndex = 35
@@ -409,12 +409,12 @@ Partial Class ViewConsultationDetails
         smlWeight.CustomBGColor = Color.White
         smlWeight.Font = New Font("Tahoma", 11F)
         smlWeight.ForeColor = Color.DimGray
-        smlWeight.Location = New Point(859, 206)
+        smlWeight.Location = New Point(660, 276)
         smlWeight.MaxLength = 32767
         smlWeight.Multiline = False
         smlWeight.Name = "smlWeight"
         smlWeight.ReadOnly = False
-        smlWeight.Size = New Size(163, 33)
+        smlWeight.Size = New Size(362, 33)
         smlWeight.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlWeight.TabIndex = 25
         smlWeight.TextAlignment = HorizontalAlignment.Left
@@ -422,18 +422,18 @@ Partial Class ViewConsultationDetails
         ' 
         ' txtFetalHeart
         ' 
-        txtFetalHeart.Location = New Point(705, 329)
+        txtFetalHeart.Location = New Point(660, 342)
         txtFetalHeart.Name = "txtFetalHeart"
-        txtFetalHeart.Size = New Size(163, 34)
+        txtFetalHeart.Size = New Size(362, 34)
         txtFetalHeart.TabIndex = 29
         ' 
         ' txtFundalHeight
         ' 
         txtFundalHeight.Font = New Font("Tahoma", 11F)
         txtFundalHeight.ForeColor = Color.DimGray
-        txtFundalHeight.Location = New Point(232, 334)
+        txtFundalHeight.Location = New Point(88, 347)
         txtFundalHeight.Name = "txtFundalHeight"
-        txtFundalHeight.Size = New Size(163, 30)
+        txtFundalHeight.Size = New Size(363, 30)
         txtFundalHeight.TabIndex = 26
         ' 
         ' smlTemperature
@@ -443,12 +443,12 @@ Partial Class ViewConsultationDetails
         smlTemperature.CustomBGColor = Color.White
         smlTemperature.Font = New Font("Tahoma", 11F)
         smlTemperature.ForeColor = Color.DimGray
-        smlTemperature.Location = New Point(608, 206)
+        smlTemperature.Location = New Point(660, 210)
         smlTemperature.MaxLength = 32767
         smlTemperature.Multiline = False
         smlTemperature.Name = "smlTemperature"
         smlTemperature.ReadOnly = False
-        smlTemperature.Size = New Size(163, 33)
+        smlTemperature.Size = New Size(362, 33)
         smlTemperature.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlTemperature.TabIndex = 24
         smlTemperature.TextAlignment = HorizontalAlignment.Left
@@ -460,7 +460,7 @@ Partial Class ViewConsultationDetails
         Label16.BackColor = Color.Transparent
         Label16.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label16.ForeColor = Color.Black
-        Label16.Location = New Point(695, 296)
+        Label16.Location = New Point(660, 313)
         Label16.Name = "Label16"
         Label16.Size = New Size(201, 25)
         Label16.TabIndex = 28
@@ -473,12 +473,12 @@ Partial Class ViewConsultationDetails
         smlPulse.CustomBGColor = Color.White
         smlPulse.Font = New Font("Tahoma", 11F)
         smlPulse.ForeColor = Color.DimGray
-        smlPulse.Location = New Point(362, 206)
+        smlPulse.Location = New Point(88, 279)
         smlPulse.MaxLength = 32767
         smlPulse.Multiline = False
         smlPulse.Name = "smlPulse"
         smlPulse.ReadOnly = False
-        smlPulse.Size = New Size(163, 33)
+        smlPulse.Size = New Size(363, 33)
         smlPulse.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlPulse.TabIndex = 23
         smlPulse.TextAlignment = HorizontalAlignment.Left
@@ -490,7 +490,7 @@ Partial Class ViewConsultationDetails
         Label15.BackColor = Color.Transparent
         Label15.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label15.ForeColor = Color.Black
-        Label15.Location = New Point(256, 296)
+        Label15.Location = New Point(88, 317)
         Label15.Name = "Label15"
         Label15.Size = New Size(129, 25)
         Label15.TabIndex = 26
@@ -503,12 +503,12 @@ Partial Class ViewConsultationDetails
         smlBloodPressure.CustomBGColor = Color.White
         smlBloodPressure.Font = New Font("Tahoma", 11F)
         smlBloodPressure.ForeColor = Color.DimGray
-        smlBloodPressure.Location = New Point(89, 206)
+        smlBloodPressure.Location = New Point(89, 211)
         smlBloodPressure.MaxLength = 32767
         smlBloodPressure.Multiline = False
         smlBloodPressure.Name = "smlBloodPressure"
         smlBloodPressure.ReadOnly = False
-        smlBloodPressure.Size = New Size(163, 33)
+        smlBloodPressure.Size = New Size(362, 33)
         smlBloodPressure.SmoothingType = Drawing2D.SmoothingMode.AntiAlias
         smlBloodPressure.TabIndex = 22
         smlBloodPressure.TextAlignment = HorizontalAlignment.Left
@@ -520,7 +520,7 @@ Partial Class ViewConsultationDetails
         Label11.BackColor = Color.Transparent
         Label11.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label11.ForeColor = Color.Black
-        Label11.Location = New Point(102, 181)
+        Label11.Location = New Point(89, 181)
         Label11.Name = "Label11"
         Label11.Size = New Size(138, 25)
         Label11.TabIndex = 17
@@ -532,7 +532,7 @@ Partial Class ViewConsultationDetails
         Label12.BackColor = Color.Transparent
         Label12.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label12.ForeColor = Color.Black
-        Label12.Location = New Point(389, 181)
+        Label12.Location = New Point(88, 249)
         Label12.Name = "Label12"
         Label12.Size = New Size(112, 25)
         Label12.TabIndex = 18
@@ -544,7 +544,7 @@ Partial Class ViewConsultationDetails
         Label13.BackColor = Color.Transparent
         Label13.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label13.ForeColor = Color.Black
-        Label13.Location = New Point(636, 181)
+        Label13.Location = New Point(660, 181)
         Label13.Name = "Label13"
         Label13.Size = New Size(118, 25)
         Label13.TabIndex = 19
@@ -556,7 +556,7 @@ Partial Class ViewConsultationDetails
         Label14.BackColor = Color.Transparent
         Label14.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold)
         Label14.ForeColor = Color.Black
-        Label14.Location = New Point(888, 181)
+        Label14.Location = New Point(660, 247)
         Label14.Name = "Label14"
         Label14.Size = New Size(109, 25)
         Label14.TabIndex = 20
@@ -573,7 +573,7 @@ Partial Class ViewConsultationDetails
         HopeGroupBox1.Font = New Font("Segoe UI", 12F)
         HopeGroupBox1.ForeColor = Color.FromArgb(CByte(48), CByte(49), CByte(51))
         HopeGroupBox1.LineColor = Color.FromArgb(CByte(220), CByte(223), CByte(230))
-        HopeGroupBox1.Location = New Point(42, 96)
+        HopeGroupBox1.Location = New Point(39, 96)
         HopeGroupBox1.Name = "HopeGroupBox1"
         HopeGroupBox1.ShowText = False
         HopeGroupBox1.Size = New Size(1100, 295)
@@ -790,9 +790,9 @@ Partial Class ViewConsultationDetails
     Friend WithEvents Panel1 As Panel
     Friend WithEvents IconPictureBox1 As FontAwesome.Sharp.IconPictureBox
     Friend WithEvents HopeGroupBox2 As ReaLTaiizor.Controls.HopeGroupBox
-    Friend WithEvents txtDoctorPlan As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Panel3 As Panel
+    Friend WithEvents txtDoctorPlan As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents txtVitaminIntake As TextBox
     Friend WithEvents hgbUrineAnalysis As ReaLTaiizor.Controls.HopeGroupBox

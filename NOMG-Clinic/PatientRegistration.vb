@@ -394,14 +394,25 @@ Public Class PatientRegistration
                 End If
 
                 Dim adminForm As AdminDashboard = TryCast(Application.OpenForms("AdminDashboard"), AdminDashboard)
+                Dim doctorForm As DoctorDashboard = TryCast(Application.OpenForms("DoctorDashboard"), DoctorDashboard)
+                Dim nurseForm As NurseDashboard = TryCast(Application.OpenForms("NurseDashboard"), NurseDashboard)
                 If adminForm IsNot Nothing Then
                     adminForm.PatientsSetupDataGrid()
                     adminForm.PatientsPopulateDataGrid()
                     adminForm.AppointmentsSetupDataGrid()
                     adminForm.AppointmentsPopulateDataGrid()
-                Else
-                    MessageBox.Show("Admin dashboard not found. Please refresh the dashboard manually.",
-                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+                If doctorForm IsNot Nothing Then
+                    doctorForm.PatientsSetupDataGrid()
+                    doctorForm.PatientsPopulateDataGrid()
+                    doctorForm.AppointmentsSetupDataGrid()
+                    doctorForm.AppointmentsPopulateDataGrid()
+                End If
+                If nurseForm IsNot Nothing Then
+                    nurseForm.PatientsSetupDataGrid()
+                    nurseForm.PatientsPopulateDataGrid()
+                    nurseForm.AppointmentsSetupDataGrid()
+                    nurseForm.AppointmentsPopulateDataGrid()
                 End If
                 Me.Close()
 
