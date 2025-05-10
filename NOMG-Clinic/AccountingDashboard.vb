@@ -960,4 +960,8 @@ Public Class AccountingDashboard
     Private Sub AccountingDashboard_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Application.Exit()
     End Sub
+
+    Private Sub lblTotalPaymentToday_Click(sender As Object, e As EventArgs) Handles lblTotalPaymentToday.Click
+
+    End Sub
 End Class

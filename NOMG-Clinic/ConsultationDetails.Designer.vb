@@ -27,9 +27,10 @@ Partial Class ConsultationDetails
         Panel1 = New Panel()
         IconPictureBox1 = New FontAwesome.Sharp.IconPictureBox()
         HopeGroupBox2 = New ReaLTaiizor.Controls.HopeGroupBox()
-        txtDoctorPlan = New TextBox()
         Label3 = New Label()
         Panel3 = New Panel()
+        txtDoctorPlan = New TextBox()
+        btnSave = New FontAwesome.Sharp.IconButton()
         hgbUrineAnalysis = New ReaLTaiizor.Controls.HopeGroupBox()
         rbBlood = New RadioButton()
         rbKetones = New RadioButton()
@@ -76,7 +77,6 @@ Partial Class ConsultationDetails
         Label2 = New Label()
         lblDate = New Label()
         Label1 = New Label()
-        btnSave = New FontAwesome.Sharp.IconButton()
         Panel1.SuspendLayout()
         CType(IconPictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         HopeGroupBox2.SuspendLayout()
@@ -106,7 +106,7 @@ Partial Class ConsultationDetails
         ' Panel1
         ' 
         Panel1.AutoScroll = True
-        Panel1.BackColor = SystemColors.ControlLightLight
+        Panel1.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
         Panel1.Controls.Add(IconPictureBox1)
         Panel1.Controls.Add(HopeGroupBox2)
@@ -151,15 +151,6 @@ Partial Class ConsultationDetails
         HopeGroupBox2.Text = "HopeGroupBox2"
         HopeGroupBox2.ThemeColor = Color.FromArgb(CByte(247), CByte(124), CByte(161))
         ' 
-        ' txtDoctorPlan
-        ' 
-        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
-        txtDoctorPlan.Location = New Point(30, 803)
-        txtDoctorPlan.Multiline = True
-        txtDoctorPlan.Name = "txtDoctorPlan"
-        txtDoctorPlan.Size = New Size(1050, 167)
-        txtDoctorPlan.TabIndex = 39
-        ' 
         ' Label3
         ' 
         Label3.AutoSize = True
@@ -202,6 +193,31 @@ Partial Class ConsultationDetails
         Panel3.Name = "Panel3"
         Panel3.Size = New Size(1100, 1120)
         Panel3.TabIndex = 45
+        ' 
+        ' txtDoctorPlan
+        ' 
+        txtDoctorPlan.BorderStyle = BorderStyle.FixedSingle
+        txtDoctorPlan.Location = New Point(30, 803)
+        txtDoctorPlan.Multiline = True
+        txtDoctorPlan.Name = "txtDoctorPlan"
+        txtDoctorPlan.Size = New Size(1050, 167)
+        txtDoctorPlan.TabIndex = 39
+        ' 
+        ' btnSave
+        ' 
+        btnSave.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
+        btnSave.BackgroundImageLayout = ImageLayout.None
+        btnSave.FlatStyle = FlatStyle.Flat
+        btnSave.ForeColor = SystemColors.ControlLightLight
+        btnSave.IconChar = FontAwesome.Sharp.IconChar.None
+        btnSave.IconColor = Color.RosyBrown
+        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
+        btnSave.Location = New Point(997, 1015)
+        btnSave.Name = "btnSave"
+        btnSave.Size = New Size(83, 49)
+        btnSave.TabIndex = 45
+        btnSave.Text = "Save"
+        btnSave.UseVisualStyleBackColor = False
         ' 
         ' hgbUrineAnalysis
         ' 
@@ -588,7 +604,7 @@ Partial Class ConsultationDetails
         ' Label26
         ' 
         Label26.AutoSize = True
-        Label26.Location = New Point(705, 145)
+        Label26.Location = New Point(686, 145)
         Label26.Name = "Label26"
         Label26.Size = New Size(78, 28)
         Label26.TabIndex = 33
@@ -600,7 +616,7 @@ Partial Class ConsultationDetails
         lblPatientName.BackColor = SystemColors.ControlLightLight
         lblPatientName.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientName.ForeColor = Color.Black
-        lblPatientName.Location = New Point(102, 40)
+        lblPatientName.Location = New Point(195, 40)
         lblPatientName.Name = "lblPatientName"
         lblPatientName.Size = New Size(68, 28)
         lblPatientName.TabIndex = 20
@@ -609,7 +625,7 @@ Partial Class ConsultationDetails
         ' Label25
         ' 
         Label25.AutoSize = True
-        Label25.Location = New Point(705, 101)
+        Label25.Location = New Point(691, 101)
         Label25.Name = "Label25"
         Label25.Size = New Size(72, 28)
         Label25.TabIndex = 32
@@ -620,7 +636,7 @@ Partial Class ConsultationDetails
         lblGestationalAge.AutoSize = True
         lblGestationalAge.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblGestationalAge.ForeColor = Color.Black
-        lblGestationalAge.Location = New Point(774, 104)
+        lblGestationalAge.Location = New Point(762, 104)
         lblGestationalAge.Name = "lblGestationalAge"
         lblGestationalAge.Size = New Size(177, 25)
         lblGestationalAge.TabIndex = 23
@@ -629,7 +645,7 @@ Partial Class ConsultationDetails
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(705, 57)
+        Label8.Location = New Point(711, 57)
         Label8.Name = "Label8"
         Label8.Size = New Size(51, 28)
         Label8.TabIndex = 31
@@ -640,7 +656,7 @@ Partial Class ConsultationDetails
         Label6.AutoSize = True
         Label6.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label6.ForeColor = Color.Black
-        Label6.Location = New Point(186, 84)
+        Label6.Location = New Point(195, 84)
         Label6.Name = "Label6"
         Label6.Size = New Size(156, 28)
         Label6.TabIndex = 22
@@ -649,7 +665,7 @@ Partial Class ConsultationDetails
         ' Label24
         ' 
         Label24.AutoSize = True
-        Label24.Location = New Point(28, 172)
+        Label24.Location = New Point(68, 172)
         Label24.Name = "Label24"
         Label24.Size = New Size(114, 28)
         Label24.TabIndex = 30
@@ -660,7 +676,7 @@ Partial Class ConsultationDetails
         lblDueDate.AutoSize = True
         lblDueDate.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDueDate.ForeColor = Color.Black
-        lblDueDate.Location = New Point(144, 132)
+        lblDueDate.Location = New Point(195, 132)
         lblDueDate.Name = "lblDueDate"
         lblDueDate.Size = New Size(142, 28)
         lblDueDate.TabIndex = 24
@@ -669,7 +685,7 @@ Partial Class ConsultationDetails
         ' Label23
         ' 
         Label23.AutoSize = True
-        Label23.Location = New Point(28, 128)
+        Label23.Location = New Point(86, 128)
         Label23.Name = "Label23"
         Label23.Size = New Size(97, 28)
         Label23.TabIndex = 29
@@ -700,7 +716,7 @@ Partial Class ConsultationDetails
         lblBloodType.AutoSize = True
         lblBloodType.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblBloodType.ForeColor = Color.Black
-        lblBloodType.Location = New Point(148, 172)
+        lblBloodType.Location = New Point(195, 172)
         lblBloodType.Name = "lblBloodType"
         lblBloodType.Size = New Size(55, 28)
         lblBloodType.TabIndex = 25
@@ -709,7 +725,7 @@ Partial Class ConsultationDetails
         ' Label21
         ' 
         Label21.AutoSize = True
-        Label21.Location = New Point(28, 40)
+        Label21.Location = New Point(114, 40)
         Label21.Name = "Label21"
         Label21.Size = New Size(68, 28)
         Label21.TabIndex = 27
@@ -720,7 +736,7 @@ Partial Class ConsultationDetails
         lblAllergies.AutoSize = True
         lblAllergies.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAllergies.ForeColor = Color.Black
-        lblAllergies.Location = New Point(785, 147)
+        lblAllergies.Location = New Point(762, 147)
         lblAllergies.Name = "lblAllergies"
         lblAllergies.Size = New Size(87, 28)
         lblAllergies.TabIndex = 26
@@ -758,22 +774,6 @@ Partial Class ConsultationDetails
         Label1.Size = New Size(269, 38)
         Label1.TabIndex = 0
         Label1.Text = "Consultation Notes"
-        ' 
-        ' btnSave
-        ' 
-        btnSave.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
-        btnSave.BackgroundImageLayout = ImageLayout.None
-        btnSave.FlatStyle = FlatStyle.Flat
-        btnSave.ForeColor = SystemColors.ControlLightLight
-        btnSave.IconChar = FontAwesome.Sharp.IconChar.None
-        btnSave.IconColor = Color.RosyBrown
-        btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSave.Location = New Point(997, 1015)
-        btnSave.Name = "btnSave"
-        btnSave.Size = New Size(83, 49)
-        btnSave.TabIndex = 45
-        btnSave.Text = "Save"
-        btnSave.UseVisualStyleBackColor = False
         ' 
         ' ConsultationDetails
         ' 

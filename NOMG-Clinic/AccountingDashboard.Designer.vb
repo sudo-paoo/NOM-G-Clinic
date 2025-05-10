@@ -31,12 +31,14 @@ Partial Class AccountingDashboard
         btnPatients = New FontAwesome.Sharp.IconButton()
         btnDashboard = New FontAwesome.Sharp.IconButton()
         pnlDashboard = New Panel()
+        Panel3 = New Panel()
+        lblTotalPaymentToday = New Label()
+        Label2 = New Label()
+        Panel2 = New Panel()
+        lblTotalRevenue = New Label()
+        Label4 = New Label()
         Label1 = New Label()
         flowRecentPayments = New FlowLayoutPanel()
-        lblTotalRevenue = New Label()
-        lblTotalPaymentToday = New Label()
-        Label4 = New Label()
-        Label2 = New Label()
         lblWelcomeMessage = New Label()
         pnlPatients = New Panel()
         Label3 = New Label()
@@ -74,6 +76,8 @@ Partial Class AccountingDashboard
         txtFirstName = New TextBox()
         Panel1.SuspendLayout()
         pnlDashboard.SuspendLayout()
+        Panel3.SuspendLayout()
+        Panel2.SuspendLayout()
         pnlPatients.SuspendLayout()
         pnlPatientsDataGrid.SuspendLayout()
         CType(dgvPatients, ComponentModel.ISupportInitialize).BeginInit()
@@ -228,19 +232,82 @@ Partial Class AccountingDashboard
         ' pnlDashboard
         ' 
         pnlDashboard.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
-        pnlDashboard.BackgroundImage = My.Resources.Resources.Untitled_design__1_
+        pnlDashboard.Controls.Add(Panel3)
+        pnlDashboard.Controls.Add(Panel2)
         pnlDashboard.Controls.Add(Label1)
         pnlDashboard.Controls.Add(flowRecentPayments)
-        pnlDashboard.Controls.Add(lblTotalRevenue)
-        pnlDashboard.Controls.Add(lblTotalPaymentToday)
-        pnlDashboard.Controls.Add(Label4)
-        pnlDashboard.Controls.Add(Label2)
         pnlDashboard.Controls.Add(lblWelcomeMessage)
         pnlDashboard.Dock = DockStyle.Fill
         pnlDashboard.Location = New Point(300, 40)
         pnlDashboard.Name = "pnlDashboard"
         pnlDashboard.Size = New Size(900, 660)
         pnlDashboard.TabIndex = 3
+        ' 
+        ' Panel3
+        ' 
+        Panel3.BackgroundImage = My.Resources.Resources.groupbox_bg
+        Panel3.BackgroundImageLayout = ImageLayout.Stretch
+        Panel3.Controls.Add(lblTotalPaymentToday)
+        Panel3.Controls.Add(Label2)
+        Panel3.Location = New Point(460, 63)
+        Panel3.Name = "Panel3"
+        Panel3.Size = New Size(405, 157)
+        Panel3.TabIndex = 10
+        ' 
+        ' lblTotalPaymentToday
+        ' 
+        lblTotalPaymentToday.AutoSize = True
+        lblTotalPaymentToday.BackColor = Color.Transparent
+        lblTotalPaymentToday.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotalPaymentToday.Location = New Point(12, 83)
+        lblTotalPaymentToday.Name = "lblTotalPaymentToday"
+        lblTotalPaymentToday.Size = New Size(243, 28)
+        lblTotalPaymentToday.TabIndex = 6
+        lblTotalPaymentToday.Text = "Total within a day"
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.BackColor = Color.Transparent
+        Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold)
+        Label2.Location = New Point(62, 11)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(275, 22)
+        Label2.TabIndex = 5
+        Label2.Text = "Payments Received Today"
+        ' 
+        ' Panel2
+        ' 
+        Panel2.BackgroundImage = My.Resources.Resources.groupbox_bg
+        Panel2.BackgroundImageLayout = ImageLayout.Stretch
+        Panel2.Controls.Add(lblTotalRevenue)
+        Panel2.Controls.Add(Label4)
+        Panel2.Location = New Point(22, 63)
+        Panel2.Name = "Panel2"
+        Panel2.Size = New Size(405, 157)
+        Panel2.TabIndex = 9
+        ' 
+        ' lblTotalRevenue
+        ' 
+        lblTotalRevenue.AutoSize = True
+        lblTotalRevenue.BackColor = Color.Transparent
+        lblTotalRevenue.Font = New Font("Verdana", 13.2000008F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        lblTotalRevenue.Location = New Point(12, 85)
+        lblTotalRevenue.Name = "lblTotalRevenue"
+        lblTotalRevenue.Size = New Size(185, 28)
+        lblTotalRevenue.TabIndex = 6
+        lblTotalRevenue.Text = "Total Amount"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.BackColor = Color.Transparent
+        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold)
+        Label4.Location = New Point(119, 11)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(154, 22)
+        Label4.TabIndex = 5
+        Label4.Text = "Total Revenue"
         ' 
         ' Label1
         ' 
@@ -260,50 +327,6 @@ Partial Class AccountingDashboard
         flowRecentPayments.Name = "flowRecentPayments"
         flowRecentPayments.Size = New Size(838, 385)
         flowRecentPayments.TabIndex = 0
-        ' 
-        ' lblTotalRevenue
-        ' 
-        lblTotalRevenue.AutoSize = True
-        lblTotalRevenue.BackColor = Color.Transparent
-        lblTotalRevenue.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalRevenue.Location = New Point(31, 149)
-        lblTotalRevenue.Name = "lblTotalRevenue"
-        lblTotalRevenue.Size = New Size(185, 28)
-        lblTotalRevenue.TabIndex = 6
-        lblTotalRevenue.Text = "Total Amount"
-        ' 
-        ' lblTotalPaymentToday
-        ' 
-        lblTotalPaymentToday.AutoSize = True
-        lblTotalPaymentToday.BackColor = Color.Transparent
-        lblTotalPaymentToday.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalPaymentToday.Location = New Point(469, 146)
-        lblTotalPaymentToday.Name = "lblTotalPaymentToday"
-        lblTotalPaymentToday.Size = New Size(243, 28)
-        lblTotalPaymentToday.TabIndex = 6
-        lblTotalPaymentToday.Text = "Total within a day"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.BackColor = Color.Transparent
-        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(162, 78)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(154, 22)
-        Label4.TabIndex = 5
-        Label4.Text = "Total Revenue"
-        ' 
-        ' Label2
-        ' 
-        Label2.AutoSize = True
-        Label2.BackColor = Color.Transparent
-        Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(539, 79)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(275, 22)
-        Label2.TabIndex = 5
-        Label2.Text = "Payments Received Today"
         ' 
         ' lblWelcomeMessage
         ' 
@@ -693,10 +716,10 @@ Partial Class AccountingDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
-        Controls.Add(pnlDashboard)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
@@ -709,6 +732,10 @@ Partial Class AccountingDashboard
         Panel1.ResumeLayout(False)
         pnlDashboard.ResumeLayout(False)
         pnlDashboard.PerformLayout()
+        Panel3.ResumeLayout(False)
+        Panel3.PerformLayout()
+        Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
         pnlPatients.ResumeLayout(False)
         pnlPatients.PerformLayout()
         pnlPatientsDataGrid.ResumeLayout(False)
@@ -772,4 +799,6 @@ Partial Class AccountingDashboard
     Friend WithEvents lblTotalPaymentToday As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel2 As Panel
 End Class

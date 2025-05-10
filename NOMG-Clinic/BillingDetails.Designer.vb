@@ -198,7 +198,7 @@ Partial Class BillingDetails
         btnPayBillCash.Size = New Size(152, 54)
         btnPayBillCash.TabIndex = 54
         btnPayBillCash.Text = "Pay Bill"
-        btnPayBillCash.TextImageRelation = TextImageRelation.ImageBeforeText
+        btnPayBillCash.TextImageRelation = TextImageRelation.TextBeforeImage
         btnPayBillCash.UseVisualStyleBackColor = True
         ' 
         ' lblChange
@@ -415,7 +415,7 @@ Partial Class BillingDetails
         btnPayBillCard.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnPayBillCard.IconSize = 40
         btnPayBillCard.ImageAlign = ContentAlignment.BottomRight
-        btnPayBillCard.Location = New Point(216, 289)
+        btnPayBillCard.Location = New Point(379, 285)
         btnPayBillCard.Name = "btnPayBillCard"
         btnPayBillCard.Size = New Size(152, 50)
         btnPayBillCard.TabIndex = 53

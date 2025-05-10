@@ -256,7 +256,7 @@ Partial Class NurseDashboard
         Label1.AutoSize = True
         Label1.BackColor = Color.Transparent
         Label1.Font = New Font("Verdana", 10.8F, FontStyle.Bold)
-        Label1.Location = New Point(7, 12)
+        Label1.Location = New Point(55, 12)
         Label1.Name = "Label1"
         Label1.Size = New Size(149, 22)
         Label1.TabIndex = 0
@@ -266,7 +266,7 @@ Partial Class NurseDashboard
         ' 
         lblActiveDoctors.BackColor = Color.Transparent
         lblActiveDoctors.Font = New Font("Verdana", 13.8F, FontStyle.Bold)
-        lblActiveDoctors.Location = New Point(19, 85)
+        lblActiveDoctors.Location = New Point(11, 85)
         lblActiveDoctors.Name = "lblActiveDoctors"
         lblActiveDoctors.Size = New Size(229, 44)
         lblActiveDoctors.TabIndex = 1
@@ -277,7 +277,7 @@ Partial Class NurseDashboard
         label.AutoSize = True
         label.BackColor = Color.Transparent
         label.Font = New Font("Verdana", 10.8F, FontStyle.Bold)
-        label.Location = New Point(19, 12)
+        label.Location = New Point(42, 12)
         label.Name = "label"
         label.Size = New Size(173, 22)
         label.TabIndex = 0
@@ -338,7 +338,7 @@ Partial Class NurseDashboard
         ' 
         lblTodaysAppointments.BackColor = Color.Transparent
         lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold)
-        lblTodaysAppointments.Location = New Point(15, 85)
+        lblTodaysAppointments.Location = New Point(7, 85)
         lblTodaysAppointments.Name = "lblTodaysAppointments"
         lblTodaysAppointments.Size = New Size(229, 40)
         lblTodaysAppointments.TabIndex = 2
@@ -348,16 +348,16 @@ Partial Class NurseDashboard
         ' 
         Label4.AutoSize = True
         Label4.BackColor = Color.Transparent
-        Label4.Font = New Font("Verdana", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(3, 9)
+        Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold)
+        Label4.Location = New Point(21, 11)
         Label4.Name = "Label4"
-        Label4.Size = New Size(251, 25)
+        Label4.Size = New Size(225, 22)
         Label4.TabIndex = 0
         Label4.Text = "Today's Appointment"
         ' 
         ' pnlDashboard
         ' 
-        pnlDashboard.BackColor = Color.Transparent
+        pnlDashboard.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlDashboard.BackgroundImageLayout = ImageLayout.Stretch
         pnlDashboard.Controls.Add(Panel5)
         pnlDashboard.Controls.Add(Panel4)
@@ -416,7 +416,7 @@ Partial Class NurseDashboard
         ' 
         ' pnlPatients
         ' 
-        pnlPatients.BackColor = Color.Transparent
+        pnlPatients.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlPatients.Controls.Add(btnAddPatient)
         pnlPatients.Controls.Add(pnlPatientsDataGrid)
         pnlPatients.Controls.Add(txtSearchPatient)
@@ -434,7 +434,7 @@ Partial Class NurseDashboard
         btnAddPatient.IconColor = Color.Black
         btnAddPatient.IconFont = FontAwesome.Sharp.IconFont.Regular
         btnAddPatient.IconSize = 34
-        btnAddPatient.Location = New Point(671, 16)
+        btnAddPatient.Location = New Point(677, 34)
         btnAddPatient.Name = "btnAddPatient"
         btnAddPatient.Size = New Size(195, 60)
         btnAddPatient.TabIndex = 12
@@ -808,9 +808,9 @@ Partial Class NurseDashboard
         BackgroundImage = My.Resources.Resources.bg_img
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlPatients)
         Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
+        Controls.Add(pnlPatients)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)

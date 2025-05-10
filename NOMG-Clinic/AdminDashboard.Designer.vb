@@ -366,7 +366,7 @@ Partial Class AdminDashboard
         ' 
         Label1.AutoSize = True
         Label1.Font = New Font("Verdana", 16.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label1.Location = New Point(24, 10)
+        Label1.Location = New Point(24, 12)
         Label1.Name = "Label1"
         Label1.Size = New Size(186, 34)
         Label1.TabIndex = 2
@@ -402,7 +402,7 @@ Partial Class AdminDashboard
         lblActiveDoctors.AutoSize = True
         lblActiveDoctors.BackColor = Color.Transparent
         lblActiveDoctors.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblActiveDoctors.Location = New Point(19, 74)
+        lblActiveDoctors.Location = New Point(16, 77)
         lblActiveDoctors.Name = "lblActiveDoctors"
         lblActiveDoctors.Size = New Size(190, 28)
         lblActiveDoctors.TabIndex = 6
@@ -413,7 +413,7 @@ Partial Class AdminDashboard
         Label4.AutoSize = True
         Label4.BackColor = Color.Transparent
         Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(19, 13)
+        Label4.Location = New Point(59, 11)
         Label4.Name = "Label4"
         Label4.Size = New Size(157, 22)
         Label4.TabIndex = 5
@@ -435,7 +435,7 @@ Partial Class AdminDashboard
         lblTodaysAppointments.AutoSize = True
         lblTodaysAppointments.BackColor = Color.Transparent
         lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTodaysAppointments.Location = New Point(17, 74)
+        lblTodaysAppointments.Location = New Point(10, 77)
         lblTodaysAppointments.Name = "lblTodaysAppointments"
         lblTodaysAppointments.Size = New Size(190, 28)
         lblTodaysAppointments.TabIndex = 5
@@ -446,7 +446,7 @@ Partial Class AdminDashboard
         Label3.AutoSize = True
         Label3.BackColor = Color.Transparent
         Label3.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(17, 13)
+        Label3.Location = New Point(17, 12)
         Label3.Name = "Label3"
         Label3.Size = New Size(236, 22)
         Label3.TabIndex = 4
@@ -468,7 +468,7 @@ Partial Class AdminDashboard
         lblTotalPatients.AutoSize = True
         lblTotalPatients.BackColor = Color.Transparent
         lblTotalPatients.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalPatients.Location = New Point(17, 77)
+        lblTotalPatients.Location = New Point(15, 77)
         lblTotalPatients.Name = "lblTotalPatients"
         lblTotalPatients.Size = New Size(190, 28)
         lblTotalPatients.TabIndex = 4
@@ -479,7 +479,7 @@ Partial Class AdminDashboard
         Label2.AutoSize = True
         Label2.BackColor = Color.Transparent
         Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(17, 13)
+        Label2.Location = New Point(61, 11)
         Label2.Name = "Label2"
         Label2.Size = New Size(149, 22)
         Label2.TabIndex = 3
@@ -581,7 +581,7 @@ Partial Class AdminDashboard
         ' 
         ' btnAddPatient
         ' 
-        btnAddPatient.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddPatient.BackColor = SystemColors.ControlLightLight
         btnAddPatient.FlatAppearance.BorderSize = 0
         btnAddPatient.FlatStyle = FlatStyle.Flat
         btnAddPatient.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -589,7 +589,7 @@ Partial Class AdminDashboard
         btnAddPatient.IconColor = Color.Black
         btnAddPatient.IconFont = FontAwesome.Sharp.IconFont.Regular
         btnAddPatient.IconSize = 34
-        btnAddPatient.Location = New Point(681, 22)
+        btnAddPatient.Location = New Point(681, 35)
         btnAddPatient.Name = "btnAddPatient"
         btnAddPatient.Size = New Size(195, 60)
         btnAddPatient.TabIndex = 2
@@ -623,7 +623,7 @@ Partial Class AdminDashboard
         ' 
         ' btnAddDoctor
         ' 
-        btnAddDoctor.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddDoctor.BackColor = SystemColors.ControlLightLight
         btnAddDoctor.FlatAppearance.BorderSize = 0
         btnAddDoctor.FlatStyle = FlatStyle.Flat
         btnAddDoctor.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -631,7 +631,7 @@ Partial Class AdminDashboard
         btnAddDoctor.IconColor = Color.Black
         btnAddDoctor.IconFont = FontAwesome.Sharp.IconFont.Regular
         btnAddDoctor.IconSize = 34
-        btnAddDoctor.Location = New Point(681, 22)
+        btnAddDoctor.Location = New Point(681, 35)
         btnAddDoctor.Name = "btnAddDoctor"
         btnAddDoctor.Size = New Size(195, 60)
         btnAddDoctor.TabIndex = 2
@@ -684,9 +684,9 @@ Partial Class AdminDashboard
         pnlAppointments.Controls.Add(Panel3)
         pnlAppointments.Controls.Add(Appointments)
         pnlAppointments.Dock = DockStyle.Fill
-        pnlAppointments.Location = New Point(300, 40)
+        pnlAppointments.Location = New Point(0, 0)
         pnlAppointments.Name = "pnlAppointments"
-        pnlAppointments.Size = New Size(900, 660)
+        pnlAppointments.Size = New Size(1200, 700)
         pnlAppointments.TabIndex = 8
         ' 
         ' Panel3
@@ -922,7 +922,7 @@ Partial Class AdminDashboard
         btnSaveAdminSettings.FlatAppearance.BorderSize = 0
         btnSaveAdminSettings.FlatStyle = FlatStyle.Flat
         btnSaveAdminSettings.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Check
+        btnSaveAdminSettings.IconChar = FontAwesome.Sharp.IconChar.Cloud
         btnSaveAdminSettings.IconColor = Color.Black
         btnSaveAdminSettings.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSaveAdminSettings.IconSize = 36
@@ -1000,7 +1000,7 @@ Partial Class AdminDashboard
         ' 
         ' btnAddNurse
         ' 
-        btnAddNurse.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddNurse.BackColor = SystemColors.ControlLightLight
         btnAddNurse.FlatAppearance.BorderSize = 0
         btnAddNurse.FlatStyle = FlatStyle.Flat
         btnAddNurse.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -1008,7 +1008,7 @@ Partial Class AdminDashboard
         btnAddNurse.IconColor = Color.Black
         btnAddNurse.IconFont = FontAwesome.Sharp.IconFont.Regular
         btnAddNurse.IconSize = 34
-        btnAddNurse.Location = New Point(681, 22)
+        btnAddNurse.Location = New Point(681, 35)
         btnAddNurse.Name = "btnAddNurse"
         btnAddNurse.Size = New Size(195, 60)
         btnAddNurse.TabIndex = 2
@@ -1070,7 +1070,7 @@ Partial Class AdminDashboard
         ' 
         ' btnAddAccountant
         ' 
-        btnAddAccountant.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnAddAccountant.BackColor = SystemColors.ControlLightLight
         btnAddAccountant.FlatAppearance.BorderSize = 0
         btnAddAccountant.FlatStyle = FlatStyle.Flat
         btnAddAccountant.Font = New Font("Verdana", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
@@ -1078,7 +1078,7 @@ Partial Class AdminDashboard
         btnAddAccountant.IconColor = Color.Black
         btnAddAccountant.IconFont = FontAwesome.Sharp.IconFont.Regular
         btnAddAccountant.IconSize = 34
-        btnAddAccountant.Location = New Point(681, 22)
+        btnAddAccountant.Location = New Point(678, 35)
         btnAddAccountant.Name = "btnAddAccountant"
         btnAddAccountant.Size = New Size(195, 60)
         btnAddAccountant.TabIndex = 2
@@ -1102,16 +1102,16 @@ Partial Class AdminDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlPatients)
-        Controls.Add(pnlBilling)
         Controls.Add(pnlSettingsAdmin)
         Controls.Add(pnlDashboard)
-        Controls.Add(pnlAccountants)
         Controls.Add(pnlNurses)
+        Controls.Add(pnlAccountants)
         Controls.Add(pnlDoctors)
-        Controls.Add(pnlAppointments)
+        Controls.Add(pnlPatients)
+        Controls.Add(pnlBilling)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
+        Controls.Add(pnlAppointments)
         FormBorderStyle = FormBorderStyle.None
         MaximizeBox = False
         MaximumSize = New Size(1920, 1020)

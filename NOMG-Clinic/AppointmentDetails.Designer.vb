@@ -144,12 +144,13 @@ Partial Class AppointmentDetails
         ' btnSubmit
         ' 
         btnSubmit.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnSubmit.IconChar = FontAwesome.Sharp.IconChar.None
+        btnSubmit.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnSubmit.IconColor = Color.Black
         btnSubmit.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSubmit.Location = New Point(286, 594)
+        btnSubmit.IconSize = 40
+        btnSubmit.Location = New Point(286, 593)
         btnSubmit.Name = "btnSubmit"
-        btnSubmit.Size = New Size(302, 40)
+        btnSubmit.Size = New Size(302, 46)
         btnSubmit.TabIndex = 41
         btnSubmit.Text = "Schedule Appointment"
         btnSubmit.TextAlign = ContentAlignment.MiddleLeft
@@ -164,7 +165,7 @@ Partial Class AppointmentDetails
         btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnCancel.Location = New Point(12, 594)
         btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Size(111, 40)
+        btnCancel.Size = New Size(111, 46)
         btnCancel.TabIndex = 40
         btnCancel.Text = "Cancel"
         btnCancel.UseVisualStyleBackColor = True

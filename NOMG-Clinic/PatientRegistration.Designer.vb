@@ -231,16 +231,16 @@ Partial Class PatientRegistration
         ' 
         ' btnPersonalInformationNext
         ' 
-        btnPersonalInformationNext.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnPersonalInformationNext.BackColor = Color.Transparent
         btnPersonalInformationNext.FlatAppearance.BorderSize = 0
-        btnPersonalInformationNext.FlatStyle = FlatStyle.Flat
+        btnPersonalInformationNext.FlatStyle = FlatStyle.Popup
         btnPersonalInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnPersonalInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnPersonalInformationNext.IconColor = Color.Black
         btnPersonalInformationNext.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnPersonalInformationNext.IconSize = 28
         btnPersonalInformationNext.ImageAlign = ContentAlignment.BottomRight
-        btnPersonalInformationNext.Location = New Point(857, 554)
+        btnPersonalInformationNext.Location = New Point(857, 559)
         btnPersonalInformationNext.Name = "btnPersonalInformationNext"
         btnPersonalInformationNext.Size = New Size(94, 40)
         btnPersonalInformationNext.TabIndex = 22
@@ -448,7 +448,7 @@ Partial Class PatientRegistration
         btnEmergencyContactPrevious.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEmergencyContactPrevious.IconSize = 28
         btnEmergencyContactPrevious.ImageAlign = ContentAlignment.BottomRight
-        btnEmergencyContactPrevious.Location = New Point(16, 317)
+        btnEmergencyContactPrevious.Location = New Point(16, 346)
         btnEmergencyContactPrevious.Name = "btnEmergencyContactPrevious"
         btnEmergencyContactPrevious.Size = New Size(131, 40)
         btnEmergencyContactPrevious.TabIndex = 24
@@ -458,16 +458,16 @@ Partial Class PatientRegistration
         ' 
         ' btnEmergencyContactNext
         ' 
-        btnEmergencyContactNext.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnEmergencyContactNext.BackColor = Color.Transparent
         btnEmergencyContactNext.FlatAppearance.BorderSize = 0
-        btnEmergencyContactNext.FlatStyle = FlatStyle.Flat
+        btnEmergencyContactNext.FlatStyle = FlatStyle.Popup
         btnEmergencyContactNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnEmergencyContactNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnEmergencyContactNext.IconColor = Color.Black
         btnEmergencyContactNext.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnEmergencyContactNext.IconSize = 28
         btnEmergencyContactNext.ImageAlign = ContentAlignment.BottomRight
-        btnEmergencyContactNext.Location = New Point(854, 317)
+        btnEmergencyContactNext.Location = New Point(854, 346)
         btnEmergencyContactNext.Name = "btnEmergencyContactNext"
         btnEmergencyContactNext.Size = New Size(94, 40)
         btnEmergencyContactNext.TabIndex = 23
@@ -653,7 +653,7 @@ Partial Class PatientRegistration
         btnMedicalInformationPrevious.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnMedicalInformationPrevious.IconSize = 28
         btnMedicalInformationPrevious.ImageAlign = ContentAlignment.BottomRight
-        btnMedicalInformationPrevious.Location = New Point(20, 553)
+        btnMedicalInformationPrevious.Location = New Point(20, 550)
         btnMedicalInformationPrevious.Name = "btnMedicalInformationPrevious"
         btnMedicalInformationPrevious.Size = New Size(131, 40)
         btnMedicalInformationPrevious.TabIndex = 26
@@ -672,7 +672,7 @@ Partial Class PatientRegistration
         btnRegisterPatient.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnRegisterPatient.IconSize = 28
         btnRegisterPatient.ImageAlign = ContentAlignment.BottomRight
-        btnRegisterPatient.Location = New Point(772, 553)
+        btnRegisterPatient.Location = New Point(772, 551)
         btnRegisterPatient.Name = "btnRegisterPatient"
         btnRegisterPatient.Size = New Size(180, 40)
         btnRegisterPatient.TabIndex = 25

@@ -242,7 +242,7 @@ Partial Class DoctorDashboard
         ' 
         ' pnlDashboard
         ' 
-        pnlDashboard.BackgroundImage = My.Resources.Resources.bg_img
+        pnlDashboard.BackColor = Color.FromArgb(CByte(255), CByte(227), CByte(241))
         pnlDashboard.BackgroundImageLayout = ImageLayout.Stretch
         pnlDashboard.Controls.Add(Panel6)
         pnlDashboard.Controls.Add(Panel5)
@@ -272,7 +272,7 @@ Partial Class DoctorDashboard
         Label6.AutoSize = True
         Label6.BackColor = Color.Transparent
         Label6.Font = New Font("Verdana", 9F, FontStyle.Italic, GraphicsUnit.Point, CByte(0))
-        Label6.Location = New Point(19, 110)
+        Label6.Location = New Point(17, 110)
         Label6.Name = "Label6"
         Label6.Size = New Size(187, 18)
         Label6.TabIndex = 7
@@ -283,7 +283,7 @@ Partial Class DoctorDashboard
         Label5.AutoSize = True
         Label5.BackColor = Color.Transparent
         Label5.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.Location = New Point(16, 11)
+        Label5.Location = New Point(28, 11)
         Label5.Name = "Label5"
         Label5.Size = New Size(219, 22)
         Label5.TabIndex = 5
@@ -294,7 +294,7 @@ Partial Class DoctorDashboard
         lblUpcomingDeliveries.AutoSize = True
         lblUpcomingDeliveries.BackColor = Color.Transparent
         lblUpcomingDeliveries.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblUpcomingDeliveries.Location = New Point(16, 82)
+        lblUpcomingDeliveries.Location = New Point(13, 82)
         lblUpcomingDeliveries.Name = "lblUpcomingDeliveries"
         lblUpcomingDeliveries.Size = New Size(190, 28)
         lblUpcomingDeliveries.TabIndex = 6
@@ -316,7 +316,7 @@ Partial Class DoctorDashboard
         lblTodaysAppointments.AutoSize = True
         lblTodaysAppointments.BackColor = Color.Transparent
         lblTodaysAppointments.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTodaysAppointments.Location = New Point(17, 82)
+        lblTodaysAppointments.Location = New Point(11, 82)
         lblTodaysAppointments.Name = "lblTodaysAppointments"
         lblTodaysAppointments.Size = New Size(190, 28)
         lblTodaysAppointments.TabIndex = 8
@@ -327,7 +327,7 @@ Partial Class DoctorDashboard
         Label2.AutoSize = True
         Label2.BackColor = Color.Transparent
         Label2.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label2.Location = New Point(17, 11)
+        Label2.Location = New Point(23, 11)
         Label2.Name = "Label2"
         Label2.Size = New Size(230, 22)
         Label2.TabIndex = 7
@@ -349,7 +349,7 @@ Partial Class DoctorDashboard
         lblTotalPatients.AutoSize = True
         lblTotalPatients.BackColor = Color.Transparent
         lblTotalPatients.Font = New Font("Verdana", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblTotalPatients.Location = New Point(15, 82)
+        lblTotalPatients.Location = New Point(11, 82)
         lblTotalPatients.Name = "lblTotalPatients"
         lblTotalPatients.Size = New Size(190, 28)
         lblTotalPatients.TabIndex = 6
@@ -360,7 +360,7 @@ Partial Class DoctorDashboard
         Label4.AutoSize = True
         Label4.BackColor = Color.Transparent
         Label4.Font = New Font("Verdana", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label4.Location = New Point(16, 11)
+        Label4.Location = New Point(53, 11)
         Label4.Name = "Label4"
         Label4.Size = New Size(149, 22)
         Label4.TabIndex = 5
@@ -805,9 +805,9 @@ Partial Class DoctorDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlPatients)
         Controls.Add(Panel4)
-        Controls.Add(pnlDashboard)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)

@@ -179,16 +179,16 @@ Partial Class AccountantRegistration
         ' 
         ' btnAccountInformationNext
         ' 
-        btnAccountInformationNext.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnAccountInformationNext.BackColor = Color.Transparent
         btnAccountInformationNext.FlatAppearance.BorderSize = 0
-        btnAccountInformationNext.FlatStyle = FlatStyle.Flat
+        btnAccountInformationNext.FlatStyle = FlatStyle.Popup
         btnAccountInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnAccountInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnAccountInformationNext.IconColor = Color.Black
         btnAccountInformationNext.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnAccountInformationNext.IconSize = 28
         btnAccountInformationNext.ImageAlign = ContentAlignment.BottomRight
-        btnAccountInformationNext.Location = New Point(810, 361)
+        btnAccountInformationNext.Location = New Point(810, 345)
         btnAccountInformationNext.Name = "btnAccountInformationNext"
         btnAccountInformationNext.Size = New Size(94, 40)
         btnAccountInformationNext.TabIndex = 40
@@ -319,9 +319,9 @@ Partial Class AccountantRegistration
         ' 
         ' btnPersonalInformationNext
         ' 
-        btnPersonalInformationNext.BackColor = Color.FromArgb(CByte(225), CByte(29), CByte(72))
+        btnPersonalInformationNext.BackColor = Color.Transparent
         btnPersonalInformationNext.FlatAppearance.BorderSize = 0
-        btnPersonalInformationNext.FlatStyle = FlatStyle.Flat
+        btnPersonalInformationNext.FlatStyle = FlatStyle.Popup
         btnPersonalInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnPersonalInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnPersonalInformationNext.IconColor = Color.Black
