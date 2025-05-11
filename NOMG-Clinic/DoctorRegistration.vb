@@ -24,6 +24,8 @@ Public Class DoctorRegistration
         txtPassword.UseSystemPasswordChar = True
         txtConfirmPassword.UseSystemPasswordChar = True
 
+        txtUsername.Focus()
+
         ' Set up validation for account information fields
         AddHandler txtUsername.Validating, AddressOf ValidateRequiredField
         AddHandler txtPassword.Validating, AddressOf ValidateRequiredField
@@ -36,6 +38,102 @@ Public Class DoctorRegistration
         btnEyeConfirmPassword.TabStop = False
     End Sub
 
+    ' Handle Enter key for txtUsername to move to txtPassword
+    Private Sub txtUsername_KeyDown(sender As Object, e As KeyEventArgs) Handles txtUsername.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtPassword.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtPassword to move to txtConfirmPassword
+    Private Sub txtPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtConfirmPassword.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnAccountInformationNext click
+    Private Sub txtConfirmPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtConfirmPassword.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnAccountInformationNext.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtFirstName to move to txtMiddleName
+    Private Sub txtFirstName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFirstName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtMiddleName.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtMiddleName to move to txtLastName
+    Private Sub txtMiddleName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtMiddleName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtLastName.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtLastName to move to numAge
+    Private Sub txtLastName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLastName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            numAge.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for numAge to move to txtGender
+    Private Sub numAge_KeyDown(sender As Object, e As KeyEventArgs) Handles numAge.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtGender.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtGender to move to txtLicenseNumber
+    Private Sub txtGender_KeyDown(sender As Object, e As KeyEventArgs) Handles txtGender.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtLicenseNumber.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnPersonalInformationNext click
+    Private Sub txtLicenseNumber_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLicenseNumber.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnPersonalInformationNext.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtAddress to move to txtContactNumber
+    Private Sub txtAddress_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAddress.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtContactNumber.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtContactNumber to move to txtEmailAddress
+    Private Sub txtContactNumber_KeyDown(sender As Object, e As KeyEventArgs) Handles txtContactNumber.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtEmailAddress.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnRegisterDoctor click
+    Private Sub txtEmailAddress_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmailAddress.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnRegisterDoctor.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
     Private Sub txtContactNumber_KeyPress(sender As Object, e As KeyPressEventArgs)
         RegistrationModule.HandleNumericKeyPress(e)
 
@@ -44,7 +142,6 @@ Public Class DoctorRegistration
             e.Handled = True
         End If
     End Sub
-
 
     Private Sub tabDoctorRegistration_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabDoctorRegistration.SelectedIndexChanged
         If Not tabDoctorRegistration.SelectedTab.Enabled Then

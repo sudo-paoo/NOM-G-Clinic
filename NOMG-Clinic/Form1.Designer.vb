@@ -22,7 +22,6 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
         Panel2 = New Panel()
@@ -45,7 +44,7 @@ Partial Class Form1
         HopeForm1.Dock = DockStyle.Top
         HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
-        HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
+        HopeForm1.Image = My.Resources.Resources.icon
         HopeForm1.Location = New Point(0, 0)
         HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
@@ -56,7 +55,7 @@ Partial Class Form1
         ' 
         ' Panel1
         ' 
-        Panel1.BackgroundImage = CType(resources.GetObject("Panel1.BackgroundImage"), Image)
+        Panel1.BackgroundImage = My.Resources.Resources.login_bg
         Panel1.BackgroundImageLayout = ImageLayout.Stretch
         Panel1.Controls.Add(Panel2)
         Panel1.Dock = DockStyle.Right
