@@ -22,9 +22,9 @@ Partial Class ViewAppointmentDetails
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ViewAppointmentDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
+        Label9 = New Label()
         lblFluVac = New Label()
         Label7 = New Label()
         txtNotes = New TextBox()
@@ -47,7 +47,6 @@ Partial Class ViewAppointmentDetails
         cboDoctor = New ComboBox()
         cboTimeSlot = New ComboBox()
         calAppointmentDate = New MonthCalendar()
-        Label9 = New Label()
         Panel1.SuspendLayout()
         SuspendLayout()
         ' 
@@ -59,7 +58,7 @@ Partial Class ViewAppointmentDetails
         HopeForm1.Dock = DockStyle.Top
         HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
-        HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
+        HopeForm1.Image = My.Resources.Resources.icon
         HopeForm1.Location = New Point(0, 0)
         HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
@@ -101,6 +100,17 @@ Partial Class ViewAppointmentDetails
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(600, 600)
         Panel1.TabIndex = 2
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.BackColor = Color.Transparent
+        Label9.Font = New Font("Verdana", 10.2F)
+        Label9.Location = New Point(12, 428)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(79, 20)
+        Label9.TabIndex = 45
+        Label9.Text = "Flu Vac:"
         ' 
         ' lblFluVac
         ' 
@@ -327,17 +337,6 @@ Partial Class ViewAppointmentDetails
         calAppointmentDate.Location = New Point(12, 184)
         calAppointmentDate.Name = "calAppointmentDate"
         calAppointmentDate.TabIndex = 19
-        ' 
-        ' Label9
-        ' 
-        Label9.AutoSize = True
-        Label9.BackColor = Color.Transparent
-        Label9.Font = New Font("Verdana", 10.2F)
-        Label9.Location = New Point(12, 428)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(79, 20)
-        Label9.TabIndex = 45
-        Label9.Text = "Flu Vac:"
         ' 
         ' ViewAppointmentDetails
         ' 

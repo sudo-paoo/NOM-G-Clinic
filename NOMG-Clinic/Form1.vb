@@ -2,17 +2,21 @@
 Imports MySql.Data.MySqlClient
 
 Public Class Form1
-    ' Variable to track the visibility state of the password
     Private isPasswordVisible As Boolean = False
 
     Dim conn As MySqlConnection
     Dim cmd As MySqlCommand
     Dim reader As MySqlDataReader
 
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtUsername.Focus()
+    End Sub
+
     Private Sub btnEyeIcon_Click(sender As Object, e As EventArgs) Handles btnEyeIcon.Click
         isPasswordVisible = Not isPasswordVisible
 
         txtPassword.UseSystemPasswordChar = Not isPasswordVisible
+        txtPassword.Focus()
 
         If isPasswordVisible Then
             btnEyeIcon.IconChar = IconChar.EyeSlash ' Show "eye-slash" icon
@@ -154,6 +158,4 @@ Public Class Form1
     Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Application.Exit()
     End Sub
-
-
 End Class

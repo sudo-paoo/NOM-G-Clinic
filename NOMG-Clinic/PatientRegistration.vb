@@ -17,6 +17,8 @@ Public Class PatientRegistration
         tabPatientRegistration.TabPages(1).Enabled = False
         tabPatientRegistration.TabPages(2).Enabled = False
 
+        txtFirstName.Focus()
+
         ' Set up event handlers for validation - TabPage1
         AddHandler txtFirstName.Validating, AddressOf ValidateRequiredField
         AddHandler txtLastName.Validating, AddressOf ValidateRequiredField
@@ -40,6 +42,162 @@ Public Class PatientRegistration
         AddHandler clrLastMenstrual.DateSelected, AddressOf clrLastMenstrual_DateSelected
 
         LoadDoctors()
+    End Sub
+
+    ' Handle Enter key for txtFirstName to move to txtMiddleName
+    Private Sub txtFirstName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFirstName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtMiddleName.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtMiddleName to move to txtLastName
+    Private Sub txtMiddleName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtMiddleName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtLastName.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtLastName to move to numAge
+    Private Sub txtLastName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLastName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            numAge.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for numAge to move to cbxCivilStatus
+    Private Sub numAge_KeyDown(sender As Object, e As KeyEventArgs) Handles numAge.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            cbxCivilStatus.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for cbxCivilStatus to move to cbxBloodType
+    Private Sub cbxCivilStatus_KeyDown(sender As Object, e As KeyEventArgs) Handles cbxCivilStatus.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If ValidateComboBox(cbxCivilStatus) Then
+                cbxBloodType.Focus()
+                e.SuppressKeyPress = True
+            End If
+        End If
+    End Sub
+
+    ' Handle Enter key for cbxBloodType to move to numWeight
+    Private Sub cbxBloodType_KeyDown(sender As Object, e As KeyEventArgs) Handles cbxBloodType.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If ValidateComboBox(cbxBloodType) Then
+                numWeight.Focus()
+                e.SuppressKeyPress = True
+            End If
+        End If
+    End Sub
+
+    ' Handle Enter key for numWeight to move to numHeight
+    Private Sub numWeight_KeyDown(sender As Object, e As KeyEventArgs) Handles numWeight.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            numHeight.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for numHeight to move to txtAddress
+    Private Sub numHeight_KeyDown(sender As Object, e As KeyEventArgs) Handles numHeight.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtAddress.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtAddress to move to txtContactNumber
+    Private Sub txtAddress_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAddress.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtContactNumber.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtContactNumber to move to txtEmailAddress
+    Private Sub txtContactNumber_KeyDown(sender As Object, e As KeyEventArgs) Handles txtContactNumber.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtEmailAddress.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnPersonalInformationNext click
+    Private Sub txtEmailAddress_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmailAddress.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnPersonalInformationNext.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtEmergencyContactName to move to txtEmergencyContactRelationship
+    Private Sub txtEmergencyContactName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmergencyContactName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtEmergencyContactRelationship.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtEmergencyContactRelationship to move to txtEmergencyContactNumber
+    Private Sub txtEmergencyContactRelationship_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmergencyContactRelationship.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtEmergencyContactNumber.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnEmergencyContactNext click
+    Private Sub txtEmergencyContactNumber_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmergencyContactNumber.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnEmergencyContactNext.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    Private Function ValidateComboBox(cmb As ComboBox) As Boolean
+        If cmb.SelectedIndex = -1 AndAlso Not String.IsNullOrEmpty(cmb.Text) Then
+            Dim itemExists As Boolean = False
+            For Each item As Object In cmb.Items
+                If item.ToString().Equals(cmb.Text, StringComparison.OrdinalIgnoreCase) Then
+                    itemExists = True
+                    Exit For
+                End If
+            Next
+
+            If Not itemExists Then
+                errProvider.SetError(cmb, "Please select a valid option from the list.")
+                Return False
+            End If
+        End If
+
+        errProvider.SetError(cmb, "")
+        Return True
+    End Function
+
+    Private Sub cbxCivilStatus_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles cbxCivilStatus.Validating
+        ValidateComboBox(cbxCivilStatus)
+    End Sub
+
+    Private Sub cbxBloodType_Validating(sender As Object, e As ComponentModel.CancelEventArgs) Handles cbxBloodType.Validating
+        ValidateComboBox(cbxBloodType)
+    End Sub
+
+    Private Sub cbxCivilStatus_TextChanged(sender As Object, e As EventArgs) Handles cbxCivilStatus.TextChanged
+        If cbxCivilStatus.SelectedIndex = -1 AndAlso Not String.IsNullOrEmpty(cbxCivilStatus.Text) Then
+            ValidateComboBox(cbxCivilStatus)
+        End If
+    End Sub
+
+    Private Sub cbxBloodType_TextChanged(sender As Object, e As EventArgs) Handles cbxBloodType.TextChanged
+        If cbxBloodType.SelectedIndex = -1 AndAlso Not String.IsNullOrEmpty(cbxBloodType.Text) Then
+            ValidateComboBox(cbxBloodType)
+        End If
     End Sub
 
     ' Load doctors from database into the combobox

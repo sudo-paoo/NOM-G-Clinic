@@ -26,6 +26,8 @@ Public Class AccountantRegistration
         txtPassword.UseSystemPasswordChar = True
         txtConfirmPassword.UseSystemPasswordChar = True
 
+        txtUsername.Focus()
+
         ' Set up validation for account information fields
         AddHandler txtUsername.Validating, AddressOf ValidateRequiredField
         AddHandler txtPassword.Validating, AddressOf ValidateRequiredField
@@ -35,7 +37,129 @@ Public Class AccountantRegistration
         btnEyeConfirmPassword.TabStop = False
     End Sub
 
+    ' Handle Enter key for txtUsername to move to txtPassword
+    Private Sub txtUsername_KeyDown(sender As Object, e As KeyEventArgs) Handles txtUsername.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtPassword.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
 
+    ' Handle Enter key for txtPassword to move to txtConfirmPassword
+    Private Sub txtPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtPassword.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtConfirmPassword.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnAccountInformationNext click
+    Private Sub txtConfirmPassword_KeyDown(sender As Object, e As KeyEventArgs) Handles txtConfirmPassword.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnAccountInformationNext.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtFirstName to move to txtMiddleName
+    Private Sub txtFirstName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtFirstName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtMiddleName.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtMiddleName to move to txtLastName
+    Private Sub txtMiddleName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtMiddleName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtLastName.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtLastName to move to numAge
+    Private Sub txtLastName_KeyDown(sender As Object, e As KeyEventArgs) Handles txtLastName.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            numAge.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for numAge to move to txtGender
+    Private Sub numAge_KeyDown(sender As Object, e As KeyEventArgs) Handles numAge.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtGender.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtGender to move to cmbPosition
+    Private Sub txtGender_KeyDown(sender As Object, e As KeyEventArgs) Handles txtGender.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            cmbPosition.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnPersonalInformationNext click
+    Private Sub cmbPosition_KeyDown(sender As Object, e As KeyEventArgs) Handles cmbPosition.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            If ValidateComboBox(cmbPosition) Then
+                btnPersonalInformationNext.PerformClick()
+                e.SuppressKeyPress = True
+            End If
+        End If
+    End Sub
+
+    ' Handle Enter key for txtAddress to move to txtContactNumber
+    Private Sub txtAddress_KeyDown(sender As Object, e As KeyEventArgs) Handles txtAddress.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtContactNumber.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Handle Enter key for txtContactNumber to move to txtEmailAddress
+    Private Sub txtContactNumber_KeyDown(sender As Object, e As KeyEventArgs) Handles txtContactNumber.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            txtEmailAddress.Focus()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' Simulate btnRegisterAccountant click
+    Private Sub txtEmailAddress_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmailAddress.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            btnRegisterAccountant.PerformClick()
+            e.SuppressKeyPress = True
+        End If
+    End Sub
+
+    ' ComboBox validation to ensure the entered text is in the list
+    Private Function ValidateComboBox(cmb As ComboBox) As Boolean
+        If cmb.SelectedIndex = -1 AndAlso Not String.IsNullOrEmpty(cmb.Text) Then
+            Dim itemExists As Boolean = False
+            For Each item As Object In cmb.Items
+                If item.ToString().Equals(cmb.Text, StringComparison.OrdinalIgnoreCase) Then
+                    itemExists = True
+                    Exit For
+                End If
+            Next
+
+            If Not itemExists Then
+                errProvider.SetError(cmb, "Please select a valid option from the list.")
+                Return False
+            End If
+        End If
+
+        errProvider.SetError(cmb, "")
+        Return True
+    End Function
+
+    ' Add validation for combobox when losing focus
+    Private Sub cmbPosition_Validating(sender As Object, e As CancelEventArgs) Handles cmbPosition.Validating
+        ValidateComboBox(cmbPosition)
+    End Sub
 
     Private Sub tabAccountantRegistration_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabAccountantRegistration.SelectedIndexChanged
         If Not tabAccountantRegistration.SelectedTab.Enabled Then
@@ -333,8 +457,13 @@ Public Class AccountantRegistration
         errProvider.SetError(txtGender, "")
     End Sub
 
-    Private Sub cmbPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPosition.SelectedIndexChanged
+    Private Sub cmbPosition_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPosition.SelectedIndexChanged, cmbPosition.TextChanged
         errProvider.SetError(cmbPosition, "")
+
+        ' If it's a text change event but not a selection, validate the text
+        If cmbPosition.SelectedIndex = -1 AndAlso Not String.IsNullOrEmpty(cmbPosition.Text) Then
+            ValidateComboBox(cmbPosition)
+        End If
     End Sub
 
     Private Sub numAge_ValueChanged(sender As Object, e As EventArgs) Handles numAge.ValueChanged
@@ -361,7 +490,6 @@ Public Class AccountantRegistration
         End If
         RegistrationModule.ValidateContactNumber(txtContactNumber, errProvider)
     End Sub
-
 
     Private Sub txtEmailAddress_TextChanged(sender As Object, e As EventArgs) Handles txtEmailAddress.TextChanged
         RegistrationModule.ValidateEmail(txtEmailAddress, errProvider)

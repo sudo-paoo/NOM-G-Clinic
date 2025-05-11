@@ -22,7 +22,6 @@ Partial Class AccountingDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AccountingDashboard))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
         btnSettings = New FontAwesome.Sharp.IconButton()
@@ -96,7 +95,7 @@ Partial Class AccountingDashboard
         HopeForm1.Dock = DockStyle.Top
         HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
-        HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
+        HopeForm1.Image = My.Resources.Resources.icon
         HopeForm1.Location = New Point(0, 0)
         HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"

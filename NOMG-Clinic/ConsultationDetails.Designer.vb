@@ -22,7 +22,6 @@ Partial Class ConsultationDetails
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ConsultationDetails))
         HopeForm1 = New ReaLTaiizor.Forms.HopeForm()
         Panel1 = New Panel()
         IconPictureBox1 = New FontAwesome.Sharp.IconPictureBox()
@@ -94,7 +93,7 @@ Partial Class ConsultationDetails
         HopeForm1.Dock = DockStyle.Top
         HopeForm1.Font = New Font("Segoe UI", 12F)
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
-        HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
+        HopeForm1.Image = My.Resources.Resources.icon
         HopeForm1.Location = New Point(0, 0)
         HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
@@ -208,15 +207,18 @@ Partial Class ConsultationDetails
         btnSave.BackColor = Color.FromArgb(CByte(236), CByte(72), CByte(153))
         btnSave.BackgroundImageLayout = ImageLayout.None
         btnSave.FlatStyle = FlatStyle.Flat
-        btnSave.ForeColor = SystemColors.ControlLightLight
-        btnSave.IconChar = FontAwesome.Sharp.IconChar.None
-        btnSave.IconColor = Color.RosyBrown
+        btnSave.Font = New Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnSave.ForeColor = SystemColors.ActiveCaptionText
+        btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
+        btnSave.IconColor = Color.Black
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnSave.Location = New Point(997, 1015)
+        btnSave.IconSize = 40
+        btnSave.Location = New Point(963, 1015)
         btnSave.Name = "btnSave"
-        btnSave.Size = New Size(83, 49)
+        btnSave.Size = New Size(117, 49)
         btnSave.TabIndex = 45
         btnSave.Text = "Save"
+        btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
         btnSave.UseVisualStyleBackColor = False
         ' 
         ' hgbUrineAnalysis
