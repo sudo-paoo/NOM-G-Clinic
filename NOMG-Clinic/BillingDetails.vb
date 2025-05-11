@@ -216,6 +216,7 @@ Public Class BillingDetails
                 b.item_names, 
                 b.total_amount, 
                 b.status,
+                b.notes,
                 p.patient_id,
                 p.next_checkup,
                 p.last_menstrual_period,
@@ -252,13 +253,37 @@ Public Class BillingDetails
                             lblPatientID.Text = reader("patient_id").ToString()
                             lblGestationalAge.Text = gestationalAge
                             lblLastVisit.Text = If(reader("next_checkup") IsNot DBNull.Value,
-                                          Convert.ToDateTime(reader("next_checkup")).ToString("MMMM dd, yyyy"),
-                                          "Not Available")
+                                      Convert.ToDateTime(reader("next_checkup")).ToString("MMMM dd, yyyy"),
+                                      "Not Available")
                             lblBillingDate.Text = billingDate.ToString("MMMM dd, yyyy")
                             txtAmountDueCash.Text = totalAmount.ToString("F2")
                             txtAmountDueCard.Text = totalAmount.ToString("F2")
 
                             LoadItemsFromJson(billingItems)
+
+                            ' Check if billing is already paid
+                            If billingStatus.Equals("Paid", StringComparison.OrdinalIgnoreCase) Then
+                                If reader("notes") IsNot DBNull.Value Then
+                                    Dim paymentDetailsJson As String = reader("notes").ToString()
+
+                                    Try
+                                        Dim paymentDetails As Dictionary(Of String, Object) =
+                                        JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(paymentDetailsJson)
+
+                                        Dim paymentMethod As String = "Unknown"
+                                        If paymentDetails.ContainsKey("mode") Then
+                                            paymentMethod = paymentDetails("mode").ToString()
+                                        End If
+
+                                        DisplayPaidBillingInfo(paymentDetailsJson, paymentMethod)
+                                    Catch ex As Exception
+                                        Console.WriteLine("Error parsing payment JSON: " & ex.Message)
+                                        ShowSimplePaidMessage(paymentDetailsJson)
+                                    End Try
+                                Else
+                                    ShowSimplePaidMessage("Unknown")
+                                End If
+                            End If
                         Else
                             MessageBox.Show("Billing record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                             Me.DialogResult = DialogResult.Cancel
@@ -273,6 +298,215 @@ Public Class BillingDetails
             Me.Close()
         End Try
     End Sub
+
+    Private Sub ShowSimplePaidMessage(paymentMethod As String)
+        btnPayBillCash.Visible = False
+        btnPayBillCard.Visible = False
+
+        Dim showCashTab As Boolean = paymentMethod.ToLower().Contains("cash")
+
+        tabModePayment.TabPages.Remove(If(showCashTab, tabCard, tabCash))
+
+        Dim lblPaidInfo As New Label With {
+        .Text = $"Payment completed on {billingDate.ToString("MMMM dd, yyyy")}",
+        .AutoSize = False,
+        .Dock = DockStyle.Top,
+        .TextAlign = ContentAlignment.MiddleCenter,
+        .Height = 40,
+        .Font = New Font(Me.Font.FontFamily, 12, FontStyle.Bold),
+        .ForeColor = Color.Green,
+        .BackColor = Color.FromArgb(240, 255, 240)
+    }
+
+        If showCashTab Then
+            tabCash.Controls.Add(lblPaidInfo)
+        Else
+            tabCard.Controls.Add(lblPaidInfo)
+        End If
+    End Sub
+
+    ' Display paid billing information from JSON
+    Private Sub DisplayPaidBillingInfo(paymentDetailsJson As String, paymentMethod As String)
+        Try
+            txtAmountReceived.ReadOnly = True
+            txtCardNumber.ReadOnly = True
+
+            Dim paymentDetails As Dictionary(Of String, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(paymentDetailsJson)
+
+            If paymentMethod.Equals("Cash", StringComparison.OrdinalIgnoreCase) OrElse
+           (paymentDetails.ContainsKey("mode") AndAlso paymentDetails("mode").ToString().Equals("Cash", StringComparison.OrdinalIgnoreCase)) Then
+                ' Show Cash tab only
+                tabModePayment.TabPages.Remove(tabCard)
+                tabModePayment.SelectedTab = tabCash
+
+                DisplayCashPaymentDetails(paymentDetails)
+            Else
+                ' Show Card tab only
+                tabModePayment.TabPages.Remove(tabCash)
+                tabModePayment.SelectedTab = tabCard
+
+                DisplayCardPaymentDetails(paymentDetails)
+            End If
+
+            ' Create a header label with payment info
+            Dim lblPaidHeader As New Label With {
+            .Text = "PAYMENT COMPLETED",
+            .AutoSize = False,
+            .Dock = DockStyle.Top,
+            .TextAlign = ContentAlignment.MiddleCenter,
+            .Height = 40,
+            .Font = New Font(Me.Font.FontFamily, 14, FontStyle.Bold),
+            .ForeColor = Color.Green,
+            .BackColor = Color.FromArgb(240, 255, 240)
+        }
+
+            If tabModePayment.SelectedTab Is tabCash Then
+                tabCash.Controls.Add(lblPaidHeader)
+                lblPaidHeader.BringToFront()
+            Else
+                tabCard.Controls.Add(lblPaidHeader)
+                lblPaidHeader.BringToFront()
+            End If
+
+        Catch ex As Exception
+            Console.WriteLine("Error displaying payment details: " & ex.Message)
+
+            ' If there's an error parsing JSON, just show basic info
+            Dim lblError As New Label With {
+            .Text = $"Paid with {paymentMethod}. Details unavailable.",
+            .AutoSize = False,
+            .Dock = DockStyle.Top,
+            .TextAlign = ContentAlignment.MiddleCenter,
+            .Height = 40,
+            .Font = New Font(Me.Font.FontFamily, 12, FontStyle.Bold),
+            .ForeColor = Color.Green
+        }
+
+            tabModePayment.TabPages.Remove(If(paymentMethod.Equals("Cash", StringComparison.OrdinalIgnoreCase), tabCard, tabCash))
+
+            If paymentMethod.Equals("Cash", StringComparison.OrdinalIgnoreCase) Then
+                tabCash.Controls.Add(lblError)
+            Else
+                tabCard.Controls.Add(lblError)
+            End If
+        End Try
+    End Sub
+
+    ' Display cash payment details
+    Private Sub DisplayCashPaymentDetails(paymentDetails As Dictionary(Of String, Object))
+        txtAmountReceived.ReadOnly = True
+        txtAmountReceived.Enabled = False
+        txtCardNumber.Enabled = False
+        txtAmountReceived.BackColor = SystemColors.Control
+
+        If paymentDetails.ContainsKey("amount_received") Then
+            txtAmountReceived.Text = Convert.ToDecimal(paymentDetails("amount_received")).ToString("F2")
+        End If
+
+        If paymentDetails.ContainsKey("payment_date") Then
+            Dim paymentDateStr As String = $"Paid on: {paymentDetails("payment_date")}"
+
+            If paymentDetails.ContainsKey("payment_time") Then
+                paymentDateStr &= $" at {paymentDetails("payment_time")}"
+            End If
+
+            Dim lblPaymentDate As New Label With {
+            .Text = paymentDateStr,
+            .AutoSize = False,
+            .Width = tabCash.Width - 20,
+            .Height = 25,
+            .Location = New Point(10, btnPayBillCash.Location.Y),
+            .Font = New Font(Me.Font.FontFamily, 9, FontStyle.Regular),
+            .ForeColor = Color.Navy
+        }
+
+            tabCash.Controls.Add(lblPaymentDate)
+        End If
+
+        If paymentDetails.ContainsKey("change") Then
+            lblChange.Text = Convert.ToDecimal(paymentDetails("change")).ToString("C")
+        ElseIf paymentDetails.ContainsKey("amount_received") Then
+            Dim amountReceived As Decimal = Convert.ToDecimal(paymentDetails("amount_received"))
+            Dim amountDue As Decimal = Decimal.Parse(txtAmountDueCash.Text)
+            lblChange.Text = (amountReceived - amountDue).ToString("C")
+        End If
+
+        btnPayBillCash.Visible = False
+    End Sub
+
+    ' Display card payment details
+    Private Sub DisplayCardPaymentDetails(paymentDetails As Dictionary(Of String, Object))
+        txtCardNumber.ReadOnly = True
+        txtCardNumber.BackColor = SystemColors.Control
+        txtCardHolderName.ReadOnly = True
+        txtCardHolderName.BackColor = SystemColors.Control
+        txtEpirationMonth.ReadOnly = True
+        txtEpirationMonth.BackColor = SystemColors.Control
+        txtExpirationYear.ReadOnly = True
+        txtExpirationYear.BackColor = SystemColors.Control
+        txtCCV.ReadOnly = True
+        txtCCV.BackColor = SystemColors.Control
+        txtBillingAddress.ReadOnly = True
+        txtBillingAddress.BackColor = SystemColors.Control
+        txtPostal.ReadOnly = True
+        txtPostal.BackColor = SystemColors.Control
+
+        ' Display card information
+        If paymentDetails.ContainsKey("card_number") Then
+            txtCardNumber.Text = paymentDetails("card_number").ToString()
+        End If
+
+        If paymentDetails.ContainsKey("card_holder") Then
+            txtCardHolderName.Text = paymentDetails("card_holder").ToString()
+        End If
+
+        If paymentDetails.ContainsKey("expiration") Then
+            Dim expiration As String = paymentDetails("expiration").ToString()
+            Dim parts As String() = expiration.Split("/"c)
+
+            If parts.Length = 2 Then
+                txtEpirationMonth.Text = parts(0)
+                txtExpirationYear.Text = parts(1)
+            End If
+        End If
+
+        txtCCV.Text = "***"
+
+        If paymentDetails.ContainsKey("billing_address") AndAlso TypeOf paymentDetails("billing_address") Is Newtonsoft.Json.Linq.JObject Then
+            Dim addressObj As Newtonsoft.Json.Linq.JObject = DirectCast(paymentDetails("billing_address"), Newtonsoft.Json.Linq.JObject)
+
+            If addressObj.ContainsKey("address") Then
+                txtBillingAddress.Text = addressObj("address").ToString()
+            End If
+
+            If addressObj.ContainsKey("postal") Then
+                txtPostal.Text = addressObj("postal").ToString()
+            End If
+        End If
+
+        If paymentDetails.ContainsKey("payment_date") Then
+            Dim paymentDateStr As String = $"Paid on: {paymentDetails("payment_date")}"
+
+            If paymentDetails.ContainsKey("payment_time") Then
+                paymentDateStr &= $" at {paymentDetails("payment_time")}"
+            End If
+
+            Dim lblPaymentDate As New Label With {
+            .Text = paymentDateStr,
+            .AutoSize = False,
+            .Width = tabCard.Width - 20,
+            .Height = 25,
+            .Location = New Point(10, btnPayBillCard.Location.Y),
+            .Font = New Font(Me.Font.FontFamily, 9, FontStyle.Regular),
+            .ForeColor = Color.Navy
+        }
+
+            tabCard.Controls.Add(lblPaymentDate)
+        End If
+
+        btnPayBillCard.Visible = False
+    End Sub
+
 
     ' Pay Bill button handlers
     Private Sub btnPayBillCash_Click(sender As Object, e As EventArgs) Handles btnPayBillCash.Click
@@ -332,6 +566,9 @@ Public Class BillingDetails
             End If
         End If
 
+        ' Create payment details JSON
+        Dim paymentDetailsJson As String = CreatePaymentDetailsJson(paymentMethod)
+
         ' Update the billing status in the database
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
@@ -339,11 +576,11 @@ Public Class BillingDetails
             Using connection As New MySqlConnection(connectionString)
                 connection.Open()
 
-                Dim query As String = "UPDATE billing SET status = 'Paid', notes = @paymentMethod WHERE billing_id = @billingId"
+                Dim query As String = "UPDATE billing SET status = 'Paid', notes = @paymentDetails WHERE billing_id = @billingId"
 
                 Using cmd As New MySqlCommand(query, connection)
                     cmd.Parameters.AddWithValue("@billingId", BillingId)
-                    cmd.Parameters.AddWithValue("@paymentMethod", paymentMethod)
+                    cmd.Parameters.AddWithValue("@paymentDetails", paymentDetailsJson)
 
                     Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -360,6 +597,47 @@ Public Class BillingDetails
             MessageBox.Show("Error processing payment: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    ' Create JSON string for payment details
+    Private Function CreatePaymentDetailsJson(paymentMethod As String) As String
+        Dim paymentDetails As New Dictionary(Of String, Object)()
+
+        ' Add payment date and time
+        paymentDetails.Add("payment_date", DateTime.Now.ToString("yyyy-MM-dd"))
+        paymentDetails.Add("payment_time", DateTime.Now.ToString("HH:mm:ss"))
+        paymentDetails.Add("mode", paymentMethod)
+        paymentDetails.Add("amount_due", Decimal.Parse(txtAmountDueCash.Text))
+
+        If paymentMethod = "Cash" Then
+            ' Cash payment details
+            Dim amountReceived As Decimal = Decimal.Parse(txtAmountReceived.Text)
+            Dim change As Decimal = amountReceived - Decimal.Parse(txtAmountDueCash.Text)
+
+            paymentDetails.Add("amount_received", amountReceived)
+            paymentDetails.Add("change", change)
+        ElseIf paymentMethod = "Card" Then
+            Dim cardNumber As String = txtCardNumber.Text.Replace(" ", "")
+
+            paymentDetails.Add("card_number", cardNumber)
+            paymentDetails.Add("card_holder", txtCardHolderName.Text)
+            paymentDetails.Add("expiration", $"{txtEpirationMonth.Text}/{txtExpirationYear.Text}")
+
+            ' Store billing address if provided
+            If Not String.IsNullOrWhiteSpace(txtBillingAddress.Text) Then
+                Dim addressDetails As New Dictionary(Of String, String)()
+                addressDetails.Add("address", txtBillingAddress.Text)
+
+                If Not String.IsNullOrWhiteSpace(txtPostal.Text) Then
+                    addressDetails.Add("postal", txtPostal.Text)
+                End If
+
+                paymentDetails.Add("billing_address", addressDetails)
+            End If
+        End If
+
+        ' Convert to JSON string
+        Return JsonConvert.SerializeObject(paymentDetails)
+    End Function
 
     ' Event handler for allowing only numbers and decimal points
     Private Sub NumberAndDecimalOnly_KeyPress(sender As Object, e As KeyPressEventArgs)

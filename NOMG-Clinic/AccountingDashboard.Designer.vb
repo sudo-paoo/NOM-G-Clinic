@@ -665,12 +665,12 @@ Partial Class AccountingDashboard
         ' 
         ' btnSave
         ' 
-        btnSave.BackColor = SystemColors.ControlLightLight
+        btnSave.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
         btnSave.FlatAppearance.BorderSize = 0
         btnSave.FlatStyle = FlatStyle.Flat
         btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.RosyBrown
+        btnSave.IconColor = Color.Black
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSave.IconSize = 36
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
@@ -716,8 +716,8 @@ Partial Class AccountingDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
         Controls.Add(Panel1)

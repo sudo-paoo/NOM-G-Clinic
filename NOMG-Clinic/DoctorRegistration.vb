@@ -11,23 +11,23 @@ Public Class DoctorRegistration
         errProvider.BlinkStyle = ErrorBlinkStyle.NeverBlink
 
         ' Position the error icons
-        errProvider.SetIconAlignment(txtEmergencyContactRelationship, ErrorIconAlignment.TopLeft)
-        errProvider.SetIconAlignment(txtEmergencyContactNumber, ErrorIconAlignment.TopLeft)
-        errProvider.SetIconPadding(txtEmergencyContactRelationship, 10)
-        errProvider.SetIconPadding(txtEmergencyContactNumber, 10)
+        errProvider.SetIconAlignment(txtPassword, ErrorIconAlignment.TopLeft)
+        errProvider.SetIconAlignment(txtConfirmPassword, ErrorIconAlignment.TopLeft)
+        errProvider.SetIconPadding(txtPassword, 10)
+        errProvider.SetIconPadding(txtConfirmPassword, 10)
 
         ' Disable TabPages 2 and 3 initially
         tabDoctorRegistration.TabPages(1).Enabled = False
         tabDoctorRegistration.TabPages(2).Enabled = False
 
         ' Set up password fields
-        txtEmergencyContactRelationship.UseSystemPasswordChar = True
-        txtEmergencyContactNumber.UseSystemPasswordChar = True
+        txtPassword.UseSystemPasswordChar = True
+        txtConfirmPassword.UseSystemPasswordChar = True
 
         ' Set up validation for account information fields
-        AddHandler txtEmergencyContactName.Validating, AddressOf ValidateRequiredField
-        AddHandler txtEmergencyContactRelationship.Validating, AddressOf ValidateRequiredField
-        AddHandler txtEmergencyContactNumber.Validating, AddressOf ValidateConfirmPassword
+        AddHandler txtUsername.Validating, AddressOf ValidateRequiredField
+        AddHandler txtPassword.Validating, AddressOf ValidateRequiredField
+        AddHandler txtConfirmPassword.Validating, AddressOf ValidateConfirmPassword
         AddHandler txtContactNumber.TextChanged, AddressOf txtContactNumber_TextChanged
         AddHandler txtEmailAddress.TextChanged, AddressOf txtEmailAddress_TextChanged
         AddHandler txtContactNumber.KeyPress, AddressOf txtContactNumber_KeyPress
@@ -38,7 +38,13 @@ Public Class DoctorRegistration
 
     Private Sub txtContactNumber_KeyPress(sender As Object, e As KeyPressEventArgs)
         RegistrationModule.HandleNumericKeyPress(e)
+
+        Dim textBox = DirectCast(sender, TextBox)
+        If textBox.Text.Length >= 11 And e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
     End Sub
+
 
     Private Sub tabDoctorRegistration_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabDoctorRegistration.SelectedIndexChanged
         If Not tabDoctorRegistration.SelectedTab.Enabled Then
@@ -87,52 +93,52 @@ Public Class DoctorRegistration
 
     ' Password visibility toggle buttons
     Private Sub btnEyePassword_MouseDown(sender As Object, e As MouseEventArgs) Handles btnEyePassword.MouseDown
-        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactRelationship, btnEyePassword, isPasswordVisible)
+        RegistrationModule.TogglePasswordVisibility(txtPassword, btnEyePassword, isPasswordVisible)
     End Sub
 
     Private Sub btnEyeConfirmPassword_MouseDown(sender As Object, e As MouseEventArgs) Handles btnEyeConfirmPassword.MouseDown
-        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactNumber, btnEyeConfirmPassword, isConfirmPasswordVisible)
+        RegistrationModule.TogglePasswordVisibility(txtConfirmPassword, btnEyeConfirmPassword, isConfirmPasswordVisible)
     End Sub
 
     ' Validation functions
     Private Function ValidateAccountInformation() As Boolean
         Dim isValid As Boolean = True
 
-        If String.IsNullOrWhiteSpace(txtEmergencyContactName.Text) Then
-            errProvider.SetError(txtEmergencyContactName, "Username is required.")
+        If String.IsNullOrWhiteSpace(txtUsername.Text) Then
+            errProvider.SetError(txtUsername, "Username is required.")
             isValid = False
         Else
             ' Check if username exists
             Try
-                If RegistrationModule.IsUsernameExists(txtEmergencyContactName.Text.Trim()) Then
-                    errProvider.SetError(txtEmergencyContactName, "Username already exists. Please choose another.")
+                If RegistrationModule.IsUsernameExists(txtUsername.Text.Trim()) Then
+                    errProvider.SetError(txtUsername, "Username already exists. Please choose another.")
                     isValid = False
                 Else
-                    errProvider.SetError(txtEmergencyContactName, "")
+                    errProvider.SetError(txtUsername, "")
                 End If
             Catch ex As Exception
                 Console.WriteLine("Database error when checking username: " & ex.Message)
-                errProvider.SetError(txtEmergencyContactName, "")
+                errProvider.SetError(txtUsername, "")
             End Try
         End If
 
         ' Validate Password
-        If String.IsNullOrWhiteSpace(txtEmergencyContactRelationship.Text) Then
-            errProvider.SetError(txtEmergencyContactRelationship, "Password is required.")
+        If String.IsNullOrWhiteSpace(txtPassword.Text) Then
+            errProvider.SetError(txtPassword, "Password is required.")
             isValid = False
         Else
-            errProvider.SetError(txtEmergencyContactRelationship, "")
+            errProvider.SetError(txtPassword, "")
         End If
 
         ' Validate Confirm Password
-        If String.IsNullOrWhiteSpace(txtEmergencyContactNumber.Text) Then
-            errProvider.SetError(txtEmergencyContactNumber, "Confirm Password is required.")
+        If String.IsNullOrWhiteSpace(txtConfirmPassword.Text) Then
+            errProvider.SetError(txtConfirmPassword, "Confirm Password is required.")
             isValid = False
-        ElseIf txtEmergencyContactNumber.Text <> txtEmergencyContactRelationship.Text Then
-            errProvider.SetError(txtEmergencyContactNumber, "Passwords do not match.")
+        ElseIf txtConfirmPassword.Text <> txtPassword.Text Then
+            errProvider.SetError(txtConfirmPassword, "Passwords do not match.")
             isValid = False
         Else
-            errProvider.SetError(txtEmergencyContactNumber, "")
+            errProvider.SetError(txtConfirmPassword, "")
         End If
 
         Return isValid
@@ -190,28 +196,28 @@ Public Class DoctorRegistration
 
     Private Sub ValidateConfirmPassword(sender As Object, e As CancelEventArgs)
         Dim confirmPasswordTextBox = DirectCast(sender, TextBox)
-        RegistrationModule.ValidateConfirmPassword(confirmPasswordTextBox, txtEmergencyContactRelationship, e, errProvider)
+        RegistrationModule.ValidateConfirmPassword(confirmPasswordTextBox, txtPassword, e, errProvider)
     End Sub
 
-    Private Sub txtEmergencyContactRelationship_DoubleClick(sender As Object, e As EventArgs) Handles txtEmergencyContactRelationship.DoubleClick
-        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactRelationship, btnEyePassword, isPasswordVisible)
+    Private Sub txtPassword_DoubleClick(sender As Object, e As EventArgs) Handles txtPassword.DoubleClick
+        RegistrationModule.TogglePasswordVisibility(txtPassword, btnEyePassword, isPasswordVisible)
     End Sub
 
-    Private Sub txtEmergencyContactNumber_DoubleClick(sender As Object, e As EventArgs) Handles txtEmergencyContactNumber.DoubleClick
-        RegistrationModule.TogglePasswordVisibility(txtEmergencyContactNumber, btnEyeConfirmPassword, isConfirmPasswordVisible)
+    Private Sub txtConfirmPassword_DoubleClick(sender As Object, e As EventArgs) Handles txtConfirmPassword.DoubleClick
+        RegistrationModule.TogglePasswordVisibility(txtConfirmPassword, btnEyeConfirmPassword, isConfirmPasswordVisible)
     End Sub
 
     ' Clear validation errors when text changes
-    Private Sub txtEmergencyContactName_TextChanged(sender As Object, e As EventArgs) Handles txtEmergencyContactName.TextChanged
-        errProvider.SetError(txtEmergencyContactName, "")
+    Private Sub txtUsername_TextChanged(sender As Object, e As EventArgs) Handles txtUsername.TextChanged
+        errProvider.SetError(txtUsername, "")
     End Sub
 
-    Private Sub txtEmergencyContactRelationship_TextChanged(sender As Object, e As EventArgs) Handles txtEmergencyContactRelationship.TextChanged
-        errProvider.SetError(txtEmergencyContactRelationship, "")
+    Private Sub txtPassword_TextChanged(sender As Object, e As EventArgs) Handles txtPassword.TextChanged
+        errProvider.SetError(txtPassword, "")
     End Sub
 
-    Private Sub txtEmergencyContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txtEmergencyContactNumber.TextChanged
-        errProvider.SetError(txtEmergencyContactNumber, "")
+    Private Sub txtConfirmPassword_TextChanged(sender As Object, e As EventArgs) Handles txtConfirmPassword.TextChanged
+        errProvider.SetError(txtConfirmPassword, "")
     End Sub
 
     Private Sub txtFirstName_TextChanged(sender As Object, e As EventArgs) Handles txtFirstName.TextChanged
@@ -235,8 +241,13 @@ Public Class DoctorRegistration
     End Sub
 
     Private Sub txtContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txtContactNumber.TextChanged
+        If txtContactNumber.Text.Length > 11 Then
+            txtContactNumber.Text = txtContactNumber.Text.Substring(0, 11)
+            txtContactNumber.SelectionStart = 11
+        End If
         RegistrationModule.ValidateContactNumber(txtContactNumber, errProvider)
     End Sub
+
 
     Private Sub txtEmailAddress_TextChanged(sender As Object, e As EventArgs) Handles txtEmailAddress.TextChanged
         RegistrationModule.ValidateEmail(txtEmailAddress, errProvider)
@@ -297,11 +308,11 @@ Public Class DoctorRegistration
                 Using conn As New MySqlConnection(RegistrationModule.ConnectionString)
                     conn.Open()
 
-                    If RegistrationModule.IsUsernameExists(txtEmergencyContactName.Text.Trim()) Then
+                    If RegistrationModule.IsUsernameExists(txtUsername.Text.Trim()) Then
                         MessageBox.Show("Username already exists. Please choose another username.",
                                   "Username Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         tabDoctorRegistration.SelectedIndex = 0
-                        txtEmergencyContactName.Focus()
+                        txtUsername.Focus()
                         Return
                     End If
 
@@ -315,8 +326,8 @@ Public Class DoctorRegistration
 
                     Using cmd As New MySqlCommand(query, conn)
                         cmd.Parameters.AddWithValue("@doctorId", doctorId)
-                        cmd.Parameters.AddWithValue("@username", txtEmergencyContactName.Text.Trim())
-                        cmd.Parameters.AddWithValue("@password", txtEmergencyContactRelationship.Text.Trim())
+                        cmd.Parameters.AddWithValue("@username", txtUsername.Text.Trim())
+                        cmd.Parameters.AddWithValue("@password", txtPassword.Text.Trim())
                         cmd.Parameters.AddWithValue("@firstName", txtFirstName.Text.Trim())
                         cmd.Parameters.AddWithValue("@middleName", If(String.IsNullOrWhiteSpace(txtMiddleName.Text), "", txtMiddleName.Text.Trim()))
                         cmd.Parameters.AddWithValue("@lastName", txtLastName.Text.Trim())
@@ -329,7 +340,7 @@ Public Class DoctorRegistration
 
                         cmd.ExecuteNonQuery()
 
-                        RegistrationModule.AddToUsersTable(txtEmergencyContactName.Text.Trim(), txtEmergencyContactRelationship.Text.Trim(), "doctor")
+                        RegistrationModule.AddToUsersTable(txtUsername.Text.Trim(), txtPassword.Text.Trim(), "doctor")
 
                         ' Show success message
                         MessageBox.Show("Doctor successfully registered with ID: " & doctorId,

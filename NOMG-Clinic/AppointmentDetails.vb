@@ -739,8 +739,11 @@ Public Class AppointmentDetails
         Return "B" & nextId.ToString("D03")
     End Function
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
-        Me.DialogResult = DialogResult.Cancel
-        Me.Close()
+    Private Sub AppointmentDetails_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If Me.DialogResult <> DialogResult.OK AndAlso Me.DialogResult <> DialogResult.Cancel Then
+            MessageBox.Show("Please use the Submit button to complete the appointment scheduling.",
+                    "Form Closing", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            e.Cancel = True
+        End If
     End Sub
 End Class

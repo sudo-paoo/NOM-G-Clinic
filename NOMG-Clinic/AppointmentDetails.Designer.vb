@@ -29,7 +29,6 @@ Partial Class AppointmentDetails
         Label7 = New Label()
         txtNotes = New TextBox()
         btnSubmit = New FontAwesome.Sharp.IconButton()
-        btnCancel = New FontAwesome.Sharp.IconButton()
         lblSelectedDate = New Label()
         Label5 = New Label()
         Label4 = New Label()
@@ -78,7 +77,6 @@ Partial Class AppointmentDetails
         Panel1.Controls.Add(Label7)
         Panel1.Controls.Add(txtNotes)
         Panel1.Controls.Add(btnSubmit)
-        Panel1.Controls.Add(btnCancel)
         Panel1.Controls.Add(lblSelectedDate)
         Panel1.Controls.Add(Label5)
         Panel1.Controls.Add(Label4)
@@ -143,6 +141,8 @@ Partial Class AppointmentDetails
         ' 
         ' btnSubmit
         ' 
+        btnSubmit.FlatAppearance.BorderSize = 0
+        btnSubmit.FlatStyle = FlatStyle.Flat
         btnSubmit.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         btnSubmit.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnSubmit.IconColor = Color.Black
@@ -156,19 +156,6 @@ Partial Class AppointmentDetails
         btnSubmit.TextAlign = ContentAlignment.MiddleLeft
         btnSubmit.TextImageRelation = TextImageRelation.TextBeforeImage
         btnSubmit.UseVisualStyleBackColor = True
-        ' 
-        ' btnCancel
-        ' 
-        btnCancel.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        btnCancel.IconChar = FontAwesome.Sharp.IconChar.None
-        btnCancel.IconColor = Color.Black
-        btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto
-        btnCancel.Location = New Point(12, 594)
-        btnCancel.Name = "btnCancel"
-        btnCancel.Size = New Size(111, 46)
-        btnCancel.TabIndex = 40
-        btnCancel.Text = "Cancel"
-        btnCancel.UseVisualStyleBackColor = True
         ' 
         ' lblSelectedDate
         ' 
@@ -405,7 +392,6 @@ Partial Class AppointmentDetails
     Friend WithEvents cboTimeSlot As ComboBox
     Friend WithEvents calAppointmentDate As MonthCalendar
     Friend WithEvents btnSubmit As FontAwesome.Sharp.IconButton
-    Friend WithEvents btnCancel As FontAwesome.Sharp.IconButton
     Friend WithEvents lblSelectedDate As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents txtNotes As TextBox

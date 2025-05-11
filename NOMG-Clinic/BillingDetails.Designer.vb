@@ -30,7 +30,7 @@ Partial Class BillingDetails
         Label4 = New Label()
         lblPatientID = New Label()
         tabModePayment = New TabControl()
-        TabPage1 = New TabPage()
+        tabCash = New TabPage()
         btnPayBillCash = New FontAwesome.Sharp.IconButton()
         lblChange = New Label()
         Label17 = New Label()
@@ -38,7 +38,7 @@ Partial Class BillingDetails
         txtAmountDueCash = New TextBox()
         Label16 = New Label()
         Label15 = New Label()
-        TabPage2 = New TabPage()
+        tabCard = New TabPage()
         txtAmountDueCard = New TextBox()
         Label19 = New Label()
         Label14 = New Label()
@@ -67,8 +67,8 @@ Partial Class BillingDetails
         lblBillingDate = New Label()
         Panel1.SuspendLayout()
         tabModePayment.SuspendLayout()
-        TabPage1.SuspendLayout()
-        TabPage2.SuspendLayout()
+        tabCash.SuspendLayout()
+        tabCard.SuspendLayout()
         pnlItems.SuspendLayout()
         CType(dgvItems, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
@@ -160,30 +160,31 @@ Partial Class BillingDetails
         ' 
         ' tabModePayment
         ' 
-        tabModePayment.Controls.Add(TabPage1)
-        tabModePayment.Controls.Add(TabPage2)
+        tabModePayment.Controls.Add(tabCash)
+        tabModePayment.Controls.Add(tabCard)
         tabModePayment.Location = New Point(600, 52)
         tabModePayment.Name = "tabModePayment"
         tabModePayment.SelectedIndex = 0
         tabModePayment.Size = New Size(562, 387)
+        tabModePayment.SizeMode = TabSizeMode.Fixed
         tabModePayment.TabIndex = 54
         ' 
-        ' TabPage1
+        ' tabCash
         ' 
-        TabPage1.BackColor = Color.FromArgb(CByte(250), CByte(210), CByte(235))
-        TabPage1.Controls.Add(btnPayBillCash)
-        TabPage1.Controls.Add(lblChange)
-        TabPage1.Controls.Add(Label17)
-        TabPage1.Controls.Add(txtAmountReceived)
-        TabPage1.Controls.Add(txtAmountDueCash)
-        TabPage1.Controls.Add(Label16)
-        TabPage1.Controls.Add(Label15)
-        TabPage1.Location = New Point(4, 29)
-        TabPage1.Name = "TabPage1"
-        TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(554, 354)
-        TabPage1.TabIndex = 0
-        TabPage1.Text = "Cash"
+        tabCash.BackColor = Color.FromArgb(CByte(250), CByte(210), CByte(235))
+        tabCash.Controls.Add(btnPayBillCash)
+        tabCash.Controls.Add(lblChange)
+        tabCash.Controls.Add(Label17)
+        tabCash.Controls.Add(txtAmountReceived)
+        tabCash.Controls.Add(txtAmountDueCash)
+        tabCash.Controls.Add(Label16)
+        tabCash.Controls.Add(Label15)
+        tabCash.Location = New Point(4, 29)
+        tabCash.Name = "tabCash"
+        tabCash.Padding = New Padding(3)
+        tabCash.Size = New Size(554, 354)
+        tabCash.TabIndex = 0
+        tabCash.Text = "Cash"
         ' 
         ' btnPayBillCash
         ' 
@@ -257,32 +258,32 @@ Partial Class BillingDetails
         Label15.TabIndex = 0
         Label15.Text = "Amount Due"
         ' 
-        ' TabPage2
+        ' tabCard
         ' 
-        TabPage2.BackColor = Color.FromArgb(CByte(250), CByte(210), CByte(235))
-        TabPage2.Controls.Add(txtAmountDueCard)
-        TabPage2.Controls.Add(Label19)
-        TabPage2.Controls.Add(Label14)
-        TabPage2.Controls.Add(Label10)
-        TabPage2.Controls.Add(txtPostal)
-        TabPage2.Controls.Add(Label13)
-        TabPage2.Controls.Add(txtExpirationYear)
-        TabPage2.Controls.Add(txtCardHolderName)
-        TabPage2.Controls.Add(txtBillingAddress)
-        TabPage2.Controls.Add(txtCCV)
-        TabPage2.Controls.Add(txtEpirationMonth)
-        TabPage2.Controls.Add(txtCardNumber)
-        TabPage2.Controls.Add(Label12)
-        TabPage2.Controls.Add(Label11)
-        TabPage2.Controls.Add(btnPayBillCard)
-        TabPage2.Controls.Add(Label9)
-        TabPage2.Controls.Add(Label8)
-        TabPage2.Location = New Point(4, 29)
-        TabPage2.Name = "TabPage2"
-        TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(554, 354)
-        TabPage2.TabIndex = 1
-        TabPage2.Text = "Card"
+        tabCard.BackColor = Color.FromArgb(CByte(250), CByte(210), CByte(235))
+        tabCard.Controls.Add(txtAmountDueCard)
+        tabCard.Controls.Add(Label19)
+        tabCard.Controls.Add(Label14)
+        tabCard.Controls.Add(Label10)
+        tabCard.Controls.Add(txtPostal)
+        tabCard.Controls.Add(Label13)
+        tabCard.Controls.Add(txtExpirationYear)
+        tabCard.Controls.Add(txtCardHolderName)
+        tabCard.Controls.Add(txtBillingAddress)
+        tabCard.Controls.Add(txtCCV)
+        tabCard.Controls.Add(txtEpirationMonth)
+        tabCard.Controls.Add(txtCardNumber)
+        tabCard.Controls.Add(Label12)
+        tabCard.Controls.Add(Label11)
+        tabCard.Controls.Add(btnPayBillCard)
+        tabCard.Controls.Add(Label9)
+        tabCard.Controls.Add(Label8)
+        tabCard.Location = New Point(4, 29)
+        tabCard.Name = "tabCard"
+        tabCard.Padding = New Padding(3)
+        tabCard.Size = New Size(554, 354)
+        tabCard.TabIndex = 1
+        tabCard.Text = "Card"
         ' 
         ' txtAmountDueCard
         ' 
@@ -560,10 +561,10 @@ Partial Class BillingDetails
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
         tabModePayment.ResumeLayout(False)
-        TabPage1.ResumeLayout(False)
-        TabPage1.PerformLayout()
-        TabPage2.ResumeLayout(False)
-        TabPage2.PerformLayout()
+        tabCash.ResumeLayout(False)
+        tabCash.PerformLayout()
+        tabCard.ResumeLayout(False)
+        tabCard.PerformLayout()
         pnlItems.ResumeLayout(False)
         CType(dgvItems, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
@@ -585,8 +586,8 @@ Partial Class BillingDetails
     Friend WithEvents dgvItems As DataGridView
     Friend WithEvents btnPayBillCard As FontAwesome.Sharp.IconButton
     Friend WithEvents tabModePayment As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents tabCash As TabPage
+    Friend WithEvents tabCard As TabPage
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label9 As Label
