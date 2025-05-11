@@ -548,12 +548,11 @@ Public Class AccountingDashboard
                 buttonCell.Style.SelectionBackColor = Color.FromArgb(70, 170, 70)
                 buttonCell.Style.SelectionForeColor = Color.White
             Else
-                buttonCell.Value = "Completed"
-                buttonCell.Style.BackColor = Color.LightGray
-                buttonCell.Style.ForeColor = Color.DarkGray
-                buttonCell.Style.SelectionBackColor = Color.LightGray
-                buttonCell.Style.SelectionForeColor = Color.DarkGray
-                buttonCell.FlatStyle = FlatStyle.Flat
+                buttonCell.Value = "View Billing"
+                buttonCell.Style.BackColor = Color.FromArgb(0, 120, 215)
+                buttonCell.Style.ForeColor = Color.White
+                buttonCell.Style.SelectionBackColor = Color.FromArgb(0, 100, 190)
+                buttonCell.Style.SelectionForeColor = Color.White
             End If
         End If
 
@@ -576,19 +575,20 @@ Public Class AccountingDashboard
     Private Sub dgvBilling_CellClick(sender As Object, e As DataGridViewCellEventArgs)
         If e.ColumnIndex = dgvBilling.Columns("PaymentButton").Index AndAlso e.RowIndex >= 0 Then
             Dim status As String = dgvBilling.Rows(e.RowIndex).Cells("Status").Value.ToString()
+            Dim billingId As String = dgvBilling.Rows(e.RowIndex).Tag.ToString()
+
+            Dim billingDetailsForm As New BillingDetails()
+            billingDetailsForm.BillingId = billingId
 
             If status.Equals("Unpaid", StringComparison.OrdinalIgnoreCase) Then
-                Dim billingId As String = dgvBilling.Rows(e.RowIndex).Tag.ToString()
-
-                Dim billingDetailsForm As New BillingDetails()
-                billingDetailsForm.BillingId = billingId
-
                 If billingDetailsForm.ShowDialog() = DialogResult.OK Then
                     BillingPopulateDataGrid()
 
                     Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
                     PopulateRecentPayments(connectionString)
                 End If
+            Else
+                billingDetailsForm.ShowDialog()
             End If
         End If
     End Sub

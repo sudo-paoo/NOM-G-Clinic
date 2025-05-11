@@ -180,8 +180,7 @@ Partial Class AccountantRegistration
         ' btnAccountInformationNext
         ' 
         btnAccountInformationNext.BackColor = Color.Transparent
-        btnAccountInformationNext.FlatAppearance.BorderSize = 0
-        btnAccountInformationNext.FlatStyle = FlatStyle.Popup
+        btnAccountInformationNext.FlatStyle = FlatStyle.Flat
         btnAccountInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnAccountInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnAccountInformationNext.IconColor = Color.Black
@@ -320,8 +319,7 @@ Partial Class AccountantRegistration
         ' btnPersonalInformationNext
         ' 
         btnPersonalInformationNext.BackColor = Color.Transparent
-        btnPersonalInformationNext.FlatAppearance.BorderSize = 0
-        btnPersonalInformationNext.FlatStyle = FlatStyle.Popup
+        btnPersonalInformationNext.FlatStyle = FlatStyle.Flat
         btnPersonalInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnPersonalInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnPersonalInformationNext.IconColor = Color.Black

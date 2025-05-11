@@ -33,11 +33,11 @@ Partial Class DoctorRegistration
         btnAccountInformationNext = New FontAwesome.Sharp.IconButton()
         Label17 = New Label()
         labelnum = New Label()
-        txtEmergencyContactNumber = New TextBox()
+        txtConfirmPassword = New TextBox()
         labelrel = New Label()
-        txtEmergencyContactRelationship = New TextBox()
+        txtPassword = New TextBox()
         Label15 = New Label()
-        txtEmergencyContactName = New TextBox()
+        txtUsername = New TextBox()
         TabPage2 = New TabPage()
         btnPersonalInformationPrevious = New FontAwesome.Sharp.IconButton()
         btnPersonalInformationNext = New FontAwesome.Sharp.IconButton()
@@ -82,6 +82,7 @@ Partial Class DoctorRegistration
         HopeForm1.ForeColor = Color.FromArgb(CByte(242), CByte(246), CByte(252))
         HopeForm1.Image = CType(resources.GetObject("HopeForm1.Image"), Image)
         HopeForm1.Location = New Point(0, 0)
+        HopeForm1.MaximizeBox = False
         HopeForm1.Name = "HopeForm1"
         HopeForm1.Size = New Size(1000, 40)
         HopeForm1.TabIndex = 0
@@ -133,11 +134,11 @@ Partial Class DoctorRegistration
         TabPage1.Controls.Add(btnAccountInformationNext)
         TabPage1.Controls.Add(Label17)
         TabPage1.Controls.Add(labelnum)
-        TabPage1.Controls.Add(txtEmergencyContactNumber)
+        TabPage1.Controls.Add(txtConfirmPassword)
         TabPage1.Controls.Add(labelrel)
-        TabPage1.Controls.Add(txtEmergencyContactRelationship)
+        TabPage1.Controls.Add(txtPassword)
         TabPage1.Controls.Add(Label15)
-        TabPage1.Controls.Add(txtEmergencyContactName)
+        TabPage1.Controls.Add(txtUsername)
         TabPage1.Location = New Point(4, 29)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
@@ -179,8 +180,7 @@ Partial Class DoctorRegistration
         ' btnAccountInformationNext
         ' 
         btnAccountInformationNext.BackColor = Color.Transparent
-        btnAccountInformationNext.FlatAppearance.BorderSize = 0
-        btnAccountInformationNext.FlatStyle = FlatStyle.Popup
+        btnAccountInformationNext.FlatStyle = FlatStyle.Flat
         btnAccountInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnAccountInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnAccountInformationNext.IconColor = Color.Black
@@ -216,13 +216,13 @@ Partial Class DoctorRegistration
         labelnum.TabIndex = 38
         labelnum.Text = "Confirm Password"
         ' 
-        ' txtEmergencyContactNumber
+        ' txtConfirmPassword
         ' 
-        txtEmergencyContactNumber.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmergencyContactNumber.Location = New Point(20, 275)
-        txtEmergencyContactNumber.Name = "txtEmergencyContactNumber"
-        txtEmergencyContactNumber.Size = New Size(894, 32)
-        txtEmergencyContactNumber.TabIndex = 37
+        txtConfirmPassword.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtConfirmPassword.Location = New Point(20, 275)
+        txtConfirmPassword.Name = "txtConfirmPassword"
+        txtConfirmPassword.Size = New Size(894, 32)
+        txtConfirmPassword.TabIndex = 37
         ' 
         ' labelrel
         ' 
@@ -234,13 +234,13 @@ Partial Class DoctorRegistration
         labelrel.TabIndex = 36
         labelrel.Text = "Password"
         ' 
-        ' txtEmergencyContactRelationship
+        ' txtPassword
         ' 
-        txtEmergencyContactRelationship.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmergencyContactRelationship.Location = New Point(20, 192)
-        txtEmergencyContactRelationship.Name = "txtEmergencyContactRelationship"
-        txtEmergencyContactRelationship.Size = New Size(894, 32)
-        txtEmergencyContactRelationship.TabIndex = 35
+        txtPassword.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtPassword.Location = New Point(20, 192)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(894, 32)
+        txtPassword.TabIndex = 35
         ' 
         ' Label15
         ' 
@@ -252,13 +252,13 @@ Partial Class DoctorRegistration
         Label15.TabIndex = 34
         Label15.Text = "Username"
         ' 
-        ' txtEmergencyContactName
+        ' txtUsername
         ' 
-        txtEmergencyContactName.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
-        txtEmergencyContactName.Location = New Point(20, 105)
-        txtEmergencyContactName.Name = "txtEmergencyContactName"
-        txtEmergencyContactName.Size = New Size(932, 32)
-        txtEmergencyContactName.TabIndex = 33
+        txtUsername.Font = New Font("Verdana", 12F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        txtUsername.Location = New Point(20, 105)
+        txtUsername.Name = "txtUsername"
+        txtUsername.Size = New Size(932, 32)
+        txtUsername.TabIndex = 33
         ' 
         ' TabPage2
         ' 
@@ -307,8 +307,7 @@ Partial Class DoctorRegistration
         ' btnPersonalInformationNext
         ' 
         btnPersonalInformationNext.BackColor = Color.Transparent
-        btnPersonalInformationNext.FlatAppearance.BorderSize = 0
-        btnPersonalInformationNext.FlatStyle = FlatStyle.Popup
+        btnPersonalInformationNext.FlatStyle = FlatStyle.Flat
         btnPersonalInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnPersonalInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnPersonalInformationNext.IconColor = Color.Black
@@ -573,6 +572,7 @@ Partial Class DoctorRegistration
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
         FormBorderStyle = FormBorderStyle.None
+        MaximizeBox = False
         MaximumSize = New Size(1920, 1020)
         MinimumSize = New Size(190, 40)
         Name = "DoctorRegistration"
@@ -599,11 +599,11 @@ Partial Class DoctorRegistration
     Friend WithEvents Label7 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents labelnum As Label
-    Friend WithEvents txtEmergencyContactNumber As TextBox
+    Friend WithEvents txtConfirmPassword As TextBox
     Friend WithEvents labelrel As Label
-    Friend WithEvents txtEmergencyContactRelationship As TextBox
+    Friend WithEvents txtPassword As TextBox
     Friend WithEvents Label15 As Label
-    Friend WithEvents txtEmergencyContactName As TextBox
+    Friend WithEvents txtUsername As TextBox
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents Label16 As Label
     Friend WithEvents Label3 As Label

@@ -689,19 +689,21 @@ Partial Class DoctorDashboard
         ' 
         ' btnSave
         ' 
+        btnSave.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnSave.FlatStyle = FlatStyle.Flat
         btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.RosyBrown
+        btnSave.IconColor = Color.Black
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSave.IconSize = 36
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
-        btnSave.Location = New Point(649, 950)
+        btnSave.Location = New Point(625, 920)
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(133, 44)
         btnSave.TabIndex = 14
-        btnSave.Text = "SAVE"
+        btnSave.Text = "Save"
         btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnSave.UseVisualStyleBackColor = True
+        btnSave.UseVisualStyleBackColor = False
         ' 
         ' txtPassword
         ' 
@@ -805,9 +807,9 @@ Partial Class DoctorDashboard
         AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1200, 700)
+        Controls.Add(Panel4)
         Controls.Add(pnlDashboard)
         Controls.Add(pnlPatients)
-        Controls.Add(Panel4)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)

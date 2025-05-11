@@ -197,6 +197,9 @@ Public Class NurseRegistration
         ElseIf Not RegistrationModule.IsNumeric(txtContactNumber.Text.Trim()) Then
             errProvider.SetError(txtContactNumber, "Contact Number must contain only numbers.")
             isValid = False
+        ElseIf txtContactNumber.Text.Trim().Length <> 11 Then
+            errProvider.SetError(txtContactNumber, "Contact Number must be exactly 11 digits.")
+            isValid = False
         Else
             errProvider.SetError(txtContactNumber, "")
         End If
@@ -222,6 +225,7 @@ Public Class NurseRegistration
 
         Return isValid
     End Function
+
 
     Private Sub btnRegisterNurse_Click(sender As Object, e As EventArgs) Handles btnRegisterNurse.Click
         Dim result As DialogResult = MessageBox.Show(
@@ -339,11 +343,22 @@ Public Class NurseRegistration
 
     Private Sub txtContactNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContactNumber.KeyPress
         RegistrationModule.HandleNumericKeyPress(e)
+
+        Dim textBox = DirectCast(sender, TextBox)
+        If textBox.Text.Length >= 11 And e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
     End Sub
 
+
     Private Sub txtContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txtContactNumber.TextChanged
+        If txtContactNumber.Text.Length > 11 Then
+            txtContactNumber.Text = txtContactNumber.Text.Substring(0, 11)
+            txtContactNumber.SelectionStart = 11
+        End If
         RegistrationModule.ValidateContactNumber(txtContactNumber, errProvider)
     End Sub
+
 
     Private Sub txtEmailAddress_TextChanged(sender As Object, e As EventArgs) Handles txtEmailAddress.TextChanged
         RegistrationModule.ValidateEmail(txtEmailAddress, errProvider)

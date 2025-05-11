@@ -35,6 +35,8 @@ Public Class AccountantRegistration
         btnEyeConfirmPassword.TabStop = False
     End Sub
 
+
+
     Private Sub tabAccountantRegistration_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabAccountantRegistration.SelectedIndexChanged
         If Not tabAccountantRegistration.SelectedTab.Enabled Then
             For i As Integer = 0 To tabAccountantRegistration.TabPages.Count - 1
@@ -197,6 +199,9 @@ Public Class AccountantRegistration
         ElseIf Not RegistrationModule.IsNumeric(txtContactNumber.Text.Trim()) Then
             errProvider.SetError(txtContactNumber, "Contact Number must contain only numbers.")
             isValid = False
+        ElseIf txtContactNumber.Text.Trim().Length <> 11 Then
+            errProvider.SetError(txtContactNumber, "Contact Number must be exactly 11 digits.")
+            isValid = False
         Else
             errProvider.SetError(txtContactNumber, "")
         End If
@@ -222,6 +227,7 @@ Public Class AccountantRegistration
 
         Return isValid
     End Function
+
 
     Private Sub btnRegisterAccountant_Click(sender As Object, e As EventArgs) Handles btnRegisterAccountant.Click
         Dim result As DialogResult = MessageBox.Show(
@@ -341,11 +347,21 @@ Public Class AccountantRegistration
 
     Private Sub txtContactNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtContactNumber.KeyPress
         RegistrationModule.HandleNumericKeyPress(e)
+
+        Dim textBox = DirectCast(sender, TextBox)
+        If textBox.Text.Length >= 11 And e.KeyChar <> ControlChars.Back Then
+            e.Handled = True
+        End If
     End Sub
 
     Private Sub txtContactNumber_TextChanged(sender As Object, e As EventArgs) Handles txtContactNumber.TextChanged
+        If txtContactNumber.Text.Length > 11 Then
+            txtContactNumber.Text = txtContactNumber.Text.Substring(0, 11)
+            txtContactNumber.SelectionStart = 11
+        End If
         RegistrationModule.ValidateContactNumber(txtContactNumber, errProvider)
     End Sub
+
 
     Private Sub txtEmailAddress_TextChanged(sender As Object, e As EventArgs) Handles txtEmailAddress.TextChanged
         RegistrationModule.ValidateEmail(txtEmailAddress, errProvider)

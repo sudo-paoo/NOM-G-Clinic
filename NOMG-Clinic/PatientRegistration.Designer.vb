@@ -232,8 +232,7 @@ Partial Class PatientRegistration
         ' btnPersonalInformationNext
         ' 
         btnPersonalInformationNext.BackColor = Color.Transparent
-        btnPersonalInformationNext.FlatAppearance.BorderSize = 0
-        btnPersonalInformationNext.FlatStyle = FlatStyle.Popup
+        btnPersonalInformationNext.FlatStyle = FlatStyle.Flat
         btnPersonalInformationNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnPersonalInformationNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnPersonalInformationNext.IconColor = Color.Black
@@ -459,8 +458,7 @@ Partial Class PatientRegistration
         ' btnEmergencyContactNext
         ' 
         btnEmergencyContactNext.BackColor = Color.Transparent
-        btnEmergencyContactNext.FlatAppearance.BorderSize = 0
-        btnEmergencyContactNext.FlatStyle = FlatStyle.Popup
+        btnEmergencyContactNext.FlatStyle = FlatStyle.Flat
         btnEmergencyContactNext.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnEmergencyContactNext.IconChar = FontAwesome.Sharp.IconChar.AngleRight
         btnEmergencyContactNext.IconColor = Color.Black
@@ -647,6 +645,7 @@ Partial Class PatientRegistration
         ' 
         ' btnMedicalInformationPrevious
         ' 
+        btnMedicalInformationPrevious.FlatStyle = FlatStyle.Flat
         btnMedicalInformationPrevious.Font = New Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnMedicalInformationPrevious.IconChar = FontAwesome.Sharp.IconChar.AngleLeft
         btnMedicalInformationPrevious.IconColor = Color.Black

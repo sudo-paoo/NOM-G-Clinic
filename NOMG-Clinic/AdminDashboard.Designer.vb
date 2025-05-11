@@ -684,9 +684,9 @@ Partial Class AdminDashboard
         pnlAppointments.Controls.Add(Panel3)
         pnlAppointments.Controls.Add(Appointments)
         pnlAppointments.Dock = DockStyle.Fill
-        pnlAppointments.Location = New Point(0, 0)
+        pnlAppointments.Location = New Point(300, 40)
         pnlAppointments.Name = "pnlAppointments"
-        pnlAppointments.Size = New Size(1200, 700)
+        pnlAppointments.Size = New Size(900, 660)
         pnlAppointments.TabIndex = 8
         ' 
         ' Panel3
@@ -1109,9 +1109,9 @@ Partial Class AdminDashboard
         Controls.Add(pnlDoctors)
         Controls.Add(pnlPatients)
         Controls.Add(pnlBilling)
+        Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
         Controls.Add(HopeForm1)
-        Controls.Add(pnlAppointments)
         FormBorderStyle = FormBorderStyle.None
         MaximizeBox = False
         MaximumSize = New Size(1920, 1020)

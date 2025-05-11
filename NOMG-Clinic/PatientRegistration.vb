@@ -234,8 +234,12 @@ Public Class PatientRegistration
 
     ' Limit input to numeric characters only
     Private Sub NumericTextBox_KeyPress(sender As Object, e As KeyPressEventArgs)
-        If Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ControlChars.Back Or e.KeyChar = "+" Or
-                e.KeyChar = "-" Or e.KeyChar = "(" Or e.KeyChar = ")" Or e.KeyChar = " ") Then
+        Dim textBox = DirectCast(sender, TextBox)
+        If Not (Char.IsDigit(e.KeyChar) Or e.KeyChar = ControlChars.Back) Then
+            e.Handled = True
+            Return
+        End If
+        If textBox.Text.Length >= 11 And e.KeyChar <> ControlChars.Back Then
             e.Handled = True
         End If
     End Sub
@@ -248,8 +252,11 @@ Public Class PatientRegistration
         If String.IsNullOrWhiteSpace(contactNumber) Then
             errProvider.SetError(textBox, "Contact number is required.")
             e.Cancel = True
-        ElseIf Not System.Text.RegularExpressions.Regex.IsMatch(contactNumber, "^[0-9\+\-\(\) ]{7,15}$") Then
-            errProvider.SetError(textBox, "Please enter a valid contact number.")
+        ElseIf contactNumber.Length <> 11 Then
+            errProvider.SetError(textBox, "Contact number must be exactly 11 digits.")
+            e.Cancel = True
+        ElseIf Not RegistrationModule.IsNumeric(contactNumber) Then
+            errProvider.SetError(textBox, "Contact number must contain only digits.")
             e.Cancel = True
         Else
             errProvider.SetError(textBox, "")
@@ -259,17 +266,7 @@ Public Class PatientRegistration
     ' Validation for email address
     Private Sub ValidateEmail(sender As Object, e As System.ComponentModel.CancelEventArgs)
         Dim textBox = DirectCast(sender, TextBox)
-        Dim email = textBox.Text.Trim()
-
-        If String.IsNullOrWhiteSpace(email) Then
-            errProvider.SetError(textBox, "Email address is required.")
-            e.Cancel = True
-        ElseIf Not RegistrationModule.IsValidEmail(email) Then
-            errProvider.SetError(textBox, "Please enter a valid email address.")
-            e.Cancel = True
-        Else
-            errProvider.SetError(textBox, "")
-        End If
+        RegistrationModule.ValidateEmail(textBox, errProvider, e)
     End Sub
 
     ' Validation handler for TextBox when text changes

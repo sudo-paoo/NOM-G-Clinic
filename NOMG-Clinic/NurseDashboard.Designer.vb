@@ -758,9 +758,11 @@ Partial Class NurseDashboard
         ' 
         ' btnSave
         ' 
+        btnSave.BackColor = Color.FromArgb(CByte(204), CByte(51), CByte(102))
+        btnSave.FlatStyle = FlatStyle.Flat
         btnSave.Font = New Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnSave.IconChar = FontAwesome.Sharp.IconChar.Cloud
-        btnSave.IconColor = Color.RosyBrown
+        btnSave.IconColor = Color.Black
         btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnSave.IconSize = 36
         btnSave.ImageAlign = ContentAlignment.MiddleLeft
@@ -768,9 +770,9 @@ Partial Class NurseDashboard
         btnSave.Name = "btnSave"
         btnSave.Size = New Size(133, 44)
         btnSave.TabIndex = 14
-        btnSave.Text = "SAVE"
+        btnSave.Text = "Save"
         btnSave.TextImageRelation = TextImageRelation.TextBeforeImage
-        btnSave.UseVisualStyleBackColor = True
+        btnSave.UseVisualStyleBackColor = False
         ' 
         ' Label14
         ' 
@@ -808,8 +810,8 @@ Partial Class NurseDashboard
         BackgroundImage = My.Resources.Resources.bg_img
         BackgroundImageLayout = ImageLayout.None
         ClientSize = New Size(1200, 700)
-        Controls.Add(pnlDashboard)
         Controls.Add(pnlSettings)
+        Controls.Add(pnlDashboard)
         Controls.Add(pnlPatients)
         Controls.Add(pnlAppointments)
         Controls.Add(Panel1)
