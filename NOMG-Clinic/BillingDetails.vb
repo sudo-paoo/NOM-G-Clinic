@@ -330,6 +330,19 @@ Public Class BillingDetails
         Try
             txtAmountReceived.ReadOnly = True
             txtCardNumber.ReadOnly = True
+            txtCardNumber.Enabled = False
+            txtEpirationMonth.ReadOnly = True
+            txtEpirationMonth.Enabled = False
+            txtCCV.ReadOnly = True
+            txtCCV.Enabled = False
+            txtExpirationYear.ReadOnly = True
+            txtExpirationYear.Enabled = False
+            txtCardHolderName.ReadOnly = True
+            txtCardHolderName.Enabled = False
+            txtBillingAddress.ReadOnly = True
+            txtBillingAddress.Enabled = False
+            txtPostal.ReadOnly = True
+            txtPostal.Enabled = False
 
             Dim paymentDetails As Dictionary(Of String, Object) = JsonConvert.DeserializeObject(Of Dictionary(Of String, Object))(paymentDetailsJson)
 
