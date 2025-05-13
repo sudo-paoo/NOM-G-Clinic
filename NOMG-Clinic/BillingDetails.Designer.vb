@@ -287,7 +287,7 @@ Partial Class BillingDetails
         ' txtAmountDueCard
         ' 
         txtAmountDueCard.Enabled = False
-        txtAmountDueCard.Location = New Point(216, 37)
+        txtAmountDueCard.Location = New Point(216, 49)
         txtAmountDueCard.Name = "txtAmountDueCard"
         txtAmountDueCard.Size = New Size(315, 27)
         txtAmountDueCard.TabIndex = 65
@@ -296,7 +296,7 @@ Partial Class BillingDetails
         ' 
         Label19.AutoSize = True
         Label19.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label19.Location = New Point(39, 37)
+        Label19.Location = New Point(39, 49)
         Label19.Name = "Label19"
         Label19.Size = New Size(123, 25)
         Label19.TabIndex = 64
@@ -305,7 +305,7 @@ Partial Class BillingDetails
         ' Label14
         ' 
         Label14.AutoSize = True
-        Label14.Location = New Point(369, 164)
+        Label14.Location = New Point(369, 168)
         Label14.Name = "Label14"
         Label14.Size = New Size(15, 20)
         Label14.TabIndex = 63
@@ -315,7 +315,7 @@ Partial Class BillingDetails
         ' 
         Label10.AutoSize = True
         Label10.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label10.Location = New Point(39, 163)
+        Label10.Location = New Point(39, 167)
         Label10.Name = "Label10"
         Label10.Size = New Size(106, 25)
         Label10.TabIndex = 62
@@ -323,7 +323,7 @@ Partial Class BillingDetails
         ' 
         ' txtPostal
         ' 
-        txtPostal.Location = New Point(393, 161)
+        txtPostal.Location = New Point(393, 165)
         txtPostal.Name = "txtPostal"
         txtPostal.PlaceholderText = "postal code"
         txtPostal.Size = New Size(138, 27)
@@ -333,7 +333,7 @@ Partial Class BillingDetails
         ' Label13
         ' 
         Label13.AutoSize = True
-        Label13.Location = New Point(369, 126)
+        Label13.Location = New Point(369, 130)
         Label13.Name = "Label13"
         Label13.Size = New Size(15, 20)
         Label13.TabIndex = 60
@@ -341,7 +341,7 @@ Partial Class BillingDetails
         ' 
         ' txtExpirationYear
         ' 
-        txtExpirationYear.Location = New Point(393, 122)
+        txtExpirationYear.Location = New Point(393, 126)
         txtExpirationYear.Name = "txtExpirationYear"
         txtExpirationYear.PlaceholderText = "yy"
         txtExpirationYear.Size = New Size(138, 27)
@@ -350,21 +350,21 @@ Partial Class BillingDetails
         ' 
         ' txtCardHolderName
         ' 
-        txtCardHolderName.Location = New Point(216, 242)
+        txtCardHolderName.Location = New Point(216, 246)
         txtCardHolderName.Name = "txtCardHolderName"
         txtCardHolderName.Size = New Size(315, 27)
         txtCardHolderName.TabIndex = 58
         ' 
         ' txtBillingAddress
         ' 
-        txtBillingAddress.Location = New Point(216, 202)
+        txtBillingAddress.Location = New Point(216, 206)
         txtBillingAddress.Name = "txtBillingAddress"
         txtBillingAddress.Size = New Size(315, 27)
         txtBillingAddress.TabIndex = 57
         ' 
         ' txtCCV
         ' 
-        txtCCV.Location = New Point(216, 161)
+        txtCCV.Location = New Point(216, 165)
         txtCCV.Name = "txtCCV"
         txtCCV.PlaceholderText = "ccv"
         txtCCV.Size = New Size(138, 27)
@@ -373,7 +373,7 @@ Partial Class BillingDetails
         ' 
         ' txtEpirationMonth
         ' 
-        txtEpirationMonth.Location = New Point(216, 122)
+        txtEpirationMonth.Location = New Point(216, 126)
         txtEpirationMonth.Name = "txtEpirationMonth"
         txtEpirationMonth.PlaceholderText = "mm"
         txtEpirationMonth.Size = New Size(135, 27)
@@ -382,7 +382,7 @@ Partial Class BillingDetails
         ' 
         ' txtCardNumber
         ' 
-        txtCardNumber.Location = New Point(216, 82)
+        txtCardNumber.Location = New Point(216, 86)
         txtCardNumber.Name = "txtCardNumber"
         txtCardNumber.Size = New Size(315, 27)
         txtCardNumber.TabIndex = 54
@@ -391,7 +391,7 @@ Partial Class BillingDetails
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label12.Location = New Point(39, 241)
+        Label12.Location = New Point(39, 245)
         Label12.Name = "Label12"
         Label12.Size = New Size(162, 25)
         Label12.TabIndex = 4
@@ -401,7 +401,7 @@ Partial Class BillingDetails
         ' 
         Label11.AutoSize = True
         Label11.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label11.Location = New Point(39, 201)
+        Label11.Location = New Point(39, 205)
         Label11.Name = "Label11"
         Label11.Size = New Size(141, 25)
         Label11.TabIndex = 3
@@ -415,7 +415,7 @@ Partial Class BillingDetails
         btnPayBillCard.IconFont = FontAwesome.Sharp.IconFont.Auto
         btnPayBillCard.IconSize = 40
         btnPayBillCard.ImageAlign = ContentAlignment.BottomRight
-        btnPayBillCard.Location = New Point(379, 285)
+        btnPayBillCard.Location = New Point(379, 289)
         btnPayBillCard.Name = "btnPayBillCard"
         btnPayBillCard.Size = New Size(152, 50)
         btnPayBillCard.TabIndex = 53
@@ -427,7 +427,7 @@ Partial Class BillingDetails
         ' 
         Label9.AutoSize = True
         Label9.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label9.Location = New Point(39, 121)
+        Label9.Location = New Point(39, 125)
         Label9.Name = "Label9"
         Label9.Size = New Size(144, 25)
         Label9.TabIndex = 1
@@ -437,7 +437,7 @@ Partial Class BillingDetails
         ' 
         Label8.AutoSize = True
         Label8.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label8.Location = New Point(39, 81)
+        Label8.Location = New Point(39, 85)
         Label8.Name = "Label8"
         Label8.Size = New Size(129, 25)
         Label8.TabIndex = 0
