@@ -1105,7 +1105,7 @@ Public Class AdminDashboard
             Dim viewAppointmentForm As New ViewAppointmentDetails()
             viewAppointmentForm.AppointmentID = appointmentID
             viewAppointmentForm.PatientID = patientID
-            viewAppointmentForm.ShowDialog()
+            viewAppointmentForm.Show()
         End If
     End Sub
 
