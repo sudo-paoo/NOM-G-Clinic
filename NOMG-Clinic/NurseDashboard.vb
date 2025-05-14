@@ -647,19 +647,42 @@ Public Class NurseDashboard
         Dim query As String = "SELECT patient_id FROM patient WHERE first_name = @firstName AND last_name = @lastName LIMIT 1"
 
         Using connection As New MySqlConnection(connectionString)
-            Using command As New MySqlCommand(query, connection)
-                command.Parameters.AddWithValue("@firstName", firstName)
-                command.Parameters.AddWithValue("@lastName", lastName)
-                Try
-                    connection.Open()
+            Try
+                connection.Open()
+
+                ' Try 1: Exact match
+                Using command As New MySqlCommand("SELECT patient_id FROM patient WHERE first_name = @firstName AND last_name = @lastName LIMIT 1", connection)
+                    command.Parameters.AddWithValue("@firstName", firstName)
+                    command.Parameters.AddWithValue("@lastName", lastName)
                     Dim result As Object = command.ExecuteScalar()
                     If result IsNot Nothing Then
-                        patientId = result.ToString()
+                        Return result.ToString()
                     End If
-                Catch ex As Exception
-                    MessageBox.Show("Error retrieving patient ID: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End Try
-            End Using
+                End Using
+
+                ' Try 2: Case insensitive match
+                Using command As New MySqlCommand("SELECT patient_id FROM patient WHERE LOWER(first_name) = LOWER(@firstName) AND LOWER(last_name) = LOWER(@lastName) LIMIT 1", connection)
+                    command.Parameters.AddWithValue("@firstName", firstName)
+                    command.Parameters.AddWithValue("@lastName", lastName)
+                    Dim result As Object = command.ExecuteScalar()
+                    If result IsNot Nothing Then
+                        Return result.ToString()
+                    End If
+                End Using
+
+                ' Try 3: Partial match
+                Using command As New MySqlCommand("SELECT patient_id FROM patient WHERE first_name LIKE @firstName AND last_name LIKE @lastName LIMIT 1", connection)
+                    command.Parameters.AddWithValue("@firstName", firstName + "%")  ' Match first name starting with
+                    command.Parameters.AddWithValue("@lastName", lastName)
+                    Dim result As Object = command.ExecuteScalar()
+                    If result IsNot Nothing Then
+                        Return result.ToString()
+                    End If
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show("Error retrieving patient ID: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End Using
         Return patientId
     End Function
