@@ -397,7 +397,7 @@ Partial Class PatientDetails
         lblAddress.AutoSize = True
         lblAddress.Font = New Font("Verdana", 10.2F)
         lblAddress.Location = New Point(93, 212)
-        lblAddress.MaximumSize = New Size(180, 0)
+        lblAddress.MaximumSize = New Size(400, 0)
         lblAddress.Name = "lblAddress"
         lblAddress.Size = New Size(86, 20)
         lblAddress.TabIndex = 13
