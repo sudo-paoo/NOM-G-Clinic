@@ -37,7 +37,7 @@ Public Class AppointmentDetails
         End If
 
         If DueDate <> Date.MinValue Then
-            lblDueDate.Text = DueDate.ToString("MMMM dd, yyyy")
+            lblDueDate.Text = DueDate.ToString("MMM dd, yyyy")
         End If
 
         If LastVisitDate.HasValue Then
