@@ -166,6 +166,7 @@ Public Class AppointmentDetails
         Dim doctorId As String = GetSelectedDoctorId()
         Dim currentDateTime As DateTime = DateTime.Now
         Dim shouldProcessTimeSlots As Boolean = True
+        Dim originalDate As Date = selectedDate ' Store original date to check if we changed it
 
         If String.IsNullOrEmpty(doctorId) Then
             Return
@@ -242,13 +243,29 @@ Public Class AppointmentDetails
             Next
         End If
 
-        If cboTimeSlot.Items.Count > 0 Then
-            cboTimeSlot.SelectedIndex = 0
-        ElseIf Not MessageAlreadyShownDuringLoad Then
-            MessageBox.Show("No available time slots for the selected doctor on this date. Please select another date or doctor.",
-          "No Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        ' If no time slots are available, move to the next valid day
+        If cboTimeSlot.Items.Count = 0 Then
+            Dim nextDate As Date = selectedDate.AddDays(1)
+            While nextDate.DayOfWeek = DayOfWeek.Sunday OrElse nextDate.DayOfWeek = DayOfWeek.Monday
+                nextDate = nextDate.AddDays(1)
+            End While
 
-            MessageAlreadyShownDuringLoad = True
+            ' If we're in initial form load, don't show message
+            If Not MessageAlreadyShownDuringLoad AndAlso originalDate <> nextDate Then
+                MessageBox.Show($"No available time slots on {selectedDate:dddd, MMMM dd, yyyy}. " &
+                           $"Moving to the next available day: {nextDate:dddd, MMMM dd, yyyy}.",
+                          "Finding Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                MessageAlreadyShownDuringLoad = True
+            End If
+
+            calAppointmentDate.SetDate(nextDate)
+
+            lblSelectedDate.Text = "Selected Date: " & calAppointmentDate.SelectionStart.ToString("MMMM dd, yyyy")
+
+            Return
+        ElseIf cboTimeSlot.Items.Count > 0 Then
+            cboTimeSlot.SelectedIndex = 0
         End If
     End Sub
 
