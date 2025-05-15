@@ -43,7 +43,7 @@
         lblDoctor.Font = New Font("Segoe UI", 10, FontStyle.Bold)
         lblDoctor.Anchor = AnchorStyles.Right
         lblDoctor.AutoSize = True
-        lblDoctor.Location = New Point(Me.Width - 200, 20)
+        lblDoctor.Location = New Point(Me.Width - 300, 20)
 
         ' Add controls
         Me.Controls.Add(lblInitials)

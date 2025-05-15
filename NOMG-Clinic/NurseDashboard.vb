@@ -104,6 +104,7 @@ Public Class NurseDashboard
             CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
             CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
             a.appointment_date AS AppointmentDate,
+            a.appointment_time,
             a.reason_for_visit AS Reason
         FROM 
             appointment_table a
@@ -127,12 +128,18 @@ Public Class NurseDashboard
                         While reader.Read()
                             hasPastAppointments = True
 
+                            Dim appointmentTime As DateTime
+                            Dim formattedTime As String = "No time set"
+
+                            If DateTime.TryParse(reader("appointment_time").ToString(), appointmentTime) Then
+                                formattedTime = appointmentTime.ToString("h:mm tt")
+                            End If
+
                             Dim patientName As String = reader("PatientName").ToString()
                             Dim doctorName As String = reader("DoctorName").ToString()
-                            Dim appointmentDate As Date = Convert.ToDateTime(reader("AppointmentDate"))
                             Dim reason As String = reader("Reason").ToString()
 
-                            Dim item As New AppointmentItem(patientName.Substring(0, 2).ToUpper(), patientName, appointmentDate.ToString("hh:mm tt"), reason, doctorName)
+                            Dim item As New AppointmentItem(patientName.Substring(0, 2).ToUpper(), patientName, formattedTime, reason, doctorName)
                             item.Margin = New Padding(0, 5, 0, 5)
                             SetItemWidth(item)
 
@@ -166,7 +173,7 @@ Public Class NurseDashboard
 
     Private Sub SetItemWidth(ctrl As Control)
         Dim paddingWidth As Integer = flowRecentAppointments.Padding.Left + flowRecentAppointments.Padding.Right
-        ctrl.Width = flowRecentAppointments.ClientSize.Width - paddingWidth
+        ctrl.Width = flowRecentAppointments.ClientSize.Width - paddingWidth - 30
     End Sub
 
     ' Populate scheduled today
@@ -178,6 +185,7 @@ Public Class NurseDashboard
         CONCAT(p.first_name, ' ', p.last_name) AS PatientName,
         CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
         a.appointment_date AS AppointmentDate,
+        a.appointment_time,
         a.reason_for_visit AS Reason
     FROM 
         appointment_table a
@@ -201,16 +209,21 @@ Public Class NurseDashboard
 
                         While reader.Read()
                             hasTodayAppointments = True
+                            Dim appointmentTime As DateTime
+                            Dim formattedTime As String = "No time set"
 
+                            If DateTime.TryParse(reader("appointment_time").ToString(), appointmentTime) Then
+                                formattedTime = appointmentTime.ToString("h:mm tt")
+                            End If
                             Dim patientName As String = reader("PatientName").ToString()
                             Dim doctorName As String = reader("DoctorName").ToString()
-                            Dim appointmentDate As Date = Convert.ToDateTime(reader("AppointmentDate"))
+
                             Dim reason As String = reader("Reason").ToString()
 
                             ' Create initials from the first two characters of the patient name
                             Dim initials As String = patientName.Substring(0, Math.Min(2, patientName.Length)).ToUpper()
 
-                            Dim item As New AppointmentItem(initials, patientName, appointmentDate.ToString("hh:mm tt"), reason, doctorName)
+                            Dim item As New AppointmentItem(initials, patientName, formattedTime, reason, doctorName)
                             item.Margin = New Padding(0, 5, 0, 5)
                             SetItemWidth(item)
 

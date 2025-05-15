@@ -106,14 +106,14 @@ Public Class DoctorDashboard
     Private Sub LoadTodaysAppointments()
         flowTodaysAppointments.Controls.Clear()
 
-        Dim query As String = "SELECT a.appointment_id, a.patient_id, a.appointment_date, a.reason_for_visit, " &
-        "CONCAT(p.first_name, ' ', p.last_name) AS patient_name, " &
-        "CONCAT(d.first_name, ' ', d.last_name) AS doctor_name " &
-        "FROM appointment_table a " &
-        "JOIN patient p ON a.patient_id = p.patient_id " &
-        "JOIN doctor d ON a.doctor_id = d.doctor_id " &
-        "WHERE a.doctor_id = @doctorID AND DATE(a.appointment_date) = CURDATE() " &
-        "ORDER BY a.appointment_date ASC"
+        Dim query As String = "SELECT a.appointment_id, a.patient_id, a.appointment_date, a.appointment_time, a.reason_for_visit, " &
+"CONCAT(p.first_name, ' ', p.last_name) AS patient_name, " &
+"CONCAT(d.first_name, ' ', d.last_name) AS doctor_name " &
+"FROM appointment_table a " &
+"JOIN patient p ON a.patient_id = p.patient_id " &
+"JOIN doctor d ON a.doctor_id = d.doctor_id " &
+"WHERE a.doctor_id = @doctorID AND DATE(a.appointment_date) = CURDATE() " &
+"ORDER BY a.appointment_time ASC"
 
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
@@ -130,12 +130,19 @@ Public Class DoctorDashboard
                     While reader.Read()
                         hasAppointments = True
 
+                        Dim appointmentTime As DateTime
+                        Dim formattedTime As String = "No time set"
+
+                        If DateTime.TryParse(reader("appointment_time").ToString(), appointmentTime) Then
+                            formattedTime = appointmentTime.ToString("h:mm tt")
+                        End If
+
                         ' Create appointment panel
                         Dim appointmentPanel As Panel = CreateAppointmentPanel(
-                            reader("patient_name").ToString(),
-                            Convert.ToDateTime(reader("appointment_date")).ToString("h:mm tt"),
-                            reader("reason_for_visit").ToString()
-                        )
+                        reader("patient_name").ToString(),
+                        formattedTime,
+                        reader("reason_for_visit").ToString()
+                    )
 
                         ' Add to flow layout panel
                         flowTodaysAppointments.Controls.Add(appointmentPanel)
@@ -163,7 +170,7 @@ Public Class DoctorDashboard
     Private Sub LoadRecentAppointments()
         flowRecentAppointments.Controls.Clear()
 
-        Dim query As String = "SELECT a.appointment_id, a.patient_id, a.appointment_date, a.reason_for_visit, " &
+        Dim query As String = "SELECT a.appointment_id, a.patient_id, a.appointment_date, a.reason_for_visit, a.appointment_time, " &
                              "CONCAT(p.first_name, ' ', p.last_name) AS patient_name, " &
                              "CONCAT(d.first_name, ' ', d.last_name) AS doctor_name " &
                              "FROM appointment_table a " &
@@ -172,7 +179,7 @@ Public Class DoctorDashboard
                              "WHERE a.doctor_id = @doctorID " &
                              "AND DATE(a.appointment_date) < CURDATE() " &
                              "AND DATE(a.appointment_date) >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
-                             "ORDER BY a.appointment_date DESC"
+                             "ORDER BY a.appointment_time ASC"
 
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
@@ -188,11 +195,17 @@ Public Class DoctorDashboard
 
                     While reader.Read()
                         hasAppointments = True
+                        Dim appointmentTime As DateTime
+                        Dim formattedTime As String = "No time set"
 
-                        ' Create appointment panel
+                        If DateTime.TryParse(reader("appointment_time").ToString(), appointmentTime) Then
+                            formattedTime = appointmentTime.ToString("h:mm tt")
+                        End If
+
+
                         Dim appointmentPanel As Panel = CreateAppointmentPanel(
                             reader("patient_name").ToString(),
-                            Convert.ToDateTime(reader("appointment_date")).ToString("MMM dd, h:mm tt"),
+                            formattedTime,
                             reader("reason_for_visit").ToString()
                         )
 
