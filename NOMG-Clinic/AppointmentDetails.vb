@@ -219,8 +219,8 @@ Public Class AppointmentDetails
         End If
 
         Dim allTimeSlots As New List(Of Date)
-        Dim startTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 8, 30, 0)
-        Dim endTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 16, 30, 0)
+        Dim startTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 8, 0, 0)
+        Dim endTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 16, 0, 0)
 
         If selectedDate.Date = currentDateTime.Date Then
             Dim bufferTime As TimeSpan = TimeSpan.FromMinutes(30)
@@ -229,7 +229,7 @@ Public Class AppointmentDetails
             Dim nextHour As Integer = adjustedCurrentTime.Hour + 1
             If nextHour > 16 Then
                 MessageBox.Show("The clinic is closed for today. All remaining time slots for today are unavailable. " &
-                           "Please select another date.", "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                       "Please select another date.", "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
 
@@ -238,7 +238,7 @@ Public Class AppointmentDetails
 
         If selectedDate.Date < currentDateTime.Date Then
             MessageBox.Show("Cannot schedule appointments for past dates. Please select today or a future date.",
-                       "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                   "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             calAppointmentDate.SetDate(currentDateTime.Date)
             Return
         End If
@@ -254,11 +254,13 @@ Public Class AppointmentDetails
             conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
             conn.Open()
 
+            ' Modified query to filter by doctor_id
             Dim query As String = "SELECT appointment_time FROM appointment_table " &
-                         "WHERE appointment_date = @selectedDate"
+                     "WHERE appointment_date = @selectedDate AND doctor_id = @doctorId"
 
             cmd = New MySqlCommand(query, conn)
             cmd.Parameters.AddWithValue("@selectedDate", selectedDate.ToString("yyyy-MM-dd"))
+            cmd.Parameters.AddWithValue("@doctorId", doctorId)
 
             Dim reader As MySqlDataReader = cmd.ExecuteReader()
             While reader.Read()
@@ -288,10 +290,36 @@ Public Class AppointmentDetails
         If cboTimeSlot.Items.Count > 0 Then
             cboTimeSlot.SelectedIndex = 0
         Else
-            MessageBox.Show("No available time slots for the selected date. Please select another date.",
-              "No Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("No available time slots for the selected doctor on this date. Please select another date or doctor.",
+          "No Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
+
+    Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
+        Try
+            Dim doctorId As String = GetSelectedDoctorId()
+
+            ' Modified query to check availability for the specific doctor
+            Dim query As String = "SELECT COUNT(*) FROM appointment_table " &
+                         "WHERE appointment_date = @selectedDate " &
+                         "AND appointment_time = @selectedTime " &
+                         "AND doctor_id = @doctorId"
+
+            cmd = New MySqlCommand(query, conn)
+            cmd.Parameters.AddWithValue("@selectedDate", appointmentDateTime.ToString("yyyy-MM-dd"))
+            cmd.Parameters.AddWithValue("@selectedTime", appointmentDateTime.ToString("HH:mm:ss"))
+            cmd.Parameters.AddWithValue("@doctorId", doctorId)
+
+            Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+            Return count = 0
+
+        Catch ex As Exception
+            MessageBox.Show("Error checking time slot availability: " & ex.Message,
+                   "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End Try
+    End Function
+
 
     Private Sub calAppointmentDate_DateChanged(sender As Object, e As DateRangeEventArgs) Handles calAppointmentDate.DateChanged
         Dim selectedDate As Date = calAppointmentDate.SelectionStart
@@ -433,25 +461,25 @@ Public Class AppointmentDetails
         End Try
     End Function
 
-    Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
-        Try
-            Dim query As String = "SELECT COUNT(*) FROM appointment_table " &
-                             "WHERE appointment_date = @selectedDate " &
-                             "AND appointment_time = @selectedTime"
+    'Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
+    '    Try
+    '        Dim query As String = "SELECT COUNT(*) FROM appointment_table " &
+    '                         "WHERE appointment_date = @selectedDate " &
+    '                         "AND appointment_time = @selectedTime"
 
-            cmd = New MySqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@selectedDate", appointmentDateTime.ToString("yyyy-MM-dd"))
-            cmd.Parameters.AddWithValue("@selectedTime", appointmentDateTime.ToString("HH:mm:ss"))
+    '        cmd = New MySqlCommand(query, conn)
+    '        cmd.Parameters.AddWithValue("@selectedDate", appointmentDateTime.ToString("yyyy-MM-dd"))
+    '        cmd.Parameters.AddWithValue("@selectedTime", appointmentDateTime.ToString("HH:mm:ss"))
 
-            Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-            Return count = 0
+    '        Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+    '        Return count = 0
 
-        Catch ex As Exception
-            MessageBox.Show("Error checking time slot availability: " & ex.Message,
-                       "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return False
-        End Try
-    End Function
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error checking time slot availability: " & ex.Message,
+    '                   "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        Return False
+    '    End Try
+    'End Function
 
     Private Function GetNextAppointmentId() As Integer
         Dim nextId As Integer = 1001
@@ -637,9 +665,9 @@ Public Class AppointmentDetails
                 Dim daysToNextVisit As Integer
 
                 ' Calculate days to next visit based on gestational age (trimester)
-                If GestationalWeeks <= 12 Then
+                If GestationalWeeks < 12 Then
                     daysToNextVisit = 30
-                ElseIf GestationalWeeks <= 24 Then
+                ElseIf GestationalWeeks < 24 Then
                     daysToNextVisit = 20
                 Else
                     daysToNextVisit = 10

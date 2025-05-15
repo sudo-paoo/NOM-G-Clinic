@@ -170,7 +170,7 @@ Public Class PatientDetails
         Dim query As String = "
     SELECT 
         a.appointment_id,
-        DATE_FORMAT(a.appointment_date, '%h:%i %p') AS AppointmentTime,
+        DATE_FORMAT(a.appointment_time, '%h:%i %p') AS AppointmentTime,
         DATE_FORMAT(a.appointment_date, '%b %d, %Y') AS AppointmentDate,
         CONCAT('Dr. ', d.first_name, ' ', d.last_name) AS DoctorName,
         a.reason_for_visit AS Reason,

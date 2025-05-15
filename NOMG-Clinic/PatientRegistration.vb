@@ -556,6 +556,8 @@ Public Class PatientRegistration
                     adminForm.PatientsPopulateDataGrid()
                     adminForm.AppointmentsSetupDataGrid()
                     adminForm.AppointmentsPopulateDataGrid()
+                    adminForm.DoctorsSetupDataGrid()
+                    adminForm.DoctorsPopulateDataGrid()
                 End If
                 If doctorForm IsNot Nothing Then
                     doctorForm.PatientsSetupDataGrid()
