@@ -61,10 +61,8 @@ Partial Class ConsultationDetails
         Panel2 = New Panel()
         Label26 = New Label()
         lblPatientName = New Label()
-        Label25 = New Label()
         lblGestationalAge = New Label()
         Label8 = New Label()
-        Label6 = New Label()
         Label24 = New Label()
         lblDueDate = New Label()
         Label23 = New Label()
@@ -586,10 +584,8 @@ Partial Class ConsultationDetails
         Panel2.BackColor = SystemColors.ControlLightLight
         Panel2.Controls.Add(Label26)
         Panel2.Controls.Add(lblPatientName)
-        Panel2.Controls.Add(Label25)
         Panel2.Controls.Add(lblGestationalAge)
         Panel2.Controls.Add(Label8)
-        Panel2.Controls.Add(Label6)
         Panel2.Controls.Add(Label24)
         Panel2.Controls.Add(lblDueDate)
         Panel2.Controls.Add(Label23)
@@ -606,7 +602,7 @@ Partial Class ConsultationDetails
         ' Label26
         ' 
         Label26.AutoSize = True
-        Label26.Location = New Point(686, 145)
+        Label26.Location = New Point(691, 84)
         Label26.Name = "Label26"
         Label26.Size = New Size(78, 28)
         Label26.TabIndex = 33
@@ -624,21 +620,12 @@ Partial Class ConsultationDetails
         lblPatientName.TabIndex = 20
         lblPatientName.Text = "NAME"
         ' 
-        ' Label25
-        ' 
-        Label25.AutoSize = True
-        Label25.Location = New Point(691, 101)
-        Label25.Name = "Label25"
-        Label25.Size = New Size(72, 28)
-        Label25.TabIndex = 32
-        Label25.Text = "Weeks:"
-        ' 
         ' lblGestationalAge
         ' 
         lblGestationalAge.AutoSize = True
         lblGestationalAge.Font = New Font("Segoe UI Semibold", 10.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblGestationalAge.ForeColor = Color.Black
-        lblGestationalAge.Location = New Point(762, 104)
+        lblGestationalAge.Location = New Point(195, 87)
         lblGestationalAge.Name = "lblGestationalAge"
         lblGestationalAge.Size = New Size(177, 25)
         lblGestationalAge.TabIndex = 23
@@ -647,22 +634,11 @@ Partial Class ConsultationDetails
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(711, 57)
+        Label8.Location = New Point(718, 40)
         Label8.Name = "Label8"
         Label8.Size = New Size(51, 28)
         Label8.TabIndex = 31
         Label8.Text = "Age:"
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label6.ForeColor = Color.Black
-        Label6.Location = New Point(195, 84)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(156, 28)
-        Label6.TabIndex = 22
-        Label6.Text = "Gestational Age"
         ' 
         ' Label24
         ' 
@@ -678,7 +654,7 @@ Partial Class ConsultationDetails
         lblDueDate.AutoSize = True
         lblDueDate.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblDueDate.ForeColor = Color.Black
-        lblDueDate.Location = New Point(195, 132)
+        lblDueDate.Location = New Point(195, 128)
         lblDueDate.Name = "lblDueDate"
         lblDueDate.Size = New Size(142, 28)
         lblDueDate.TabIndex = 24
@@ -698,7 +674,7 @@ Partial Class ConsultationDetails
         lblPatientAge.AutoSize = True
         lblPatientAge.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblPatientAge.ForeColor = Color.Black
-        lblPatientAge.Location = New Point(762, 57)
+        lblPatientAge.Location = New Point(769, 40)
         lblPatientAge.Name = "lblPatientAge"
         lblPatientAge.Size = New Size(49, 28)
         lblPatientAge.TabIndex = 21
@@ -738,7 +714,7 @@ Partial Class ConsultationDetails
         lblAllergies.AutoSize = True
         lblAllergies.Font = New Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblAllergies.ForeColor = Color.Black
-        lblAllergies.Location = New Point(762, 147)
+        lblAllergies.Location = New Point(775, 84)
         lblAllergies.Name = "lblAllergies"
         lblAllergies.Size = New Size(87, 28)
         lblAllergies.TabIndex = 26
@@ -851,10 +827,8 @@ Partial Class ConsultationDetails
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label26 As Label
     Friend WithEvents lblPatientName As Label
-    Friend WithEvents Label25 As Label
     Friend WithEvents lblGestationalAge As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents Label6 As Label
     Friend WithEvents Label24 As Label
     Friend WithEvents lblDueDate As Label
     Friend WithEvents Label23 As Label

@@ -233,8 +233,6 @@ Public Class AppointmentDetails
 
             Dim nextHour As Integer = adjustedCurrentTime.Hour + 1
             If nextHour > 16 Then
-                MessageBox.Show("The clinic is closed for today. All remaining time slots for today are unavailable. " &
-                       "Please select another date.", "Clinic Closed", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Return
             End If
 
@@ -242,7 +240,6 @@ Public Class AppointmentDetails
         End If
 
         If selectedDate.Date < currentDateTime.Date Then
-            ' This check is already in calAppointmentDate_DateChanged, so we don't need to show message again
             calAppointmentDate.SetDate(currentDateTime.Date)
             Return
         End If

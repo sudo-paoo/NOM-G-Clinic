@@ -310,7 +310,7 @@ Public Class AccountingDashboard
     ''''''''''''''''''''''''''''''''
 
     ' Setup dgvBilling
-    Private Sub BillingSetupDataGrid()
+    Public Sub BillingSetupDataGrid()
         ' Configure the DataGridView
         dgvBilling.AllowUserToAddRows = False
         dgvBilling.AllowUserToDeleteRows = False
@@ -416,7 +416,7 @@ Public Class AccountingDashboard
     End Sub
 
     ' Populate the dgvBilling
-    Private Sub BillingPopulateDataGrid()
+    Public Sub BillingPopulateDataGrid()
         dgvBilling.Rows.Clear()
 
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
