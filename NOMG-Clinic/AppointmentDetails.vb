@@ -17,11 +17,13 @@ Public Class AppointmentDetails
     Private NextCheckupDays As Integer = 30
     Private ExpectedNextAppointmentDate As Date = Date.MinValue
     Private HasFluVaccination As Boolean = False
+    Private MessageAlreadyShownDuringLoad As Boolean = False
 
     Private conn As MySqlConnection
     Private cmd As MySqlCommand
 
     Private Sub AppointmentDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        MessageAlreadyShownDuringLoad = False
         lblPatientName.Text = PatientName
         lblPatientID.Text = PatientId
 
@@ -105,56 +107,6 @@ Public Class AppointmentDetails
         End If
     End Sub
 
-    Private Sub ConfigureCalendarForFollowUp()
-        Dim minDate As Date = DateTime.Today
-
-        If IsFollowUp AndAlso LastVisitDate.HasValue Then
-            If GestationalWeeks < 12 Then
-                NextCheckupDays = 30
-            ElseIf GestationalWeeks < 24 Then
-                NextCheckupDays = 20
-            Else
-                NextCheckupDays = 10
-            End If
-
-            ExpectedNextAppointmentDate = LastVisitDate.Value.AddDays(NextCheckupDays)
-
-            If DateTime.Today > ExpectedNextAppointmentDate Then
-                DaysLate = DateDiff(DateInterval.Day, ExpectedNextAppointmentDate, DateTime.Today)
-
-                MessageBox.Show(
-                    $"Patient is {DaysLate} days late for their follow-up appointment." & vbCrLf & vbCrLf &
-                    $"Expected follow-up date was {ExpectedNextAppointmentDate:MMMM dd, yyyy}." & vbCrLf &
-                    $"The vitamin supply will be adjusted to {NextCheckupDays - DaysLate} days.",
-                    "Late Follow-up",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information)
-
-                minDate = DateTime.Today
-            Else
-                minDate = ExpectedNextAppointmentDate
-
-                MessageBox.Show(
-                    $"Next follow-up should be scheduled on or after {ExpectedNextAppointmentDate:MMMM dd, yyyy}" & vbCrLf &
-                    $"(+{NextCheckupDays} days from last visit).",
-                    "Follow-up Schedule",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information)
-            End If
-        End If
-
-        calAppointmentDate.MinDate = minDate
-
-        Dim defaultDate As Date = If(minDate > DateTime.Today, minDate, DateTime.Today)
-
-        While defaultDate.DayOfWeek = DayOfWeek.Sunday OrElse defaultDate.DayOfWeek = DayOfWeek.Monday
-            defaultDate = defaultDate.AddDays(1)
-        End While
-
-        calAppointmentDate.SetDate(defaultDate)
-        lblSelectedDate.Text = "Selected Date: " & calAppointmentDate.SelectionStart.ToString("MMMM dd, yyyy")
-    End Sub
-
     Private Sub LoadDoctors()
         Try
             cboDoctor.Items.Clear()
@@ -213,12 +165,12 @@ Public Class AppointmentDetails
         Dim selectedDate As Date = calAppointmentDate.SelectionStart
         Dim doctorId As String = GetSelectedDoctorId()
         Dim currentDateTime As DateTime = DateTime.Now
+        Dim shouldProcessTimeSlots As Boolean = True
 
         If String.IsNullOrEmpty(doctorId) Then
             Return
         End If
 
-        ' Check if clinic is closed on the selected day before proceeding
         If selectedDate.DayOfWeek = DayOfWeek.Sunday OrElse selectedDate.DayOfWeek = DayOfWeek.Monday Then
             Return
         End If
@@ -233,10 +185,10 @@ Public Class AppointmentDetails
 
             Dim nextHour As Integer = adjustedCurrentTime.Hour + 1
             If nextHour > 16 Then
-                Return
+                shouldProcessTimeSlots = False
+            Else
+                startTime = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, nextHour, 0, 0)
             End If
-
-            startTime = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, nextHour, 0, 0)
         End If
 
         If selectedDate.Date < currentDateTime.Date Then
@@ -244,56 +196,117 @@ Public Class AppointmentDetails
             Return
         End If
 
-        Dim currentTime As Date = startTime
-        While currentTime <= endTime
-            allTimeSlots.Add(currentTime)
-            currentTime = currentTime.AddHours(1)
-        End While
-
-        Dim bookedSlots As New List(Of String)
-        Try
-            conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
-            conn.Open()
-
-            ' Modified query to filter by doctor_id
-            Dim query As String = "SELECT appointment_time FROM appointment_table " &
-                     "WHERE appointment_date = @selectedDate AND doctor_id = @doctorId"
-
-            cmd = New MySqlCommand(query, conn)
-            cmd.Parameters.AddWithValue("@selectedDate", selectedDate.ToString("yyyy-MM-dd"))
-            cmd.Parameters.AddWithValue("@doctorId", doctorId)
-
-            Dim reader As MySqlDataReader = cmd.ExecuteReader()
-            While reader.Read()
-                Dim timeString As String = reader("appointment_time").ToString()
-                bookedSlots.Add(timeString)
+        If shouldProcessTimeSlots Then
+            Dim currentTime As Date = startTime
+            While currentTime <= endTime
+                allTimeSlots.Add(currentTime)
+                currentTime = currentTime.AddHours(1)
             End While
 
-            reader.Close()
-            conn.Close()
-        Catch ex As Exception
-            MessageBox.Show("Error retrieving appointment data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+            Dim bookedSlots As New List(Of String)
+            Try
+                conn = New MySqlConnection("server=localhost;userid=root;password=root;database=ob_gyn;")
+                conn.Open()
 
-        For Each timeSlot As Date In allTimeSlots
-            Dim isBooked As Boolean = False
-            Dim timeString As String = timeSlot.ToString("HH:mm:ss")
+                ' Modified query to filter by doctor_id
+                Dim query As String = "SELECT appointment_time FROM appointment_table " &
+                 "WHERE appointment_date = @selectedDate AND doctor_id = @doctorId"
 
-            If bookedSlots.Contains(timeString) Then
-                isBooked = True
-            End If
+                cmd = New MySqlCommand(query, conn)
+                cmd.Parameters.AddWithValue("@selectedDate", selectedDate.ToString("yyyy-MM-dd"))
+                cmd.Parameters.AddWithValue("@doctorId", doctorId)
 
-            If Not isBooked Then
-                cboTimeSlot.Items.Add(timeSlot.ToString("h:mm tt"))
-            End If
-        Next
+                Dim reader As MySqlDataReader = cmd.ExecuteReader()
+                While reader.Read()
+                    Dim timeString As String = reader("appointment_time").ToString()
+                    bookedSlots.Add(timeString)
+                End While
+
+                reader.Close()
+                conn.Close()
+            Catch ex As Exception
+                MessageBox.Show("Error retrieving appointment data: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+
+            For Each timeSlot As Date In allTimeSlots
+                Dim isBooked As Boolean = False
+                Dim timeString As String = timeSlot.ToString("HH:mm:ss")
+
+                If bookedSlots.Contains(timeString) Then
+                    isBooked = True
+                End If
+
+                If Not isBooked Then
+                    cboTimeSlot.Items.Add(timeSlot.ToString("h:mm tt"))
+                End If
+            Next
+        End If
 
         If cboTimeSlot.Items.Count > 0 Then
             cboTimeSlot.SelectedIndex = 0
-        Else
+        ElseIf Not MessageAlreadyShownDuringLoad Then
             MessageBox.Show("No available time slots for the selected doctor on this date. Please select another date or doctor.",
           "No Available Slots", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+            MessageAlreadyShownDuringLoad = True
         End If
+    End Sub
+
+    Private Sub ConfigureCalendarForFollowUp()
+        Dim minDate As Date = DateTime.Today
+
+        If IsFollowUp AndAlso LastVisitDate.HasValue Then
+            If GestationalWeeks < 12 Then
+                NextCheckupDays = 30
+            ElseIf GestationalWeeks < 24 Then
+                NextCheckupDays = 20
+            Else
+                NextCheckupDays = 10
+            End If
+
+            ExpectedNextAppointmentDate = LastVisitDate.Value.AddDays(NextCheckupDays)
+
+            If Not MessageAlreadyShownDuringLoad Then
+                If DateTime.Today > ExpectedNextAppointmentDate Then
+                    DaysLate = DateDiff(DateInterval.Day, ExpectedNextAppointmentDate, DateTime.Today)
+
+                    MessageBox.Show(
+                    $"Patient is {DaysLate} days late for their follow-up appointment." & vbCrLf & vbCrLf &
+                    $"Expected follow-up date was {ExpectedNextAppointmentDate:MMMM dd, yyyy}." & vbCrLf &
+                    $"The vitamin supply will be adjusted to {NextCheckupDays - DaysLate} days.",
+                    "Late Follow-up",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
+
+                    ' Set the flag to prevent additional messages
+                    MessageAlreadyShownDuringLoad = True
+
+                    minDate = DateTime.Today
+                Else
+                    minDate = ExpectedNextAppointmentDate
+
+                    MessageBox.Show(
+                    $"Next follow-up should be scheduled on or after {ExpectedNextAppointmentDate:MMMM dd, yyyy}" & vbCrLf &
+                    $"(+{NextCheckupDays} days from last visit).",
+                    "Follow-up Schedule",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information)
+
+                    MessageAlreadyShownDuringLoad = True
+                End If
+            End If
+        End If
+
+        calAppointmentDate.MinDate = minDate
+
+        Dim defaultDate As Date = If(minDate > DateTime.Today, minDate, DateTime.Today)
+
+        While defaultDate.DayOfWeek = DayOfWeek.Sunday OrElse defaultDate.DayOfWeek = DayOfWeek.Monday
+            defaultDate = defaultDate.AddDays(1)
+        End While
+
+        calAppointmentDate.SetDate(defaultDate)
+        lblSelectedDate.Text = "Selected Date: " & calAppointmentDate.SelectionStart.ToString("MMMM dd, yyyy")
     End Sub
 
     Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
