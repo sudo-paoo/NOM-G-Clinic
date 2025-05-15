@@ -609,6 +609,8 @@ Public Class BillingDetails
                             accountantForm.CalculateTodayPayments()
                             accountantForm.CalculateTotalRevenue()
                             accountantForm.PopulateRecentPayments(RegistrationModule.ConnectionString)
+                            accountantForm.BillingSetupDataGrid()
+                            accountantForm.BillingPopulateDataGrid()
                         End If
                         MessageBox.Show("Payment processed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         Me.DialogResult = DialogResult.OK
