@@ -41,6 +41,7 @@ Public Class PatientRegistration
 
         AddHandler clrLastMenstrual.DateSelected, AddressOf clrLastMenstrual_DateSelected
 
+        clrLastMenstrual.MaxDate = DateTime.Today
         LoadDoctors()
     End Sub
 
@@ -247,8 +248,17 @@ Public Class PatientRegistration
     ' Event handler for calendar date selected
     Private Sub clrLastMenstrual_DateSelected(sender As Object, e As DateRangeEventArgs)
         Dim selectedDate As Date = clrLastMenstrual.SelectionStart
+
+        ' This is a safety check, but shouldn't be necessary since MaxDate is already set
+        If selectedDate > DateTime.Today Then
+            MessageBox.Show("Please select today's date or a date in the past.", "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            clrLastMenstrual.SetDate(DateTime.Today)
+            selectedDate = DateTime.Today
+        End If
+
         lblSelectedDate.Text = "Date: " & selectedDate.ToString("MMMM dd, yyyy")
     End Sub
+
 
     ' Helper method to find a label by name
     Private Function FindLabelByName(name As String) As Label
@@ -367,8 +377,8 @@ Public Class PatientRegistration
         Dim numericUpDown = DirectCast(sender, NumericUpDown)
 
         If numericUpDown Is numAge Then
-            If numericUpDown.Value <= 0 Or numericUpDown.Value > 120 Then
-                errProvider.SetError(numericUpDown, "Age must be between 1 and 120.")
+            If numericUpDown.Value <= 12 Or numericUpDown.Value > 120 Then
+                errProvider.SetError(numericUpDown, "Age must be between 12 and 120.")
                 e.Cancel = True
             Else
                 errProvider.SetError(numericUpDown, "")

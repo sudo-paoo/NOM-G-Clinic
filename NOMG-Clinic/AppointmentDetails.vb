@@ -218,6 +218,11 @@ Public Class AppointmentDetails
             Return
         End If
 
+        ' Check if clinic is closed on the selected day before proceeding
+        If selectedDate.DayOfWeek = DayOfWeek.Sunday OrElse selectedDate.DayOfWeek = DayOfWeek.Monday Then
+            Return
+        End If
+
         Dim allTimeSlots As New List(Of Date)
         Dim startTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 8, 0, 0)
         Dim endTime As Date = New Date(selectedDate.Year, selectedDate.Month, selectedDate.Day, 16, 0, 0)
@@ -237,8 +242,7 @@ Public Class AppointmentDetails
         End If
 
         If selectedDate.Date < currentDateTime.Date Then
-            MessageBox.Show("Cannot schedule appointments for past dates. Please select today or a future date.",
-                   "Invalid Date", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            ' This check is already in calAppointmentDate_DateChanged, so we don't need to show message again
             calAppointmentDate.SetDate(currentDateTime.Date)
             Return
         End If
@@ -460,26 +464,6 @@ Public Class AppointmentDetails
             End If
         End Try
     End Function
-
-    'Private Function IsTimeSlotAvailable(appointmentDateTime As DateTime) As Boolean
-    '    Try
-    '        Dim query As String = "SELECT COUNT(*) FROM appointment_table " &
-    '                         "WHERE appointment_date = @selectedDate " &
-    '                         "AND appointment_time = @selectedTime"
-
-    '        cmd = New MySqlCommand(query, conn)
-    '        cmd.Parameters.AddWithValue("@selectedDate", appointmentDateTime.ToString("yyyy-MM-dd"))
-    '        cmd.Parameters.AddWithValue("@selectedTime", appointmentDateTime.ToString("HH:mm:ss"))
-
-    '        Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-    '        Return count = 0
-
-    '    Catch ex As Exception
-    '        MessageBox.Show("Error checking time slot availability: " & ex.Message,
-    '                   "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '        Return False
-    '    End Try
-    'End Function
 
     Private Function GetNextAppointmentId() As Integer
         Dim nextId As Integer = 1001

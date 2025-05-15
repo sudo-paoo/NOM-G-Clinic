@@ -531,6 +531,7 @@ Public Class BillingDetails
     End Sub
 
     ' Process payment
+    ' Process payment
     Private Sub ProcessPayment(paymentMethod As String)
         If paymentMethod = "Cash" Then
             If String.IsNullOrWhiteSpace(txtAmountReceived.Text) Then
@@ -582,6 +583,10 @@ Public Class BillingDetails
         ' Create payment details JSON
         Dim paymentDetailsJson As String = CreatePaymentDetailsJson(paymentMethod)
 
+        ' Get the current date for payment
+        Dim currentDate As DateTime = DateTime.Now
+        Dim formattedDate As String = currentDate.ToString("yyyy-MM-dd")
+
         ' Update the billing status in the database
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
 
@@ -589,15 +594,22 @@ Public Class BillingDetails
             Using connection As New MySqlConnection(connectionString)
                 connection.Open()
 
-                Dim query As String = "UPDATE billing SET status = 'Paid', notes = @paymentDetails WHERE billing_id = @billingId"
+                ' Updated query to also update the date field
+                Dim query As String = "UPDATE billing SET status = 'Paid', notes = @paymentDetails, date = @paymentDate WHERE billing_id = @billingId"
 
                 Using cmd As New MySqlCommand(query, connection)
                     cmd.Parameters.AddWithValue("@billingId", BillingId)
                     cmd.Parameters.AddWithValue("@paymentDetails", paymentDetailsJson)
+                    cmd.Parameters.AddWithValue("@paymentDate", formattedDate)
 
                     Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
                     If rowsAffected > 0 Then
+                        Dim accountantForm As AccountingDashboard = TryCast(Application.OpenForms("AccountingDashboard"), AccountingDashboard)
+                        If accountantForm IsNot Nothing Then
+                            accountantForm.CalculateTodayPayments()
+                            accountantForm.CalculateTotalRevenue()
+                            accountantForm.PopulateRecentPayments(RegistrationModule.ConnectionString)
+                        End If
                         MessageBox.Show("Payment processed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         Me.DialogResult = DialogResult.OK
                         Me.Close()

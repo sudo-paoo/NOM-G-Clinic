@@ -605,7 +605,7 @@ Public Class AccountingDashboard
     End Sub
 
     ' Populate the recent appointments flow panel
-    Private Sub PopulateRecentPayments(connectionString As String)
+    Public Sub PopulateRecentPayments(connectionString As String)
         flowRecentPayments.Controls.Clear()
 
         Dim query As String = "
@@ -654,7 +654,7 @@ Public Class AccountingDashboard
         ctrl.Width = flowRecentPayments.ClientSize.Width - paddingWidth
     End Sub
 
-    Private Sub CalculateTotalRevenue()
+    Public Sub CalculateTotalRevenue()
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
         Dim totalRevenue As Decimal = 0
 
@@ -685,10 +685,61 @@ Public Class AccountingDashboard
         End Using
     End Sub
 
-    Private Sub CalculateTodayPayments()
+    Public Sub CalculateTodayPayments()
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
         Dim todayTotal As Decimal = 0
+        Dim today As String = DateTime.Now.ToString("yyyy-MM-dd")
 
+        ' Debug output
+        Console.WriteLine("Today's date for query: " & today)
+
+        ' Get a count of all records in the billing table
+        Dim countQuery As String = "SELECT COUNT(*) FROM billing"
+        Using countConnection As New MySqlConnection(connectionString)
+            Using countCommand As New MySqlCommand(countQuery, countConnection)
+                Try
+                    countConnection.Open()
+                    Dim count = countCommand.ExecuteScalar()
+                    Console.WriteLine("Total records in billing table: " & count)
+                Catch ex As Exception
+                    Console.WriteLine("Error counting records: " & ex.Message)
+                End Try
+            End Using
+        End Using
+
+        ' Get a count of paid records (regardless of date)
+        Dim paidCountQuery As String = "SELECT COUNT(*) FROM billing WHERE status = 'Paid'"
+        Using paidCountConnection As New MySqlConnection(connectionString)
+            Using paidCountCommand As New MySqlCommand(paidCountQuery, paidCountConnection)
+                Try
+                    paidCountConnection.Open()
+                    Dim paidCount = paidCountCommand.ExecuteScalar()
+                    Console.WriteLine("Total 'Paid' records in billing table: " & paidCount)
+                Catch ex As Exception
+                    Console.WriteLine("Error counting paid records: " & ex.Message)
+                End Try
+            End Using
+        End Using
+
+        ' Get all unique status values
+        Dim statusQuery As String = "SELECT DISTINCT status FROM billing"
+        Using statusConnection As New MySqlConnection(connectionString)
+            Using statusCommand As New MySqlCommand(statusQuery, statusConnection)
+                Try
+                    statusConnection.Open()
+                    Using reader As MySqlDataReader = statusCommand.ExecuteReader()
+                        Console.WriteLine("Unique status values in billing table:")
+                        While reader.Read()
+                            Console.WriteLine("- " & reader.GetString(0))
+                        End While
+                    End Using
+                Catch ex As Exception
+                    Console.WriteLine("Error getting unique status values: " & ex.Message)
+                End Try
+            End Using
+        End Using
+
+        ' Main query for today's payments
         Dim query As String = "
     SELECT 
         SUM(total_amount) AS TodayTotal
@@ -696,7 +747,9 @@ Public Class AccountingDashboard
         billing
     WHERE 
         status = 'Paid'
-        AND DATE(date) = CURDATE()"
+        AND DATE(date) = '" & today & "'"
+
+        Console.WriteLine("Final query: " & query)
 
         Using connection As New MySqlConnection(connectionString)
             Using command As New MySqlCommand(query, connection)
@@ -704,18 +757,24 @@ Public Class AccountingDashboard
                     connection.Open()
                     Dim result = command.ExecuteScalar()
 
+                    Console.WriteLine("Query result: " & If(result Is Nothing, "NULL", result.ToString()))
+
                     If result IsNot Nothing AndAlso Not Convert.IsDBNull(result) Then
                         todayTotal = Convert.ToDecimal(result)
+                        Console.WriteLine("Converted to decimal: " & todayTotal)
                     End If
 
                     lblTotalPaymentToday.Text = String.Format("{0:C}", todayTotal)
+                    Console.WriteLine("Set label text to: " & lblTotalPaymentToday.Text)
                 Catch ex As Exception
                     MessageBox.Show("Error calculating today's payments: " & ex.Message)
                     lblTotalPaymentToday.Text = "$0.00"
+                    Console.WriteLine("Error: " & ex.Message)
                 End Try
             End Using
         End Using
     End Sub
+
 
     Private Sub LoadAccountantProfile()
         Dim connectionString As String = "Server=localhost;Database=ob_gyn;Uid=root;Pwd=root;"
